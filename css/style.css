@@ -49,3 +49,20 @@ body {
 .button:hover {
   background-color: #0056b3;
 }
+
+/* franja de notificacion */
+.notice-bar {
+  background-color: #42396E5C;
+  color: white;
+  margin-top: 1.75rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 12px 20px;
+  max-width: 90%;
+  border-left: 4px solid #FF6B6B;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: normal;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
