@@ -3,45 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Go Bathroom NYC</title>
+  <title>NYC Public Restroom Map</title>
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
       font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
+    }
+
+    /* Imagen de fondo */
+    body {
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    /* Overlay morado transparente */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #231330F0; /* tu color morado con opacidad (F0 en hex = ~94%) */
+      z-index: 1;
+    }
+
+    /* Contenido centrado */
+    .content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      color: white;
       text-align: center;
     }
 
-    .container {
-      max-width: 500px;
-      padding: 20px;
-    }
-
-    h1 {
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 16px;
-      color: #555;
-      margin-bottom: 20px;
-    }
-
     .button {
-      background-color: #007bff;
+      margin-top: 20px;
+      background-color: #007BFF;
       color: white;
       padding: 12px 24px;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
       text-decoration: none;
-      transition: background-color 0.2s;
+      border-radius: 8px;
+      font-weight: bold;
     }
 
     .button:hover {
@@ -50,10 +59,12 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="overlay"></div>
+
+  <div class="content">
     <h1>NYC Public Restroom Map 🗺️</h1>
     <p>Helping delivery drivers, tourists, and residents find nearby bathrooms.</p>
-    <a href="https://rebrand.ly/open-map" class="button" target="_blank">View Map</a>
+    <a href="https://rebrand.ly/your-map-link" class="button">View Map</a>
   </div>
 </body>
 </html>
