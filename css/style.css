@@ -45,7 +45,7 @@ body {
  /* contenedor principal */
 .main-container {
   background-color: #42396E5C;
-  width: 50vw;
+  width: 500%;
   height: auto;
   padding: 2rem 1rem;
   box-sizing: border-box;
