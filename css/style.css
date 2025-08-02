@@ -64,4 +64,6 @@ body {
   backdrop-filter: blur(4px);
   position: relative;
   z-index: 2;
+
+  text-align: center; /* 👈 Esto centra el texto horizontalmente */
 }
