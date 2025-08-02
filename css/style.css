@@ -45,7 +45,7 @@ body {
  /* contenedor principal */
 .central-panel {
   background-color: #42396E5C;
-  max-width: 400px; /* o ajusta a 420px o 440px según tu diseño */
+  max-width: 440px; /* o ajusta a 420px o 440px según tu diseño */
   margin: 4rem auto;
   padding: 2rem;
   border-radius: 12px; /* opcional: bordes redondeados como en tu ejemplo */
