@@ -48,7 +48,6 @@ body {
   height: auto;                /* altura automática */
   padding: 2rem 1rem;          /* espacio interno opcional */
   margin-top: 1.75rem;
-  margin: 0 auto;
   box-sizing: border-box;
   z-index: 2;
   position: relative;
