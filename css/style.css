@@ -71,7 +71,6 @@ body {
 }
 
 .content {
-  padding-top: 60px; /* para que no se esconda debajo de la franja */
   margin-top: 1.75rem;
   margin-bottom: 1.75rem;
 
