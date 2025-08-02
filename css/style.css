@@ -40,3 +40,15 @@ body {
 
   text-align: center; /* 👈 Esto centra el texto horizontalmente */
 }
+
+ /* contenedor principal */
+.main-container {
+  background-color: #42396E5C; /* color morado semitransparente */
+  width: 100vw;                /* ancho completo de borde a borde */
+  height: auto;                /* altura automática */
+  padding: 2rem 1rem;          /* espacio interno opcional */
+  margin: 0 auto;
+  box-sizing: border-box;
+  z-index: 2;
+  position: relative;
+}
