@@ -4,59 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NYC Public Restroom Map</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: Arial, sans-serif;
-    }
-
-    /* Imagen de fondo */
-    body {
-      background: url('background.jpg') no-repeat center center fixed;
-      background-size: cover;
-      position: relative;
-    }
-
-    /* Overlay morado transparente */
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #231330F0; /* tu color morado con opacidad (F0 en hex = ~94%) */
-      z-index: 1;
-    }
-
-    /* Contenido centrado */
-    .content {
-      position: relative;
-      z-index: 2;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      text-align: center;
-    }
-
-    .button {
-      margin-top: 20px;
-      background-color: #007BFF;
-      color: white;
-      padding: 12px 24px;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-
-    .button:hover {
-      background-color: #0056b3;
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <div class="overlay"></div>
