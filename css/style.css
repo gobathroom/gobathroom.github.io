@@ -36,20 +36,6 @@ body {
   text-align: center;
 }
 
-.button {
-  margin-top: 20px;
-  background-color: #007BFF;
-  color: white;
-  padding: 12px 24px;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-}
-
-.button:hover {
-  background-color: #0056b3;
-}
-
 /* franja de notificacion */
 .notice-bar {
   background-color: #42396E5C;
