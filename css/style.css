@@ -50,21 +50,3 @@ body {
   background-color: #0056b3;
 }
 
-/* Franja superior */
-.top-bar {
-  background-color: #42396E5C;
-  color: white;
-  padding: 10px 20px;
-  font-size: 14px;
-  z-index: 10;
-  backdrop-filter: blur(4px);
-  border-bottom: 1px dashed #ccc;
-  margin-top: 1.75rem; /* Agrega esta separación desde el top de la página */
-}
-
-/* Estilo especial para resaltar la advertencia */
-.top-bar .warning {
-  color: #FF6B6B;
-  font-weight: bold;
-}
-
