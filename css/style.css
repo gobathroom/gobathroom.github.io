@@ -43,13 +43,14 @@ body {
 }
 
  /* contenedor principal */
-.main-container {
+.central-panel {
   background-color: #42396E5C;
-  width: 50%;
-  height: auto;
-  padding: 2rem 1rem;
+  max-width: 400px; /* o ajusta a 420px o 440px según tu diseño */
+  margin: 4rem auto;
+  padding: 2rem;
+  border-radius: 12px; /* opcional: bordes redondeados como en tu ejemplo */
   box-sizing: border-box;
-  z-index: 2;
   position: relative;
+  z-index: 2;
 }
 
