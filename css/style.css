@@ -48,7 +48,6 @@ body {
   width: 100vw;
   height: auto;
   padding: 2rem 1rem;
-  margin-top: 1.75rem; /* Separación desde la franja superior */
   box-sizing: border-box;
   z-index: 2;
   position: relative;
