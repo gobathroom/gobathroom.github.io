@@ -49,3 +49,27 @@ body {
 .button:hover {
   background-color: #0056b3;
 }
+
+/* Franja superior */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #42396E5C;
+  color: white;
+  padding: 10px 20px;
+  font-size: 14px;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  border-bottom: 1px dashed #ccc;
+}
+
+.top-bar .warning {
+  color: #FF6B6B;
+  font-weight: bold;
+}
+
+.content {
+  padding-top: 60px; /* para que no se esconda debajo de la franja */
+}
