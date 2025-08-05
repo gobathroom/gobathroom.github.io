@@ -90,4 +90,37 @@ body {
   margin-bottom: 2rem;
 }
 
+/* General buttom */
+.cta-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #0db3c8, #26e0a6);
+  border: none;
+  color: white;
+  padding: 14px 20px;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  margin-top: 32px; /* Separación desde el texto */
+}
+
+.cta-button:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+.cta-button:active {
+  transform: scale(0.97);
+}
+
+.cta-button i {
+  margin-left: 12px;
+  font-size: 18px;
+}
+
 
