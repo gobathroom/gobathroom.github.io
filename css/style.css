@@ -56,6 +56,8 @@ body {
 
 /* logo gobathroom */
 .logo-container {
+  position: relative;
+  z-index: 3; /* Por encima del fondo y del contenedor */
   display: flex;
   justify-content: center;
   margin-bottom: 1.5rem;
