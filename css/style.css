@@ -73,3 +73,21 @@ body {
   object-fit: cover;
 }
 
+/* Title and Subtitle */
+.main-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.description {
+  text-align: center;
+  font-size: 15px;
+  color: #E0E0E0;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+
