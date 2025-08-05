@@ -95,7 +95,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(90deg, #0db3c8, #26e0a6);
+  background: linear-gradient(90deg, #0db3c8, #000000);
   border: none;
   color: white;
   padding: 14px 20px;
