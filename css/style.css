@@ -19,7 +19,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #1a1430ff; /* tu color morado con opacidad (F0 en hex = ~94%) */
+  background-color: #1a1430F0; /* tu color morado con opacidad (F0 en hex = ~94%) */
   z-index: 1;
 }
 
