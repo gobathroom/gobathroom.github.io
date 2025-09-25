@@ -128,4 +128,54 @@ body {
   font-size: 18px;
 }
 
+.report-section {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.report-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.dual-button {
+  display: inline-flex;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.dual-button a {
+  padding: 0.7rem 1.2rem;
+  text-decoration: none;
+  font-weight: bold;
+  color: #fff;
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-left {
+  background: #0acfa3;
+}
+
+.btn-left:hover {
+  background: #08b68e;
+}
+
+.btn-right {
+  background: #0077ff;
+}
+
+.btn-right:hover {
+  background: #005fcc;
+}
+
+.dual-button i {
+  margin-left: 6px;
+}
+
 
