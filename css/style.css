@@ -99,7 +99,7 @@ body {
   align-items: center;
   justify-content: space-between;
   text-decoration: none; /* 👈 esto quita el subrayado */
-  background: linear-gradient(90deg, #0db3c8, #26e0a6);
+  background: linear-gradient(90deg, #0079C1, #29C3C4);
   border: none;
   color: white;
   padding: 14px 20px;
