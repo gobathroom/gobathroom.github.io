@@ -250,14 +250,3 @@ body {
 
 
 
-.donate-form {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px; /* más espacio arriba*/
-  margin-bottom: 10px; /*opcional, espacio abajo*/
-}
-
-.donate-btn {
-  max-width: 200px;  /* ajusta el ancho si lo quieres más chico */
-  height: auto;
-}
