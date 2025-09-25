@@ -4,7 +4,7 @@ function armTapReset(a) {
     // quita foco para evitar :focus-visible persistente
     setTimeout(() => a.blur(), 50);
     // intenta restaurar a los 1.5s (puede pausarse en background)
-    setTimeout(() => a.classList.remove('tapped'), 1500);
+    setTimeout(() => a.classList.remove('tapped'), 90);
   };
 
   a.addEventListener('click', activate, { passive: true });
