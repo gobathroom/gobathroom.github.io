@@ -129,119 +129,77 @@ body {
 }
 
 /* Reusar el mismo degradado del botón principal */
-:root {
+:root{
   --cta-gradient: linear-gradient(90deg, #0db3c8, #26e0a6);
-  --suggest-active: #0aa56d;  /* verde al interactuar */
-  --report-active:  #ff7a1a;  /* naranja al interactuar */
+  --suggest-active:#0aa56d;   /* verde al interactuar */
+  --report-active:#ff7a1a;    /* naranja al interactuar */
 }
 
-/* Tu botón principal mantiene el degradado */
-.cta-button {
-  background: var(--cta-gradient);
-}
+/* Botón principal */
+.cta-button{ background:var(--cta-gradient); }
 
 /* Bloque título + botón doble */
-.report-section {
-  text-align: center;
-  margin-top: 18px;
+.report-section{ text-align:center; margin-top:18px; }
+.report-title{ font-size:.95rem; font-weight:600; color:#e7e7ee; margin:0 0 8px 0; }
+
+/* Contenedor: degradado continuo */
+.dual-button{
+  display:inline-flex; width:100%;
+  border-radius:12px; overflow:hidden;
+  box-shadow:0 4px 12px rgba(0,0,0,.2);
+  background:var(--cta-gradient);
 }
 
-.report-title {
-  font-size: 0.95rem;           /* discreto */
-  font-weight: 600;
-  color: #e7e7ee;
-  margin: 0 0 8px 0;
+/* Cada mitad: grid centrado, transparente por defecto */
+.dual-button a{
+  flex:1 1 50%;
+  display:grid; place-items:center;
+  padding:14px 18px;
+  text-decoration:none; color:#fff; font-weight:600;
+  background-color:transparent;
+  transition:background-color .25s ease, transform .15s ease, opacity .2s ease;
 }
 
-/* Contenedor: se pinta el degradado UNA SOLA VEZ aquí */
-.dual-button {
-  display: inline-flex;
-  width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  background: var(--cta-gradient);       /* ✅ degradado continuo */
+/* Línea divisoria central */
+.dual-button a + a{ border-left:1px solid rgba(255,255,255,.18); }
+
+/* Texto e ícono superpuestos y centrados */
+.dual-button .btn-text, .dual-button i{ grid-area:1 / 1; }
+.dual-button i{
+  margin-left:0 !important;
+  opacity:0; transform:translateY(2px);
+  transition:opacity .2s ease, transform .2s ease;
+}
+.dual-button .btn-text{ transition:opacity .2s ease; }
+
+/* ===== Estado controlado por JS (.tapped) ===== */
+.dual-button .btn-left.tapped{
+  background-color:var(--suggest-active);
+}
+.dual-button .btn-left.tapped .btn-text{ opacity:0; }
+.dual-button .btn-left.tapped i{ opacity:1; transform:translateY(0); }
+
+.dual-button .btn-right.tapped{
+  background-color:var(--report-active);
+}
+.dual-button .btn-right.tapped .btn-text{ opacity:0; }
+.dual-button .btn-right.tapped i{ opacity:1; transform:translateY(0); }
+
+/* Hover SOLO en dispositivos con hover real (no móvil) */
+@media (hover:hover){
+  .dual-button .btn-left:hover{ background-color:var(--suggest-active); }
+  .dual-button .btn-right:hover{ background-color:var(--report-active); }
+  .dual-button .btn-left:hover .btn-text,
+  .dual-button .btn-right:hover .btn-text{ opacity:0; }
+  .dual-button .btn-left:hover i,
+  .dual-button .btn-right:hover i{ opacity:1; transform:translateY(0); }
 }
 
-/* Cada mitad: grid centrado y transparente por defecto */
-.dual-button a {
-  flex: 1 1 50%;
-  display: grid;                      /* <- grid en vez de flex */
-  place-items: center;                /* centra vertical/horizontal */
-  padding: 14px 18px;
-  text-decoration: none;
-  color: #fff;
-  font-weight: 600;
-  background-color: transparent;      /* deja ver el degradado del padre */
-  transition: background-color 0.25s ease, transform 0.15s ease, opacity 0.2s ease;
-}
+/* Feedback de click */
+.dual-button a:active{ transform:scale(.98); }
 
-/* Línea divisoria sutil en el centro */
-.dual-button a + a {
-  border-left: 1px solid rgba(255,255,255,0.18);
-}
-
-/* Texto e ícono se superponen en la MISMA celda (centrados) */
-.dual-button .btn-text,
-.dual-button i {
-  grid-area: 1 / 1;                   /* ambos al centro exacto */
-}
-
-/* Anula margen global de iconos solo en el botón doble */
-.dual-button i {
-  margin-left: 0 !important;
-  opacity: 0;
-  transform: translateY(2px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.dual-button .btn-text {
-  transition: opacity 0.2s ease;
-}
-
-/* Interacción: SUGGEST → verde sólido + solo ícono */
-.dual-button .btn-left:hover,
-.dual-button .btn-left:active,
-.dual-button .btn-left:focus-visible {
-  background-color: var(--suggest-active);  /* tapa el degradado debajo */
-}
-.dual-button .btn-left:hover .btn-text,
-.dual-button .btn-left:active .btn-text,
-.dual-button .btn-left:focus-visible .btn-text {
-  opacity: 0;
-}
-.dual-button .btn-left:hover i,
-.dual-button .btn-left:active i,
-.dual-button .btn-left:focus-visible i {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Interacción: REPORT → naranja sólido + solo ícono */
-.dual-button .btn-right:hover,
-.dual-button .btn-right:active,
-.dual-button .btn-right:focus-visible {
-  background-color: var(--report-active);
-}
-.dual-button .btn-right:hover .btn-text,
-.dual-button .btn-right:active .btn-text,
-.dual-button .btn-right:focus-visible .btn-text {
-  opacity: 0;
-}
-.dual-button .btn-right:hover i,
-.dual-button .btn-right:active i,
-.dual-button .btn-right:focus-visible i {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Feedback de click (opcional) */
-.dual-button a:active {
-  transform: scale(0.98);
-}
-
-/* Accesibilidad: enfoque visible con teclado */
-.dual-button a:focus-visible {
-  outline: 2px solid rgba(255,255,255,0.6);
-  outline-offset: -2px;
+/* Accesibilidad: solo borde de enfoque, sin cambiar contenido */
+.dual-button a:focus-visible{
+  outline:2px solid rgba(255,255,255,.6);
+  outline-offset:-2px;
 }
