@@ -163,18 +163,16 @@ body {
   background: var(--cta-gradient);       /* ✅ degradado continuo */
 }
 
-/* Cada mitad es transparente por defecto para mostrar el degradado del padre */
+/* Cada mitad: grid centrado y transparente por defecto */
 .dual-button a {
   flex: 1 1 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  display: grid;                      /* <- grid en vez de flex */
+  place-items: center;                /* centra vertical/horizontal */
   padding: 14px 18px;
   text-decoration: none;
   color: #fff;
   font-weight: 600;
-  background-color: transparent;         /* ✅ deja ver el degradado continuo */
+  background-color: transparent;      /* deja ver el degradado del padre */
   transition: background-color 0.25s ease, transform 0.15s ease, opacity 0.2s ease;
 }
 
@@ -183,8 +181,15 @@ body {
   border-left: 1px solid rgba(255,255,255,0.18);
 }
 
-/* Animación texto/ícono */
+/* Texto e ícono se superponen en la MISMA celda (centrados) */
+.dual-button .btn-text,
 .dual-button i {
+  grid-area: 1 / 1;                   /* ambos al centro exacto */
+}
+
+/* Anula margen global de iconos solo en el botón doble */
+.dual-button i {
+  margin-left: 0 !important;
   opacity: 0;
   transform: translateY(2px);
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -198,7 +203,7 @@ body {
 .dual-button .btn-left:hover,
 .dual-button .btn-left:active,
 .dual-button .btn-left:focus-visible {
-  background-color: var(--suggest-active);  /* ✅ tapa el degradado debajo */
+  background-color: var(--suggest-active);  /* tapa el degradado debajo */
 }
 .dual-button .btn-left:hover .btn-text,
 .dual-button .btn-left:active .btn-text,
@@ -216,7 +221,7 @@ body {
 .dual-button .btn-right:hover,
 .dual-button .btn-right:active,
 .dual-button .btn-right:focus-visible {
-  background-color: var(--report-active);   /* ✅ tapa el degradado debajo */
+  background-color: var(--report-active);
 }
 .dual-button .btn-right:hover .btn-text,
 .dual-button .btn-right:active .btn-text,
@@ -240,7 +245,3 @@ body {
   outline: 2px solid rgba(255,255,255,0.6);
   outline-offset: -2px;
 }
-
-
-
-
