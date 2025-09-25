@@ -250,3 +250,18 @@ body {
 
 
 
+/* Botón de donación con el MISMO estilo base del primer CTA */
+.donate-cta{
+  /* hereda todo de .cta-button */
+  margin-top: 16px;        /* separación del bloque anterior */
+  /* si quieres que sea idéntico, no cambies el fondo.
+     si prefieres diferenciarlo un poco, descomenta las 2 líneas de abajo: */
+  /* background: linear-gradient(90deg, #12c2e9, #26e0a6); */
+  /* color:#fff; */
+}
+
+/* (opcional) un pequeño ajuste para el icono de PayPal */
+.donate-cta i{
+  margin-left: 12px;
+  font-size: 18px;
+}
