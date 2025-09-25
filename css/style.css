@@ -128,6 +128,8 @@ body {
   font-size: 18px;
 }
 
+
+
 /* Reusar el mismo degradado del botón principal */
 :root {
   --cta-gradient: linear-gradient(90deg, #0db3c8, #26e0a6);
@@ -244,4 +246,17 @@ body {
 .dual-button a:focus-visible {
   outline: 2px solid rgba(255,255,255,0.6);
   outline-offset: -2px;
+}
+
+
+
+.donate-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.donate-btn {
+  max-width: 200px;  /* ajusta el ancho si lo quieres más chico */
+  height: auto;
 }
