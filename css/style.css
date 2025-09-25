@@ -135,7 +135,7 @@ body {
   --report-active:  #ff7a1a;  /* naranja al interactuar */
 }
 
-/* Usa la variable en tu botón existente */
+/* Tu botón principal mantiene el degradado */
 .cta-button {
   background: var(--cta-gradient);
 }
@@ -147,22 +147,23 @@ body {
 }
 
 .report-title {
-  font-size: 0.95rem;        /* discreto */
+  font-size: 0.95rem;           /* discreto */
   font-weight: 600;
   color: #e7e7ee;
   margin: 0 0 8px 0;
 }
 
-/* Contenedor que parece un solo botón */
+/* Contenedor: se pinta el degradado UNA SOLA VEZ aquí */
 .dual-button {
   display: inline-flex;
   width: 100%;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  background: var(--cta-gradient);       /* ✅ degradado continuo */
 }
 
-/* Cada mitad es un enlace con el mismo look del botón principal */
+/* Cada mitad es transparente por defecto para mostrar el degradado del padre */
 .dual-button a {
   flex: 1 1 50%;
   display: flex;
@@ -173,8 +174,8 @@ body {
   text-decoration: none;
   color: #fff;
   font-weight: 600;
-  background: var(--cta-gradient);
-  transition: background 0.25s ease, transform 0.15s ease;
+  background-color: transparent;         /* ✅ deja ver el degradado continuo */
+  transition: background-color 0.25s ease, transform 0.15s ease, opacity 0.2s ease;
 }
 
 /* Línea divisoria sutil en el centro */
@@ -193,11 +194,11 @@ body {
   transition: opacity 0.2s ease;
 }
 
-/* Interacción: SUGGEST → verde + solo ícono */
+/* Interacción: SUGGEST → verde sólido + solo ícono */
 .dual-button .btn-left:hover,
 .dual-button .btn-left:active,
 .dual-button .btn-left:focus-visible {
-  background: var(--suggest-active);
+  background-color: var(--suggest-active);  /* ✅ tapa el degradado debajo */
 }
 .dual-button .btn-left:hover .btn-text,
 .dual-button .btn-left:active .btn-text,
@@ -211,11 +212,11 @@ body {
   transform: translateY(0);
 }
 
-/* Interacción: REPORT → naranja + solo ícono */
+/* Interacción: REPORT → naranja sólido + solo ícono */
 .dual-button .btn-right:hover,
 .dual-button .btn-right:active,
 .dual-button .btn-right:focus-visible {
-  background: var(--report-active);
+  background-color: var(--report-active);   /* ✅ tapa el degradado debajo */
 }
 .dual-button .btn-right:hover .btn-text,
 .dual-button .btn-right:active .btn-text,
@@ -229,7 +230,7 @@ body {
   transform: translateY(0);
 }
 
-/* Pequeño feedback de click (opcional) */
+/* Feedback de click (opcional) */
 .dual-button a:active {
   transform: scale(0.98);
 }
