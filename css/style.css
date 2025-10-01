@@ -66,39 +66,23 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.logo-container img {
+/* Tamaño general del logo */
+.logo-container .gb-icon {
   width: 150px;
-  height: 150px;
-  object-fit: cover;
-}
-
-/* Tamaño del SVG del logo */
-.logo-container .logo-svg {
-  width: 150px;
-  height: 150px;
+  height: auto;
   display: block;
   margin: 0 auto;
+
+  /* Colores por defecto */
+  --gb-bg: #111111;   /* fondo negro */
+  --gb-wc: #ffffff;   /* WC blanco */
 }
 
-/* === Colores fijos e independientes === */
-/* Fondo / marcador */
-.logo-container .logo-svg .bg * {
-  fill: #111111;   /* ← color del fondo/marker (pon el que quieras) */
-}
-
-/* Baño / parte blanca */
-.logo-container .logo-svg .wc * {
-  fill: #ffffff;   /* ← color del WC. déjalo blanco o cambia si lo necesitas */
-}
-
-/* (Opcional) variantes de acceso: solo cambian el FONDO */
-.logo-container.access-green  .logo-svg .bg * { fill: #22c55e; }
-.logo-container.access-blue   .logo-svg .bg * { fill: #0b5cff; }
-.logo-container.access-orange .logo-svg .bg * { fill: #f97316; }
-
-/* Importante: no heredar colores accidentalmente */
-.logo-container { color: inherit; }  /* evita que 'currentColor' intervenga */
-
+/* Variantes: puedes cambiar colores según el lugar donde pongas el icono */
+.logo-container.green   .gb-icon { --gb-bg: #22c55e; }   /* fondo verde */
+.logo-container.blue    .gb-icon { --gb-bg: #0b5cff; }   /* fondo azul */
+.logo-container.orange  .gb-icon { --gb-bg: #f97316; }   /* fondo naranja */
+.logo-container.graywc  .gb-icon { --gb-wc: #888888; }   /* WC gris */
 
 
 
