@@ -72,31 +72,33 @@ body {
   object-fit: cover;
 }
 
-/* === Estilos para el SVG del icono === */
-
-/* Aplica al <svg> dentro del contenedor existente */
-.logo-container svg {
-  display: block;        /* evita espacios fantasma de inline-SVG */
-  width: 150px;          /* mismo tamaño que la imagen anterior */
+/* Tamaño del SVG del logo */
+.logo-container .logo-svg {
+  width: 150px;
   height: 150px;
-  margin: 0 auto;        /* mantiene el centrado dentro del contenedor */
+  display: block;
+  margin: 0 auto;
 }
 
-/* Color base de las partes que no tienen fill definido en el archivo */
-.logo-container svg path,
-.logo-container svg ellipse {
-  fill: currentColor;    /* toma el color del contenedor o del texto */
+/* === Colores fijos e independientes === */
+/* Fondo / marcador */
+.logo-container .logo-svg .bg * {
+  fill: #111111;   /* ← color del fondo/marker (pon el que quieras) */
 }
 
-/* Define el color base usando el contenedor */
-.logo-container {
-  color: #ffffff;        /* blanco por defecto */
+/* Baño / parte blanca */
+.logo-container .logo-svg .wc * {
+  fill: #ffffff;   /* ← color del WC. déjalo blanco o cambia si lo necesitas */
 }
 
-/* (Opcional) Cambia color al pasar el mouse sobre el icono */
-.logo-container:hover {
-  color: #00e0ff;        /* por ejemplo, cian al pasar el mouse */
-}
+/* (Opcional) variantes de acceso: solo cambian el FONDO */
+.logo-container.access-green  .logo-svg .bg * { fill: #22c55e; }
+.logo-container.access-blue   .logo-svg .bg * { fill: #0b5cff; }
+.logo-container.access-orange .logo-svg .bg * { fill: #f97316; }
+
+/* Importante: no heredar colores accidentalmente */
+.logo-container { color: inherit; }  /* evita que 'currentColor' intervenga */
+
 
 
 
