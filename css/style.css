@@ -72,6 +72,35 @@ body {
   object-fit: cover;
 }
 
+/* === Estilos para el SVG del icono === */
+
+/* Aplica al <svg> dentro del contenedor existente */
+.logo-container svg {
+  display: block;        /* evita espacios fantasma de inline-SVG */
+  width: 150px;          /* mismo tamaño que la imagen anterior */
+  height: 150px;
+  margin: 0 auto;        /* mantiene el centrado dentro del contenedor */
+}
+
+/* Color base de las partes que no tienen fill definido en el archivo */
+.logo-container svg path,
+.logo-container svg ellipse {
+  fill: currentColor;    /* toma el color del contenedor o del texto */
+}
+
+/* Define el color base usando el contenedor */
+.logo-container {
+  color: #ffffff;        /* blanco por defecto */
+}
+
+/* (Opcional) Cambia color al pasar el mouse sobre el icono */
+.logo-container:hover {
+  color: #00e0ff;        /* por ejemplo, cian al pasar el mouse */
+}
+
+
+
+
 /* Title and description */
 .main-title {
   text-align: center;
