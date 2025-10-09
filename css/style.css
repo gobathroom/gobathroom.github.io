@@ -26,12 +26,12 @@ html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
   padding: 8px 0;
 }
 
-/* Contenedor intermedio */
-.stage { width: 100%; }
-
-/* GRID CENTRAL (a tamaño completo inicialmente) */
+/* Centro (grid) a todo lo ancho por defecto */
+.stage { width: 100%; }                 /* no pongas max-width aquí */
 .grid-container {
   width: 100%;
+  margin: 0;                            /* sin espacios laterales */
+  /* tu grid: */
   display: grid;
   gap: 10px;
   padding: 10px;
@@ -41,6 +41,7 @@ html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
   grid-template-columns: 200px 1fr 1fr 200px;
   grid-template-rows: 1fr auto;
 }
+
 
 /* Áreas */
 .left-sidebar     { grid-area: left; }
