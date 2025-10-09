@@ -21,11 +21,6 @@ html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
 /* === MIXTO ROBUSTO === */
 /* Base: ocupa TODO el ancho */
 .stage { width: 100%; }
-/* Solo para depuración visual */
-.stage { outline: 3px dashed red; }  /* Verás borde rojo cuando esté full width */
-@media (max-width:1400px) {
-  .stage { outline-color: blue; }    /* Cambia a azul cuando se limite el ancho */
-}
 
 /* Al achicar ventana (≤1400px), SOLO el centro se limita y se centra */
 @media screen and (max-width: 1400px) {
