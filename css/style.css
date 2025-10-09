@@ -1,4 +1,4 @@
-/* Fondo con la imagen */
+/* ---Fondo con la imagen--- */
 body {
   margin: 0;
   padding: 0;
@@ -7,7 +7,7 @@ body {
   height: 100%;
 }
 
-/* Overlay morado transparente */
+/* -Overlay morado transparente- */
 .overlay {
   position: fixed;       /* siempre cubre toda la ventana */
   top: 0;
@@ -18,7 +18,7 @@ body {
   z-index: 0;            /* detrás de todo el contenido */
 }
 
-/* Barra superior */
+/* ---Barra superior--- */
 .notice-bar {
   position: relative;    /* o fixed si debe seguir visible */
   z-index: 2;            /* sobre la capa morada */
@@ -29,10 +29,103 @@ body {
   border-left: 4px solid #ff6b6b;
 }
 
-/* Contenedor principal */
+/* ---Contenedor principal--- */
 .shell {
   position: relative;
   z-index: 3;           /* sobre la barra y el overlay */
   max-width: 1200px;    /* ejemplo: ancho para desktop */
   margin: 0 auto;
 }
+
+
+
+
+/* -Panel translúcido base- */
+.panel {
+  background: rgba(66, 57, 110, 0.36);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  padding: 2rem;
+}
+
+/* Hero: centrado y ancho controlado (desktop primero) */
+.panel.hero {
+  width: min(440px, 92vw);
+  margin: 3rem auto;
+  text-align: center;
+  z-index: 3;
+}
+
+/* Logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+.gb-icon {
+  width: 120px;
+  height: auto;
+  --gb-bg: #111;   /* fondo por defecto */
+  --gb-wc: #fff;   /* icono por defecto */
+}
+
+/* Tipografía */
+.main-title {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0 0 .75rem 0;
+}
+.description {
+  color: #e0e0e0;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+/* CTA principal */
+.cta-button {
+  display: flex; align-items: center; justify-content: center;
+  gap: .5rem;
+  width: 100%;
+  background: linear-gradient(90deg, #037fc1, #25bdc4);
+  color: #fff; font-weight: 700; font-size: 16px;
+  padding: 14px 18px; border-radius: 12px;
+  text-decoration: none; box-shadow: 0 6px 14px rgba(0,0,0,.25);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.cta-button:hover { transform: translateY(-1px); box-shadow: 0 10px 18px rgba(0,0,0,.28); }
+.cta-button:active { transform: translateY(0); }
+
+/* Subtítulo y botones dobles */
+.report-section { margin-top: 14px; }
+.report-title { color:#e7e7ee; font-weight:600; font-size:.95rem; margin-bottom:8px; }
+.dual-button {
+  display: grid; grid-template-columns: 1fr 1fr;
+  background: linear-gradient(90deg, #0db3c8, #26e0a6);
+  border-radius: 12px; overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0,0,0,.2);
+}
+.dual-button a {
+  display: grid; place-items: center;
+  padding: 12px 10px; color:#fff; text-decoration:none; font-weight:700;
+  background: transparent; transition: background-color .2s ease, opacity .2s ease;
+}
+.dual-button a + a { border-left: 1px solid rgba(255,255,255,.2); }
+.dual-button .btn-text, .dual-button i { grid-area: 1 / 1; }
+.dual-button i { opacity: 0; transform: translateY(2px); transition: opacity .2s ease, transform .2s ease; }
+
+/* Hover states */
+.dual-button .btn-left:hover  { background:#0aa56d; }
+.dual-button .btn-right:hover { background:#ff7a1a; }
+.dual-button a:hover .btn-text { opacity: 0; }
+.dual-button a:hover i { opacity: 1; transform: translateY(0); }
+
+/* Donación estilo PayPal */
+.donate-cta {
+  margin-top: 14px;
+  background: linear-gradient(90deg, #00457C, #0079C1);
+}
+
