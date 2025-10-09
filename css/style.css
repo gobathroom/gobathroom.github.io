@@ -1,3 +1,9 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+
 /* ---Fondo con la imagen--- */
 body {
   margin: 0;
@@ -25,8 +31,8 @@ body {
   background-color: #42396E5C;
   backdrop-filter: blur(4px);
   color: #fff;
-  padding: 0.75rem 1rem;
-  border-left: 4px solid #ff6b6b;
+  padding: 12px 20px;
+  border-left: 4px solid #FF6B6B;
   box-sizing: border-box;
   text-align: center;
   font-size: 12px;
