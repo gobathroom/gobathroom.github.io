@@ -1,27 +1,19 @@
-/* Reset */
+/* Reset mínimo */
 * { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
+html, body { height: 100%; }
+body { margin: 0; font-family: system-ui, sans-serif; }
 
-/* Estructura general */
+/* Estructura general: header y footer siempre full width */
 .page {
   min-height: 100svh;
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
 
-/* Header y Footer — SIEMPRE full ancho + borde */
-.header, .footer {
-  border: 2px solid #000;          /* 🔹 contorno visible */
-  border-radius: 10px;
-  text-align: center;
-  font-weight: 700;
-  padding: 8px 0;
-}
-
-/* Contenedor intermedio */
+/* Centro (stage) ocupa todo; el grid vive dentro */
 .stage { width: 100%; }
 
-/* GRID CENTRAL (a tamaño completo inicialmente) */
+/* Grid de escritorio (ocupa todo el ancho por defecto) */
 .grid-container {
   width: 100%;
   display: grid;
@@ -34,32 +26,29 @@ html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
   grid-template-rows: 1fr auto;
 }
 
-/* Áreas */
+/* Asignaciones de área */
 .left-sidebar     { grid-area: left; }
 .main-content     { grid-area: main; }
 .secondary-content{ grid-area: secondary; }
 .tertiary-content { grid-area: tertiary; }
 .right-sidebar    { grid-area: right; }
 
-/* Bordes de referencia (todos los cuadros visibles) */
+/* Bordes de depuración (quítalos al final) */
 .grid-container > * {
-  border: 2px solid #000;
-  border-radius: 10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:700;
+  border: 2px solid #000; border-radius: 10px;
+  display:flex; align-items:center; justify-content:center;
+  font-weight: 700;
 }
 
-/* SOLO el centro se achica cuando reduces ventana */
+/* “Encoger” solo el centro cuando la ventana se hace más estrecha */
 @media (max-width: 1280px) {
   .grid-container {
-    max-width: 1100px;   /* 🔹 el centro se limita */
-    margin-inline: auto; /* 🔹 se centra */
+    max-width: 1100px;
+    margin-inline: auto;
   }
 }
 
-/* En móviles, dos botones arriba + contenido apilado */
+/* Mobile: dos botones arriba y contenido apilado */
 @media (max-width: 768px) {
   .grid-container {
     max-width: 100%;
@@ -73,10 +62,7 @@ html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
     grid-template-rows: auto auto auto 1fr;
   }
   .left-sidebar, .right-sidebar {
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:44px;
-    border-radius:9999px;
+    display:flex; justify-content:center; align-items:center;
+    min-height:44px; border-radius:9999px;
   }
 }
