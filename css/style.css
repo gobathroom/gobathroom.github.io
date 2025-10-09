@@ -8,6 +8,8 @@
 
 /* GRID PRINCIPAL */
 .grid-container {
+  max-width: 1600px;  /* evita que en pantallas muy anchas se estire demasiado */
+  margin: 0 auto;     /* centra el contenido */
   display: grid;
   grid-template-areas:
     "header header header header"
