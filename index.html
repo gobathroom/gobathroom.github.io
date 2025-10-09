@@ -3,36 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Content Security Policy (seguridad) -->
- <meta http-equiv="Content-Security-Policy"
-content="
-  default-src 'self';
-  script-src 'self';
-  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
-  img-src 'self' data: https://www.paypalobjects.com https://www.paypal.com;
-  font-src 'self' https://cdnjs.cloudflare.com data:;
-  frame-src https://docs.google.com https://www.paypal.com https://www.sandbox.paypal.com;
-  form-action 'self' https://www.paypal.com;
-  connect-src 'self' https://rebrand.ly/open-map;
-">
-  
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>GoBathroom</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Fondo global, controlado con CSS -->
-  
-  <div class="overlay"></div> <!-- Capa morada -->
-
-  <div class="notice-bar">
-    📜 <strong>NYC Law 2023:</strong> Couriers have the right to use restrooms at pickup locations (if in a common area) — ❌ If not: out of service, cleaning, or restricted access.
-  </div>
-
-  <div class="shell">
-    <section class="panel hero"> … </section>
-    <section class="panel icon-key"> … </section>
-    <section class="panel emoji-key"> … </section>
+  <div class="grid-container">
+    <header class="header">HEADER</header>
+    <aside class="left-sidebar">LEFT SIDEBAR</aside>
+    <main class="main-content">MAIN CONTENT</main>
+    <section class="secondary-content">SECONDARY CONTENT</section>
+    <aside class="right-sidebar">RIGHT SIDEBAR</aside>
+    <section class="tertiary-content">TERTIARY CONTENT</section>
+    <footer class="footer">FOOTER</footer>
   </div>
 </body>
 </html>
