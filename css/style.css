@@ -32,7 +32,7 @@ body {
 /* ---Contenedor principal--- */
 .shell {
   position: relative;
-  z-index: 3;           /* sobre la barra y el overlay */
+  z-index: 2;           /* sobre la barra y el overlay */
   max-width: 1200px;    /* ejemplo: ancho para desktop */
   margin: 0 auto;
 }
@@ -48,6 +48,7 @@ body {
   border-radius: 14px;
   box-shadow: 0 10px 30px rgba(0,0,0,.25);
   padding: 2rem;
+  z-index: 3;
 }
 
 /* Hero: centrado y ancho controlado (desktop primero) */
@@ -63,6 +64,7 @@ body {
   display: flex;
   justify-content: center;
   margin-bottom: 1.25rem;
+  z-index:4;
 }
 .gb-icon {
   width: 120px;
@@ -83,6 +85,7 @@ body {
   font-size: 15px;
   line-height: 1.6;
   margin-bottom: 1.25rem;
+  z-index: 4;
 }
 
 /* CTA principal */
@@ -95,6 +98,7 @@ body {
   padding: 14px 18px; border-radius: 12px;
   text-decoration: none; box-shadow: 0 6px 14px rgba(0,0,0,.25);
   transition: transform .15s ease, box-shadow .15s ease;
+  z-index: 4;
 }
 .cta-button:hover { transform: translateY(-1px); box-shadow: 0 10px 18px rgba(0,0,0,.28); }
 .cta-button:active { transform: translateY(0); }
@@ -107,6 +111,7 @@ body {
   background: linear-gradient(90deg, #0db3c8, #26e0a6);
   border-radius: 12px; overflow: hidden;
   box-shadow: 0 6px 14px rgba(0,0,0,.2);
+  z-index: 4;
 }
 .dual-button a {
   display: grid; place-items: center;
