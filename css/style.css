@@ -6,34 +6,35 @@
   font-family: system-ui, sans-serif;
 }
 
-/* Reset básico */
+/* Reset */
 * { box-sizing: border-box; }
-html, body { height: 100%; }
-body { margin: 0; }
+html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
 
-/* Estructura general: header y footer SIEMPRE full-bleed */
+/* Estructura general */
 .page {
   min-height: 100svh;
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
 
-/* Header/Footer ocupan todo el ancho siempre */
+/* Header y Footer — SIEMPRE full ancho + borde */
 .header, .footer {
-  padding: 8px 0;                 /* quita padding lateral si no quieres bordes */
-  /* background: #f5f5f5; */
-  /* border-top/bottom opcionales */
+  border: 2px solid #000;          /* 🔹 contorno visible */
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 700;
+  padding: 8px 0;
 }
 
-/* --- CENTRO (tu layout) --- */
+/* Contenedor intermedio */
+.stage { width: 100%; }
 
-/* 1) Escritorio normal: ocupa TODO el ancho (sin márgenes laterales) */
-.stage { width: 100%; }            /* contenedor del grid central */
+/* GRID CENTRAL (a tamaño completo inicialmente) */
 .grid-container {
   width: 100%;
   display: grid;
   gap: 10px;
-  padding: 10px;                   /* quítalo si quieres sin “gutter” */
+  padding: 10px;
   grid-template-areas:
     "left main      secondary right"
     "left tertiary  tertiary  right";
@@ -41,20 +42,35 @@ body { margin: 0; }
   grid-template-rows: 1fr auto;
 }
 
-/* 2) Cuando “minimizas” la ventana:
-      - Header/Footer siguen 100% (sin reducir)
-      - SOLO el centro se hace más estrecho y queda centrado */
+/* Áreas */
+.left-sidebar     { grid-area: left; }
+.main-content     { grid-area: main; }
+.secondary-content{ grid-area: secondary; }
+.tertiary-content { grid-area: tertiary; }
+.right-sidebar    { grid-area: right; }
+
+/* Bordes de referencia (todos los cuadros visibles) */
+.grid-container > * {
+  border: 2px solid #000;
+  border-radius: 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+}
+
+/* SOLO el centro se achica cuando reduces ventana */
 @media (max-width: 1280px) {
   .grid-container {
-    max-width: 1100px;             /* el ancho controlado del centro */
-    margin-inline: auto;           /* centrado → aparecen laterales */
+    max-width: 1100px;   /* 🔹 el centro se limita */
+    margin-inline: auto; /* 🔹 se centra */
   }
 }
 
-/* 3) Mobile: tus botones arriba y el resto apilado */
+/* En móviles, dos botones arriba + contenido apilado */
 @media (max-width: 768px) {
   .grid-container {
-    max-width: 100%;               /* en mobile ocupamos todo */
+    max-width: 100%;
     margin: 0;
     grid-template-areas:
       "left   right"
@@ -64,24 +80,11 @@ body { margin: 0; }
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto 1fr;
   }
-  .left-sidebar,.right-sidebar{
-    justify-content:center; align-items:center;
-    display:flex; min-height:44px; border-radius:9999px;
-    /* estilos de botón opcionales */
+  .left-sidebar, .right-sidebar {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:44px;
+    border-radius:9999px;
   }
 }
-
-/* Áreas (igual que antes) */
-.left-sidebar     { grid-area: left; }
-.main-content     { grid-area: main; }
-.secondary-content{ grid-area: secondary; }
-.tertiary-content { grid-area: tertiary; }
-.right-sidebar    { grid-area: right; }
-
-/* Bordes de depuración (quítalos al final) */
-.grid-container > * {
-  border: 2px solid #000; border-radius: 10px;
-  display:flex; align-items:center; justify-content:center;
-  font-weight: 700;
-}
-
