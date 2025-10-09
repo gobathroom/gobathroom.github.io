@@ -23,54 +23,23 @@ html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
   width: 100%;
 }
 
-/* GRID CENTRAL a pantalla completa */
-.grid-container {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  gap: 10px;
-  padding: 10px;
-  grid-template-areas:
-    "left main      secondary right"
-    "left tertiary  tertiary  right";
-  grid-template-columns: 200px 1fr 1fr 200px;
-  grid-template-rows: 1fr auto;
+/* por defecto: ocupa todo */
+.grid-container { width: 100%; }
+
+/* cuando la ventana baja de 1400px, el centro se limita y se centra */
+@media (max-width: 1400px) {
+  .grid-container { max-width: 1200px; margin-inline: auto; }
 }
 
-/* Áreas */
-.left-sidebar     { grid-area: left; }
-.main-content     { grid-area: main; }
-.secondary-content{ grid-area: secondary; }
-.tertiary-content { grid-area: tertiary; }
-.right-sidebar    { grid-area: right; }
-
-/* Bordes de referencia */
-.grid-container > * {
-  border: 2px solid #000;
-  border-radius: 10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:700;
-}
-
-/* Versión mobile */
+/* móvil (igual que ya tenías) */
 @media (max-width: 768px) {
   .grid-container {
+    max-width: 100%; margin: 0;
     grid-template-areas:
-      "left   right"
-      "main   main"
+      "left right"
+      "main main"
       "secondary secondary"
       "tertiary tertiary";
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto 1fr;
-  }
-
-  .left-sidebar, .right-sidebar {
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:44px;
-    border-radius:9999px;
   }
 }
