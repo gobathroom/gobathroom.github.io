@@ -1,284 +1,38 @@
-html, body {
+/* Fondo con la imagen */
+body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  font-family: Arial, sans-serif;
-}
-
-/* Imagen de fondo */
-body {
   background: url('../background.jpg') no-repeat center center fixed;
   background-size: cover;
-  position: relative;
+  height: 100%;
 }
 
 /* Overlay morado transparente */
 .overlay {
-  position: fixed;
+  position: fixed;       /* siempre cubre toda la ventana */
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(26, 20, 48, 0.94); /* #1a1430 con 94% opacidad */
-  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(26, 20, 48, 0.94); /* morado semitransparente */
+  z-index: 0;            /* detrás de todo el contenido */
 }
 
-/* franja de notificacion */
+/* Barra superior */
 .notice-bar {
-  background-color: #42396E5C;
-  color: white;
-  margin-top: 1.75rem;
-  margin-bottom: 1.75rem;
-  padding: 12px 20px;
-  width: 100%;
-  box-sizing: border-box;
-  border-left: 4px solid #FF6B6B;
-  font-size: 14px;
-  font-weight: normal;
-  backdrop-filter: blur(4px);
-  position: relative;
-  z-index: 2;
-
-  text-align: center; /* 👈 Esto centra el texto horizontalmente */
-}
-
- /* contenedor principal */
-.central-panel {
-  background-color: #42396E5C;
-  max-width: 440px;  /* o ajusta a 420px o 440px según tu diseño */
-  margin: 4rem auto;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 2rem;
-  overflow-wrap: break-word; /* ✅ fuerza a romper texto largo */
-  border-radius: 12px; /* opcional: bordes redondeados como en tu ejemplo */
-  box-sizing: border-box;
-  position: relative;
-  z-index: 2;
-}
-
-/* logo gobathroom */
-.logo-container {
-  position: relative;
-  z-index: 3; /* Por encima del fondo y del contenedor */
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-}
-
-/* Tamaño general del logo */
-.logo-container .gb-icon {
-  width: 150px;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-
-  /* Colores por defecto */
-  --gb-bg: #29c3c4;   /* fondo negro */
-  --gb-wc: #ffffff;   /* WC blanco */
-}
-
-/* Variantes: puedes cambiar colores según el lugar donde pongas el icono */
-.logo-container.green   .gb-icon { --gb-bg: #22c55e; }   /* fondo verde */
-.logo-container.blue    .gb-icon { --gb-bg: #0b5cff; }   /* fondo azul */
-.logo-container.orange  .gb-icon { --gb-bg: #f97316; }   /* fondo naranja */
-.logo-container.graywc  .gb-icon { --gb-wc: #888888; }   /* WC gris */
-
-
-
-
-/* Title and description */
-.main-title {
-  text-align: center;
-  font-size: 28px;
-  font-weight: bold;
-  color: white;
-  margin-bottom: 1rem;
-}
-
-.description {
-  text-align: center;
-  font-size: 15px;
-  color: #E0E0E0;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
-
-/* General buttom */
-.cta-button {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  text-decoration: none; /* 👈 esto quita el subrayado */
-  background: linear-gradient(90deg, #037fc1, #25bdc4);
-  border: none;
-  color: white;
-  padding: 14px 20px;
-  font-size: 16px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  width: 100%;
-  box-sizing: border-box;
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  margin-top: 32px; /* Separación desde el texto */
-}
-
-.cta-button:hover {
-  transform: scale(1.04);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
-}
-
-.cta-button:active {
-  transform: scale(0.97);
-}
-
-.cta-button i {
-  margin-left: 12px;
-  font-size: 18px;
-}
-
-
-
-/* Reusar el mismo degradado del botón principal */
-:root {
-  --cta-gradient: linear-gradient(90deg, #0db3c8, #26e0a6);
-  --suggest-active: #0aa56d;  /* verde al interactuar */
-  --report-active:  #ff7a1a;  /* naranja al interactuar */
-}
-
-/* Tu botón principal mantiene el degradado */
-.cta-button {
-  background: var(--cta-gradient);
-}
-
-/* Bloque título + botón doble */
-.report-section {
-  text-align: center;
-  margin-top: 18px;
-}
-
-.report-title {
-  font-size: 0.95rem;           /* discreto */
-  font-weight: 600;
-  color: #e7e7ee;
-  margin: 0 0 8px 0;
-}
-
-/* Contenedor: se pinta el degradado UNA SOLA VEZ aquí */
-.dual-button {
-  display: inline-flex;
-  width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  background: var(--cta-gradient);       /* ✅ degradado continuo */
-}
-
-/* Cada mitad: grid centrado y transparente por defecto */
-.dual-button a {
-  flex: 1 1 50%;
-  display: grid;                      /* <- grid en vez de flex */
-  place-items: center;                /* centra vertical/horizontal */
-  padding: 14px 18px;
-  text-decoration: none;
+  position: relative;    /* o fixed si debe seguir visible */
+  z-index: 2;            /* sobre la capa morada */
+  background-color: rgba(66, 57, 110, 0.6);
   color: #fff;
-  font-weight: 600;
-  background-color: transparent;      /* deja ver el degradado del padre */
-  transition: background-color 0.25s ease, transform 0.15s ease, opacity 0.2s ease;
+  text-align: center;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #ff6b6b;
 }
 
-/* Línea divisoria sutil en el centro */
-.dual-button a + a {
-  border-left: 1px solid rgba(255,255,255,0.18);
-}
-
-/* Texto e ícono se superponen en la MISMA celda (centrados) */
-.dual-button .btn-text,
-.dual-button i {
-  grid-area: 1 / 1;                   /* ambos al centro exacto */
-}
-
-/* Anula margen global de iconos solo en el botón doble */
-.dual-button i {
-  margin-left: 0 !important;
-  opacity: 0;
-  transform: translateY(2px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.dual-button .btn-text {
-  transition: opacity 0.2s ease;
-}
-
-/* Interacción: SUGGEST → verde sólido + solo ícono */
-.dual-button .btn-left:hover,
-.dual-button .btn-left:active,
-.dual-button .btn-left:focus-visible {
-  background-color: var(--suggest-active);  /* tapa el degradado debajo */
-}
-.dual-button .btn-left:hover .btn-text,
-.dual-button .btn-left:active .btn-text,
-.dual-button .btn-left:focus-visible .btn-text {
-  opacity: 0;
-}
-.dual-button .btn-left:hover i,
-.dual-button .btn-left:active i,
-.dual-button .btn-left:focus-visible i {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Interacción: REPORT → naranja sólido + solo ícono */
-.dual-button .btn-right:hover,
-.dual-button .btn-right:active,
-.dual-button .btn-right:focus-visible {
-  background-color: var(--report-active);
-}
-.dual-button .btn-right:hover .btn-text,
-.dual-button .btn-right:active .btn-text,
-.dual-button .btn-right:focus-visible .btn-text {
-  opacity: 0;
-}
-.dual-button .btn-right:hover i,
-.dual-button .btn-right:active i,
-.dual-button .btn-right:focus-visible i {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Feedback de click (opcional) */
-.dual-button a:active {
-  transform: scale(0.98);
-}
-
-/* Accesibilidad: enfoque visible con teclado */
-.dual-button a:focus-visible {
-  outline: 2px solid rgba(255,255,255,0.6);
-  outline-offset: -2px;
-}
-
-
-
-/* Botón estilo PayPal */
-.donate-cta {
-  background: linear-gradient(90deg, #00457C, #0079C1);
-  margin-top: 16px;
-}
-
-/* Hover */
-.donate-cta:hover {
-  transform: scale(1.04);
-  box-shadow: 0 6px 14px rgba(0, 48, 135, 0.4);
-}
-
-/* Active */
-.donate-cta:active {
-  transform: scale(0.97);
-}
-
-.donate-cta i {
-  margin-left: 12px;
-  font-size: 18px;
+/* Contenedor principal */
+.shell {
+  position: relative;
+  z-index: 3;           /* sobre la barra y el overlay */
+  max-width: 1200px;    /* ejemplo: ancho para desktop */
+  margin: 0 auto;
 }
