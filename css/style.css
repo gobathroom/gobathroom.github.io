@@ -22,19 +22,24 @@ body {
 .notice-bar {
   position: relative;    /* o fixed si debe seguir visible */
   z-index: 2;            /* sobre la capa morada */
-  background-color: rgba(66, 57, 110, 0.6);
+  background-color: #42396E5C;
+  backdrop-filter: blur(4px);
   color: #fff;
-  text-align: center;
   padding: 0.75rem 1rem;
   border-left: 4px solid #ff6b6b;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 14px;
+  font-weight: normal;
 }
 
 /* ---Contenedor principal--- */
 .shell {
   position: relative;
-  z-index: 2;           /* sobre la barra y el overlay */
+  z-index: 2;           /* sobre el overlay */
   max-width: 1200px;    /* ejemplo: ancho para desktop */
   margin: 0 auto;
+  
 }
 
 
