@@ -42,20 +42,10 @@
 }
 
 /* Responsivo */
-/* ===== Mobile (<= 719px) ===== */
-@media (max-width: 719px){
-  .grid-container{
-    /* 2 columnas para la fila de botones (left/right) */
-    grid-template-columns: 1fr 1fr;
-
-    /* Orden EXACTO en mobile:
-       HEADER
-       LEFT | RIGHT
-       MAIN
-       SECONDARY
-       TERTIARY
-       FOOTER
-    */
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+  .grid-container {
+    /* 2 columnas solo para la fila de botones (left/right) */
     grid-template-areas:
       "header header"
       "left   right"
@@ -63,26 +53,6 @@
       "secondary secondary"
       "tertiary tertiary"
       "footer footer";
+    grid-template-columns: 1fr 1fr;  /* dos columnas iguales */
+    grid-template-rows: auto auto auto auto 1fr auto;
   }
-
-  /* Estas zonas ocupan todo el ancho en mobile */
-  .header,
-  .main-content,
-  .secondary-content,
-  .tertiary-content,
-  .footer{
-    grid-column: 1 / -1;
-  }
-
-  /* (Opcional) estilizar sidebars como botones compactos en mobile */
-  .left-sidebar,
-  .right-sidebar{
-    background: transparent;
-    border: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
