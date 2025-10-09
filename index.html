@@ -7,14 +7,22 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <div class="grid-container">
+  <div class="page">
     <header class="header">HEADER</header>
-    <aside class="left-sidebar">LEFT SIDEBAR</aside>
-    <main class="main-content">MAIN CONTENT</main>
-    <section class="secondary-content">SECONDARY CONTENT</section>
-    <aside class="right-sidebar">RIGHT SIDEBAR</aside>
-    <section class="tertiary-content">TERTIARY CONTENT</section>
+
+    <!-- SOLO el centro (grid) vive dentro de .stage -->
+    <div class="stage">
+      <div class="grid-container">
+        <aside class="left-sidebar">LEFT SIDEBAR</aside>
+        <main class="main-content">MAIN CONTENT</main>
+        <section class="secondary-content">SECONDARY CONTENT</section>
+        <section class="tertiary-content">TERTIARY CONTENT</section>
+        <aside class="right-sidebar">RIGHT SIDEBAR</aside>
+      </div>
+    </div>
+
     <footer class="footer">FOOTER</footer>
   </div>
 </body>
+
 </html>
