@@ -43,7 +43,8 @@ body {
 .shell {
   position: relative;
   z-index: 2;           /* sobre el overlay */
-  max-width: 1200px;    /* ejemplo: ancho para desktop */
+  background-color: #42396E5C;
+  max-width: 420px;  /* o ajusta a 420px o 440px según tu diseño */
   margin: 0 auto;
   
 }
