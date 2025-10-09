@@ -6,55 +6,82 @@
   font-family: system-ui, sans-serif;
 }
 
-/* GRID PRINCIPAL */
-.grid-container {
-  max-width: 1600px;  /* evita que en pantallas muy anchas se estire demasiado */
-  margin: 0 auto;     /* centra el contenido */
+/* Reset básico */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; }
+
+/* Estructura general: header y footer SIEMPRE full-bleed */
+.page {
+  min-height: 100svh;
   display: grid;
-  grid-template-areas:
-    "header header header header"
-    "left main secondary right"
-    "left tertiary tertiary right"
-    "footer footer footer footer";
-  
-  grid-template-columns: 200px 1fr 1fr 200px; /* puedes ajustar los tamaños */
-  grid-template-rows: auto 1fr 1fr auto;
-  height: 100vh;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* Header/Footer ocupan todo el ancho siempre */
+.header, .footer {
+  padding: 8px 0;                 /* quita padding lateral si no quieres bordes */
+  /* background: #f5f5f5; */
+  /* border-top/bottom opcionales */
+}
+
+/* --- CENTRO (tu layout) --- */
+
+/* 1) Escritorio normal: ocupa TODO el ancho (sin márgenes laterales) */
+.stage { width: 100%; }            /* contenedor del grid central */
+.grid-container {
+  width: 100%;
+  display: grid;
   gap: 10px;
-  padding: 10px;
+  padding: 10px;                   /* quítalo si quieres sin “gutter” */
+  grid-template-areas:
+    "left main      secondary right"
+    "left tertiary  tertiary  right";
+  grid-template-columns: 200px 1fr 1fr 200px;
+  grid-template-rows: 1fr auto;
 }
 
-/* Áreas */
-.header { grid-area: header; background: #f5f5f5; text-align: center; }
-.left-sidebar { grid-area: left; background: #fafafa; }
-.main-content { grid-area: main; background: #fff; }
-.secondary-content { grid-area: secondary; background: #fff; }
-.tertiary-content { grid-area: tertiary; background: #fff; }
-.right-sidebar { grid-area: right; background: #fafafa; }
-.footer { grid-area: footer; background: #f5f5f5; text-align: center; }
-
-/* Bordes de referencia (para visualizar) */
-.grid-container > * {
-  border: 2px solid #000;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
+/* 2) Cuando “minimizas” la ventana:
+      - Header/Footer siguen 100% (sin reducir)
+      - SOLO el centro se hace más estrecho y queda centrado */
+@media (max-width: 1280px) {
+  .grid-container {
+    max-width: 1100px;             /* el ancho controlado del centro */
+    margin-inline: auto;           /* centrado → aparecen laterales */
+  }
 }
 
-/* Responsivo */
-/* ===== Mobile ===== */
+/* 3) Mobile: tus botones arriba y el resto apilado */
 @media (max-width: 768px) {
   .grid-container {
-    /* 2 columnas solo para la fila de botones (left/right) */
+    max-width: 100%;               /* en mobile ocupamos todo */
+    margin: 0;
     grid-template-areas:
-      "header header"
       "left   right"
       "main   main"
       "secondary secondary"
-      "tertiary tertiary"
-      "footer footer";
-    grid-template-columns: 1fr 1fr;  /* dos columnas iguales */
-    grid-template-rows: auto auto auto auto 1fr auto;
+      "tertiary tertiary";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto 1fr;
   }
+  .left-sidebar,.right-sidebar{
+    justify-content:center; align-items:center;
+    display:flex; min-height:44px; border-radius:9999px;
+    /* estilos de botón opcionales */
+  }
+}
+
+/* Áreas (igual que antes) */
+.left-sidebar     { grid-area: left; }
+.main-content     { grid-area: main; }
+.secondary-content{ grid-area: secondary; }
+.tertiary-content { grid-area: tertiary; }
+.right-sidebar    { grid-area: right; }
+
+/* Bordes de depuración (quítalos al final) */
+.grid-container > * {
+  border: 2px solid #000; border-radius: 10px;
+  display:flex; align-items:center; justify-content:center;
+  font-weight: 700;
+}
+
