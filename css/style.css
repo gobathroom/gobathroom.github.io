@@ -1,12 +1,4 @@
 /* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: system-ui, sans-serif;
-}
-
-/* Reset */
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
 
@@ -26,12 +18,12 @@ html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
   padding: 8px 0;
 }
 
-/* Centro (grid) a todo lo ancho por defecto */
-.stage { width: 100%; }                 /* no pongas max-width aquí */
+/* Contenedor intermedio */
+.stage { width: 100%; }
+
+/* GRID CENTRAL (a tamaño completo inicialmente) */
 .grid-container {
   width: 100%;
-  margin: 0;                            /* sin espacios laterales */
-  /* tu grid: */
   display: grid;
   gap: 10px;
   padding: 10px;
@@ -41,7 +33,6 @@ html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
   grid-template-columns: 200px 1fr 1fr 200px;
   grid-template-rows: 1fr auto;
 }
-
 
 /* Áreas */
 .left-sidebar     { grid-area: left; }
@@ -60,14 +51,13 @@ html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
   font-weight:700;
 }
 
-/* Cuando la ventana sea menor a 1400px, el centro se limita y se centra */
-@media (max-width: 1400px) {
+/* SOLO el centro se achica cuando reduces ventana */
+@media (max-width: 1280px) {
   .grid-container {
-    max-width: 1200px;                  /* ajusta a tu gusto (1100–1280) */
-    margin-inline: auto;                /* aparecen espacios laterales */
+    max-width: 1100px;   /* 🔹 el centro se limita */
+    margin-inline: auto; /* 🔹 se centra */
   }
 }
-
 
 /* En móviles, dos botones arriba + contenido apilado */
 @media (max-width: 768px) {
