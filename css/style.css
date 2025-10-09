@@ -9,7 +9,7 @@ html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
   grid-template-rows: auto 1fr auto;
 }
 
-/* Header y Footer — siempre full ancho + borde */
+/* Header / Footer full-bleed con borde */
 .header, .footer {
   border: 2px solid #000;
   border-radius: 10px;
@@ -18,22 +18,24 @@ html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
   padding: 8px 0;
 }
 
-/* Contenedor intermedio */
+/* === MIXTO ROBUSTO === */
+/* Base: ocupa TODO el ancho */
 .stage { width: 100%; }
 
-/* ===== Centro (GRID) – base “mixta” ===== */
-/* Base: centrado con ancho máximo (limpia en la mayoría de desktops) */
+/* Al achicar ventana (≤1400px), SOLO el centro se limita y se centra */
+@media screen and (max-width: 1400px) {
+  .stage { max-width: 1200px; margin-inline: auto; }
+}
+
+/* Grid central (sin max-width aquí) */
 .grid-container {
   width: 100%;
-  max-width: 1200px;        /* <-- límite visual elegante */
-  margin-inline: auto;      /* centrado */
   display: grid;
   gap: 10px;
   padding: 10px;
   grid-template-areas:
     "left main      secondary right"
     "left tertiary  tertiary  right";
-  /* sidebars con mínimo flexible; columnas de contenido fluidas */
   grid-template-columns: minmax(170px, 200px) 1fr 1fr minmax(170px, 200px);
   grid-template-rows: 1fr auto;
 }
@@ -49,25 +51,13 @@ html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
 .grid-container > * {
   border: 2px solid #000;
   border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700;
 }
 
-/* ===== Full-bleed en pantallas muy anchas ===== */
-@media (min-width: 1400px) {
-  .grid-container {
-    max-width: none;   /* ocupa todo el ancho */
-    margin-inline: 0;
-  }
-}
-
-/* ===== Mobile: dos botones arriba + contenido apilado ===== */
+/* Mobile: dos botones arriba + contenido apilado */
 @media (max-width: 768px) {
   .grid-container {
-    max-width: 100%;
-    margin: 0;
     grid-template-areas:
       "left   right"
       "main   main"
@@ -77,10 +67,7 @@ html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
     grid-template-rows: auto auto auto 1fr;
   }
   .left-sidebar, .right-sidebar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 44px;        /* buen target táctil */
-    border-radius: 9999px;   /* pill */
+    display:flex; justify-content:center; align-items:center;
+    min-height:44px; border-radius:9999px;
   }
 }
