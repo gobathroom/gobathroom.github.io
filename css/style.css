@@ -180,6 +180,122 @@ body {
   font-size: 18px;
 }
 
+/* ---------- Dual action (Suggest / Report) ----------- */
+:root{
+  /* Colores de interacción */
+  --suggest-active:#0aa56d;   /* verde al interactuar */
+  --report-active: #ff7a1a;   /* naranja al interactuar */
+  --cta-gradient: linear-gradient(90deg, #037fc1, #25bdc4);
+}
+
+.report-section{
+  text-align:center;
+  margin-top: 18px;
+}
+
+.report-title{
+  /* igual a .description strong (15px + bold) */
+  font-size: 15px;
+  font-weight: bold;
+  color: #E0E0E0;
+  margin: 0 0 8px 0;
+}
+
+.dual-button{
+  /* mismo tamaño “visual” que tu .cta-button */
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  background: var(--cta-gradient);            /* 👈 un solo degradado que cubre todo */
+  position: relative;
+}
+
+.dual-button .half{
+  position: relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 14px 20px;
+  text-decoration:none;
+  color:#fff;
+  font-size:16px;
+  font-weight:600;
+  transition: transform .18s ease;
+  isolation:isolate; /* asegura el z-index de los hijos por encima del ::before */
+}
+
+/* separador entre mitades */
+.dual-button .half + .half{
+  border-left: 1px solid rgba(255,255,255,0.22);
+}
+
+/* overlay de color al hover/click: verde u naranja solo en la mitad */
+.dual-button .half::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: transparent;
+  opacity:0;
+  transition: opacity .18s ease;
+  z-index:0;
+}
+.dual-button .half > *{ position:relative; z-index:1; }
+
+/* icono/label: alternan en hover/focus */
+.dual-button .icon{
+  position:absolute;
+  opacity:0;
+  transform: scale(.9);
+  transition: opacity .18s ease, transform .18s ease;
+  font-size:18px;
+}
+.dual-button .label{
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+/* Hover / Active / Keyboard */
+.dual-button .half:hover,
+.dual-button .half:active,
+.dual-button .half:focus-visible{
+  transform: scale(1.02);
+}
+
+.dual-button .half:hover .label,
+.dual-button .half:active .label,
+.dual-button .half:focus-visible .label{
+  opacity:0; transform: translateY(-6px);
+}
+.dual-button .half:hover .icon,
+.dual-button .half:active .icon,
+.dual-button .half:focus-visible .icon{
+  opacity:1; transform: scale(1);
+}
+
+/* Colores por mitad al interactuar */
+.dual-button .suggest:hover::before,
+.dual-button .suggest:active::before,
+.dual-button .suggest:focus-visible::before{
+  background: var(--suggest-active);
+  opacity:1;
+}
+.dual-button .report:hover::before,
+.dual-button .report:active::before,
+.dual-button .report:focus-visible::before{
+  background: var(--report-active);
+  opacity:1;
+}
+
+/* Móvil: que ocupe todo el ancho disponible */
+@media (max-width: 420px){
+  .dual-button{ width:100%; }
+}
+
+
+
 
 /* Bordes de referencia (quítalos al final) */
 .grid-container > * {
