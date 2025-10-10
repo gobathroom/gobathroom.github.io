@@ -207,7 +207,7 @@ body {
 
 /* Contenedor: se pinta el degradado UNA SOLA VEZ aquí */
 .dual-button {
-  margin: 0 auto;   /* ✅ centra horizontalmente */
+  margin: auto;   /* ✅ centra horizontalmente */
   display: flex;    /* puedes dejar flex en lugar de inline-flex */
   width: 180%;
   border-radius: 12px;
