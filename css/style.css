@@ -180,6 +180,52 @@ body {
 }
 
 
+/* =========================
+   TOKENS GLOBALES (variables)
+   ========================= */
+:root{
+  /* Anchos consistentes con el botón principal */
+  --cta-fluid: 90%;         /* ancho fluido relativo */
+  --cta-max: 520px;         /* tope máximo compartido */
+
+  /* Bordes y sombra */
+  --cta-radius: 16px;
+  --cta-shadow: 0 4px 12px rgba(0,0,0,.20);
+
+  /* Tipografía y espaciado */
+  --cta-font-weight: 600;
+  --cta-font-size: 16px;
+  --cta-pad-y: 14px;
+  --cta-pad-x: 20px;
+
+  /* Degradados */
+  --grad-main: linear-gradient(90deg, #037fc1, #25bdc4);   /* tu botón principal */
+  --grad-invert: linear-gradient(90deg, #25bdc4, #037fc1); /* invertido p/dual-button */
+
+  /* Colores de hover por mitad */
+  --suggest-active: #0aa56d;
+  --report-active:  #ff7a1a;
+}
+
+/* =========================================
+   “REGLA DE CONTENEDOR”: ancho compartido
+   - Aplica el MISMO ancho al botón principal
+     y al botón doble dentro del hero.
+   ========================================= */
+.hero .cta-button,
+.hero .report-section .dual-button{
+  width: min(var(--cta-fluid), var(--cta-max));
+  margin-inline: auto;           /* centrado */
+  border-radius: var(--cta-radius);
+  box-shadow: var(--cta-shadow);
+  font-weight: var(--cta-font-weight);
+  font-size: var(--cta-font-size);
+}
+
+/* (opcional) que el botón principal use siempre su degradado */
+.hero .cta-button{ background: var(--grad-main); }
+
+
 /* Bordes de referencia (quítalos al final) */
 .grid-container > * {
   border: 2px solid #000;
