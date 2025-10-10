@@ -189,6 +189,8 @@ body {
 /* Tu botón principal mantiene el degradado */
 .cta-button {
   background: var(--cta-gradient);
+  width: 90%;
+  margin: 0 auto;          /* ← centra horizontalmente */
 }
 
 /* Bloque título + botón doble */
@@ -206,12 +208,14 @@ body {
 
 /* Contenedor: se pinta el degradado UNA SOLA VEZ aquí */
 .dual-button {
-  display: inline-flex;
-  width: 100%;
+  display: flex;
+  width: 90%;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   background: var(--cta-gradient);       /* ✅ degradado continuo */
+  margin: 12px auto 0;     /* ← centrado + separación superior */
+  box-sizing: border-box;
 }
 
 /* Cada mitad: grid centrado y transparente por defecto */
