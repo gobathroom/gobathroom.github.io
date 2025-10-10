@@ -181,12 +181,7 @@ body {
 }
 
 
-/* Reusar el mismo degradado del botón principal */
-:root {
-  --cta-gradient: linear-gradient(90deg, #0db3c8, #26e0a6);
-  --suggest-active: #0aa56d;  /* verde al interactuar */
-  --report-active:  #ff7a1a;  /* naranja al interactuar */
-}
+
 
 /* Tu botón principal mantiene el degradado */
 .cta-button {
