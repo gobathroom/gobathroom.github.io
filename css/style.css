@@ -267,6 +267,81 @@ body {
 /* Quita márgenes heredados en icono dentro del doble botón */
 .dual-button i{ margin: 0; font-size: 18px; }
 
+/* Transiciones base (suaves y GPU-friendly) */
+.dual-button a {
+  transition: background-color .25s ease, transform .15s ease, opacity .2s ease;
+  min-height: 44px;                 /* accesibilidad táctil */
+}
+
+/* Texto e ícono: preparados para el “swap” */
+.dual-button .btn-text { 
+  transition: opacity .2s ease; 
+}
+
+.dual-button i {
+  opacity: 0;
+  transform: translateY(2px);
+  transition: opacity .2s ease, transform .2s ease;
+  font-size: 18px;
+}
+
+/* -------- Mitad izquierda: SUGGEST -------- */
+.dual-button .btn-left:hover,
+.dual-button .btn-left:active,
+.dual-button .btn-left:focus-visible {
+  background-color: #0aa56d;        /* var(--suggest-active) si usas tokens */
+}
+
+.dual-button .btn-left:hover .btn-text,
+.dual-button .btn-left:active .btn-text,
+.dual-button .btn-left:focus-visible .btn-text {
+  opacity: 0;
+}
+
+.dual-button .btn-left:hover i,
+.dual-button .btn-left:active i,
+.dual-button .btn-left:focus-visible i {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* -------- Mitad derecha: REPORT -------- */
+.dual-button .btn-right:hover,
+.dual-button .btn-right:active,
+.dual-button .btn-right:focus-visible {
+  background-color: #ff7a1a;        /* var(--report-active) si usas tokens */
+}
+
+.dual-button .btn-right:hover .btn-text,
+.dual-button .btn-right:active .btn-text,
+.dual-button .btn-right:focus-visible .btn-text {
+  opacity: 0;
+}
+
+.dual-button .btn-right:hover i,
+.dual-button .btn-right:active i,
+.dual-button .btn-right:focus-visible i {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Feedback de clic */
+.dual-button a:active { transform: scale(.98); }
+
+/* Accesibilidad: enfoque visible con teclado */
+.dual-button a:focus-visible {
+  outline: 2px solid rgba(255,255,255,.65);
+  outline-offset: -2px;             /* queda dentro del borde redondeado */
+}
+
+/* Respeto a usuarios con “reducir movimiento” */
+@media (prefers-reduced-motion: reduce) {
+  .dual-button a,
+  .dual-button .btn-text,
+  .dual-button i { transition: none; }
+}
+
+
 
 
 
