@@ -194,14 +194,14 @@ body {
 /* Bloque título + botón doble */
 .report-section {
   text-align: center;
-  margin-top: 18px;
+  margin-top: 16px;
 }
 
 .report-title {
   font-size: 0.95rem;           /* discreto */
   font-weight: 600;
   color: #e7e7ee;
-  margin: 0 0 8px 0;
+  margin: 0 0 0px 0;
 }
 
 /* Contenedor: se pinta el degradado UNA SOLA VEZ aquí */
