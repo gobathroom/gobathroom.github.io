@@ -145,40 +145,55 @@ body {
   font-weight: bold;     /* solo el texto dentro del <strong> estará en negrita */
 }
 
-/* General buttom */
-.cta-button {
+/* === Base común para ambos === */
+.cta-button,
+.donate-cta {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  text-decoration: none; /* 👈 esto quita el subrayado */
-  background: linear-gradient(90deg, #037fc1, #25bdc4);
+  justify-content: center; /* centrado */
+  gap: 8px;
+  text-decoration: none;
   border: none;
   color: white;
-  padding: 14px 20px;
   font-size: 16px;
+  font-weight: 600;
+  padding: 14px 20px;
   border-radius: 12px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
   width: 90%;
   box-sizing: border-box;
-  font-weight: 600;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  margin-top: 0px; /* Separación desde el texto */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.cta-button:hover {
+/* Hover y Active generales */
+.cta-button:hover,
+.donate-cta:hover {
   transform: scale(1.04);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
 }
-
-.cta-button:active {
+.cta-button:active,
+.donate-cta:active {
   transform: scale(0.97);
 }
 
-.cta-button i {
-  margin-left: 12px;
+/* Iconos comunes */
+.cta-button i,
+.donate-cta i {
   font-size: 18px;
+  margin-left: 12px;
 }
+
+/* === Botón principal === */
+.cta-button {
+  background: linear-gradient(90deg, #037fc1, #25bdc4);
+  margin-top: 0;
+}
+.cta-button:hover {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+
+
 
 /* 1) Asegura que el wrapper del doble botón tenga base de 100% */
 .panel.hero .report-section{
@@ -315,27 +330,17 @@ body {
   opacity:1;
 }
 
-/* Botón estilo PayPal */
+/* === Botón PayPal === */
 .donate-cta {
   background: linear-gradient(90deg, #00457C, #0079C1);
   margin-top: 16px;
 }
-
-/* Hover */
 .donate-cta:hover {
-  transform: scale(1.04);
-  box-shadow: 0 6px 14px rgba(0, 48, 135, 0.4);
+  box-shadow: 0 6px 14px rgba(0,48,135,0.4);
 }
 
-/* Active */
-.donate-cta:active {
-  transform: scale(0.97);
-}
 
-.donate-cta i {
-  margin-left: 12px;
-  font-size: 18px;
-}
+
 
 
 /* Bordes de referencia (quítalos al final) */
