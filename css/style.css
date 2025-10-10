@@ -216,6 +216,19 @@ body {
   background: var(--cta-gradient);       /* ✅ degradado continuo */
 }
 
+/* Cada mitad: grid centrado y transparente por defecto */
+.dual-button a {
+  flex: 1 1 50%;
+  display: grid;                      /* <- grid en vez de flex */
+  place-items: center;                /* centra vertical/horizontal */
+  padding: 14px 18px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  background-color: transparent;      /* deja ver el degradado del padre */
+  transition: background-color 0.25s ease, transform 0.15s ease, opacity 0.2s ease;
+}
+
 
 
 /* Línea divisoria sutil en el centro */
@@ -229,13 +242,8 @@ body {
   grid-area: 1 / 1;                   /* ambos al centro exacto */
 }
 
-/* Anula margen global de iconos solo en el botón doble */
-.dual-button i {
-  margin-left: 0 !important;
-  opacity: 0;
-  transform: translateY(2px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
+
+
 
 .dual-button .btn-text {
   transition: opacity 0.2s ease;
