@@ -198,6 +198,13 @@ body {
   margin-inline: auto;  /* centra horizontal */
 }
 
+.panel.hero .dual-button{
+  border-radius: 12px;
+  /* mismo padding vertical que el CTA (el horizontal ya lo da cada mitad) */
+}
+.panel.hero .dual-button .half{ padding: 14px 20px; }
+
+
 
 .report-section{
   text-align:center;
