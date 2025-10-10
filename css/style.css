@@ -217,7 +217,7 @@ body {
 
 .dual-button .half{
   position: relative;
-  display: grid;
+  display: flex;
   align-items:center;
   justify-content:center;
   padding: 14px 20px;
