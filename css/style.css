@@ -93,6 +93,7 @@ body {
   box-sizing: border-box;
   position: relative;
   z-index: 2;
+}
 
 /* Bordes de referencia (quítalos al final) */
 .grid-container > * {
