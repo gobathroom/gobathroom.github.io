@@ -2,6 +2,13 @@
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
 
+/* Imagen de fondo */
+body {
+  background: url('../background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+
 /* Estructura general */
 .page {
   min-height: 100svh;
