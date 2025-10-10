@@ -58,6 +58,7 @@ body {
     "left tertiary  tertiary  right";
   grid-template-columns: minmax(170px, 200px) 0.5fr 1fr minmax(170px, 200px);
   grid-template-rows: 1fr auto;
+  z-index: 2;
 }
 
 /* Áreas */
