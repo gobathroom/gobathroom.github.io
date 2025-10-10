@@ -95,6 +95,29 @@ body {
   z-index: 2;
 }
 
+/* logo gobathroom */
+.logo-container {
+  position: relative;
+  z-index: 3; /* Por encima del fondo y del contenedor */
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Tamaño general del logo */
+.logo-container .gb-icon {
+  width: 150px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+
+  /* Colores por defecto */
+  --gb-bg: #29c3c4;   /* fondo negro */
+  --gb-wc: #ffffff;   /* WC blanco */
+}
+
+  
+
 /* Bordes de referencia (quítalos al final) */
 .grid-container > * {
   border: 2px solid #000;
