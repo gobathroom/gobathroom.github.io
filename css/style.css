@@ -118,12 +118,9 @@ body {
   display: block;     /* elimina espacios inline y permite centrado limpio */
 
   /* Colores de logo gb */
-  --gb-bg: #29c3c4;   /* fondo cyan */
+  --gb-bg: #29C3C4;   /* fondo cyan */
   --gb-wc: #ffffff;   /* WC blanco */
 }
-
-
-  
 
 /* Bordes de referencia (quítalos al final) */
 .grid-container > * {
