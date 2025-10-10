@@ -84,7 +84,7 @@ body {
 /* paneles */
 .panel {
   background-color: #42396E5C;
-  max-width: 440px;
+  max-width: auto;
   width: 100%;
   box-sizing: border-box;
   padding: 2rem;
