@@ -25,6 +25,7 @@ body {
   min-height: 100svh;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  position: relative;
   z-index: 2;
 }
 
@@ -35,7 +36,6 @@ body {
   text-align: center;
   font-weight: 700;
   padding: 8px 0;
-  z-index: 2;
 }
 
 /* === MIXTO ROBUSTO === */
@@ -58,7 +58,6 @@ body {
     "left tertiary  tertiary  right";
   grid-template-columns: minmax(170px, 200px) 0.5fr 1fr minmax(170px, 200px);
   grid-template-rows: 1fr auto;
-  z-index: 2;
 }
 
 /* Áreas */
@@ -74,7 +73,6 @@ body {
   border-radius: 10px;
   display:flex; align-items:center; justify-content:center;
   font-weight:700;
-  z-index: 2;
 }
 
 /* Mobile: dos botones arriba + contenido apilado */
