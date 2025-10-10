@@ -190,7 +190,8 @@ body {
   --suggest-active:#0aa56d;   /* verde al interactuar */
   --report-active: #ff7a1a;   /* naranja al interactuar */
   --cta-gradient: linear-gradient(90deg, #037fc1, #25bdc4);
-  --cta-max: 420px; } /* ajusta a gusto */
+  --cta-max: 420px; 
+} /* ajusta a gusto */
 
 .panel.hero .cta-button,
 .panel.hero .dual-button,
