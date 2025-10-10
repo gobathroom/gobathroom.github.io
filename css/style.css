@@ -165,6 +165,20 @@ body {
   margin-top: 0px; /* Separación desde el texto */
 }
 
+.cta-button:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+.cta-button:active {
+  transform: scale(0.97);
+}
+
+.cta-button i {
+  margin-left: 12px;
+  font-size: 18px;
+}
+
 /* Bordes de referencia (quítalos al final) */
 .grid-container > * {
   border: 2px solid #000;
