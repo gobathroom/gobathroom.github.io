@@ -146,7 +146,7 @@ body {
 }
 
 /* General buttom */
-.cta-button .dual-button {
+.cta-button {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -205,21 +205,18 @@ body {
   margin: 0 0 8px 0;
 }
 
-
-
-
-/* Cada mitad: grid centrado y transparente por defecto */
-.dual-button a {
-  flex: 1 1 50%;
-  display: grid;                      /* <- grid en vez de flex */
-  place-items: center;                /* centra vertical/horizontal */
-  padding: 14px 18px;
-  text-decoration: none;
-  color: #fff;
-  font-weight: 600;
-  background-color: transparent;      /* deja ver el degradado del padre */
-  transition: background-color 0.25s ease, transform 0.15s ease, opacity 0.2s ease;
+/* Contenedor: se pinta el degradado UNA SOLA VEZ aquí */
+.dual-button {
+  margin: 0 auto;   /* ✅ centra horizontalmente */
+  display: flex;    /* puedes dejar flex en lugar de inline-flex */
+  width: 180%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  background: var(--cta-gradient);       /* ✅ degradado continuo */
 }
+
+
 
 /* Línea divisoria sutil en el centro */
 .dual-button a + a {
