@@ -202,17 +202,20 @@ body {
 }
 
 .dual-button{
-  /* mismo tamaño “visual” que tu .cta-button */
-  width: 90%;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  background: var(--cta-gradient);            /* 👈 un solo degradado que cubre todo */
+  background: var(--cta-gradient);
   position: relative;
+
+  /* ✅ mismo tamaño y alineación que el botón principal */
+  width: 90%;
+  max-width: 420px; /* opcional, para igualar visualmente si el CTA tiene límite */
+  margin-inline: auto;
 }
+
 
 .dual-button .half{
   position: relative;
