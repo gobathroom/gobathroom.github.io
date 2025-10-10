@@ -187,14 +187,13 @@ body {
   --report-active:  #ff7a1a;  /* naranja al interactuar */
 }
 
-
-
-
-/* Bloque título + botón doble */
-.report-section {
-  text-align: center;
-  margin-top: 18px;
+/* Tu botón principal mantiene el degradado */
+.cta-button {
+  background: var(--cta-gradient);
 }
+
+
+
 
 .report-title {
   font-size: 0.95rem;           /* discreto */
