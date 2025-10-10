@@ -144,6 +144,27 @@ body {
   font-weight: bold;     /* solo el texto dentro del <strong> estará en negrita */
 }
 
+/* General buttom */
+.cta-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none; /* 👈 esto quita el subrayado */
+  background: linear-gradient(90deg, #037fc1, #25bdc4);
+  border: none;
+  color: white;
+  padding: 14px 20px;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  margin-top: 32px; /* Separación desde el texto */
+}
+
 /* Bordes de referencia (quítalos al final) */
 .grid-container > * {
   border: 2px solid #000;
