@@ -48,6 +48,7 @@ body {
   border-left: 4px solid #FF6B6B;
   font-weight: normal;
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   position: relative;
 }
 
@@ -90,7 +91,6 @@ body {
   padding: 2rem;
   overflow-wrap: break-word; /* ✅ fuerza a romper texto largo */
   border-radius: 12px; /* opcional: bordes redondeados como en tu ejemplo */
-  box-sizing: border-box;
   position: relative;
   z-index: 2;
 }
