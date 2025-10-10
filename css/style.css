@@ -9,6 +9,15 @@ body {
   position: relative;
 }
 
+/* Overly morado transparente */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(26, 20, 48, 0.94); /* #1a1430 con 94% opacidad */
+
 /* Estructura general */
 .page {
   min-height: 100svh;
