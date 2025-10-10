@@ -112,10 +112,9 @@ body {
 
 /* Tamaño general del logo */
 .logo-container .gb-icon {
-  width: 100%;
-  max-width: 100px;   /* límite máximo */
-  height: auto;
-  display: block;     /* elimina espacios inline y permite centrado limpio */
+  width: 96px;      /* prueba 80/96/100 */
+  height: 96px;     /* fuerza proporción */
+  display: block;
 
   /* Colores de logo gb */
   --gb-bg: #29C3C4;   /* fondo cyan */
