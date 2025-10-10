@@ -46,8 +46,8 @@ body {
   width: 100%;
   box-sizing: border-box;
   border-left: 4px solid #FF6B6B;
-  font-weigth: normal;
-  backdrop-filter: blur (4px);
+  font-weight: normal;
+  backdrop-filter: blur(4px);
   position: relative;
 }
 
@@ -83,7 +83,7 @@ body {
 
 /* paneles */
 .panel {
-  background-color: #42396E5C;
+  background-color: rgba(255,255,255,0.12);
   max-width: auto;
   width: 100%;
   box-sizing: border-box;
