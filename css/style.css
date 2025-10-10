@@ -162,7 +162,7 @@ body {
   box-sizing: border-box;
   font-weight: 600;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  margin-top: 16px; /* Separación desde el texto */
+  margin-top: 0px; /* Separación desde el texto */
 }
 
 /* Bordes de referencia (quítalos al final) */
