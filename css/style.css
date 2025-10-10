@@ -180,29 +180,31 @@ body {
   font-size: 18px;
 }
 
-/* ---------- Dual action (Suggest / Report) ----------- */
-:root{
-  /* Colores de interacción */
-  --suggest-active:#0aa56d;   /* verde al interactuar */
-  --report-active: #ff7a1a;   /* naranja al interactuar */
-  --cta-gradient: linear-gradient(90deg, #037fc1, #25bdc4);
-  --cta-max: 420px;           /* ← ancho visual igual para todos los botones */
+/* 1) Asegura que el wrapper del doble botón tenga base de 100% */
+.panel.hero .report-section{
+  width: 100%;
 }
 
-/* Ancho uniforme para los tres botones principales */
+/* 2) Unifica el ancho visual de los tres botones */
+:root{ --cta-max: 420px; } /* ajusta a gusto */
+
 .panel.hero .cta-button,
 .panel.hero .dual-button,
 .panel.hero .donate-cta{
   width: 90%;
   max-width: var(--cta-max);
-  margin-inline: auto;  /* centra horizontal */
+  margin-inline: auto;
 }
 
-.panel.hero .dual-button{
-  border-radius: 12px;
-  /* mismo padding vertical que el CTA (el horizontal ya lo da cada mitad) */
+/* 3) Evita que el texto de cada mitad salte a dos líneas */
+.dual-button .label{
+  white-space: nowrap;
 }
-.panel.hero .dual-button .half{ padding: 14px 20px; }
+
+/* (opcional) Si quieres que TODOS los hijos del hero se estiren,
+   puedes usar esto en lugar del punto 1: */
+/* .panel.hero{ align-items: stretch; } */
+
 
 
 
