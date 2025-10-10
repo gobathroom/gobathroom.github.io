@@ -186,7 +186,11 @@ body {
 }
 
 /* 2) Unifica el ancho visual de los tres botones */
-:root{ --cta-max: 420px; } /* ajusta a gusto */
+:root{ 
+  --suggest-active:#0aa56d;   /* verde al interactuar */
+  --report-active: #ff7a1a;   /* naranja al interactuar */
+  --cta-gradient: linear-gradient(90deg, #037fc1, #25bdc4);
+  --cta-max: 420px; } /* ajusta a gusto */
 
 .panel.hero .cta-button,
 .panel.hero .dual-button,
