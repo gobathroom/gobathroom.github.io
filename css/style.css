@@ -1,6 +1,6 @@
 /* Reset */
 * { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; font-family: Arial, sans-serif; }
+html, body { height: 100%; margin: 0; font-family: Arial, sans-serif; font-size: 12px; }
 
 /* Imagen de fondo */
 body {
@@ -38,6 +38,19 @@ body {
   padding: 8px 0;
 }
 
+/* franja de notificacion */
+.notice-bar {
+  background-color: #42396E5C;
+  color: white;
+  padding: 12px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  border-left: 4px solid #FF6B6B;
+  font-weigth: normal;
+  backdrop-filter: blur (4px);
+  position: relative;
+
+  
 /* === MIXTO ROBUSTO === */
 /* Base: ocupa TODO el ancho */
 .stage { width: 100%; }
