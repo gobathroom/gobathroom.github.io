@@ -242,7 +242,13 @@ body {
   grid-area: 1 / 1;                   /* ambos al centro exacto */
 }
 
-
+/* Anula margen global de iconos solo en el botón doble */
+.dual-button i {
+  margin-left: 0 !important;
+  opacity: 0;
+  transform: translateY(2px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
 
 
 .dual-button .btn-text {
