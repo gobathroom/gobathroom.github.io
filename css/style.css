@@ -290,12 +290,6 @@ body {
   opacity:1;
 }
 
-/* Móvil: que ocupe todo el ancho disponible */
-@media (max-width: 420px){
-  .dual-button{ width:100%; }
-}
-
-
 
 
 /* Bordes de referencia (quítalos al final) */
