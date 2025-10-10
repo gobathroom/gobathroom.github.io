@@ -198,18 +198,15 @@ body {
   margin-top: 18px;
 }
 
-
-
-
-/* Contenedor: se pinta el degradado UNA SOLA VEZ aquí */
-.dual-button {
-  display: inline-flex;
-  width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  background: var(--cta-gradient);       /* ✅ degradado continuo */
+.report-title {
+  font-size: 0.95rem;           /* discreto */
+  font-weight: 600;
+  color: #e7e7ee;
+  margin: 0 0 8px 0;
 }
+
+
+
 
 /* Cada mitad: grid centrado y transparente por defecto */
 .dual-button a {
