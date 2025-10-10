@@ -1,6 +1,6 @@
 /* Reset */
 * { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
+html, body { height: 100%; margin: 0; font-family: Arial, sans-serif; }
 
 /* Imagen de fondo */
 body {
