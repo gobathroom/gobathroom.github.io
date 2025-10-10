@@ -106,8 +106,8 @@ body {
 
 /* Tamaño general del logo */
 .logo-container .gb-icon {
-  width: 75px;
-  height: 75px;
+  width: 150px;
+  height: auto;
   display: block;
   margin: 0 auto;
 
