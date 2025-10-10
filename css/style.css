@@ -181,49 +181,143 @@ body {
 
 
 /* =========================
-   TOKENS GLOBALES (variables)
+   TOKENS (variables globales)
    ========================= */
-:root{
-  /* Anchos consistentes con el botón principal */
-  --cta-fluid: 90%;         /* ancho fluido relativo */
-  --cta-max: 520px;         /* tope máximo compartido */
+:root {
+  /* Ancho compartido con tu botón principal */
+  --cta-fluid: 90%;
+  --cta-max: 520px;
 
-  /* Bordes y sombra */
+  /* Look & feel */
   --cta-radius: 16px;
-  --cta-shadow: 0 4px 12px rgba(0,0,0,.20);
-
-  /* Tipografía y espaciado */
+  --cta-shadow: 0 4px 12px rgba(0,0,0,.2);
   --cta-font-weight: 600;
   --cta-font-size: 16px;
   --cta-pad-y: 14px;
   --cta-pad-x: 20px;
 
   /* Degradados */
-  --grad-main: linear-gradient(90deg, #037fc1, #25bdc4);   /* tu botón principal */
-  --grad-invert: linear-gradient(90deg, #25bdc4, #037fc1); /* invertido p/dual-button */
+  --grad-main: linear-gradient(90deg, #037fc1, #25bdc4);
+  --grad-invert: linear-gradient(90deg, #25bdc4, #037fc1);
 
-  /* Colores de hover por mitad */
+  /* Hovers por mitad */
   --suggest-active: #0aa56d;
   --report-active:  #ff7a1a;
 }
 
-/* =========================================
-   “REGLA DE CONTENEDOR”: ancho compartido
-   - Aplica el MISMO ancho al botón principal
-     y al botón doble dentro del hero.
-   ========================================= */
-.hero .cta-button,
-.hero .report-section .dual-button{
-  width: min(var(--cta-fluid), var(--cta-max));
-  margin-inline: auto;           /* centrado */
-  border-radius: var(--cta-radius);
-  box-shadow: var(--cta-shadow);
-  font-weight: var(--cta-font-weight);
-  font-size: var(--cta-font-size);
+/* =========================
+   Título del bloque
+   ========================= */
+.report-section {
+  text-align: center;
+  margin-top: 16px;
 }
 
-/* (opcional) que el botón principal use siempre su degradado */
-.hero .cta-button{ background: var(--grad-main); }
+.report-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e7e7ee;
+  margin: 0 0 12px 0;
+}
+
+/* =======================================================
+   Botón doble: mismo ancho/centro que el botón principal
+   ======================================================= */
+.hero .dual-button {
+  width: min(var(--cta-fluid), var(--cta-max));
+  margin-inline: auto;             /* centrado */
+  border-radius: var(--cta-radius);
+  box-shadow: var(--cta-shadow);
+  background: var(--grad-invert);  /* degradado invertido */
+  display: flex;                   /* divide en dos mitades */
+  overflow: hidden;                /* recorta radios */
+}
+
+/* Cada mitad ocupa el 50% y centra contenido */
+.dual-button a {
+  flex: 1 1 50%;
+  display: grid;             /* más simple para centrar */
+  place-items: center;       /* centra texto e icono */
+  padding: var(--cta-pad-y) var(--cta-pad-x);
+  text-decoration: none;
+  color: #fff;
+  font-weight: var(--cta-font-weight);
+  font-size: var(--cta-font-size);
+  background: transparent;   /* deja ver el degradado del contenedor */
+  transition: background-color .2s ease, transform .15s ease, opacity .2s ease;
+  min-width: 0;              /* evita empujes si el texto es largo */
+}
+
+/* Línea divisoria central sutil */
+.dual-button a + a {
+  border-left: 1px solid rgba(255,255,255,.18);
+}
+
+/* Texto e ícono superpuestos y centrados */
+.dual-button .btn-text,
+.dual-button i {
+  grid-area: 1 / 1;          /* ambos en el mismo centro */
+}
+
+/* Por defecto mostrar texto, ocultar icono levemente */
+.dual-button i {
+  margin-left: 0;            /* evita empuje lateral */
+  opacity: 0;
+  transform: translateY(2px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+/* Hover/Foco: mitad izquierda (Suggest) */
+.dual-button .btn-left:hover,
+.dual-button .btn-left:active,
+.dual-button .btn-left:focus-visible {
+  background-color: var(--suggest-active); /* tapa el degradado debajo */
+}
+
+.dual-button .btn-left:hover .btn-text,
+.dual-button .btn-left:active .btn-text,
+.dual-button .btn-left:focus-visible .btn-text {
+  opacity: 0;
+}
+.dual-button .btn-left:hover i,
+.dual-button .btn-left:active i,
+.dual-button .btn-left:focus-visible i {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover/Foco: mitad derecha (Report) */
+.dual-button .btn-right:hover,
+.dual-button .btn-right:active,
+.dual-button .btn-right:focus-visible {
+  background-color: var(--report-active);
+}
+
+.dual-button .btn-right:hover .btn-text,
+.dual-button .btn-right:active .btn-text,
+.dual-button .btn-right:focus-visible .btn-text {
+  opacity: 0;
+}
+.dual-button .btn-right:hover i,
+.dual-button .btn-right:active i,
+.dual-button .btn-right:focus-visible i {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Feedback de click */
+.dual-button a:active { transform: scale(.98); }
+
+/* Accesibilidad: enfoque visible */
+.dual-button a:focus-visible {
+  outline: 2px solid rgba(255,255,255,.6);
+  outline-offset: -2px;
+}
+
+/* ======= Responsive pequeño (opcional) ======= */
+@media (max-width: 480px){
+  :root { --cta-font-size: 15px; }
+}
 
 
 /* Bordes de referencia (quítalos al final) */
