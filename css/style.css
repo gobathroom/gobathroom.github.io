@@ -142,3 +142,11 @@ body {
     min-height:44px; border-radius:9999px;
   }
 }
+
+.panel.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* centra horizontal */
+  justify-content: center;  /* centra vertical */
+  min-height: 220px;        /* altura del panel hero */
+}
