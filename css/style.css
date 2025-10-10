@@ -158,12 +158,11 @@ body {
   border-radius: 12px;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  width: 100%;
+  width: 90%;
   box-sizing: border-box;
   font-weight: 600;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   margin-top: 0px; /* Separación desde el texto */
-  margin-bottom: 16px;
 }
 
 .cta-button:hover {
