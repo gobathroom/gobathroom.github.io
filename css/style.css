@@ -38,18 +38,19 @@ body {
   padding: 8px 0;
 }
 
-/* franja de notificacion */
+/* ---Barra superior--- */
 .notice-bar {
+  position: relative;    /* o fixed si debe seguir visible */
+  z-index: 2;            /* sobre la capa morada */
   background-color: #42396E5C;
-  color: white;
-  padding: 12px 20px;
-  width: 85%;
-  box-sizing: border-box;
-  border-left: 4px solid #FF6B6B;
-  font-weight: normal;
   backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  position: relative;
+  color: #fff;
+  padding: 12px 20px;
+  border-left: 4px solid #FF6B6B;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 12px;
+  font-weight: normal;
 }
 
   
