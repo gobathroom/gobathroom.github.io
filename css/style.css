@@ -130,6 +130,15 @@ body {
   margin-bottom: 1rem;
 }
 
+/* description */
+.description {
+  text-align: center;
+  font-size: 15px;
+  color: #E0E0E0;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
 /* Bordes de referencia (quítalos al final) */
 .grid-container > * {
   border: 2px solid #000;
