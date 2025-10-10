@@ -186,7 +186,18 @@ body {
   --suggest-active:#0aa56d;   /* verde al interactuar */
   --report-active: #ff7a1a;   /* naranja al interactuar */
   --cta-gradient: linear-gradient(90deg, #037fc1, #25bdc4);
+  --cta-max: 420px;           /* ← ancho visual igual para todos los botones */
 }
+
+/* Ancho uniforme para los tres botones principales */
+.panel.hero .cta-button,
+.panel.hero .dual-button,
+.panel.hero .donate-cta{
+  width: 90%;
+  max-width: var(--cta-max);
+  margin-inline: auto;  /* centra horizontal */
+}
+
 
 .report-section{
   text-align:center;
