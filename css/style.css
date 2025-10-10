@@ -108,7 +108,7 @@ body {
 .logo-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 0rem;
+  margin-bottom: -1.5rem;
 }
 
 /* Tamaño general del logo */
