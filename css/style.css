@@ -132,11 +132,16 @@ body {
 
 /* description */
 .description {
+  font-weight: normal;   /* texto normal */
   text-align: center;
   font-size: 15px;
   color: #E0E0E0;
   line-height: 1.6;
   margin-bottom: 2rem;
+}
+
+.description strong {
+  font-weight: bold;     /* solo el texto dentro del <strong> estará en negrita */
 }
 
 /* Bordes de referencia (quítalos al final) */
