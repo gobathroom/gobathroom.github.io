@@ -144,11 +144,13 @@ body.sidebar-open .page{ margin-left: var(--rail-expanded) }
 
 /* ===== Main ===== */
 .content{
-  width: min(100% - 32px, var(--content-max));
+  /* antes: width: min(100% - 32px, var(--content-max)); */
+  width: min(100% - 48px, var(--content-max)); /* 24px por lado */
   margin: var(--space-4) auto;
   display: grid;
   gap: var(--space-4);
 }
+
 .card{
   background:var(--panel);
   border:1px solid var(--border);
