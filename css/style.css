@@ -96,7 +96,7 @@ body {
   z-index: 2;
 }
 
-.panel.hero, .panel.icon-key {
+.panel.hero {
   display: flex;
   flex-direction: column;
   align-items: center;      /* centra horizontal */
