@@ -10,31 +10,31 @@
 <body class="no-sidebar">
   <!-- Header fijo (alineado a la derecha del sidebar) -->
   <header class="topbar" role="banner">
-  <!-- Solo en móvil (oculto en desktop) -->
-  <button class="icon-btn hamburger only-mobile" aria-label="Open menu" aria-expanded="false">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
-    </svg>
-  </button>
+    <!-- Solo en móvil (oculto en desktop) -->
+    <button class="icon-btn hamburger only-mobile" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+    </button>
 
-  <a class="brand" href="/" aria-label="Go Bathroom NYC — Home">
-    <img src="logo.svg" alt="" class="brand-mark" />
-    <span class="brand-name">Go Bathroom</span>
-  </a>
+    <!-- Marca solo en móvil (en desktop el logo “vive” dentro del sidebar) -->
+    <a class="brand only-mobile" href="/" aria-label="Go Bathroom NYC — Home">
+      <img src="logo.svg" alt="" class="brand-mark" />
+      <span class="brand-name">Go Bathroom</span>
+    </a>
 
-  <nav class="top-actions" aria-label="Primary">
-    <div class="divider"></div>
-    <!-- Idioma al extremo derecho -->
-    <label class="lang-select" aria-label="Language">
-      <select id="lang">
-        <option value="en" selected>English</option>
-        <option value="es">Español</option>
-        <option value="zh">中文</option>
-      </select>
-    </label>
-  </nav>
-</header>
-
+    <nav class="top-actions" aria-label="Primary">
+      <div class="divider"></div>
+      <!-- Idioma al extremo derecho -->
+      <label class="lang-select" aria-label="Language">
+        <select id="lang">
+          <option value="en" selected>English</option>
+          <option value="es">Español</option>
+          <option value="zh">中文</option>
+        </select>
+      </label>
+    </nav>
+  </header>
 
   <!-- Notification bar fijo bajo el header -->
   <div class="notifybar" id="notifybar" role="region" aria-label="Notice">
@@ -44,16 +44,17 @@
 
   <!-- Sidebar lateral estilo Freepik (fijo desde top:0 a bottom:0) -->
   <aside class="sidebar" aria-label="App menu">
-    <!-- botón de “tres rayas” dentro del sidebar -->
-    <button class="icon-btn rail-toggle hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-    </button>
-
-    <div class="rail-header">
+    <!-- Fila superior del rail: logo (aparece al abrir) + botón ☰ a la derecha -->
+    <div class="rail-head">
       <a class="brand rail" href="/">
         <img src="logo.svg" alt="" class="brand-mark" />
         <span class="brand-name">Go Bathroom</span>
       </a>
+      <button class="icon-btn rail-toggle hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+      </button>
     </div>
 
     <ul class="rail-group" role="list">
