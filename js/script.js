@@ -9,7 +9,7 @@ burger.addEventListener('click', () => {
   burger.setAttribute('aria-expanded', String(open));
 });
 
-// Cierra sidebar al hacer click fuera (desktop)
+// Cierra sidebar al hacer click fuera (móvil)
 document.addEventListener('click', (e) => {
   if (!body.classList.contains('sidebar-open')) return;
   const insideSidebar = e.target.closest('.sidebar');
@@ -52,19 +52,29 @@ function openShare(){
     shareModal.showModal();
   }
 }
-shareBtn.addEventListener('click', openShare);
-copyLink.addEventListener('click', async () => {
+if (shareBtn) shareBtn.addEventListener('click', openShare);
+if (copyLink) copyLink.addEventListener('click', async () => {
   try{
     await navigator.clipboard.writeText(shareLink.value);
     copyLink.textContent = 'Copied!';
     setTimeout(()=>copyLink.textContent='Copy', 1200);
   }catch{}
 });
-closeShare.addEventListener('click', () => shareModal.close());
+if (closeShare) closeShare.addEventListener('click', () => shareModal.close());
 
 // Idioma (placeholder)
 $('#lang').addEventListener('change', (e) => {
-  // Aquí podrías cargar traducciones dinámicas o redirigir a /es, /en, etc.
   console.log('Language:', e.target.value);
 });
 
+/* ===== Ajuste real de la altura de la notifybar ===== */
+const notify = document.getElementById('notifybar');
+function setNotifyHeight(){
+  const h = notify ? notify.offsetHeight : 0;
+  root.style.setProperty('--notify-h', `${h}px`);
+}
+window.addEventListener('load', setNotifyHeight);
+window.addEventListener('resize', setNotifyHeight);
+if (window.ResizeObserver && notify){
+  new ResizeObserver(setNotifyHeight).observe(notify);
+}
