@@ -45,6 +45,7 @@ body {
   backdrop-filter: blur(4px);
   color: #fff;
   border-left: 4px solid #FF6B6B;
+  padding: 12px 20px;
   box-sizing: border-box;
   text-align: center;
   font-size: 12px;
