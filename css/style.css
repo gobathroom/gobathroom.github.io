@@ -29,6 +29,27 @@
   padding-inline: clamp(16px, calc((100% - var(--content-max)) / 2), 24px);
 }
 
+/* Marca en topbar: visible por defecto, oculta si el sidebar está abierto */
+.topbar .brand{
+  flex: 0 1 auto;
+  white-space: nowrap;
+  transition: opacity .2s ease, width .2s ease, margin .2s ease;
+}
+
+body.sidebar-open .topbar .brand{
+  opacity: 0;
+  width: 0;
+  margin: 0;
+  pointer-events: none; /* Evita foco/click cuando está oculta */
+}
+
+/* (opcional) oculta también el divider cuando el logo de topbar no está */
+body.sidebar-open .topbar .top-actions .divider{
+  opacity: 0;
+  width: 0;
+}
+
+
 
 
 
