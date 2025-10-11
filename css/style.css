@@ -40,7 +40,7 @@ body.sidebar-open .topbar .brand{
   opacity: 0;
   width: 0;
   margin: 0;
-  pointer-events: none; /* Evita foco/click cuando está oculta */
+  pointer-events: none;
 }
 
 /* (opcional) oculta también el divider cuando el logo de topbar no está */
@@ -75,7 +75,7 @@ body{
 /* Sidebar ocupa desde arriba, pero reservamos una franja del header para el logo */
 .sidebar{
   position: fixed;
-  top: 0;               /* antes: top: calc(var(--header-h) + var(--notify-h)) */
+  top: 0;
   bottom: 0;
   left: 0;
   width: var(--rail-collapsed);
@@ -86,14 +86,14 @@ body{
   justify-content: space-between;
   transition: width .2s ease;
   z-index: 45;
-  padding-top: var(--header-h);  /* empuja el resto del menú bajo el header */
+  padding-top: var(--header-h);
 }
 
 /* Cuando está expandido, el ancho crece como antes */
 body.sidebar-open .sidebar{ width: var(--rail-expanded) }
 
 .rail-head { 
-  justify-content: flex-start; /* ya está alineado, esto solo lo fija */
+  justify-content: flex-start;
   position: absolute;
   top: 0;
   left: 0;
@@ -104,33 +104,13 @@ body.sidebar-open .sidebar{ width: var(--rail-expanded) }
   gap: 10px;
   padding-inline: 12px;
   z-index: 1;
-} 
+}
 
 .rail-head .brand.rail{ display:flex; align-items:center; gap:12px }
-/* (removido .rail .brand-mark) */
 .rail .brand-name{ font-weight:600; opacity:0; transition:opacity .2s }
 
-/* Muestra el nombre dentro del sidebar sólo cuando está abierto (estilo Freepik) */
+/* Muestra el nombre dentro del sidebar sólo cuando está abierto */
 body.sidebar-open .rail .brand-name{ opacity:1 }
-
-/* Botón ☰ dentro del rail: inmediatamente a la derecha del nombre (no pegado al borde) */
-.rail-head .rail-toggle{
-  /* Antes tenía margin-left:auto; eso lo empujaba al borde derecho.
-     Lo removemos para que quede justo a la derecha del nombre, como Freepik. */
-}
-
-/* Grupos/acciones del rail (sin cambios) */
-.rail-group, .rail-footer{ list-style:none; margin:0; padding:12px; }
-.rail-item{
-  width:100%; display:flex; align-items:center; gap:12px;
-  padding:10px 12px; border-radius:12px; border:1px solid transparent;
-  background:transparent; color:var(--text); cursor:pointer;
-}
-.rail-item:hover{ background:var(--panel-2); border-color:var(--border) }
-.rail-item .ico{ width:24px; text-align:center }
-.rail-item .txt{ opacity:0; transition:opacity .2s }
-body.sidebar-open .rail-item .txt{ opacity:1 }
-.rail-item.ghost{ opacity:.85 }
 
 /* ===== Header fijo alineado al rail ===== */
 .topbar{
@@ -144,6 +124,9 @@ body.sidebar-open .rail-item .txt{ opacity:1 }
   background:var(--panel);
   border-bottom:1px solid var(--border);
   z-index: 1100;
+  /* >>> añadido para animar y evitar el salto */
+  transition: left .2s ease;
+  will-change: left;
 }
 body.sidebar-open .topbar{ left: var(--rail-expanded) }
 
@@ -153,7 +136,6 @@ body.sidebar-open .topbar{ left: var(--rail-expanded) }
   border-radius:10px; cursor:pointer;
 }
 .brand{ display:flex; align-items:center; gap:10px; color:var(--text); text-decoration:none; }
-/* (removido .brand .brand-mark) */
 .brand .brand-name{ font-weight:600 }
 
 .top-actions{ margin-left:auto; display:flex; align-items:center; gap:var(--space-3);}
@@ -175,6 +157,9 @@ body.sidebar-open .topbar{ left: var(--rail-expanded) }
   padding: 8px var(--space-4);
   color:var(--muted);
   z-index: 1050;
+  /* >>> añadido para animar y evitar el salto */
+  transition: left .2s ease;
+  will-change: left;
 }
 body.sidebar-open .notifybar{ left: var(--rail-expanded) }
 .notifybar a{ color:var(--brand); text-decoration:none }
@@ -191,8 +176,7 @@ body.sidebar-open .page{ margin-left: var(--rail-expanded) }
 
 /* ===== Main ===== */
 .content{
-  /* antes: width: min(100% - 32px, var(--content-max)); */
-  width: min(100% - 48px, var(--content-max)); /* 24px por lado */
+  width: min(100% - 48px, var(--content-max));
   margin: var(--space-4) auto;
   display: grid;
   gap: var(--space-4);
