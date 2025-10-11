@@ -356,7 +356,7 @@ body {
 .icon-key-viewport{
   position: relative;
   width: 100%;
-  height: 400px;                 /* alto estable en desktop; ajustaremos si hace falta */
+  height: 390px;                 /* alto estable en desktop; ajustaremos si hace falta */
   background: rgba(255,255,255,0.10);
   backdrop-filter: blur(4px);
   border: 1px solid rgba(255,255,255,0.28);
