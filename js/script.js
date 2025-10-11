@@ -1,7 +1,7 @@
 // Helpers
 const $ = (s, d=document) => d.querySelector(s);
 
-// Estado del sidebar (soporta varios toggles: el del sidebar y el fallback móvil)
+// ===== Sidebar (soporta los dos toggles: botón del rail y, si existe, el de móvil)
 const body = document.body;
 const burgers = document.querySelectorAll('.hamburger');
 
@@ -12,19 +12,18 @@ burgers.forEach(btn => {
   });
 });
 
-
-// Cierra sidebar al hacer click fuera (móvil)
+// Cerrar al hacer click fuera (sólo en móvil)
 document.addEventListener('click', (e) => {
   if (!body.classList.contains('sidebar-open')) return;
   const insideSidebar = e.target.closest('.sidebar');
   const insideBurger  = e.target.closest('.hamburger');
   if (!insideSidebar && !insideBurger && window.matchMedia('(max-width: 768px)').matches){
     body.classList.remove('sidebar-open');
-    burger.setAttribute('aria-expanded', 'false');
+    burgers.forEach(b => b.setAttribute('aria-expanded', 'false'));
   }
 });
 
-// Tema: Light / Dark / System
+// ===== Tema: Light / Dark / System
 const root = document.documentElement;
 const themeBtn = $('#themeBtn');
 const themeLabel = $('#themeLabel');
@@ -40,7 +39,7 @@ function applyTheme(){
 themeBtn.addEventListener('click', () => { idx = (idx + 1) % cycle.length; applyTheme(); });
 applyTheme();
 
-// Share: Web Share API + fallback modal
+// ===== Share: Web Share API + fallback modal
 const shareBtn = $('#shareBtn');
 const shareModal = $('#shareModal');
 const shareLink = $('#shareLink');
@@ -66,12 +65,15 @@ if (copyLink) copyLink.addEventListener('click', async () => {
 });
 if (closeShare) closeShare.addEventListener('click', () => shareModal.close());
 
-// Idioma (placeholder)
-$('#lang').addEventListener('change', (e) => {
-  console.log('Language:', e.target.value);
-});
+// ===== Idioma (placeholder)
+const langSel = $('#lang');
+if (langSel){
+  langSel.addEventListener('change', (e) => {
+    console.log('Language:', e.target.value);
+  });
+}
 
-/* ===== Ajuste real de la altura de la notifybar ===== */
+// ===== Ajuste real de la altura de la notifybar
 const notify = document.getElementById('notifybar');
 function setNotifyHeight(){
   const h = notify ? notify.offsetHeight : 0;
