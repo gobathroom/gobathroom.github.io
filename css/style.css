@@ -351,7 +351,7 @@ body {
   font-weight: 700;          /* negrita */
   letter-spacing: 0.06em;    /* toque de “key/etiqueta” */
   color: #EAEAEA;            /* blanco suave, legible sobre el vidrio */
-  margin: 20px 0 12px 0;        /* separa del carrusel que pondremos después */
+  margin: 16px 0 12px 0;        /* separa del carrusel que pondremos después */
   text-transform: uppercase; /* estilo de “KEY” */
 }
 
@@ -370,7 +370,7 @@ body {
   overflow: hidden;              /* oculta lo que se sale de la “ventana” */
   padding: 12px;                 /* respiración interna */
   box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-  margin-top: 16px;
+  margin: 16px 0 0 0;
 }
 
 /* Cinta/track: fila horizontal donde vivirán las tarjetas */
