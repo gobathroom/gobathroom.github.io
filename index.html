@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body class="no-sidebar">
-  <!-- Header fijo -->
+  <!-- Header fijo (ahora se alinea a la derecha del sidebar) -->
   <header class="topbar" role="banner">
     <button class="icon-btn hamburger" aria-label="Open menu" aria-expanded="false">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
@@ -20,9 +20,6 @@
     </a>
 
     <nav class="top-actions" aria-label="Primary">
-      <!-- (Opcional) otros links -->
-      <!-- <a href="#">Map</a> -->
-      <!-- <a href="#">Donate</a> -->
       <div class="divider"></div>
       <!-- Idioma al extremo derecho -->
       <label class="lang-select" aria-label="Language">
@@ -35,63 +32,59 @@
     </nav>
   </header>
 
-  <!-- Notification bar (siempre visible bajo el header) -->
+  <!-- Notification bar fijo bajo el header -->
   <div class="notifybar" id="notifybar" role="region" aria-label="Notice">
-    NYC Law (Passed 2021, Active Since 2022): Couriers have the right to use restrooms at pickup locations (if in a common area). 
+    NYC Law (Passed 2021, Active Since 2022): Couriers have the right to use restrooms at pickup locations (if in a common area).
     <a href="#">Learn more</a>
   </div>
 
-  <!-- Sidebar lateral estilo Freepik -->
+  <!-- Sidebar lateral estilo Freepik (fijo desde top:0 a bottom:0) -->
   <aside class="sidebar" aria-label="App menu">
-  <div class="rail-header">
-    <!-- El logo “vive” dentro del sidebar cuando está expandido -->
-    <a class="brand rail" href="/">
-      <img src="logo.svg" alt="" class="brand-mark" />
-      <span class="brand-name">Go Bathroom NYC</span>
-    </a>
-  </div>
+    <div class="rail-header">
+      <a class="brand rail" href="/">
+        <img src="logo.svg" alt="" class="brand-mark" />
+        <span class="brand-name">Go Bathroom NYC</span>
+      </a>
+    </div>
 
-  <ul class="rail-group" role="list">
-    <li>
-      <button class="rail-item" data-action="suggest">
-        <i class="fa-regular fa-lightbulb ico" aria-hidden="true"></i>
-        <span class="txt">Suggest</span>
-      </button>
-    </li>
-    <li>
-      <button class="rail-item" data-action="report">
-        <i class="fa-solid fa-flag ico" aria-hidden="true"></i>
-        <span class="txt">Report</span>
-      </button>
-    </li>
-    <li>
-      <button class="rail-item" data-action="donate">
-        <i class="fa-solid fa-heart ico" aria-hidden="true"></i>
-        <span class="txt">Donate</span>
-      </button>
-    </li>
-    <li>
-      <button class="rail-item" id="shareBtn">
-        <i class="fa-solid fa-share-nodes ico" aria-hidden="true"></i>
-        <span class="txt">Share</span>
-      </button>
-    </li>
-  </ul>
+    <ul class="rail-group" role="list">
+      <li>
+        <button class="rail-item" data-action="suggest">
+          <i class="fa-regular fa-lightbulb ico" aria-hidden="true"></i>
+          <span class="txt">Suggest</span>
+        </button>
+      </li>
+      <li>
+        <button class="rail-item" data-action="report">
+          <i class="fa-solid fa-flag ico" aria-hidden="true"></i>
+          <span class="txt">Report</span>
+        </button>
+      </li>
+      <li>
+        <button class="rail-item" data-action="donate">
+          <i class="fa-solid fa-heart ico" aria-hidden="true"></i>
+          <span class="txt">Donate</span>
+        </button>
+      </li>
+      <li>
+        <button class="rail-item" id="shareBtn">
+          <i class="fa-solid fa-share-nodes ico" aria-hidden="true"></i>
+          <span class="txt">Share</span>
+        </button>
+      </li>
+    </ul>
 
-  <div class="rail-footer">
-    <button class="rail-item ghost" id="themeBtn" aria-haspopup="listbox">
-      <i class="fa-solid fa-circle-half-stroke ico" aria-hidden="true"></i>
-      <span class="txt">Theme: <b id="themeLabel">System</b></span>
-    </button>
-  </div>
-</aside>
-
-
+    <div class="rail-footer">
+      <button class="rail-item ghost" id="themeBtn" aria-haspopup="listbox">
+        <i class="fa-solid fa-circle-half-stroke ico" aria-hidden="true"></i>
+        <span class="txt">Theme: <b id="themeLabel">System</b></span>
+      </button>
+    </div>
+  </aside>
 
   <!-- Contenido principal (empujado por el sidebar) -->
   <div class="page">
     <main class="content" id="appmain">
-      <!-- Main content (Hero compacto) -->
       <section class="card hero" aria-labelledby="h-title">
         <h1 id="h-title">Find accessible bathrooms near you</h1>
         <p class="lead">Collaborative • Free • Updated monthly.</p>
@@ -103,20 +96,18 @@
         </div>
       </section>
 
-      <!-- Secondary content: Icon Key -->
       <section class="card" aria-labelledby="icon-key">
         <h2 id="icon-key">ICON KEY</h2>
         <div class="placeholder tall">Icon legend goes here</div>
       </section>
 
-      <!-- Tertiary content: Emoji Key -->
       <section class="card" aria-labelledby="emoji-key">
         <h2 id="emoji-key">EMOJI KEY</h2>
         <div class="placeholder tall">Emoji legend goes here</div>
       </section>
     </main>
 
-    <!-- Footer pegado abajo, sin superponerse -->
+    <!-- Footer al final del documento (sin superponerse) -->
     <footer class="site-footer" role="contentinfo">
       <div class="footer-inner">
         <span>© 2025 Go Bathroom NYC</span>
