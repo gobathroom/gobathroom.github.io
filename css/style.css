@@ -92,7 +92,19 @@ body{
 /* Cuando está expandido, el ancho crece como antes */
 body.sidebar-open .sidebar{ width: var(--rail-expanded) }
 
-.rail-head { justify-content: flex-start; } /* ya está alineado, esto solo lo fija */
+.rail-head { 
+  justify-content: flex-start; /* ya está alineado, esto solo lo fija */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-inline: 12px;
+  z-index: 1;
+} 
 
 .rail-head .brand.rail{ display:flex; align-items:center; gap:12px }
 /* (removido .rail .brand-mark) */
