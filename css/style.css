@@ -342,6 +342,22 @@ body {
 
 
 
+/* Título de la sección ICON KEY */
+.section-title.icon-key-title{
+  text-align: center;
+  font-size: 16px;           /* igual a "Collaborative • Free..." */
+  font-weight: 700;          /* negrita */
+  letter-spacing: 0.06em;    /* toque de “key/etiqueta” */
+  color: #EAEAEA;            /* blanco suave, legible sobre el vidrio */
+  margin: 0 0 12px 0;        /* separa del carrusel que pondremos después */
+  text-transform: uppercase; /* estilo de “KEY” */
+}
+
+
+
+
+
+
 
 /* Bordes de referencia (quítalos al final) */
 .grid-container > * {
