@@ -88,3 +88,23 @@ window.addEventListener('resize', setNotifyHeight);
 if (window.ResizeObserver && notify){
   new ResizeObserver(setNotifyHeight).observe(notify);
 }
+
+
+
+const topbarBrand = document.querySelector('.topbar .brand');
+
+function syncBrandA11y(open){
+  if (!topbarBrand) return;
+  topbarBrand.setAttribute('aria-hidden', open ? 'true' : 'false');
+}
+
+// Donde ya alternas `sidebar-open`, añade:
+burger.addEventListener('click', () => {
+  const open = body.classList.toggle('sidebar-open');
+  burger.setAttribute('aria-expanded', String(open));
+  syncBrandA11y(open); // <— esta línea
+});
+
+// Y al cargar:
+syncBrandA11y(body.classList.contains('sidebar-open'));
+
