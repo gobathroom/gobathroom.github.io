@@ -88,6 +88,7 @@ body {
   max-width: auto;
   width: 100%;
   box-sizing: border-box;
+  padding: 2rem;
   overflow-wrap: break-word; /* ✅ fuerza a romper texto largo */
   border-radius: 12px; /* opcional: bordes redondeados como en tu ejemplo */
   position: relative;
