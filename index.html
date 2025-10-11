@@ -1,94 +1,128 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="system">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Layout estilo Facebook</title>
+  <title>Go Bathroom NYC</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body class="no-sidebar">
+  <!-- Header fijo -->
+  <header class="topbar" role="banner">
+    <button class="icon-btn hamburger" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    </button>
 
-  <!-- HEADER sticky -->
-  <header class="site-header" role="banner">
-    <div class="container">
-      <div class="brand">Go Bathroom NYC</div>
-      <nav aria-label="Principal" class="top-nav">
-        <a href="#">Home</a>
-        <a href="#">Map</a>
-        <a href="#">Donate</a>
-      </nav>
-    </div>
+    <a class="brand" href="/" aria-label="Go Bathroom NYC — Home">
+      <img src="logo.svg" alt="" class="brand-mark" />
+      <span class="brand-name">Go Bathroom NYC</span>
+    </a>
+
+    <nav class="top-actions" aria-label="Primary">
+      <!-- (Opcional) otros links -->
+      <!-- <a href="#">Map</a> -->
+      <!-- <a href="#">Donate</a> -->
+      <div class="divider"></div>
+      <!-- Idioma al extremo derecho -->
+      <label class="lang-select" aria-label="Language">
+        <select id="lang">
+          <option value="en" selected>English</option>
+          <option value="es">Español</option>
+          <option value="zh">中文</option>
+        </select>
+      </label>
+    </nav>
   </header>
 
-  <!-- MAIN -->
-  <main class="site-main" role="main">
-    <div class="container">
+  <!-- Notification bar (siempre visible bajo el header) -->
+  <div class="notify" role="region" aria-label="NYC Law notice">
+    <span>NYC Law (Passed 2021, Active Since 2022): Couriers have the right to use restrooms at pickup locations (if in a common area).</span>
+    <a href="#" class="link">Learn more</a>
+  </div>
 
-      <!-- Toolbar responsiva (aparece cuando no caben los 3 cols) -->
-      <section class="toolbar" aria-label="Accesos rápidos">
-        <details class="drawer">
-          <summary>Left tools</summary>
-          <div class="drawer-panel">
-            <!-- contenido que también vive en el sidebar izquierdo -->
-            <button class="pill">Share</button>
-            <button class="pill">Filters</button>
-          </div>
-        </details>
+  <!-- Sidebar lateral estilo Freepik -->
+  <aside class="sidebar" aria-label="App menu">
+    <div class="rail-header">
+      <!-- El logo “vive” dentro del sidebar cuando está expandido -->
+      <a class="brand rail" href="/">
+        <img src="logo.svg" alt="" class="brand-mark" />
+        <span class="brand-name">Go Bathroom NYC</span>
+      </a>
+    </div>
 
-        <details class="drawer">
-          <summary>Right tools</summary>
-          <div class="drawer-panel">
-            <!-- contenido del sidebar derecho -->
-            <button class="pill">English</button>
-            <button class="pill">Español</button>
-          </div>
-        </details>
+    <ul class="rail-group" role="list">
+      <li><button class="rail-item" data-action="suggest">
+        <span class="ico">💡</span><span class="txt">Suggest</span>
+      </button></li>
+      <li><button class="rail-item" data-action="report">
+        <span class="ico">🚩</span><span class="txt">Report</span>
+      </button></li>
+      <li><button class="rail-item" data-action="donate">
+        <span class="ico">💙</span><span class="txt">Donate</span>
+      </button></li>
+      <li><button class="rail-item" id="shareBtn">
+        <span class="ico">🔗</span><span class="txt">Share</span>
+      </button></li>
+    </ul>
+
+    <div class="rail-footer">
+      <button class="rail-item ghost" id="themeBtn" aria-haspopup="listbox">
+        <span class="ico">🌓</span><span class="txt">Theme: <b id="themeLabel">System</b></span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Contenido principal (empujado por el sidebar) -->
+  <div class="page">
+    <main class="content" id="main">
+      <!-- Main content (Hero compacto) -->
+      <section class="card hero" aria-labelledby="h-title">
+        <h1 id="h-title">Find accessible bathrooms near you</h1>
+        <p class="lead">Collaborative • Free • Updated monthly.</p>
+        <div class="actions">
+          <a class="btn primary" href="#">Find Bathrooms Nearby</a>
+          <a class="btn" href="#">Suggest</a>
+          <a class="btn" href="#">Report</a>
+          <a class="btn" href="#">Donate</a>
+        </div>
       </section>
 
-      <!-- Grid principal -->
-      <section class="layout">
-        <aside class="sidebar left" aria-label="Left sidebar">
-          <!-- Mismo contenido que los drawers (si quieres duplicarlo o moverlo con JS) -->
-          <div class="card">Left Sidebar content</div>
-        </aside>
-
-        <section class="content">
-          <!-- CONTENIDO PRINCIPAL -->
-          <div class="panel hero">
-            <!-- tu bloque principal (ya lo tienes) -->
-            <h2>Go Bathroom NYC</h2>
-            <p>Discover free and accessible bathrooms across New York City.</p>
-            <!-- … -->
-          </div>
-
-          <div class="panel secondary">
-            <h3>ICON KEY</h3>
-            <div class="ghost"></div> <!-- fondo translúcido de ejemplo -->
-          </div>
-
-          <div class="panel tertiary">
-            <h3>EMOJI KEY</h3>
-            <div class="ghost"></div>
-          </div>
-        </section>
-
-        <aside class="sidebar right" aria-label="Right sidebar">
-          <div class="card">Right Sidebar content</div>
-        </aside>
+      <!-- Secondary content: Icon Key -->
+      <section class="card" aria-labelledby="icon-key">
+        <h2 id="icon-key">ICON KEY</h2>
+        <div class="placeholder tall">Icon legend goes here</div>
       </section>
-    </div>
-  </main>
 
-  <!-- FOOTER sticky -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="container">
-      <small>© 2025 Go Bathroom NYC</small>
-      <nav aria-label="Footer">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-      </nav>
-    </div>
-  </footer>
+      <!-- Tertiary content: Emoji Key -->
+      <section class="card" aria-labelledby="emoji-key">
+        <h2 id="emoji-key">EMOJI KEY</h2>
+        <div class="placeholder tall">Emoji legend goes here</div>
+      </section>
+    </main>
 
+    <!-- Footer pegado abajo, sin superponerse -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-inner">
+        <span>© 2025 Go Bathroom NYC</span>
+        <nav class="footer-links" aria-label="Legal">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </nav>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modal simple para Share (fallback) -->
+  <dialog id="shareModal" aria-labelledby="shareTitle">
+    <h3 id="shareTitle">Share</h3>
+    <p>Copy the link or share it:</p>
+    <input id="shareLink" class="input" readonly />
+    <div class="dialog-actions">
+      <button class="btn" id="copyLink">Copy</button>
+      <button class="btn primary" id="closeShare">Close</button>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
 </body>
 </html>
