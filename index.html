@@ -1,112 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Content Security Policy (seguridad) -->
- <meta http-equiv="Content-Security-Policy"
-content="
-  default-src 'self';
-  script-src 'self';
-  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
-  img-src 'self' data: https://www.paypalobjects.com https://www.paypal.com;
-  font-src 'self' https://cdnjs.cloudflare.com data:;
-  frame-src https://docs.google.com https://www.paypal.com https://www.sandbox.paypal.com;
-  form-action 'self' https://www.paypal.com;
-  connect-src 'self' https://rebrand.ly/open-map;
-">
-  
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Layout estilo Facebook</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="overlay"></div>
-  <div class="page">
-    <header class="header">
-      <div class="notice-bar">
-        📜 <strong> NYC Law (Passed 2021, Active Since 2022):</strong> Couriers have the right to use restrooms at pickup locations (if in a common area) — ❌ If not: out of service, cleaning, or restricted access.
-      </div>
-    </header>
 
-    <!-- SOLO el centro (grid) vive dentro de .stage -->
-    <div class="stage">
-      <div class="grid-container">
-        <aside class="left-sidebar">LEFT SIDEBAR</aside>
-        <main class="main-content">
-          <!-- contenedor principal --panel-hero-- -->
-        <div class="panel hero">
-          <div class="logo-container">
-            <!-- icono por defecto: fondo negro, WC blanco --gb-icon-- -->
-            <svg class="gb-icon">
-              <use href="assets/svg-icons.svg#gb-marker"></use>
-            </svg>
-          </div>
-          <h1 class="main-title">Go Bathroom NYC</h1>
-          
-          <p class="description">
-      Discover free and accessible bathrooms across New York City. Made for delivery workers, tourists, and everyone in need.<br>
-      <strong>Collaborative ▪ Free ▪ Updated monthly.</strong>
-    </p>
-          <a href="https://rebrand.ly/open-map" target="_blank" class="cta-button location-button">
-      Find Bathrooms Nearby
-      <i class="fa-solid fa-location-dot"></i>
-    </a>
-
-          <!-- Título + botón doble -->
-<div class="report-section">
-  <h3 class="report-title">Suggest or report a bathroom</h3>
-
-  <div class="dual-button" aria-label="Suggest or report a bathroom">
-    <a class="half suggest" href="#suggest" role="button">
-      <span class="label">Suggest</span>
-      <i class="fa-solid fa-lightbulb icon" aria-hidden="true"></i>
-    </a>
-
-    <a class="half report" href="#report" role="button">
-      <span class="label">Report</span>
-      <i class="fa-solid fa-flag icon" aria-hidden="true"></i>
-    </a>
-  </div>
-</div>
-          <!-- DONATE (con gradiente personalizado) -->
-<a href="https://www.paypal.com/donate/?hosted_button_id=K773CAM5X3QBC"
-   target="_blank" rel="noopener"
-   class="cta-button donate-cta"
-   aria-label="Donate to GoBathroom on PayPal">
-  Donate with PayPal
-  <i class="fa-brands fa-paypal" aria-hidden="true"></i>
-</a>
-
-        </div>
-        </main>
-        <section class="secondary-content">
-          <!-- contenedor secundario --panel icon-key-- -->
-        <div class="panel icon-key">
-          <h2 class="section-title icon-key-title" id="icon-key">ICON KEY</h2>
-
-          <!-- Viewport del carrusel (ventana) -->
-<div class="icon-key-viewport" role="region" aria-labelledby="icon-key">
-  <!-- Cinta/track: aquí irán las tarjetas -->
-  <div class="icon-key-track">
-    <!-- (Próximo paso: 3 tarjetas) -->
-  </div>
-</div>
-
-          
-        </div>
-        </section>
-        <section class="tertiary-content">
-          <!-- contenedor terciario --panel emoji-key-- -->
-        <div class="panel emoji-key">
-        </div>
-        </section>
-        <aside class="right-sidebar">RIGHT SIDEBAR</aside>
-      </div>
+  <!-- HEADER sticky -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <div class="brand">Go Bathroom NYC</div>
+      <nav aria-label="Principal" class="top-nav">
+        <a href="#">Home</a>
+        <a href="#">Map</a>
+        <a href="#">Donate</a>
+      </nav>
     </div>
+  </header>
 
-    <footer class="footer">FOOTER</footer>
-  </div>
+  <!-- MAIN -->
+  <main class="site-main" role="main">
+    <div class="container">
+
+      <!-- Toolbar responsiva (aparece cuando no caben los 3 cols) -->
+      <section class="toolbar" aria-label="Accesos rápidos">
+        <details class="drawer">
+          <summary>Left tools</summary>
+          <div class="drawer-panel">
+            <!-- contenido que también vive en el sidebar izquierdo -->
+            <button class="pill">Share</button>
+            <button class="pill">Filters</button>
+          </div>
+        </details>
+
+        <details class="drawer">
+          <summary>Right tools</summary>
+          <div class="drawer-panel">
+            <!-- contenido del sidebar derecho -->
+            <button class="pill">English</button>
+            <button class="pill">Español</button>
+          </div>
+        </details>
+      </section>
+
+      <!-- Grid principal -->
+      <section class="layout">
+        <aside class="sidebar left" aria-label="Left sidebar">
+          <!-- Mismo contenido que los drawers (si quieres duplicarlo o moverlo con JS) -->
+          <div class="card">Left Sidebar content</div>
+        </aside>
+
+        <section class="content">
+          <!-- CONTENIDO PRINCIPAL -->
+          <div class="panel hero">
+            <!-- tu bloque principal (ya lo tienes) -->
+            <h2>Go Bathroom NYC</h2>
+            <p>Discover free and accessible bathrooms across New York City.</p>
+            <!-- … -->
+          </div>
+
+          <div class="panel secondary">
+            <h3>ICON KEY</h3>
+            <div class="ghost"></div> <!-- fondo translúcido de ejemplo -->
+          </div>
+
+          <div class="panel tertiary">
+            <h3>EMOJI KEY</h3>
+            <div class="ghost"></div>
+          </div>
+        </section>
+
+        <aside class="sidebar right" aria-label="Right sidebar">
+          <div class="card">Right Sidebar content</div>
+        </aside>
+      </section>
+    </div>
+  </main>
+
+  <!-- FOOTER sticky -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <small>© 2025 Go Bathroom NYC</small>
+      <nav aria-label="Footer">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </nav>
+    </div>
+  </footer>
+
 </body>
-
 </html>
