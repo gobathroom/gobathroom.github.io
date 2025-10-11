@@ -1,16 +1,20 @@
 // Helpers
 const $ = (s, d=document) => d.querySelector(s);
 
-// ===== Sidebar (soporta los dos toggles: botón del rail y, si existe, el de móvil)
+// Toggle del sidebar desde el header (mobile) y desde el sidebar (desktop)
 const body = document.body;
-const burgers = document.querySelectorAll('.hamburger');
+const togglers = document.querySelectorAll('.hamburger, .rail-toggle');
 
-burgers.forEach(btn => {
+togglers.forEach(btn => {
   btn.addEventListener('click', () => {
     const open = body.classList.toggle('sidebar-open');
-    burgers.forEach(b => b.setAttribute('aria-expanded', String(open)));
+    // actualizar aria-expanded si el botón lo soporta
+    if (btn.hasAttribute('aria-expanded')) {
+      btn.setAttribute('aria-expanded', String(open));
+    }
   });
 });
+
 
 // Cerrar al hacer click fuera (sólo en móvil)
 document.addEventListener('click', (e) => {
