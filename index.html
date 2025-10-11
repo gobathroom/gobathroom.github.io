@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Go Bathroom NYC</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body class="no-sidebar">
@@ -41,36 +42,46 @@
   </div>
 
   <!-- Sidebar lateral estilo Freepik -->
-  <aside class="sidebar" aria-label="App menu">
-    <div class="rail-header">
-      <!-- El logo “vive” dentro del sidebar cuando está expandido -->
-      <a class="brand rail" href="/">
-        <img src="logo.svg" alt="" class="brand-mark" />
-        <span class="brand-name">Go Bathroom NYC</span>
-      </a>
-    </div>
+  <aside class="sidebar" aria-label="Main">
+  <div class="sidebar__scroll">
+    <nav class="sidebar__nav">
+      <ul>
+        <li>
+          <a href="#suggest" class="nav-item">
+            <i class="fa-solid fa-plus"></i>
+            <span>Suggest</span>
+          </a>
+        </li>
+        <li>
+          <a href="#report" class="nav-item">
+            <i class="fa-solid fa-flag"></i>
+            <span>Report</span>
+          </a>
+        </li>
+        <li>
+          <a href="#donate" class="nav-item">
+            <i class="fa-solid fa-circle-dollar-to-slot"></i>
+            <span>Donate</span>
+          </a>
+        </li>
+        <li>
+          <button type="button" class="nav-item js-share">
+            <i class="fa-solid fa-share-nodes"></i>
+            <span>Share</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
 
-    <ul class="rail-group" role="list">
-      <li><button class="rail-item" data-action="suggest">
-        <span class="ico">💡</span><span class="txt">Suggest</span>
-      </button></li>
-      <li><button class="rail-item" data-action="report">
-        <span class="ico">🚩</span><span class="txt">Report</span>
-      </button></li>
-      <li><button class="rail-item" data-action="donate">
-        <span class="ico">💙</span><span class="txt">Donate</span>
-      </button></li>
-      <li><button class="rail-item" id="shareBtn">
-        <span class="ico">🔗</span><span class="txt">Share</span>
-      </button></li>
-    </ul>
-
-    <div class="rail-footer">
-      <button class="rail-item ghost" id="themeBtn" aria-haspopup="listbox">
-        <span class="ico">🌓</span><span class="txt">Theme: <b id="themeLabel">System</b></span>
+    <div class="sidebar__bottom">
+      <button type="button" id="themeToggle" class="nav-item" aria-label="Toggle theme">
+        <i class="fa-solid fa-sun" data-icon="theme"></i>
+        <span>Theme</span>
       </button>
     </div>
-  </aside>
+  </div>
+</aside>
+
 
   <!-- Contenido principal (empujado por el sidebar) -->
   <div class="page">
