@@ -370,7 +370,7 @@ body {
   overflow: hidden;              /* oculta lo que se sale de la “ventana” */
   padding: 12px;                 /* respiración interna */
   box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-  magin-bottom: auto;
+  margin-bottom: auto;
 }
 
 /* Cinta/track: fila horizontal donde vivirán las tarjetas */
