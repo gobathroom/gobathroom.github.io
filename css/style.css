@@ -49,15 +49,6 @@ body.sidebar-open .topbar .top-actions .divider{
   width: 0;
 }
 
-
-
-
-
-/* Botón del rail dentro del sidebar (arriba a la izquierda) */
-.rail-toggle{
-  margin: 12px 12px 0 12px;
-}
-
 /* esquemas de color */
 @media (prefers-color-scheme: light){
   :root[data-theme="system"]{
@@ -101,10 +92,10 @@ body{
 /* Cuando está expandido, el ancho crece como antes */
 body.sidebar-open .sidebar{ width: var(--rail-expanded) }
 
-/* La “cabecera” interna del sidebar ocupa exactamente la altura del header
-   y centra verticalmente el logo para que quede a la misma línea visual */
-.rail-header{
-  position: absolute;   /* se “pega” arriba del sidebar */
+/* CABECERA DEL RAIL (actualizado a .rail-head) */
+/* Ocupa la altura del header y alinea logo + botón ☰ en la misma línea del topbar */
+.rail-head{
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -112,16 +103,20 @@ body.sidebar-open .sidebar{ width: var(--rail-expanded) }
   display: flex;
   align-items: center;
   gap: 10px;
-  padding-inline: 12px; /* similar al topbar para que coincidan los márgenes */
+  padding-inline: 12px;
+  z-index: 1;
 }
-
-/* Marca dentro del rail (ya la tienes) */
-.rail-header .brand.rail{ display:flex; align-items:center; gap:12px }
+.rail-head .brand.rail{ display:flex; align-items:center; gap:12px }
 .rail .brand-mark{ width:28px; height:28px }
 .rail .brand-name{ font-weight:600; opacity:0; transition:opacity .2s }
 body.sidebar-open .rail .brand-name{ opacity:1 }
 
+/* Botón ☰ dentro del rail: a la derecha de la cabecera */
+.rail-head .rail-toggle{
+  margin-left: auto;
+}
 
+/* Grupos/acciones del rail (sin cambios) */
 .rail-group, .rail-footer{ list-style:none; margin:0; padding:12px; }
 .rail-item{
   width:100%; display:flex; align-items:center; gap:12px;
@@ -271,7 +266,6 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   .topbar{ padding-inline:12px }
   .brand .brand-name{ display:none }
 }
-
 
 /* Utilidad: oculto por defecto (desktop), visible en mobile */
 .only-mobile { display: none; }
