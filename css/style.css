@@ -365,7 +365,6 @@ body {
 .grid-container > * {
   border: 2px solid #000;
   border-radius: 10px;
-  display:flex; align-items:center; justify-content:center;
   font-weight:700;
 }
 
