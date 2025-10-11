@@ -342,6 +342,22 @@ body {
 
 
 
+
+/* Quita el centrado vertical/horizontal SOLO en el área secundaria */
+.secondary-content {
+  display: block;            /* en vez de flex */
+}
+
+.secondary-content .panel.icon-key {
+  display: block;            /* aseguras flujo normal de bloque */
+  padding: 16px 20px;        /* opcional: respiración dentro del panel */
+}
+
+.section-title.icon-key-title {
+  margin-top: 0;             /* por si hereda margen extra */
+}
+
+
 /* Título de la sección ICON KEY */
 .section-title.icon-key-title{
   text-align: center;
