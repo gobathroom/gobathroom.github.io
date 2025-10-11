@@ -362,7 +362,7 @@ body {
 .icon-key-viewport{
   position: relative;
   width: 100%;
-  height: 400px;                 /* alto estable en desktop; ajustaremos si hace falta */
+  height: 425px;                 /* alto estable en desktop; ajustaremos si hace falta */
   background: rgba(255,255,255,0.10);
   backdrop-filter: blur(4px);
   border: 1px solid rgba(255,255,255,0.28);
@@ -370,7 +370,6 @@ body {
   overflow: hidden;              /* oculta lo que se sale de la “ventana” */
   padding: 12px;                 /* respiración interna */
   box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-  margin-bottom: auto;
 }
 
 /* Cinta/track: fila horizontal donde vivirán las tarjetas */
