@@ -10,9 +10,10 @@
 <body class="no-sidebar">
   <!-- Header fijo (ahora se alinea a la derecha del sidebar) -->
   <header class="topbar" role="banner">
-    <button class="icon-btn hamburger" aria-label="Open menu" aria-expanded="false">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-    </button>
+      <!-- ahora este botón sólo se ve en móvil -->
+  <button class="icon-btn hamburger mobile-only" aria-label="Open menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  </button>
 
     <a class="brand" href="/" aria-label="Go Bathroom NYC — Home">
       <img src="logo.svg" alt="" class="brand-mark" />
@@ -40,6 +41,11 @@
 
   <!-- Sidebar lateral estilo Freepik (fijo desde top:0 a bottom:0) -->
   <aside class="sidebar" aria-label="App menu">
+    <!-- botón de “tres rayas” dentro del sidebar -->
+  <button class="icon-btn rail-toggle hamburger" aria-label="Toggle menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  </button>
+    
     <div class="rail-header">
       <a class="brand rail" href="/">
         <img src="logo.svg" alt="" class="brand-mark" />
