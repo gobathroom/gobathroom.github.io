@@ -1,417 +1,160 @@
-/* Reset */
-* { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; font-family: Arial, sans-serif; font-size: 12px; }
+/* ===== variables y resets breves ===== */
+:root{
+  --bg: #0b0f1d;
+  --panel: rgba(255,255,255,.06);
+  --panel-border: rgba(255,255,255,.18);
+  --txt: #e8eef6;
 
-/* Imagen de fondo */
-body {
-  background: url('../background.jpg') no-repeat center center fixed;
-  background-size: cover;
-  position: relative;
+  --max: 1280px;           /* ancho máximo del contenido centrado */
+  --gap: 16px;             /* separación general */
+  --bar-h: 64px;           /* alto header/footer */
+  --sb-w: clamp(220px, 22vw, 280px);  /* ancho sidebar */
+  --radius: 14px;
+
+  /* breakpoints */
+  --bp-lg: 1200px;  /* 3 columnas visibles */
+  --bp-md: 900px;   /* sidebars pasan a toolbar */
 }
 
-/* Overly morado transparente */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(26, 20, 48, 0.94); /* #1a1430 con 94% opacidad */
-  z-index: 1;
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  color:var(--txt);
+  background: var(--bg) url('your-bg.jpg') center/cover fixed no-repeat;
+  font: 400 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans";
 }
 
-/* Estructura general */
-.page {
-  min-height: 100svh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  position: relative;
-  z-index: 2;
+/* ===== helpers ===== */
+.container{
+  width: min(100% - 2rem, var(--max));
+  margin-inline:auto;
 }
 
-/* Header / Footer full-bleed con borde */
-.header, .footer {
-  border: 2px solid #000;
-  border-radius: 10px;
-  text-align: center;
-  font-weight: 700;
-}
-
-/* ---Barra superior--- */
-.notice-bar {
-  position: relative;    /* o fixed si debe seguir visible */
-  z-index: 2;            /* sobre la capa morada */
-  background-color: #42396E5C;
-  backdrop-filter: blur(4px);
-  color: #fff;
-  border-left: 4px solid #FF6B6B;
-  padding: 12px 20px;
-  box-sizing: border-box;
-  text-align: center;
-  font-size: 12px;
-  font-weight: normal;
-}
-
-  
-/* === MIXTO ROBUSTO === */
-/* Base: ocupa TODO el ancho */
-.stage { width: 100%; }
-
-/* Al achicar ventana (≤1400px), SOLO el centro se limita y se centra */
-@media screen and (max-width: 1400px) {
-  .stage { max-width: 1200px; margin-inline: auto; }
-}
-
-/* Grid central (sin max-width aquí) */
-.grid-container {
-  width: 100%;
-  display: grid;
-  gap: 10px;
-  padding: 10px;
-  grid-template-areas:
-    "left main      secondary right"
-    "left tertiary  tertiary  right";
-  grid-template-columns: minmax(170px, 200px) 0.5fr 1fr minmax(170px, 200px);
-  grid-template-rows: 1fr auto;
-}
-
-/* Áreas */
-.left-sidebar      { grid-area: left; }
-.main-content      { grid-area: main; }
-.secondary-content { grid-area: secondary; }
-.tertiary-content  { grid-area: tertiary; }
-.right-sidebar     { grid-area: right; }
-
-/* paneles */
-.panel {
-  background-color: #42396E5C;
-  max-width: auto;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 2rem;
-  overflow-wrap: break-word; /* ✅ fuerza a romper texto largo */
-  border-radius: 12px; /* opcional: bordes redondeados como en tu ejemplo */
-  position: relative;
-  z-index: 2;
-}
-
-.panel.hero {
-  flex-direction: column;
-  min-height: 220px;        /* altura del panel hero */
-}
-
-/* logo gobathroom */
-.logo-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: -1rem;
-}
-
-/* Tamaño general del logo */
-.logo-container .gb-icon {
-  width: 100px;      /* prueba 80/96/100 */
-  height: 100px;     /* fuerza proporción */
-  display: block;
-
-  /* Colores de logo gb */
-  --gb-bg: #29C3C4;   /* fondo cyan */
-  --gb-wc: #ffffff;   /* WC blanco */
-}
-
-/* Title */
-.main-title {
-  text-align: center;
-  font-size: 28px;
-  font-weight: bold;
-  color: white;
-  margin-bottom: -0.5rem;
-}
-
-/* description */
-.description {
-  font-weight: normal;   /* texto normal */
-  text-align: center;
-  font-size: 15px;
-  color: #E0E0E0;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
-
-.description strong {
-  font-weight: bold;     /* solo el texto dentro del <strong> estará en negrita */
-}
-
-/* === Base común para ambos === */
-.cta-button,
-.donate-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* centrado */
-  gap: 8px;
-  text-decoration: none;
-  border: none;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  padding: 14px 20px;
-  border-radius: 12px;
-  cursor: pointer;
-  width: 90%;
-  box-sizing: border-box;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Hover y Active generales */
-.cta-button:hover,
-.donate-cta:hover {
-  transform: scale(1.04);
-}
-.cta-button:active,
-.donate-cta:active {
-  transform: scale(0.97);
-}
-
-/* Iconos comunes */
-.cta-button i,
-.donate-cta i {
-  font-size: 18px;
-  margin-left: 12px;
-}
-
-/* === Botón principal === */
-.cta-button {
-  background: linear-gradient(90deg, #037fc1, #25bdc4);
-  margin-top: 0;
-}
-.cta-button:hover {
-  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
-}
-
-
-
-
-/* 1) Asegura que el wrapper del doble botón tenga base de 100% */
-.panel.hero .report-section{
-  width: 100%;
-}
-
-/* 2) Unifica el ancho visual de los tres botones */
-:root{ 
-  --suggest-active:#0aa56d;   /* verde al interactuar */
-  --report-active: #ff7a1a;   /* naranja al interactuar */
-  --cta-gradient: linear-gradient(90deg, #037fc1, #25bdc4);
-  --cta-max: 420px; 
-} /* ajusta a gusto */
-
-.panel.hero .cta-button,
-.panel.hero .dual-button,
-.panel.hero .donate-cta{
-  width: 90%;
-  max-width: var(--cta-max);
-  margin-inline: auto;
-}
-
-/* 3) Evita que el texto de cada mitad salte a dos líneas */
-.dual-button .label{
-  white-space: nowrap;
-}
-
-/* (opcional) Si quieres que TODOS los hijos del hero se estiren,
-   puedes usar esto en lugar del punto 1: */
-/* .panel.hero{ align-items: stretch; } */
-
-
-
-
-.report-section{
-  text-align:center;
-  margin-top: 18px;
-}
-
-.report-title{
-  /* igual a .description strong (15px + bold) */
-  font-size: 15px;
-  font-weight: bold;
-  color: #E0E0E0;
-  margin: 0 0 8px 0;
-}
-
-.dual-button{
-  width: 90%;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  background: var(--cta-gradient);
-  position: relative;
-}
-
-
-
-.dual-button .half{
-  position: relative;
-  display: flex;
+/* ===== header/footer sticky ===== */
+.site-header,
+.site-footer{
+  position: sticky;
+  z-index: 50;
+  background: rgba(12,16,32,.75);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #000;
+  height: var(--bar-h);
+  display:flex;
   align-items:center;
-  justify-content:center;
-  padding: 14px 20px;
-  text-decoration:none;
+}
+.site-header{ top:0; }
+.site-footer{
+  bottom:0;
+  border-top: 1px solid #000;
+  border-bottom: 0;
+}
+
+.site-header .container,
+.site-footer .container{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: var(--gap);
+}
+.top-nav a,
+.site-footer a{
+  color: var(--txt);
+  text-decoration: none;
+  opacity:.85;
+  margin-inline: .5rem;
+}
+.top-nav a:hover,
+.site-footer a:hover{ opacity:1; }
+
+/* ===== main ===== */
+.site-main{ padding-block: calc(var(--gap) + 8px); }
+
+/* toolbar (se muestra en medios/pequeños) */
+.toolbar{
+  display:none;
+  gap: var(--gap);
+  margin-block: var(--gap);
+}
+.drawer > summary{
+  list-style: none;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: .6rem 1rem;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+}
+.drawer[open] .drawer-panel{
+  margin-top: .5rem;
+  padding: .75rem;
+  border-radius: var(--radius);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+}
+.pill{
+  border:0;
+  padding:.55rem .9rem;
+  border-radius:999px;
+  background: linear-gradient(90deg,#037fc1,#25bdc4);
   color:#fff;
-  font-size:16px;
-  font-weight:600;
-  transition: transform .18s ease;
-  isolation:isolate; /* asegura el z-index de los hijos por encima del ::before */
+  cursor:pointer;
 }
 
-/* separador entre mitades */
-.dual-button .half + .half{
-  border-left: 1px solid rgba(255,255,255,0.22);
+/* ===== grid principal (estilo Facebook) ===== */
+.layout{
+  display:grid;
+  grid-template-columns: var(--sb-w) 1fr var(--sb-w);
+  gap: var(--gap);
+  align-items: start;
 }
 
-/* overlay de color al hover/click: verde u naranja solo en la mitad */
-.dual-button .half::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: transparent;
-  opacity:0;
-  transition: opacity .18s ease;
-  z-index:0;
+/* sidebars */
+.sidebar{
+  position: sticky;
+  top: calc(var(--bar-h) + var(--gap));
 }
-.dual-button .half > *{ position:relative; z-index:1; }
-
-/* icono/label: alternan en hover/focus */
-.dual-button .icon{
-  position:absolute;
-  opacity:0;
-  transform: scale(.9);
-  transition: opacity .18s ease, transform .18s ease;
-  font-size:18px;
-}
-.dual-button .label{
-  transition: opacity .18s ease, transform .18s ease;
+.card{
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 1rem;
 }
 
-/* Hover / Active / Keyboard */
-.dual-button .half:hover,
-.dual-button .half:active,
-.dual-button .half:focus-visible{
-  transform: scale(1.02);
+/* contenido principal */
+.content{
+  display:grid;
+  gap: var(--gap);
+}
+.panel{
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.panel .ghost{
+  height: 340px;
+  border-radius: calc(var(--radius) - 6px);
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
 }
 
-.dual-button .half:hover .label,
-.dual-button .half:active .label,
-.dual-button .half:focus-visible .label{
-  opacity:0; transform: translateY(-6px);
-}
-.dual-button .half:hover .icon,
-.dual-button .half:active .icon,
-.dual-button .half:focus-visible .icon{
-  opacity:1; transform: scale(1);
-}
+/* ===== RESPONSIVE ===== */
 
-/* Colores por mitad al interactuar */
-.dual-button .suggest:hover::before,
-.dual-button .suggest:active::before,
-.dual-button .suggest:focus-visible::before{
-  background: var(--suggest-active);
-  opacity:1;
-}
-.dual-button .report:hover::before,
-.dual-button .report:active::before,
-.dual-button .report:focus-visible::before{
-  background: var(--report-active);
-  opacity:1;
-}
-
-/* === Botón PayPal === */
-.donate-cta {
-  background: linear-gradient(90deg, #00457C, #0079C1);
-  margin-top: 16px;
-}
-.donate-cta:hover {
-  box-shadow: 0 6px 14px rgba(0,48,135,0.4);
-}
-
-
-
-
-
-
-/* Título de la sección ICON KEY */
-.section-title.icon-key-title{
-  text-align: center;
-  font-size: 16px;           /* igual a "Collaborative • Free..." */
-  font-weight: 700;          /* negrita */
-  letter-spacing: 0.06em;    /* toque de “key/etiqueta” */
-  color: #EAEAEA;            /* blanco suave, legible sobre el vidrio */
-  margin: 16px 0 12px 0;        /* separa del carrusel que pondremos después */
-  text-transform: uppercase; /* estilo de “KEY” */
-}
-
-
-/* Viewport: vidrio blanco translúcido, borde sutil y esquinas redondeadas */
-.icon-key-viewport{
-  position: relative;
-  width: 100%;
-  height: 390px;                 /* alto estable en desktop; ajustaremos si hace falta */
-  background: rgba(255,255,255,0.10);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255,255,255,0.28);
-  border-radius: 12px;
-  overflow: hidden;              /* oculta lo que se sale de la “ventana” */
-  padding: 12px;                 /* respiración interna */
-  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-  margin: 16px 0 0 0;
-}
-
-/* Cinta/track: fila horizontal donde vivirán las tarjetas */
-.icon-key-track{
-  display: flex;
-  gap: 16px;
-  align-items: stretch;
-  height: 100%;
-  will-change: transform;
-  touch-action: pan-x;           /* gestos horizontales más suaves */
-}
-
-/* Responsive: un poquito más alta en móvil para texto */
-@media (max-width: 768px){
-  .icon-key-viewport{ height: 340px; }
-}
-
-
-
-
-
-
-
-
-
-
-
-/* Bordes de referencia (quítalos al final) */
-.grid-container > * {
-  border: 2px solid #000;
-  border-radius: 10px;
-  font-weight:700;
-}
-
-/* Mobile: dos botones arriba + contenido apilado */
-@media (max-width: 768px) {
-  .grid-container {
-    grid-template-areas:
-      "left   right"
-      "main   main"
-      "secondary secondary"
-      "tertiary tertiary";
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto 1fr;
+/* 1) Cuando el ancho baja de 1200px: oculta sidebars, muestra toolbar */
+@media (max-width: 1200px){
+  .layout{
+    grid-template-columns: 1fr; /* el Main ocupa todo */
   }
-  .left-sidebar, .right-sidebar {
-    display:flex; justify-content:center; align-items:center;
-    min-height:44px; border-radius:9999px;
+  .sidebar{ display:none; }
+  .toolbar{ display:flex; }
+}
+
+/* 2) Móvil: toolbar en columna y paddings mayores */
+@media (max-width: 900px){
+  .toolbar{
+    flex-direction: column;
   }
+  .panel .ghost{ height: 260px; }
+  .site-header, .site-footer{ height: 56px; }
+  :root{ --bar-h: 56px; }
 }
