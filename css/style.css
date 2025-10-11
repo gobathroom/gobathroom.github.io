@@ -21,6 +21,15 @@
   --brand-2: #7ef0ff;
 }
 
+/* Utilidad: oculto por defecto (desktop), visible en mobile */
+.only-mobile { display: none; }
+
+@media (max-width: 768px){
+  .only-mobile { display: grid; }      /* se alinea perfecto con .icon-btn */
+}
+
+
+
 /* Botón del rail dentro del sidebar (arriba a la izquierda) */
 .rail-toggle{
   margin: 12px 12px 0 12px;
