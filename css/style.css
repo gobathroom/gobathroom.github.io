@@ -17,16 +17,14 @@
 }
 
 *{ box-sizing: border-box; }
-/* ===== Frame base: fondo a 100% y footer pegajoso ===== */
+/* 1) Frame base para “footer que se pega sin superponer” */
 html, body { height: 100%; }
+
 body{
-  min-height: 100svh;           /* ocupa alto de la ventana */
-  display: flex;                /* footer pegajoso */
-  flex-direction: column;       /* header-arriba, main-medio, footer-abajo */
+  min-height: 100svh;          /* 100% del alto visible */
+  display: flex;               /* columna: header, main, footer */
+  flex-direction: column;
   margin: 0;
-  color: var(--txt);
-  background: var(--bg) center/cover fixed no-repeat;
-  font: 400 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans";
 }
 
 /* ===== helpers ===== */
@@ -164,48 +162,24 @@ body{
 }
 
 
-/* Header pegajoso (ya lo tenías; lo dejo claro) */
+/* 2) Header puede seguir sticky si quieres */
 .site-header{
-  position: sticky; top: 0; z-index: 1000;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   height: var(--bar-h, 64px);
-  backdrop-filter: blur(6px);
 }
 
-/* Compensar el header para que no tape el contenido inicial */
-main{ 
-  padding-top: var(--bar-h, 64px);
-  flex: 1 0 auto;              /* ocupa el espacio disponible y empuja el footer */
+/* 3) Main ocupa el espacio y empuja al footer */
+main{
+  flex: 1 0 auto;              /* crece y empuja al footer hacia abajo */
+  padding-top: var(--bar-h, 64px);  /* para que el sticky header no tape nada */
+  padding-bottom: 16px;        /* opcional: respiración sobre el footer */
 }
 
-/* Footer pegajoso — no fixed, no absolute */
+/* 4) Footer normal (no fixed, no absolute) */
 .site-footer{
-  flex-shrink: 0;               /* no se encoge */
-  min-height: 56px;
-}
-
-/* ===== Contenedor centrado sin “bordes vacíos” ===== */
-.container{
-  /* ancho máximo del contenido central */
-  --max: 1280px;
-  width: min(100%, var(--max)); /* ocupa 100% hasta llegar al tope */
-  margin-inline: auto;          /* centrado real */
-  padding-inline: 16px;         /* gutter interno, no bordes negros “externos” */
-}
-
-/* ===== Grid de 3 columnas (desktop) que se colapsa en responsive ===== */
-.shell{
-  display: grid;
-  grid-template-columns: 1fr minmax(0, 720px) 1fr; /* left / main / right */
-  gap: 16px;
-}
-
-/* Breakpoints: los sidebars bajan a barra en pantallas estrechas */
-@media (max-width: 1200px){
-  .shell{ grid-template-columns: minmax(0, 1fr); }
-  .left-tools, .right-tools{
-    display: grid;
-    grid-auto-flow: column;
-    gap: 8px;
-    order: -1;                  /* aparecen bajo el header */
-  }
+  position: static;            /* explícito por claridad */
+  flex-shrink: 0;              /* nunca se encoge/superpone */
+  min-height: 56px;            /* tu alto de footer */
 }
