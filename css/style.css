@@ -107,7 +107,7 @@ body.sidebar-open .sidebar{ width: var(--rail-expanded) }
   z-index: 1;
 }
 .rail-head .brand.rail{ display:flex; align-items:center; gap:12px }
-.rail .brand-mark{ width:28px; height:28px }
+/* (removido .rail .brand-mark) */
 .rail .brand-name{ font-weight:600; opacity:0; transition:opacity .2s }
 
 /* Muestra el nombre dentro del sidebar sólo cuando está abierto (estilo Freepik) */
@@ -153,7 +153,7 @@ body.sidebar-open .topbar{ left: var(--rail-expanded) }
   border-radius:10px; cursor:pointer;
 }
 .brand{ display:flex; align-items:center; gap:10px; color:var(--text); text-decoration:none; }
-.brand .brand-mark{ width:28px; height:28px; }
+/* (removido .brand .brand-mark) */
 .brand .brand-name{ font-weight:600 }
 
 .top-actions{ margin-left:auto; display:flex; align-items:center; gap:var(--space-3);}
