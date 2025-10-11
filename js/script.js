@@ -8,19 +8,28 @@ const root  = document.documentElement;
 const togglers = document.querySelectorAll('.hamburger, .rail-toggle');
 
 function syncBrandA11y(open){
+  // La marca de la topbar se oculta visualmente vía CSS cuando open=true.
+  // Aquí solo reflejamos accesibilidad.
   const topbarBrand = document.querySelector('.topbar .brand');
   if (topbarBrand) topbarBrand.setAttribute('aria-hidden', open ? 'true' : 'false');
 }
 
-function toggleSidebar(){
-  const open = body.classList.toggle('sidebar-open');
-  // reflect state on all toggles
+function reflectAria(open){
   togglers.forEach(btn => {
     if (btn.hasAttribute('aria-expanded')){
       btn.setAttribute('aria-expanded', String(open));
     }
   });
+}
+
+function setSidebar(open){
+  body.classList.toggle('sidebar-open', open);
+  reflectAria(open);
   syncBrandA11y(open);
+}
+
+function toggleSidebar(){
+  setSidebar(!body.classList.contains('sidebar-open'));
 }
 
 togglers.forEach(btn => btn.addEventListener('click', toggleSidebar));
@@ -33,9 +42,14 @@ document.addEventListener('click', (e) => {
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
   if (!clickedInside && isMobile){
-    body.classList.remove('sidebar-open');
-    togglers.forEach(b => b.setAttribute('aria-expanded', 'false'));
-    syncBrandA11y(false);
+    setSidebar(false);
+  }
+});
+
+// Accesibilidad: cerrar con ESC en móvil (y opcionalmente en desktop)
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && body.classList.contains('sidebar-open')) {
+    setSidebar(false);
   }
 });
 
@@ -105,5 +119,7 @@ if (window.ResizeObserver && notify){
   new ResizeObserver(setNotifyHeight).observe(notify);
 }
 
-// Sincronizar estado de marca al cargar
-syncBrandA11y(body.classList.contains('sidebar-open'));
+// Sincronizar estado de marca y aria al cargar
+const initiallyOpen = body.classList.contains('sidebar-open');
+reflectAria(initiallyOpen);
+syncBrandA11y(initiallyOpen);
