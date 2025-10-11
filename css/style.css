@@ -1,3 +1,22 @@
+/* ===== variables y resets breves ===== */
+:root{
+  --bg: #0b0f1d;
+  --panel: rgba(255,255,255,.06);
+  --panel-border: rgba(255,255,255,.18);
+  --txt: #e8eef6;
+
+  --max: 1280px;           /* ancho máximo del contenido centrado */
+  --gap: 16px;             /* separación general */
+  --bar-h: 64px;           /* alto header/footer */
+  --sb-w: clamp(220px, 22vw, 280px);  /* ancho sidebar */
+  --radius: 14px;
+
+  /* breakpoints */
+  --bp-lg: 1200px;  /* 3 columnas visibles */
+  --bp-md: 900px;   /* sidebars pasan a toolbar */
+}
+
+*{ box-sizing: border-box; }
 /* ===== Frame base: fondo a 100% y footer pegajoso ===== */
 html, body { height: 100%; }
 body{
@@ -9,6 +28,141 @@ body{
   background: var(--bg) center/cover fixed no-repeat;
   font: 400 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans";
 }
+
+/* ===== helpers ===== */
+.container{
+  width: min(100% - 2rem, var(--max));
+  margin-inline:auto;
+}
+
+/* ===== header/footer sticky ===== */
+.site-header,
+.site-footer{
+  position: sticky;
+  z-index: 50;
+  background: rgba(12,16,32,.75);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #000;
+  height: var(--bar-h);
+  display:flex;
+  align-items:center;
+}
+.site-header{ top:0; }
+.site-footer{
+  bottom:0;
+  border-top: 1px solid #000;
+  border-bottom: 0;
+}
+
+.site-header .container,
+.site-footer .container{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: var(--gap);
+}
+.top-nav a,
+.site-footer a{
+  color: var(--txt);
+  text-decoration: none;
+  opacity:.85;
+  margin-inline: .5rem;
+}
+.top-nav a:hover,
+.site-footer a:hover{ opacity:1; }
+
+/* ===== main ===== */
+.site-main{ padding-block: calc(var(--gap) + 8px); }
+
+/* toolbar (se muestra en medios/pequeños) */
+.toolbar{
+  display:none;
+  gap: var(--gap);
+  margin-block: var(--gap);
+}
+.drawer > summary{
+  list-style: none;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: .6rem 1rem;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+}
+.drawer[open] .drawer-panel{
+  margin-top: .5rem;
+  padding: .75rem;
+  border-radius: var(--radius);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+}
+.pill{
+  border:0;
+  padding:.55rem .9rem;
+  border-radius:999px;
+  background: linear-gradient(90deg,#037fc1,#25bdc4);
+  color:#fff;
+  cursor:pointer;
+}
+
+/* ===== grid principal (estilo Facebook) ===== */
+.layout{
+  display:grid;
+  grid-template-columns: var(--sb-w) 1fr var(--sb-w);
+  gap: var(--gap);
+  align-items: start;
+}
+
+/* sidebars */
+.sidebar{
+  position: sticky;
+  top: calc(var(--bar-h) + var(--gap));
+}
+.card{
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+
+/* contenido principal */
+.content{
+  display:grid;
+  gap: var(--gap);
+}
+.panel{
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.panel .ghost{
+  height: 340px;
+  border-radius: calc(var(--radius) - 6px);
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* 1) Cuando el ancho baja de 1200px: oculta sidebars, muestra toolbar */
+@media (max-width: 1200px){
+  .layout{
+    grid-template-columns: 1fr; /* el Main ocupa todo */
+  }
+  .sidebar{ display:none; }
+  .toolbar{ display:flex; }
+}
+
+/* 2) Móvil: toolbar en columna y paddings mayores */
+@media (max-width: 900px){
+  .toolbar{
+    flex-direction: column;
+  }
+  .panel .ghost{ height: 260px; }
+  .site-header, .site-footer{ height: 56px; }
+  :root{ --bar-h: 56px; }
+}
+
 
 /* Header pegajoso (ya lo tenías; lo dejo claro) */
 .site-header{
