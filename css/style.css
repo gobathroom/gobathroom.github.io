@@ -355,8 +355,6 @@ body {
   text-transform: uppercase; /* estilo de “KEY” */
 }
 
-/* Panel icon-key con respiración */
-.panel.icon-key { padding: 16px 20px; }
 
 /* Viewport: vidrio blanco translúcido, borde sutil y esquinas redondeadas */
 .icon-key-viewport{
