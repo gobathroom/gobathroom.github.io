@@ -21,6 +21,13 @@
   --brand-2: #7ef0ff;
 }
 
+/* Aplica el mismo marco lateral que el contenido */
+.topbar,
+.notifybar,
+.footer-inner{
+  /* iguala visualmente el borde al del contenido */
+  padding-inline: clamp(16px, calc((100% - var(--content-max)) / 2), 24px);
+}
 
 
 
