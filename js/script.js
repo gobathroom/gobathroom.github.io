@@ -1,13 +1,17 @@
 // Helpers
 const $ = (s, d=document) => d.querySelector(s);
 
-// Estado del sidebar
+// Estado del sidebar (soporta varios toggles: el del sidebar y el fallback móvil)
 const body = document.body;
-const burger = $('.hamburger');
-burger.addEventListener('click', () => {
-  const open = body.classList.toggle('sidebar-open');
-  burger.setAttribute('aria-expanded', String(open));
+const burgers = document.querySelectorAll('.hamburger');
+
+burgers.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const open = body.classList.toggle('sidebar-open');
+    burgers.forEach(b => b.setAttribute('aria-expanded', String(open)));
+  });
 });
+
 
 // Cierra sidebar al hacer click fuera (móvil)
 document.addEventListener('click', (e) => {
