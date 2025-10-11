@@ -35,7 +35,6 @@
   white-space: nowrap;
   transition: opacity .2s ease, width .2s ease, margin .2s ease;
 }
-
 body.sidebar-open .topbar .brand{
   opacity: 0;
   width: 0;
@@ -87,6 +86,7 @@ body{
   transition: width .2s ease;
   z-index: 45;
   padding-top: var(--header-h);
+  overflow: hidden; /* NUEVO: evita desbordes cuando está colapsada */
 }
 
 /* Cuando está expandido, el ancho crece como antes */
@@ -107,10 +107,59 @@ body.sidebar-open .sidebar{ width: var(--rail-expanded) }
 }
 
 .rail-head .brand.rail{ display:flex; align-items:center; gap:12px }
-.rail .brand-name{ font-weight:600; opacity:0; transition:opacity .2s }
+.rail .brand-name{
+  font-weight:600;
+  opacity:0;
+  /* NUEVO: que no ocupe espacio con el rail cerrado */
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: opacity .2s ease, width .2s ease;
+}
+body.sidebar-open .rail .brand-name{
+  opacity:1;
+  width: auto; /* NUEVO */
+}
 
-/* Muestra el nombre dentro del sidebar sólo cuando está abierto */
-body.sidebar-open .rail .brand-name{ opacity:1 }
+/* ====== (NUEVO) Estilos de los items del rail ====== */
+.rail-group, .rail-footer{ list-style:none; margin:0; padding:12px; }
+
+.rail-item{
+  /* reset de botón nativo (evita cajitas blancas) */
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  background-color: transparent;
+  border: 1px solid transparent;
+  font: inherit;
+
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 12px;
+  border-radius:12px;
+  color:var(--text);
+  cursor:pointer;
+}
+.rail-item:hover{ background:var(--panel-2); border-color:var(--border) }
+.rail-item .ico{ width:24px; text-align:center; flex:0 0 24px; }
+
+/* texto del item colapsado por defecto */
+.rail-item .txt{
+  opacity:0;
+  width:0;
+  overflow:hidden;
+  white-space:nowrap;
+  transition: opacity .2s ease, width .2s ease;
+}
+/* al abrir el sidebar, aparece el texto y recupera ancho */
+body.sidebar-open .rail-item .txt{
+  opacity:1;
+  width:auto;
+}
+
+.rail-item.ghost{ opacity:.85 }
 
 /* ===== Header fijo alineado al rail ===== */
 .topbar{
@@ -124,7 +173,7 @@ body.sidebar-open .rail .brand-name{ opacity:1 }
   background:var(--panel);
   border-bottom:1px solid var(--border);
   z-index: 1100;
-  /* >>> añadido para animar y evitar el salto */
+  /* >>> animación para evitar el salto */
   transition: left .2s ease;
   will-change: left;
 }
@@ -157,7 +206,7 @@ body.sidebar-open .topbar{ left: var(--rail-expanded) }
   padding: 8px var(--space-4);
   color:var(--muted);
   z-index: 1050;
-  /* >>> añadido para animar y evitar el salto */
+  /* >>> animación para evitar el salto */
   transition: left .2s ease;
   will-change: left;
 }
