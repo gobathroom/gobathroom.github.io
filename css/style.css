@@ -21,6 +21,19 @@
   --brand-2: #7ef0ff;
 }
 
+/* Botón del rail dentro del sidebar (ubicado arriba a la izquierda) */
+.rail-toggle{
+  margin: 12px 12px 0 12px; /* pegado al borde izquierdo, arriba */
+}
+
+/* El botón del header queda sólo para móvil */
+.mobile-only{ display: none; }
+@media (max-width: 768px){
+  .mobile-only{ display: grid; } /* visible en móvil */
+}
+
+
+
 /* esquemas de color */
 @media (prefers-color-scheme: light){
   :root[data-theme="system"]{
