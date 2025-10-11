@@ -81,10 +81,12 @@ body{
   font: 400 16px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans";
 }
 
-/* ===== Sidebar fijo a la izquierda, full height ===== */
+/* Sidebar ocupa desde arriba, pero reservamos una franja del header para el logo */
 .sidebar{
   position: fixed;
-  inset: 0 auto 0 0;
+  top: 0;               /* antes: top: calc(var(--header-h) + var(--notify-h)) */
+  bottom: 0;
+  left: 0;
   width: var(--rail-collapsed);
   background: var(--panel);
   border-right: 1px solid var(--border);
@@ -92,14 +94,33 @@ body{
   flex-direction: column;
   justify-content: space-between;
   transition: width .2s ease;
-  z-index: 1000;
+  z-index: 45;
+  padding-top: var(--header-h);  /* empuja el resto del menú bajo el header */
 }
+
+/* Cuando está expandido, el ancho crece como antes */
 body.sidebar-open .sidebar{ width: var(--rail-expanded) }
 
-.rail-header .brand.rail{ display:flex; align-items:center; gap:12px; padding:12px }
+/* La “cabecera” interna del sidebar ocupa exactamente la altura del header
+   y centra verticalmente el logo para que quede a la misma línea visual */
+.rail-header{
+  position: absolute;   /* se “pega” arriba del sidebar */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-inline: 12px; /* similar al topbar para que coincidan los márgenes */
+}
+
+/* Marca dentro del rail (ya la tienes) */
+.rail-header .brand.rail{ display:flex; align-items:center; gap:12px }
 .rail .brand-mark{ width:28px; height:28px }
 .rail .brand-name{ font-weight:600; opacity:0; transition:opacity .2s }
 body.sidebar-open .rail .brand-name{ opacity:1 }
+
 
 .rail-group, .rail-footer{ list-style:none; margin:0; padding:12px; }
 .rail-item{
