@@ -109,11 +109,14 @@ body.sidebar-open .sidebar{ width: var(--rail-expanded) }
 .rail-head .brand.rail{ display:flex; align-items:center; gap:12px }
 .rail .brand-mark{ width:28px; height:28px }
 .rail .brand-name{ font-weight:600; opacity:0; transition:opacity .2s }
+
+/* Muestra el nombre dentro del sidebar sólo cuando está abierto (estilo Freepik) */
 body.sidebar-open .rail .brand-name{ opacity:1 }
 
-/* Botón ☰ dentro del rail: a la derecha de la cabecera */
+/* Botón ☰ dentro del rail: inmediatamente a la derecha del nombre (no pegado al borde) */
 .rail-head .rail-toggle{
-  margin-left: auto;
+  /* Antes tenía margin-left:auto; eso lo empujaba al borde derecho.
+     Lo removemos para que quede justo a la derecha del nombre, como Freepik. */
 }
 
 /* Grupos/acciones del rail (sin cambios) */
