@@ -121,9 +121,8 @@ body.sidebar-open .rail .brand-name{
   width: auto;
 }
 
-/* ========= AJUSTES SOLICITADOS PARA EL BOTÓN "BARS" ========= */
+/* ========= BOTÓN "BARS" (apariencia base) ========= */
 .rail-head .rail-toggle{
-  /* sin borde y mismo look que los items */
   border: 0;
   background: transparent;
   width: 40px;
@@ -132,16 +131,11 @@ body.sidebar-open .rail .brand-name{
   place-items: center;
   border-radius: 12px;
   transition: background .15s ease;
-  margin-left: 0;            /* junto al nombre cuando está cerrado */
 }
 .rail-head .rail-toggle:hover{
   background: var(--panel-2); /* mismo hover que los items */
 }
-/* mover SOLO el botón bars al extremo derecho cuando el sidebar está abierto */
-body.sidebar-open .rail-head .rail-toggle{
-  margin-left: auto;
-}
-/* ============================================================ */
+/* ================================================== */
 
 /* ====== Estilos de los items del rail ====== */
 .rail-group, .rail-footer{ list-style:none; margin:0; padding:12px; }
@@ -158,32 +152,25 @@ body.sidebar-open .rail-head .rail-toggle{
   min-height: 40px;
   display:flex;
   align-items:center;
-  justify-content: center;   /* <- (1) centrado por defecto (sidebar cerrado) */
+  justify-content: center;   /* centrado por defecto (sidebar cerrado) */
   gap:12px;
   padding:10px 12px;
   border-radius:12px;
   color:var(--text);
   cursor:pointer;
 
-  transition: background .15s ease; /* <- (3) transición suave del fondo */
+  transition: background .15s ease;
 }
-/* al abrir el sidebar, los items se alinean a la izquierda */
-body.sidebar-open .rail-item{ justify-content:flex-start; }
+body.sidebar-open .rail-item{ justify-content:flex-start; }  /* al abrir, izquierda */
+.rail-item:hover{ background: var(--panel-2); }              /* hover */
+.rail-item.is-active{ background: var(--panel-2); }          /* activo persistente */
 
-/* (3) fondo SOLO en hover */
-.rail-item:hover{ background: var(--panel-2); }
-
-/* (4) fondo persistente si el item está activo (página actual) */
-.rail-item.is-active{ background: var(--panel-2); }
-
-/* ícono */
 .rail-item .ico{
   width:24px;
   text-align:center;
   flex:0 0 24px;
 }
 
-/* texto del item colapsado por defecto */
 .rail-item .txt{
   opacity:0;
   width:0;
@@ -191,7 +178,6 @@ body.sidebar-open .rail-item{ justify-content:flex-start; }
   white-space:nowrap;
   transition: opacity .2s ease, width .2s ease;
 }
-/* al abrir el sidebar, aparece el texto y recupera ancho */
 body.sidebar-open .rail-item .txt{
   opacity:1;
   width:auto;
@@ -211,17 +197,36 @@ body.sidebar-open .rail-item .txt{
   background:var(--panel);
   border-bottom:1px solid var(--border);
   z-index: 1100;
-  /* animación para evitar el salto */
   transition: left .2s ease;
   will-change: left;
 }
 body.sidebar-open .topbar{ left: var(--rail-expanded) }
 
+/* Icon buttons (GENÉRICO) */
 .icon-btn{
   display:grid; place-items:center; width:40px; height:40px;
   border:1px solid var(--border); background:transparent; color:var(--text);
   border-radius:10px; cursor:pointer;
 }
+
+/* >>> OVERRIDE ESPECÍFICO para el botón bars (después de .icon-btn para ganar especificidad) */
+.rail-head .rail-toggle{ border:0; }                               /* sin borde */
+.rail-head .rail-toggle:focus-visible{ outline:2px solid var(--brand); outline-offset:2px; }
+
+/* Reordenación y empuje sólo cuando el sidebar está ABIERTO:
+   - La marca queda a la izquierda y ocupa el espacio
+   - El botón bars se va a la derecha */
+.rail-head .rail       { order: 2; }   /* cerrado: primero bars, luego marca (nombre colapsado) */
+.rail-head .rail-toggle{ order: 1; }
+
+body.sidebar-open .rail-head .rail{
+  order: 1;
+  margin-right: auto;       /* empuja lo que viene (bars) al extremo derecho */
+}
+body.sidebar-open .rail-head .rail-toggle{
+  order: 3;                  /* queda el último a la derecha */
+}
+
 .brand{ display:flex; align-items:center; gap:10px; color:var(--text); text-decoration:none; }
 .brand .brand-name{ font-weight:600 }
 
@@ -244,7 +249,6 @@ body.sidebar-open .topbar{ left: var(--rail-expanded) }
   padding: 8px var(--space-4);
   color:var(--muted);
   z-index: 1050;
-  /* animación para evitar el salto */
   transition: left .2s ease;
   will-change: left;
 }
