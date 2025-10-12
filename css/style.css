@@ -90,7 +90,7 @@ body.sidebar-open .sidebar{ width: var(--rail-expanded) }
   height: var(--header-h);
   display: grid;
   grid-template-columns: var(--rail-collapsed) 1fr;   /* cerrado */
-  align-items: center;                                /* centra vertical SIEMPRE */
+  align-items: start;                                  /* ⬅ ancla arriba */
   gap: 12px;
   padding: var(--rail-gutter) var(--rail-gutter) var(--rail-gutter) 0;  /* 12px arriba/abajo y derecha */
   z-index: 1;
@@ -100,14 +100,16 @@ body.sidebar-open .rail-head{
   grid-template-columns: var(--rail-collapsed) 1fr var(--rail-collapsed);
 }
 
-/* Marca dentro del rail (misma fila del botón, misma altura e inset izquierdo) */
+/* Marca (misma fila/altura que el botón, mismo inset izquierdo) */
 .rail-head .brand.rail{
   grid-column: 2;
+  align-self: start;                 /* ⬅ alinea con el borde superior del área útil */
   display:flex;
-  align-items:center;                 /* centra verticalmente el texto */
-  height: var(--rail-btn);            /* misma altura que el botón (40px) */
-  padding-left: var(--rail-gutter);   /* mismo inset izquierdo (12px) */
-  justify-self: start;                /* pega al borde izquierdo de su celda */
+  align-items:center;
+  height: var(--rail-btn);           /* 40px */
+  line-height: var(--rail-btn);      /* baseline perfecto */
+  padding-left: var(--rail-gutter);  /* 12px desde la izquierda */
+  justify-self: start;
   gap:12px;
 }
 .rail .brand-name{
@@ -129,15 +131,16 @@ body.sidebar-open .rail .brand-name{ opacity:1; width:auto }
   margin:0;
   border-radius:12px;
   transition: background .15s ease, transform .2s ease;
-  grid-column: 1;               /* cerrado: columna fija de 64px */
-  justify-self: center;         /* centrado horizontal dentro de su celda */
+  grid-column: 1;               
+  justify-self: center;
+  align-self: start;              /* ⬅ igual que la marca */
 }
 .rail-head .rail-toggle:hover{ background:var(--panel-2) }
 .rail-head .rail-toggle:focus-visible{ outline:2px solid var(--brand); outline-offset:2px }
-/* ABIERTO: sigue centrado dentro de una celda de 64px a la derecha */
 body.sidebar-open .rail-head .rail-toggle{
   grid-column: 3;
-  justify-self: center;         /* mantiene el mismo inset/gutter */
+  justify-self: center;
+  align-self: start;
 }
 
 /* ===== Grupos de items ===== */
