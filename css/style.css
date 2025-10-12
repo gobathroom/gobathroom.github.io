@@ -247,7 +247,7 @@ body.sidebar-open .topbar{ left: var(--rail-expanded) }
   border-radius: var(--radius);
 }
 .topbar .topbar-brand .brand-icon{
-  font-size: 18px;                /* un poco más chico que en el sidebar */
+  font-size: 36px;                /* un poco más chico que en el sidebar */
   line-height: 1;
 }
 .topbar .topbar-brand .brand-name{
