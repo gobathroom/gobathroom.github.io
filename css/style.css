@@ -118,6 +118,55 @@ body.sidebar-open .rail-head .rail-toggle{
   justify-self: center;
 }
 
+
+body.sidebar-open .rail-head .rail-toggle{
+  grid-column: 3;
+  justify-self: center;
+}
+
+body.sidebar-open .rail-head .rail-toggle{
+  grid-column: 3;
+  justify-self: center;
+}
+
+/* ===== Brand dentro del sidebar (Go Bathroom) ===== */
+.sidebar .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: var(--space-3);
+  height: 56px;
+  text-decoration: none;
+  color: var(--text);
+  border-radius: var(--radius);
+  grid-column: 2; /* ocupa la columna central cuando sidebar está abierto */
+}
+
+.sidebar .brand-icon {
+  font-size: 20px;
+  line-height: 1;
+  justify-self: center;
+}
+
+/* Texto del nombre (oculto por defecto) */
+.sidebar .brand-name {
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 0;
+  width: 0;
+  transform: translateX(-4px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+/* Mostrar nombre al abrir el sidebar */
+body.sidebar-open .sidebar .brand-name {
+  opacity: 1;
+  width: auto;
+  transform: none;
+}
+
+
 /* ===== Grupos de items ===== */
 .rail-group, .rail-footer{ list-style:none; margin:0; padding:12px 0 }
 
