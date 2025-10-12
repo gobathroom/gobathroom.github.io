@@ -88,12 +88,12 @@ body.sidebar-open .sidebar{ width: var(--rail-expanded) }
   grid-template-columns: var(--rail-collapsed) 1fr;   /* cerrado */
   align-items: center;                                /* centra VERTICAL siempre */
   gap: 12px;
-  padding-inline: 0;
+  padding: 0 12px 0 0;                                /* inset solo a la derecha */
   z-index: 1;
 }
 /* al abrir añadimos una 3ª columna fija para el botón: evita solapes y saltos */
 body.sidebar-open .rail-head{
-  grid-template-columns: var(--rail-collapsed) 1fr 40px;
+  grid-template-columns: var(--rail-collapsed) 1fr auto;
 }
 
 /* Marca dentro del rail (siempre en la columna central) */
@@ -115,7 +115,9 @@ body.sidebar-open .rail .brand-name{ opacity:1; width:auto }
 .rail-head .rail-toggle{
   border:0; background:transparent;
   width:40px; height:40px;
-  display:grid; place-items:center;
+  display:flex; align-items:center; justify-content:center;  /* centra el glifo */
+  line-height:0;                                             /* evita salto vertical */
+  margin:0;
   border-radius:12px;
   transition: background .15s ease, transform .2s ease;
   grid-column: 1;               /* cerrado: columna fija de 64px */
@@ -123,10 +125,10 @@ body.sidebar-open .rail .brand-name{ opacity:1; width:auto }
 }
 .rail-head .rail-toggle:hover{ background:var(--panel-2) }
 .rail-head .rail-toggle:focus-visible{ outline:2px solid var(--brand); outline-offset:2px }
-/* abierto: pasa a la 3ª columna pero sigue centrado verticalmente */
+/* abierto: pasa a la 3ª columna y se alinea al borde derecho (con el inset) */
 body.sidebar-open .rail-head .rail-toggle{
   grid-column: 3;
-  justify-self: center;
+  justify-self: end;
 }
 
 /* ===== Grupos de items ===== */
