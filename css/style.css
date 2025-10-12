@@ -120,7 +120,7 @@ body.sidebar-open .rail-head .rail-toggle{
 
 /* ===== Brand dentro del sidebar (alineado a la columna de iconos) ===== */
 .sidebar .rail-head .brand{
-  display: grid;
+  display: none;
   grid-template-columns: var(--rail-collapsed) 1fr; /* [icono|texto] */
   align-items: center;
   grid-column: 1 / 3;          /* ocupa 1-2; deja 3 para el botón ☰ */
@@ -154,6 +154,7 @@ body.sidebar-open .sidebar .rail-head .brand-name{
   opacity: 1;
   width: auto;
   transform: none;
+  display: grid;
 }
 
 /* ===== Grupos de items ===== */
