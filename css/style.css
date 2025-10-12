@@ -88,29 +88,41 @@ body.sidebar-open .sidebar{ width: var(--rail-expanded) }
   position: absolute;
   top: 0; left: 0; right: 0;
   height: var(--header-h);
+
+  /* grid de 2/3 columnas según estado */
   display: grid;
   grid-template-columns: var(--rail-collapsed) 1fr;   /* cerrado */
-  align-items: start;                                  /* ⬅ ancla arriba */
   gap: 12px;
+
+  /* ¡clave! usamos padding simétrico y anclamos ARRIBA */
   padding: var(--rail-gutter) var(--rail-gutter) var(--rail-gutter) 0;  /* 12px arriba/abajo y derecha */
+  align-items: start;    /* ancla todo al borde superior del área útil (40px) */
+
   z-index: 1;
 }
-/* ABIERTO: 3ª columna EXACTA = 64px → botón centrado y mismo gutter */
 body.sidebar-open .rail-head{
   grid-template-columns: var(--rail-collapsed) 1fr var(--rail-collapsed);
 }
 
-/* Marca (misma fila/altura que el botón, mismo inset izquierdo) */
+/* Marca (misma fila e insets que el botón) */
 .rail-head .brand.rail{
   grid-column: 2;
-  align-self: start;                 /* ⬅ alinea con el borde superior del área útil */
-  display:flex;
-  align-items:center;
-  height: var(--rail-btn);           /* 40px */
-  line-height: var(--rail-btn);      /* baseline perfecto */
-  padding-left: var(--rail-gutter);  /* 12px desde la izquierda */
   justify-self: start;
-  gap:12px;
+  align-self: start;                 /* anclado arriba */
+  display: flex;
+
+  /* la caja de la marca ocupa exactamente el “cuadrado” de 40px */
+  height: var(--rail-btn);
+  line-height: var(--rail-btn);
+
+  /* mismo inset desde la izquierda que el botón tiene en su columna */
+  padding-left: var(--rail-gutter);
+
+  gap: 12px;
+
+  /* micro-ajuste óptico para que el texto quede a la misma altura visual
+     que el glifo del botón; si lo ves perfecto, ponlo en 0 */
+  transform: translateY(-2px);
 }
 .rail .brand-name{
   font-weight:600;
@@ -133,7 +145,7 @@ body.sidebar-open .rail .brand-name{ opacity:1; width:auto }
   transition: background .15s ease, transform .2s ease;
   grid-column: 1;               
   justify-self: center;
-  align-self: start;              /* ⬅ igual que la marca */
+  align-self: start;              /* anclado arriba */
 }
 .rail-head .rail-toggle:hover{ background:var(--panel-2) }
 .rail-head .rail-toggle:focus-visible{ outline:2px solid var(--brand); outline-offset:2px }
@@ -155,18 +167,18 @@ body.sidebar-open .rail-head .rail-toggle{
   grid-template-columns: var(--rail-collapsed) 0fr;  /* texto colapsado */
   align-items:center;
   gap:12px;
-  padding:6px 8px 6px 0;         /* SIN padding izquierdo → alinea con bars */
+  padding:6px 8px 6px 0;
   border-radius:12px;
   color:var(--text); cursor:pointer;
   transition: background .15s ease, grid-template-columns .2s ease;
 }
 body.sidebar-open .rail-item{
-  grid-template-columns: var(--rail-collapsed) 1fr;  /* aparece el texto */
+  grid-template-columns: var(--rail-collapsed) 1fr;
 }
 .rail-item:hover{ background:var(--panel-2) }
 .rail-item.is-active{ background:var(--panel-2) }
 
-/* Icono SIEMPRE centrado en la 1ª columna (no se mueve nunca) */
+/* Icono */
 .rail-item .ico{
   justify-self:center;
   width:24px; text-align:center; flex:0 0 24px;
