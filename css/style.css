@@ -92,18 +92,23 @@ body.sidebar-open .sidebar{ width: var(--rail-expanded) }
   grid-template-columns: var(--rail-collapsed) 1fr;   /* cerrado */
   align-items: center;                                /* centra vertical SIEMPRE */
   gap: 12px;
-  padding: var(--rail-gutter) var(--rail-gutter) var(--rail-gutter) 0;  /* 👈 12px arriba/abajo y derecha */
+  padding: var(--rail-gutter) var(--rail-gutter) var(--rail-gutter) 0;  /* 12px arriba/abajo y derecha */
   z-index: 1;
 }
-/* ABIERTO: 3ª columna EXACTA = 64px → el botón queda centrado dentro y con el mismo gutter */
+/* ABIERTO: 3ª columna EXACTA = 64px → botón centrado y mismo gutter */
 body.sidebar-open .rail-head{
   grid-template-columns: var(--rail-collapsed) 1fr var(--rail-collapsed);
 }
 
-/* Marca dentro del rail (siempre en la columna central) */
+/* Marca dentro del rail (misma fila del botón, misma altura e inset izquierdo) */
 .rail-head .brand.rail{
   grid-column: 2;
-  display:flex; align-items:center; gap:12px;
+  display:flex;
+  align-items:center;                 /* centra verticalmente el texto */
+  height: var(--rail-btn);            /* misma altura que el botón (40px) */
+  padding-left: var(--rail-gutter);   /* mismo inset izquierdo (12px) */
+  justify-self: start;                /* pega al borde izquierdo de su celda */
+  gap:12px;
 }
 .rail .brand-name{
   font-weight:600;
