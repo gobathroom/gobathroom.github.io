@@ -21,34 +21,25 @@
   --brand-2: #7ef0ff;
 }
 
-/* Aplica el mismo marco lateral que el contenido */
+/* Marco lateral igual al contenido */
 .topbar,
 .notifybar,
 .footer-inner{
-  /* iguala visualmente el borde al del contenido */
   padding-inline: clamp(16px, calc((100% - var(--content-max)) / 2), 24px);
 }
 
-/* Marca en topbar: visible por defecto, oculta si el sidebar está abierto */
+/* Marca topbar */
 .topbar .brand{
   flex: 0 1 auto;
   white-space: nowrap;
   transition: opacity .2s ease, width .2s ease, margin .2s ease;
 }
 body.sidebar-open .topbar .brand{
-  opacity: 0;
-  width: 0;
-  margin: 0;
-  pointer-events: none;
+  opacity: 0; width: 0; margin: 0; pointer-events: none;
 }
+body.sidebar-open .topbar .top-actions .divider{ opacity:0; width:0 }
 
-/* (opcional) oculta también el divider cuando el logo de topbar no está */
-body.sidebar-open .topbar .top-actions .divider{
-  opacity: 0;
-  width: 0;
-}
-
-/* esquemas de color */
+/* Esquemas de color */
 @media (prefers-color-scheme: light){
   :root[data-theme="system"]{
     --bg:#f5f7fb; --panel:#ffffff; --panel-2:#f1f4fa; --text:#111827; --muted:#55627a; --border:rgba(17,24,39,.1);
@@ -71,7 +62,7 @@ body{
   font: 400 16px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans";
 }
 
-/* Sidebar ocupa desde arriba, pero reservamos una franja del header para el logo */
+/* ===== Sidebar ===== */
 .sidebar{
   position: fixed;
   top: 0;
@@ -86,102 +77,98 @@ body{
   transition: width .2s ease;
   z-index: 45;
   padding-top: var(--header-h);
-  overflow: hidden; /* evita desbordes cuando está colapsada */
+  overflow: hidden;
 }
-
-/* Cuando está expandido, el ancho crece como antes */
 body.sidebar-open .sidebar{ width: var(--rail-expanded) }
 
-.rail-head { 
-  justify-content: flex-start;
+/* ===== Cabecera del rail =====
+   Usamos GRID con una 1ª columna FIJA = ancho colapsado.
+   Así el icono/nombre se alinean y el botón bars puede moverse. */
+.rail-head{
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   height: var(--header-h);
-  display: flex;
+  display: grid;
+  grid-template-columns: var(--rail-collapsed) 1fr;
   align-items: center;
-  gap: 10px;
-  padding-inline: 12px;
+  gap: 12px;
+  padding-inline: 0;   /* sin padding para que la 1ª columna sea exacta */
   z-index: 1;
 }
 
+/* Marca dentro del rail */
 .rail-head .brand.rail{ display:flex; align-items:center; gap:12px }
 .rail .brand-name{
   font-weight:600;
-  opacity:0;
-  /* que no ocupe espacio con el rail cerrado */
-  width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  transition: opacity .2s ease, width .2s ease;
-}
-body.sidebar-open .rail .brand-name{
-  opacity:1;
-  width: auto;
-}
-
-/* ========= BOTÓN "BARS" (apariencia base) ========= */
-.rail-head .rail-toggle{
-  border: 0;
-  background: transparent;
-  width: 40px;
-  height: 40px;
-  display: grid;
-  place-items: center;
-  border-radius: 12px;
-  transition: background .15s ease;
-}
-.rail-head .rail-toggle:hover{
-  background: var(--panel-2); /* mismo hover que los items */
-}
-/* ================================================== */
-
-/* ====== Estilos de los items del rail ====== */
-.rail-group, .rail-footer{ list-style:none; margin:0; padding:12px; }
-
-.rail-item{
-  /* reset de botón nativo */
-  -webkit-appearance: none;
-  appearance: none;
-  background: transparent;
-  border: 0;                 /* <- SIN contorno */
-  font: inherit;
-
-  width:100%;
-  min-height: 40px;
-  display:flex;
-  align-items:center;
-  justify-content: center;   /* centrado por defecto (sidebar cerrado) */
-  gap:12px;
-  padding:10px 12px;
-  border-radius:12px;
-  color:var(--text);
-  cursor:pointer;
-
-  transition: background .15s ease;
-}
-body.sidebar-open .rail-item{ justify-content:flex-start; }  /* al abrir, izquierda */
-.rail-item:hover{ background: var(--panel-2); }              /* hover */
-.rail-item.is-active{ background: var(--panel-2); }          /* activo persistente */
-
-.rail-item .ico{
-  width:24px;
-  text-align:center;
-  flex:0 0 24px;
-}
-
-.rail-item .txt{
   opacity:0;
   width:0;
   overflow:hidden;
   white-space:nowrap;
   transition: opacity .2s ease, width .2s ease;
 }
-body.sidebar-open .rail-item .txt{
-  opacity:1;
-  width:auto;
+body.sidebar-open .rail .brand-name{ opacity:1; width:auto }
+
+/* Botón "bars": centrado en columna 1 cuando está cerrado;
+   al abrir, pasa a la columna 2 y se alinea a la derecha */
+.rail-head .rail-toggle{
+  border:0; background:transparent;
+  width:40px; height:40px;
+  display:grid; place-items:center;
+  border-radius:12px;
+  transition: background .15s ease, transform .2s ease;
+  grid-column: 1;               /* cerrado: columna fija de 64px */
+  justify-self: center;         /* centrado horizontal */
 }
+.rail-head .rail-toggle:hover{ background:var(--panel-2) }
+body.sidebar-open .rail-head .rail-toggle{
+  grid-column: 2;               /* abierto: va a la derecha */
+  justify-self: end;
+}
+.rail-head .rail-toggle:focus-visible{
+  outline:2px solid var(--brand); outline-offset:2px;
+}
+
+/* ===== Grupos de items =====
+   Sin padding horizontal para que la columna fija (64px) sea la guía. */
+.rail-group, .rail-footer{
+  list-style:none; margin:0;
+  padding:12px 0;
+}
+
+/* ===== Items del rail =====
+   GRID con primera columna fija = 64px (icono centrado SIEMPRE).
+   La segunda columna se expande solo cuando el sidebar está abierto. */
+.rail-item{
+  -webkit-appearance:none; appearance:none;
+  background:transparent; border:0; font:inherit;
+  width:100%; min-height:40px;
+  display:grid;
+  grid-template-columns: var(--rail-collapsed) 0fr; /* texto colapsado */
+  align-items:center;
+  gap:12px;
+  padding:6px 8px;
+  border-radius:12px;
+  color:var(--text); cursor:pointer;
+  transition: background .15s ease, grid-template-columns .2s ease;
+}
+body.sidebar-open .rail-item{
+  grid-template-columns: var(--rail-collapsed) 1fr;  /* aparece el texto */
+}
+.rail-item:hover{ background:var(--panel-2) }
+.rail-item.is-active{ background:var(--panel-2) }
+
+/* Icono SIEMPRE centrado en la 1ª columna (no se mueve nunca) */
+.rail-item .ico{
+  justify-self:center;           /* centro horizontal */
+  width:24px; text-align:center; flex:0 0 24px;
+}
+
+/* Texto: aparece al abrir (opacidad por suavidad) */
+.rail-item .txt{
+  opacity:0; white-space:nowrap; overflow:hidden;
+  transition: opacity .2s ease;
+}
+body.sidebar-open .rail-item .txt{ opacity:1 }
 
 .rail-item.ghost{ opacity:.85 }
 
@@ -202,29 +189,11 @@ body.sidebar-open .rail-item .txt{
 }
 body.sidebar-open .topbar{ left: var(--rail-expanded) }
 
-/* Icon buttons (GENÉRICO) */
+/* Botones genéricos (no afecta a bars gracias a reglas específicas) */
 .icon-btn{
   display:grid; place-items:center; width:40px; height:40px;
   border:1px solid var(--border); background:transparent; color:var(--text);
   border-radius:10px; cursor:pointer;
-}
-
-/* >>> OVERRIDE ESPECÍFICO para el botón bars (después de .icon-btn para ganar especificidad) */
-.rail-head .rail-toggle{ border:0; }                               /* sin borde */
-.rail-head .rail-toggle:focus-visible{ outline:2px solid var(--brand); outline-offset:2px; }
-
-/* Reordenación y empuje sólo cuando el sidebar está ABIERTO:
-   - La marca queda a la izquierda y ocupa el espacio
-   - El botón bars se va a la derecha */
-.rail-head .rail       { order: 2; }   /* cerrado: primero bars, luego marca (nombre colapsado) */
-.rail-head .rail-toggle{ order: 1; }
-
-body.sidebar-open .rail-head .rail{
-  order: 1;
-  margin-right: auto;       /* empuja lo que viene (bars) al extremo derecho */
-}
-body.sidebar-open .rail-head .rail-toggle{
-  order: 3;                  /* queda el último a la derecha */
 }
 
 .brand{ display:flex; align-items:center; gap:10px; color:var(--text); text-decoration:none; }
@@ -237,7 +206,7 @@ body.sidebar-open .rail-head .rail-toggle{
   padding:8px 12px; border-radius:10px;
 }
 
-/* ===== Notification bar fija bajo el header, alineada al rail ===== */
+/* ===== Notify bar ===== */
 .notifybar{
   position: fixed;
   top: var(--header-h);
@@ -255,7 +224,7 @@ body.sidebar-open .rail-head .rail-toggle{
 body.sidebar-open .notifybar{ left: var(--rail-expanded) }
 .notifybar a{ color:var(--brand); text-decoration:none }
 
-/* ===== Contenedor principal empujado por sidebar + header + notify ===== */
+/* ===== Page ===== */
 .page{
   min-height:100svh;
   display:flex; flex-direction:column;
@@ -294,12 +263,8 @@ body.sidebar-open .page{ margin-left: var(--rail-expanded) }
 .placeholder{ height:160px; display:grid; place-items:center; color:var(--muted); border:1px dashed var(--border); border-radius:12px; }
 .placeholder.tall{ height:320px }
 
-/* ===== Footer al final (no fixed) ===== */
-.site-footer{
-  margin-top:auto;
-  background:var(--panel);
-  border-top:1px solid var(--border);
-}
+/* ===== Footer ===== */
+.site-footer{ margin-top:auto; background:var(--panel); border-top:1px solid var(--border) }
 .footer-inner{
   width:min(100% - 32px, var(--content-max));
   margin:0 auto; height:56px; display:flex; align-items:center; gap:12px;
@@ -318,11 +283,10 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 
 /* ===== Responsive ===== */
 @media (max-width: 1024px){
-  /* (opcional) ajustes tablet */
+  /* opcional */
 }
 
 @media (max-width: 768px){
-  /* Rail como off-canvas (overlay); no empuja layout */
   .sidebar{
     transform: translateX(-100%);
     width: var(--rail-expanded);
@@ -330,23 +294,17 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   }
   body.sidebar-open .sidebar{ transform: translateX(0) }
 
-  /* En móvil, header/notify ocupan ancho completo */
-  .topbar,
-  .notifybar,
-  .page,
-  .site-footer{
-    left: 0 !important;
-    margin-left: 0 !important;
+  .topbar, .notifybar, .page, .site-footer{
+    left: 0 !important; margin-left: 0 !important;
   }
 
   .page{ padding-top: calc(var(--header-h) + var(--notify-h)); }
-
   .topbar{ padding-inline:12px }
   .brand .brand-name{ display:none }
 }
 
-/* Utilidad: oculto por defecto (desktop), visible en mobile */
+/* Utilidad: solo móvil */
 .only-mobile { display: none; }
 @media (max-width: 768px){
-  .only-mobile { display: grid; }      /* se alinea perfecto con .icon-btn */
+  .only-mobile { display: grid; }
 }
