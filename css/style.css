@@ -236,6 +236,7 @@ body.sidebar-open .topbar{ left: var(--rail-expanded) }
 .topbar .topbar-brand .brand-name{
   font-weight: 700;               /* mismo peso que en el sidebar */
   letter-spacing: .2px;
+  margin-right: 10px,
 }
 /* Con sidebar ABIERTO, oculta el brand de la topbar */
 body.sidebar-open .topbar .topbar-brand{
