@@ -163,28 +163,36 @@ function closeThemePopover(){
 
 function positionThemePopover(){
   if (!themeBtn) return;
+
   const r = themeBtn.getBoundingClientRect();
   const isOpen = body.classList.contains('sidebar-open');
   const gap = 8;
-  let top = r.bottom + gap;
-  let left;
+
+  // medidas del popover (ya visible)
+  const popW = themePop.offsetWidth;
+  const popH = themePop.offsetHeight;
+
+  let left, top;
 
   if (isOpen){
-    // Dentro del rail cuando está abierto
-    left = r.left + Math.max(0, (r.width - themePop.offsetWidth)/2);
-    const maxLeft = window.innerWidth - themePop.offsetWidth - 8;
-    left = Math.min(left, maxLeft);
+    // Sidebar ABIERTO: popover arriba y centrado respecto al botón
+    left = r.left + (r.width - popW) / 2;
+    top  = r.top - gap - popH;          // arriba del icono
+    if (top < 8) top = r.bottom + gap;  // fallback: debajo si no hay espacio
   } else {
-    // A la derecha del rail cuando está cerrado
+    // Sidebar CERRADO: popover a la DERECHA, centrado verticalmente
     left = r.right + gap;
-    if (left + themePop.offsetWidth > window.innerWidth - 8){
-      left = Math.max(8, r.left);
-      top = r.bottom + gap;
-    }
+    top  = r.top + (r.height - popH) / 2;
   }
-  themePop.style.top = `${Math.round(top)}px`;
+
+  // Limites de viewport
+  left = Math.max(8, Math.min(left, window.innerWidth - popW - 8));
+  top  = Math.max(8, Math.min(top, window.innerHeight - popH - 8));
+
   themePop.style.left = `${Math.round(left)}px`;
+  themePop.style.top  = `${Math.round(top)}px`;
 }
+
 
 function applyTheme(val){
   const mode = (val || 'system').toLowerCase();
