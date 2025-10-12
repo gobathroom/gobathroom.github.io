@@ -223,7 +223,7 @@ body.sidebar-open .topbar{ left: var(--rail-expanded) }
   grid-auto-flow: column;         /* [icono | texto] */
   grid-auto-columns: max-content;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   height: 56px;
   text-decoration: none;
   color: var(--text);
@@ -236,7 +236,7 @@ body.sidebar-open .topbar{ left: var(--rail-expanded) }
 .topbar .topbar-brand .brand-name{
   font-weight: 700;               /* mismo peso que en el sidebar */
   letter-spacing: .2px;
-  margin-left: 150px,
+  margin-left: 10px,
 }
 /* Con sidebar ABIERTO, oculta el brand de la topbar */
 body.sidebar-open .topbar .topbar-brand{
