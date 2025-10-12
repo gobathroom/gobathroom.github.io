@@ -104,7 +104,9 @@ body.sidebar-open .rail-head{
   grid-template-columns: var(--rail-collapsed) 1fr var(--rail-collapsed);
 }
 
-
+.sidebar > .rail-head + .rail-group{
+  margin-top: var(--header-h);
+}
 
 
 
@@ -334,6 +336,4 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 }
 
 
-.sidebar > .rail-head + .rail-group{
-  margin-top: var(--header-h);
-}
+
