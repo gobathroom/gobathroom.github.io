@@ -185,30 +185,37 @@ body.sidebar-open .sidebar .rail-head .brand-name{
   padding:6px 8px 6px 0;
   border-radius:12px;
   color:var(--text); cursor:pointer;
-  transition: background .15s ease, grid-template-columns .2s ease;
+  transition: grid-template-columns .2s ease; /* el fondo ya no se anima aquí */
+  position: relative;           /* para el pseudo-fondo */
+  overflow: visible;
 }
 body.sidebar-open .rail-item{
   grid-template-columns: var(--rail-collapsed) 1fr;
+  gap: 4px;                     /* separa un poco icono ↔ texto (mejor que 0) */
+  text-align: left;             /* el botón deja de centrar el contenido */
 }
 
-/* Ajuste de separación icono ↔ texto en el sidebar ABIERTO */
-body.sidebar-open .rail-item{
-  gap: 0px;                 /* <– reduce el espacio entre columnas */
-  text-align: left;   /* el botón deja de centrar el contenido */
+/* Fondo de hover con margen a ambos lados (no toca bordes) */
+.rail-item::before{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  left: var(--space-2);         /* margen izquierdo del fondo */
+  right: var(--space-2);        /* margen derecho del fondo */
+  border-radius:12px;
+  background: var(--panel-2);
+  opacity:0;
+  transition: opacity .15s ease;
+  pointer-events:none;          /* no bloquea clics */
+}
+.rail-item:hover::before,
+.rail-item.is-active::before{
+  opacity:1;
 }
 
-body.sidebar-open .rail-item .txt{
-  margin-left: 0px;   /* sin desplazamientos raros */
-  display: block;     
-  justify-self: start;
-  text-align: left;
-}
-
-
-
-
-.rail-item:hover{ background:var(--panel-2) }
-.rail-item.is-active{ background:var(--panel-2) }
+/* ya no pintamos el fondo directamente en el item */
+.rail-item:hover{ background: transparent }
+.rail-item.is-active{ background: transparent }
 
 /* Icono */
 .rail-item .ico{
@@ -221,9 +228,15 @@ body.sidebar-open .rail-item .txt{
   opacity:0; white-space:nowrap; overflow:hidden;
   transition: opacity .2s ease;
 }
-body.sidebar-open .rail-item .txt{ opacity:1 }
+body.sidebar-open .rail-item .txt{
+  opacity:1;
+  display:block;
+  justify-self:start;
+  text-align:left;
+}
 
 .rail-item.ghost{ opacity:.85 }
+
 
 /* ===== Header fijo alineado al rail ===== */
 .topbar{
