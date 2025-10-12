@@ -85,12 +85,30 @@
     </li>
   </ul>
 
-  <div class="rail-footer">
-    <button class="rail-item ghost" id="themeBtn" aria-haspopup="listbox">
-      <i class="fa-solid fa-circle-half-stroke ico" aria-hidden="true"></i>
-      <span class="txt">Theme: <b id="themeLabel">System</b></span>
+ <div class="rail-footer">
+  <!-- Botón disparador -->
+  <button class="rail-item ghost" id="themeBtn" aria-haspopup="listbox" aria-expanded="false">
+    <i class="fa-solid fa-circle-half-stroke ico" aria-hidden="true"></i>
+    <span class="txt">Theme: <b id="themeLabel">System</b></span>
+  </button>
+
+  <!-- Popover con opciones (se muestra/oculta por JS) -->
+  <div id="themePopover" class="theme-popover" role="listbox" aria-label="Select theme" hidden>
+    <button class="theme-opt" role="option" data-value="system" aria-selected="false">
+      <i class="fa-solid fa-laptop opt-ico" aria-hidden="true"></i>
+      <span>System</span>
+    </button>
+    <button class="theme-opt" role="option" data-value="light" aria-selected="false">
+      <i class="fa-solid fa-sun opt-ico" aria-hidden="true"></i>
+      <span>Light</span>
+    </button>
+    <button class="theme-opt" role="option" data-value="dark" aria-selected="false">
+      <i class="fa-solid fa-moon opt-ico" aria-hidden="true"></i>
+      <span>Dark</span>
     </button>
   </div>
+</div>
+
 </aside>
 
 
