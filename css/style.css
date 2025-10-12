@@ -75,7 +75,7 @@ body{
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   transition: width .2s ease;
   z-index: 45;
   padding-top: 0;
@@ -104,10 +104,7 @@ body.sidebar-open .rail-head{
   grid-template-columns: var(--rail-collapsed) 1fr var(--rail-collapsed);
 }
 
-/* Usa padding-top en el primer grupo */
-.sidebar > .rail-head + .rail-group{
-  padding-top: var(--header-h);
-}
+.sidebar > .rail-head + .rail-group{ margin-top: var(--header-h);
 
 
 
@@ -161,8 +158,6 @@ body.sidebar-open .rail-head .rail-toggle{
   justify-self: center;
   align-self: center;              /* ← mantiene alineación en abierto */
 }
-
-.rail-footer{ margin-top: auto; }
 
 
 /* ===== Grupos de items ===== */
