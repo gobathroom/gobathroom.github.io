@@ -1,20 +1,16 @@
 :root{ 
-  /* Medidas y capas */
   --header-h: 64px;
   --notify-h: 40px;
   --rail-collapsed: 64px;
   --rail-expanded: 280px;
   --content-max: 1440px;
 
-  /* Derivados para alineación precisa */
-  --rail-btn: 40px;                          /* tamaño del botón bars */
-  --rail-gutter: calc((var(--rail-collapsed) - var(--rail-btn)) / 2); /* 12px */
+  --rail-btn: 40px;
+  --rail-gutter: calc((var(--rail-collapsed) - var(--rail-btn)) / 2);
 
-  /* Espacios y radios */
   --space-1: 6px;  --space-2: 10px; --space-3: 16px; --space-4: 24px;
   --radius: 14px;
 
-  /* Colores (modo oscuro por defecto) */
   --bg: #0d1117;
   --panel: #161b22;
   --panel-2: #1c2230;
@@ -26,13 +22,11 @@
 }
 
 /* Marco lateral igual al contenido */
-.topbar,
-.notifybar,
-.footer-inner{
+.topbar, .notifybar, .footer-inner{
   padding-inline: clamp(16px, calc((100% - var(--content-max)) / 2), 24px);
 }
 
-/* Marca topbar */
+/* Marca topbar (se mantiene) */
 .topbar .brand{
   flex: 0 1 auto;
   white-space: nowrap;
@@ -41,7 +35,7 @@
 body.sidebar-open .topbar .brand{ opacity:0; width:0; margin:0; pointer-events:none }
 body.sidebar-open .topbar .top-actions .divider{ opacity:0; width:0 }
 
-/* Esquemas de color */
+/* Temas */
 @media (prefers-color-scheme: light){
   :root[data-theme="system"]{
     --bg:#f5f7fb; --panel:#ffffff; --panel-2:#f1f4fa; --text:#111827; --muted:#55627a; --border:rgba(17,24,39,.1);
@@ -54,7 +48,7 @@ body.sidebar-open .topbar .top-actions .divider{ opacity:0; width:0 }
   --bg:#0d1117; --panel:#161b22; --panel-2:#1c2230; --text:#dbe5ff; --muted:#9fb0d0; --border:rgba(255,255,255,.12);
 }
 
-/* Reset mínimo */
+/* Reset */
 *{ box-sizing:border-box }
 html,body{ height:100% }
 body{
@@ -67,15 +61,13 @@ body{
 /* ===== Sidebar ===== */
 .sidebar{
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
+  top: 0; bottom: 0; left: 0;
   width: var(--rail-collapsed);
   background: var(--panel);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;      /* antes space-between */
   transition: width .2s ease;
   z-index: 45;
   padding-top: 0;
@@ -83,90 +75,55 @@ body{
 }
 body.sidebar-open .sidebar{ width: var(--rail-expanded) }
 
-/* ===== Cabecera del rail ===== */
+/* ===== Cabecera del rail (solo botón ☰) ===== */
 .rail-head{
   position: absolute;
   top: 0; left: 0; right: 0;
   height: var(--header-h);
-
-  /* grid de 2/3 columnas según estado */
   display: grid;
-  grid-template-columns: var(--rail-collapsed) 1fr;   /* cerrado */
+  grid-template-columns: var(--rail-collapsed) 1fr; /* simetría al cerrar */
   gap: 12px;
-
-  /* padding simétrico; ahora centramos verticalmente */
-  padding: var(--rail-gutter) var(--rail-gutter) var(--rail-gutter) 0;  /* 12px arriba/abajo y derecha */
-  align-items: center;    /* ← centrado vertical como Freepik */
-
+  padding: var(--rail-gutter) var(--rail-gutter) var(--rail-gutter) 0;
+  align-items: center;
   z-index: 2;
 }
 body.sidebar-open .rail-head{
   grid-template-columns: var(--rail-collapsed) 1fr var(--rail-collapsed);
 }
 
-.sidebar > .rail-head + .rail-group{ margin-top: var(--header-h);}
-
-
-
-/* Marca (misma fila e insets que el botón) */
-.rail-head .brand.rail{
-  grid-column: 2;
-  justify-self: start;
-  align-self: center;                 /* ← alineado con el botón */
-  display: flex;
-  align-items: center;                /* ← centra el texto dentro de los 40px */
-
-  /* la caja de la marca ocupa exactamente el “cuadrado” de 40px */
-  height: var(--rail-btn);
-  line-height: 1;                     /* evita desplazamiento óptico */
-
-  /* mismo inset desde la izquierda que el botón tiene en su columna */
-  padding-left: var(--rail-gutter);
-
-  gap: 12px;
-
-  /* nudge eliminado para que coincida con el ícono */
-  transform: none;
+/* Reserva espacio bajo la barra para el grupo */
+.sidebar > .rail-head + .rail-group{
+  padding-top: var(--header-h);
 }
-.rail .brand-name{
-  font-weight:600;
-  opacity:0;
-  width:0;
-  overflow:hidden;
-  white-space:nowrap;
-  transition: opacity .2s ease, width .2s ease;
-}
-body.sidebar-open .rail .brand-name{ opacity:1; width:auto }
 
-/* Botón "bars" */
+/* Footer abajo sin space-between */
+.rail-footer{ margin-top: auto; }
+
+/* ===== Botón "bars" ===== */
 .rail-head .rail-toggle{
   border:0; background:transparent;
   width:var(--rail-btn); height:var(--rail-btn);
   display:flex; align-items:center; justify-content:center;
-  line-height:0;
-  margin:0;
+  line-height:0; margin:0;
   border-radius:12px;
   transition: background .15s ease, transform .2s ease;
   grid-column: 1;               
   justify-self: center;
-  align-self: center;              /* ← alineado con la marca */
+  align-self: center;
 }
 .rail-head .rail-toggle:hover{ background:var(--panel-2) }
 .rail-head .rail-toggle:focus-visible{ outline:2px solid var(--brand); outline-offset:2px }
 body.sidebar-open .rail-head .rail-toggle{
   grid-column: 3;
   justify-self: center;
-  align-self: center;              /* ← mantiene alineación en abierto */
 }
-
 
 /* ===== Grupos de items ===== */
 .rail-group, .rail-footer{ list-style:none; margin:0; padding:12px 0 }
 
 /* ===== Items del rail ===== */
 .rail-item{
-  -webkit-appearance:none; appearance:none;
-  background:transparent; border:0; font:inherit;
+  appearance:none; background:transparent; border:0; font:inherit;
   width:100%; min-height:40px;
   display:grid;
   grid-template-columns: var(--rail-collapsed) 0fr;  /* texto colapsado */
@@ -201,9 +158,7 @@ body.sidebar-open .rail-item .txt{ opacity:1 }
 /* ===== Header fijo alineado al rail ===== */
 .topbar{
   position: fixed;
-  top: 0;
-  left: var(--rail-collapsed);
-  right: 0;
+  top: 0; left: var(--rail-collapsed); right: 0;
   height: var(--header-h);
   display:flex; align-items:center; gap:var(--space-3);
   padding:0 var(--space-4);
@@ -215,13 +170,12 @@ body.sidebar-open .rail-item .txt{ opacity:1 }
 }
 body.sidebar-open .topbar{ left: var(--rail-expanded) }
 
-/* Botones genéricos */
+/* Genéricos */
 .icon-btn{
   display:grid; place-items:center; width:40px; height:40px;
   border:1px solid var(--border); background:transparent; color:var(--text);
   border-radius:10px; cursor:pointer;
 }
-
 .brand{ display:flex; align-items:center; gap:10px; color:var(--text); text-decoration:none; }
 .brand .brand-name{ font-weight:600 }
 
@@ -308,9 +262,7 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 .dialog-actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:14px }
 
 /* ===== Responsive ===== */
-@media (max-width: 1024px){
-  /* opcional */
-}
+@media (max-width: 1024px){ }
 @media (max-width: 768px){
   .sidebar{
     transform: translateX(-100%);
@@ -333,6 +285,3 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 @media (max-width: 768px){
   .only-mobile { display: grid }
 }
-
-
-
