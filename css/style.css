@@ -187,12 +187,18 @@ body.sidebar-open .rail-item{
 
 /* Ajuste de separación icono ↔ texto en el sidebar ABIERTO */
 body.sidebar-open .rail-item{
-  gap: 6px;                 /* <– reduce el espacio entre columnas */
+  gap: 4px;                 /* <– reduce el espacio entre columnas */
+  text-align: left;   /* el botón deja de centrar el contenido */
 }
 
 body.sidebar-open .rail-item .txt{
-  margin-left: -146.5px;        /* <– acerca el texto al icono */
+  margin-left: 0px;   /* sin desplazamientos raros */
+  display: block;     
+  justify-self: start;
+  text-align: left;
 }
+
+
 
 
 .rail-item:hover{ background:var(--panel-2) }
