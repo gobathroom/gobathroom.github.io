@@ -1,4 +1,4 @@
-:root{
+:root{ 
   /* Medidas y capas */
   --header-h: 64px;
   --notify-h: 40px;
@@ -86,7 +86,7 @@ body{
   transition: width .2s ease;
   z-index: 45;
   padding-top: var(--header-h);
-  overflow: hidden; /* NUEVO: evita desbordes cuando está colapsada */
+  overflow: hidden; /* evita desbordes cuando está colapsada */
 }
 
 /* Cuando está expandido, el ancho crece como antes */
@@ -110,7 +110,7 @@ body.sidebar-open .sidebar{ width: var(--rail-expanded) }
 .rail .brand-name{
   font-weight:600;
   opacity:0;
-  /* NUEVO: que no ocupe espacio con el rail cerrado */
+  /* que no ocupe espacio con el rail cerrado */
   width: 0;
   overflow: hidden;
   white-space: nowrap;
@@ -118,32 +118,48 @@ body.sidebar-open .sidebar{ width: var(--rail-expanded) }
 }
 body.sidebar-open .rail .brand-name{
   opacity:1;
-  width: auto; /* NUEVO */
+  width: auto;
 }
 
-/* ====== (NUEVO) Estilos de los items del rail ====== */
+/* ====== Estilos de los items del rail ====== */
 .rail-group, .rail-footer{ list-style:none; margin:0; padding:12px; }
 
 .rail-item{
-  /* reset de botón nativo (evita cajitas blancas) */
+  /* reset de botón nativo */
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
-  background-color: transparent;
-  border: 1px solid transparent;
+  border: 0;                 /* <- SIN contorno */
   font: inherit;
 
   width:100%;
+  min-height: 40px;
   display:flex;
   align-items:center;
+  justify-content: center;   /* <- (1) centrado por defecto (sidebar cerrado) */
   gap:12px;
   padding:10px 12px;
   border-radius:12px;
   color:var(--text);
   cursor:pointer;
+
+  transition: background .15s ease; /* <- (3) transición suave del fondo */
 }
-.rail-item:hover{ background:var(--panel-2); border-color:var(--border) }
-.rail-item .ico{ width:24px; text-align:center; flex:0 0 24px; }
+/* al abrir el sidebar, los items se alinean a la izquierda */
+body.sidebar-open .rail-item{ justify-content:flex-start; }
+
+/* (3) fondo SOLO en hover */
+.rail-item:hover{ background: var(--panel-2); }
+
+/* (4) fondo persistente si el item está activo (página actual) */
+.rail-item.is-active{ background: var(--panel-2); }
+
+/* ícono */
+.rail-item .ico{
+  width:24px;
+  text-align:center;
+  flex:0 0 24px;
+}
 
 /* texto del item colapsado por defecto */
 .rail-item .txt{
@@ -173,7 +189,7 @@ body.sidebar-open .rail-item .txt{
   background:var(--panel);
   border-bottom:1px solid var(--border);
   z-index: 1100;
-  /* >>> animación para evitar el salto */
+  /* animación para evitar el salto */
   transition: left .2s ease;
   will-change: left;
 }
@@ -206,7 +222,7 @@ body.sidebar-open .topbar{ left: var(--rail-expanded) }
   padding: 8px var(--space-4);
   color:var(--muted);
   z-index: 1050;
-  /* >>> animación para evitar el salto */
+  /* animación para evitar el salto */
   transition: left .2s ease;
   will-change: left;
 }
@@ -305,7 +321,6 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 
 /* Utilidad: oculto por defecto (desktop), visible en mobile */
 .only-mobile { display: none; }
-
 @media (max-width: 768px){
   .only-mobile { display: grid; }      /* se alinea perfecto con .icon-btn */
 }
