@@ -139,6 +139,7 @@ body.sidebar-open .sidebar .rail-head .brand{
   opacity: 1;
   width: auto;
   transform: none;
+  margin: 0 0 0 -6px;
 }
 
 /* Icono del brand centrado como los de la lista */
