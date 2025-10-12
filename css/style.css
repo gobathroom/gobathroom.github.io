@@ -161,7 +161,7 @@ body.sidebar-open .sidebar .rail-head .brand-name{
   opacity: 1;
   width: auto;
   transform: none;
-  margin-left: -10px;   /* <- este es el “pegadito” al icono */
+  margin-left: -10px;   /* “pegadito” al icono */
 }
 
 
@@ -216,6 +216,32 @@ body.sidebar-open .rail-item .txt{ opacity:1 }
   will-change: left;
 }
 body.sidebar-open .topbar{ left: var(--rail-expanded) }
+
+/* ===== Brand en TOPBAR (Go Bathroom) — visible con sidebar CERRADO ===== */
+.topbar .topbar-brand{
+  display: grid;
+  grid-auto-flow: column;         /* [icono | texto] */
+  grid-auto-columns: max-content;
+  align-items: center;
+  gap: 4px;
+  height: 56px;
+  text-decoration: none;
+  color: var(--text);
+  border-radius: var(--radius);
+}
+.topbar .topbar-brand .brand-icon{
+  font-size: 18px;                /* un poco más chico que en el sidebar */
+  line-height: 1;
+}
+.topbar .topbar-brand .brand-name{
+  font-weight: 700;               /* mismo peso que en el sidebar */
+  letter-spacing: .2px;
+  margin-left: -10px;             /* “pegadito” al icono */
+}
+/* Con sidebar ABIERTO, oculta el brand de la topbar */
+body.sidebar-open .topbar .topbar-brand{
+  display: none;
+}
 
 /* Genéricos */
 .icon-btn{
