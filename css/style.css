@@ -34,9 +34,7 @@
   white-space: nowrap;
   transition: opacity .2s ease, width .2s ease, margin .2s ease;
 }
-body.sidebar-open .topbar .brand{
-  opacity: 0; width: 0; margin: 0; pointer-events: none;
-}
+body.sidebar-open .topbar .brand{ opacity:0; width:0; margin:0; pointer-events:none }
 body.sidebar-open .topbar .top-actions .divider{ opacity:0; width:0 }
 
 /* Esquemas de color */
@@ -81,23 +79,28 @@ body{
 }
 body.sidebar-open .sidebar{ width: var(--rail-expanded) }
 
-/* ===== Cabecera del rail =====
-   Usamos GRID con una 1ª columna FIJA = ancho colapsado.
-   Así el icono/nombre se alinean y el botón bars puede moverse. */
+/* ===== Cabecera del rail ===== */
 .rail-head{
   position: absolute;
   top: 0; left: 0; right: 0;
   height: var(--header-h);
   display: grid;
-  grid-template-columns: var(--rail-collapsed) 1fr;
-  align-items: center;
+  grid-template-columns: var(--rail-collapsed) 1fr;   /* cerrado */
+  align-items: center;                                /* centra VERTICAL siempre */
   gap: 12px;
-  padding-inline: 0;   /* sin padding para que la 1ª columna sea exacta */
+  padding-inline: 0;
   z-index: 1;
 }
+/* al abrir añadimos una 3ª columna fija para el botón: evita solapes y saltos */
+body.sidebar-open .rail-head{
+  grid-template-columns: var(--rail-collapsed) 1fr 40px;
+}
 
-/* Marca dentro del rail */
-.rail-head .brand.rail{ display:flex; align-items:center; gap:12px }
+/* Marca dentro del rail (siempre en la columna central) */
+.rail-head .brand.rail{
+  grid-column: 2;
+  display:flex; align-items:center; gap:12px;
+}
 .rail .brand-name{
   font-weight:600;
   opacity:0;
@@ -108,8 +111,7 @@ body.sidebar-open .sidebar{ width: var(--rail-expanded) }
 }
 body.sidebar-open .rail .brand-name{ opacity:1; width:auto }
 
-/* Botón "bars": centrado en columna 1 cuando está cerrado;
-   al abrir, pasa a la columna 2 y se alinea a la derecha */
+/* Botón "bars" */
 .rail-head .rail-toggle{
   border:0; background:transparent;
   width:40px; height:40px;
@@ -120,33 +122,26 @@ body.sidebar-open .rail .brand-name{ opacity:1; width:auto }
   justify-self: center;         /* centrado horizontal */
 }
 .rail-head .rail-toggle:hover{ background:var(--panel-2) }
+.rail-head .rail-toggle:focus-visible{ outline:2px solid var(--brand); outline-offset:2px }
+/* abierto: pasa a la 3ª columna pero sigue centrado verticalmente */
 body.sidebar-open .rail-head .rail-toggle{
-  grid-column: 2;               /* abierto: va a la derecha */
-  justify-self: end;
-}
-.rail-head .rail-toggle:focus-visible{
-  outline:2px solid var(--brand); outline-offset:2px;
+  grid-column: 3;
+  justify-self: center;
 }
 
-/* ===== Grupos de items =====
-   Sin padding horizontal para que la columna fija (64px) sea la guía. */
-.rail-group, .rail-footer{
-  list-style:none; margin:0;
-  padding:12px 0;
-}
+/* ===== Grupos de items ===== */
+.rail-group, .rail-footer{ list-style:none; margin:0; padding:12px 0 }
 
-/* ===== Items del rail =====
-   GRID con primera columna fija = 64px (icono centrado SIEMPRE).
-   La segunda columna se expande solo cuando el sidebar está abierto. */
+/* ===== Items del rail ===== */
 .rail-item{
   -webkit-appearance:none; appearance:none;
   background:transparent; border:0; font:inherit;
   width:100%; min-height:40px;
   display:grid;
-  grid-template-columns: var(--rail-collapsed) 0fr; /* texto colapsado */
+  grid-template-columns: var(--rail-collapsed) 0fr;  /* texto colapsado */
   align-items:center;
   gap:12px;
-  padding:6px 8px;
+  padding:6px 8px 6px 0;         /* SIN padding izquierdo → alinea con bars */
   border-radius:12px;
   color:var(--text); cursor:pointer;
   transition: background .15s ease, grid-template-columns .2s ease;
@@ -159,11 +154,11 @@ body.sidebar-open .rail-item{
 
 /* Icono SIEMPRE centrado en la 1ª columna (no se mueve nunca) */
 .rail-item .ico{
-  justify-self:center;           /* centro horizontal */
+  justify-self:center;
   width:24px; text-align:center; flex:0 0 24px;
 }
 
-/* Texto: aparece al abrir (opacidad por suavidad) */
+/* Texto */
 .rail-item .txt{
   opacity:0; white-space:nowrap; overflow:hidden;
   transition: opacity .2s ease;
@@ -189,7 +184,7 @@ body.sidebar-open .rail-item .txt{ opacity:1 }
 }
 body.sidebar-open .topbar{ left: var(--rail-expanded) }
 
-/* Botones genéricos (no afecta a bars gracias a reglas específicas) */
+/* Botones genéricos */
 .icon-btn{
   display:grid; place-items:center; width:40px; height:40px;
   border:1px solid var(--border); background:transparent; color:var(--text);
@@ -199,8 +194,8 @@ body.sidebar-open .topbar{ left: var(--rail-expanded) }
 .brand{ display:flex; align-items:center; gap:10px; color:var(--text); text-decoration:none; }
 .brand .brand-name{ font-weight:600 }
 
-.top-actions{ margin-left:auto; display:flex; align-items:center; gap:var(--space-3);}
-.top-actions .divider{ width:1px; height:22px; background:var(--border); }
+.top-actions{ margin-left:auto; display:flex; align-items:center; gap:var(--space-3)}
+.top-actions .divider{ width:1px; height:22px; background:var(--border) }
 .lang-select select{
   appearance:none; border:1px solid var(--border); background:transparent; color:var(--text);
   padding:8px 12px; border-radius:10px;
@@ -250,7 +245,7 @@ body.sidebar-open .page{ margin-left: var(--rail-expanded) }
 }
 .card h2{ margin:0 0 var(--space-2) 0; font-size:18px }
 
-.hero h1{ margin:0 0 6px 0; font-size: clamp(20px, 2.6vw, 28px); }
+.hero h1{ margin:0 0 6px 0; font-size: clamp(20px, 2.6vw, 28px) }
 .lead{ color:var(--muted); margin:0 0 var(--space-3) 0 }
 .actions{ display:flex; flex-wrap:wrap; gap:10px }
 .btn{
@@ -260,7 +255,7 @@ body.sidebar-open .page{ margin-left: var(--rail-expanded) }
   border-radius:12px; text-decoration:none;
 }
 .btn.primary{ background:linear-gradient(90deg, var(--brand), var(--brand-2)); color:#00131a; border:0; font-weight:600 }
-.placeholder{ height:160px; display:grid; place-items:center; color:var(--muted); border:1px dashed var(--border); border-radius:12px; }
+.placeholder{ height:160px; display:grid; place-items:center; color:var(--muted); border:1px dashed var(--border); border-radius:12px }
 .placeholder.tall{ height:320px }
 
 /* ===== Footer ===== */
@@ -275,7 +270,7 @@ body.sidebar-open .page{ margin-left: var(--rail-expanded) }
 
 /* ===== Dialog ===== */
 dialog{
-  border:1px solid var(--border); border-radius:12px; padding:20px; background:var(--panel); color:var(--text);
+  border:1px solid var(--border); border-radius:12px; padding:20px; background:var(--panel); color:var(--text)
 }
 dialog::backdrop{ background:rgba(0,0,0,.4) }
 .input{ width:100%; padding:10px 12px; border:1px solid var(--border); background:transparent; color:var(--text); border-radius:10px }
@@ -285,7 +280,6 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 @media (max-width: 1024px){
   /* opcional */
 }
-
 @media (max-width: 768px){
   .sidebar{
     transform: translateX(-100%);
@@ -298,13 +292,13 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
     left: 0 !important; margin-left: 0 !important;
   }
 
-  .page{ padding-top: calc(var(--header-h) + var(--notify-h)); }
+  .page{ padding-top: calc(var(--header-h) + var(--notify-h)) }
   .topbar{ padding-inline:12px }
   .brand .brand-name{ display:none }
 }
 
 /* Utilidad: solo móvil */
-.only-mobile { display: none; }
+.only-mobile { display: none }
 @media (max-width: 768px){
-  .only-mobile { display: grid; }
+  .only-mobile { display: grid }
 }
