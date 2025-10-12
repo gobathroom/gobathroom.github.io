@@ -274,7 +274,7 @@ body.sidebar-open .topbar{ left: var(--rail-expanded) }
 .topbar .topbar-brand .brand-name{
   font-weight: 700;               /* mismo peso que en el sidebar */
   letter-spacing: .2px;
-  margin-left: 36px,
+  margin-left: 36px;
 }
 /* Con sidebar ABIERTO, oculta el brand de la topbar */
 body.sidebar-open .topbar .topbar-brand{
@@ -371,6 +371,49 @@ dialog{
 dialog::backdrop{ background:rgba(0,0,0,.4) }
 .input{ width:100%; padding:10px 12px; border:1px solid var(--border); background:transparent; color:var(--text); border-radius:10px }
 .dialog-actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:14px }
+
+/* ===== Theme Popover ===== */
+.theme-popover[hidden]{ display:none !important }
+
+.theme-popover{
+  position: fixed;            /* se posiciona por JS respecto al botón */
+  min-width: 180px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 10px 26px rgba(0,0,0,.32);
+  padding: 6px;
+  z-index: 2000;
+}
+
+.theme-opt{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  height: 36px;
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+.theme-opt:hover,
+.theme-opt[aria-selected="true"]{
+  background: var(--panel-2);
+}
+
+/* Iconos dentro de las opciones del popover */
+.theme-opt .opt-ico{
+  width: 18px;
+  text-align: center;
+}
+
+
 
 /* ===== Responsive ===== */
 @media (max-width: 1024px){ }
