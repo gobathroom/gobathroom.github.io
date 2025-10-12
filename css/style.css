@@ -165,12 +165,13 @@ body.sidebar-open .sidebar .rail-head .brand-name{
 }
 
 /* ===== Grupos de items ===== */
-/* Hover con margen, pero SIN mover los íconos a la derecha */
 .rail-group, .rail-footer{
   list-style:none;
   margin:0;
-  padding:12px var(--space-2) 12px 0;  /* top right bottom left -> solo gutter a la derecha */
+  padding:12px 0;   /* ← sin gutter lateral */
 }
+
+
 
 
 /* ===== Items del rail ===== */
