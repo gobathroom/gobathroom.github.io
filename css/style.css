@@ -94,9 +94,9 @@ body.sidebar-open .sidebar{ width: var(--rail-expanded) }
   grid-template-columns: var(--rail-collapsed) 1fr;   /* cerrado */
   gap: 12px;
 
-  /* ¡clave! usamos padding simétrico y anclamos ARRIBA */
+  /* padding simétrico; ahora centramos verticalmente */
   padding: var(--rail-gutter) var(--rail-gutter) var(--rail-gutter) 0;  /* 12px arriba/abajo y derecha */
-  align-items: start;    /* ancla todo al borde superior del área útil (40px) */
+  align-items: center;    /* ← centrado vertical como Freepik */
 
   z-index: 1;
 }
@@ -108,21 +108,21 @@ body.sidebar-open .rail-head{
 .rail-head .brand.rail{
   grid-column: 2;
   justify-self: start;
-  align-self: start;                 /* anclado arriba */
+  align-self: center;                 /* ← alineado con el botón */
   display: flex;
+  align-items: center;                /* ← centra el texto dentro de los 40px */
 
   /* la caja de la marca ocupa exactamente el “cuadrado” de 40px */
   height: var(--rail-btn);
-  line-height: var(--rail-btn);
+  line-height: 1;                     /* evita desplazamiento óptico */
 
   /* mismo inset desde la izquierda que el botón tiene en su columna */
   padding-left: var(--rail-gutter);
 
   gap: 12px;
 
-  /* micro-ajuste óptico para que el texto quede a la misma altura visual
-     que el glifo del botón; si lo ves perfecto, ponlo en 0 */
-  transform: translateY(-2px);
+  /* nudge eliminado para que coincida con el ícono */
+  transform: none;
 }
 .rail .brand-name{
   font-weight:600;
@@ -145,14 +145,14 @@ body.sidebar-open .rail .brand-name{ opacity:1; width:auto }
   transition: background .15s ease, transform .2s ease;
   grid-column: 1;               
   justify-self: center;
-  align-self: start;              /* anclado arriba */
+  align-self: center;              /* ← alineado con la marca */
 }
 .rail-head .rail-toggle:hover{ background:var(--panel-2) }
 .rail-head .rail-toggle:focus-visible{ outline:2px solid var(--brand); outline-offset:2px }
 body.sidebar-open .rail-head .rail-toggle{
   grid-column: 3;
   justify-self: center;
-  align-self: start;
+  align-self: center;              /* ← mantiene alineación en abierto */
 }
 
 /* ===== Grupos de items ===== */
