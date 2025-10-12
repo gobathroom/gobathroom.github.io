@@ -187,7 +187,7 @@ body.sidebar-open .rail-item{
 
 /* Ajuste de separación icono ↔ texto en el sidebar ABIERTO */
 body.sidebar-open .rail-item{
-  gap: 4px;                 /* <– reduce el espacio entre columnas */
+  gap: 2px;                 /* <– reduce el espacio entre columnas */
   text-align: left;   /* el botón deja de centrar el contenido */
 }
 
