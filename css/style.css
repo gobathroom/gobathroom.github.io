@@ -121,6 +121,28 @@ body.sidebar-open .rail .brand-name{
   width: auto;
 }
 
+/* ========= AJUSTES SOLICITADOS PARA EL BOTÓN "BARS" ========= */
+.rail-head .rail-toggle{
+  /* sin borde y mismo look que los items */
+  border: 0;
+  background: transparent;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  transition: background .15s ease;
+  margin-left: 0;            /* junto al nombre cuando está cerrado */
+}
+.rail-head .rail-toggle:hover{
+  background: var(--panel-2); /* mismo hover que los items */
+}
+/* mover SOLO el botón bars al extremo derecho cuando el sidebar está abierto */
+body.sidebar-open .rail-head .rail-toggle{
+  margin-left: auto;
+}
+/* ============================================================ */
+
 /* ====== Estilos de los items del rail ====== */
 .rail-group, .rail-footer{ list-style:none; margin:0; padding:12px; }
 
