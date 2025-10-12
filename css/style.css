@@ -130,7 +130,7 @@ body.sidebar-open .sidebar .rail-head .brand{
   grid-template-columns: var(--rail-collapsed) 1fr; /* [icono | texto] */
   align-items: center;
   grid-column: 1 / 3;        /* ocupa col 1-2; deja 3 para el botón ☰ */
-  gap: 3px;
+  gap: 4px;
   height: 56px;
   padding: var(--space-3) 0; /* sin padding-left extra */
   text-decoration: none;
@@ -162,7 +162,7 @@ body.sidebar-open .sidebar .rail-head .brand-name{
   opacity: 1;
   width: auto;
   transform: none;
-  margin-left: -6px;   /* <- este es el “pegadito” al icono */
+  margin-left: -16px;   /* <- este es el “pegadito” al icono */
 }
 
 
