@@ -375,45 +375,67 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 .dialog-actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:14px }
 
 /* ===== Theme Popover ===== */
-.theme-popover[hidden]{ display:none !important }
+.theme-popover[hidden]{ display: none !important; }
 
 .theme-popover{
-  position: fixed;            /* se posiciona por JS respecto al botón */
+  position: fixed;                 /* lo posiciona el JS */
   min-width: 180px;
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 12px;
   box-shadow: 0 10px 26px rgba(0,0,0,.32);
-  padding: 6px;
+  padding: 8px;                    /* +aire para que 1er/último item no peguen */
   z-index: 2000;
 }
 
+/* contenedor de opciones (si tu HTML ya lo tiene) */
+.theme-list{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;                        /* separación entre opciones */
+}
+
 .theme-opt{
+  position: relative;              /* necesario para el pseudo-fondo */
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
-  height: 36px;
-  padding: 0 10px;
+  padding: 8px 12px;               /* acolchado interno del item */
   border: 0;
-  background: transparent;
+  background: transparent;         /* sin fondo directo */
   color: var(--text);
   border-radius: 10px;
   cursor: pointer;
   font: inherit;
   text-align: left;
 }
-.theme-opt:hover,
-.theme-opt[aria-selected="true"]{
+
+/* Fondo “inset” que deja margen en todos los lados (no se pega a bordes) */
+.theme-opt::before{
+  content: "";
+  position: absolute;
+  inset: 4px;                      /* margen interno top/right/bottom/left */
+  border-radius: 10px;
   background: var(--panel-2);
+  opacity: 0;
+  transition: opacity .15s ease;
+  z-index: -1;                     /* detrás del icono y texto */
+}
+
+.theme-opt:hover::before,
+.theme-opt[aria-selected="true"]::before{
+  opacity: 1;
 }
 
 /* Iconos dentro de las opciones del popover */
 .theme-opt .opt-ico{
   width: 18px;
   text-align: center;
+  flex: 0 0 18px;
 }
+
 
 
 
