@@ -201,8 +201,8 @@ body.sidebar-open .rail-item{
   content:"";
   position:absolute;
   /* deja aire arriba y abajo para que no se “toquen” */
-  top: 4px;                 /* ← separa del borde superior */
-  bottom: 4px;              /* ← separa del borde inferior */
+  top: 2px;                 /* ← separa del borde superior */
+  bottom: 2px;              /* ← separa del borde inferior */
   left: var(--space-2);     /* margen lateral que ya tenías */
   right: var(--space-2);
   border-radius:12px;
