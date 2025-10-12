@@ -162,7 +162,7 @@ body.sidebar-open .sidebar .rail-head .brand-name{
   opacity: 1;
   width: auto;
   transform: none;
-  margin-left: -16px;   /* <- este es el “pegadito” al icono */
+  margin-left: -12px;   /* <- este es el “pegadito” al icono */
 }
 
 
