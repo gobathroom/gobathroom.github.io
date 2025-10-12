@@ -1,4 +1,4 @@
-<!doctype html> 
+<!doctype html>
 <html lang="en" data-theme="system">
 <head>
   <meta charset="utf-8" />
@@ -24,6 +24,7 @@
 
     <nav class="top-actions" aria-label="Primary">
       <div class="divider"></div>
+      <!-- Idioma al extremo derecho -->
       <label class="lang-select" aria-label="Language">
         <select id="lang">
           <option value="en" selected>English</option>
@@ -42,11 +43,15 @@
 
   <!-- Sidebar lateral estilo Freepik (fijo desde top:0 a bottom:0) -->
   <aside class="sidebar" aria-label="App menu">
-    <!-- Fila superior del rail: SOLO botón ☰ -->
+    <!-- Fila superior del rail: nombre (aparece al abrir) + botón ☰ a la derecha -->
     <div class="rail-head">
       <button class="icon-btn rail-toggle hamburger" aria-label="Toggle menu" aria-expanded="false">
-        <i class="fa-solid fa-bars" aria-hidden="true"></i>
-      </button>
+    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+  </button>
+      
+      <a class="brand rail" href="/">
+        <span class="brand-name">Go Bathroom</span>
+      </a>
     </div>
 
     <ul class="rail-group" role="list">
@@ -84,6 +89,7 @@
     </div>
   </aside>
 
+  <!-- Contenido principal (empujado por el sidebar) -->
   <div class="page">
     <main class="content" id="appmain">
       <section class="card hero" aria-labelledby="h-title">
@@ -108,6 +114,7 @@
       </section>
     </main>
 
+    <!-- Footer al final del documento (sin superponerse) -->
     <footer class="site-footer" role="contentinfo">
       <div class="footer-inner">
         <span>2025 Go Bathroom NYC</span>
@@ -119,6 +126,7 @@
     </footer>
   </div>
 
+  <!-- Modal simple para Share (fallback) -->
   <dialog id="shareModal" aria-labelledby="shareTitle">
     <h3 id="shareTitle">Share</h3>
     <p>Copy the link or share it:</p>
