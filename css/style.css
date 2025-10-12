@@ -223,7 +223,7 @@ body.sidebar-open .topbar{ left: var(--rail-expanded) }
   grid-auto-flow: column;         /* [icono | texto] */
   grid-auto-columns: max-content;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   height: 56px;
   text-decoration: none;
   color: var(--text);
