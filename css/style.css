@@ -92,7 +92,7 @@ body.sidebar-open .sidebar{ width: var(--rail-expanded) }
   grid-template-columns: var(--rail-collapsed) 1fr;   /* cerrado */
   align-items: center;                                /* centra vertical SIEMPRE */
   gap: 12px;
-  padding: 0 var(--rail-gutter) 0 0;                  /* colchón a la derecha */
+  padding: var(--rail-gutter) var(--rail-gutter) var(--rail-gutter) 0;  /* 👈 12px arriba/abajo y derecha */
   z-index: 1;
 }
 /* ABIERTO: 3ª columna EXACTA = 64px → el botón queda centrado dentro y con el mismo gutter */
@@ -132,7 +132,7 @@ body.sidebar-open .rail .brand-name{ opacity:1; width:auto }
 /* ABIERTO: sigue centrado dentro de una celda de 64px a la derecha */
 body.sidebar-open .rail-head .rail-toggle{
   grid-column: 3;
-  justify-self: center;         /* NO end → mantiene el mismo inset/gutter */
+  justify-self: center;         /* mantiene el mismo inset/gutter */
 }
 
 /* ===== Grupos de items ===== */
