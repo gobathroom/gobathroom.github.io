@@ -124,11 +124,6 @@ body.sidebar-open .rail-head .rail-toggle{
   justify-self: center;
 }
 
-body.sidebar-open .rail-head .rail-toggle{
-  grid-column: 3;
-  justify-self: center;
-}
-
 /* ===== Brand dentro del sidebar (Go Bathroom) ===== */
 .sidebar .brand {
   display: flex;
