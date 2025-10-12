@@ -1,4 +1,4 @@
-:root{ 
+ :root{ 
   --header-h: 64px;
   --notify-h: 40px;
   --rail-collapsed: 64px;
@@ -67,7 +67,7 @@ body{
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;      /* antes space-between */
+  justify-content: space-between;      /* antes space-between */
   transition: width .2s ease;
   z-index: 45;
   padding-top: 0;
