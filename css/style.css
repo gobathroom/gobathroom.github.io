@@ -161,7 +161,7 @@ body.sidebar-open .sidebar .rail-head .brand-name{
   opacity: 1;
   width: auto;
   transform: none;
-  margin-left: -10px;   /* “pegadito” al icono */
+  margin-left: -6px;   /* “pegadito” al icono */
 }
 
 
