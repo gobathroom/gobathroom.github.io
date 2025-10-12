@@ -129,7 +129,7 @@ body.sidebar-open .sidebar .rail-head .brand{
   grid-template-columns: var(--rail-collapsed) 1fr; /* [icono | texto] */
   align-items: center;
   grid-column: 1 / 3;        /* ocupa col 1-2; deja 3 para el botón ☰ */
-  gap: 4px;
+  gap: 6px;
   height: 56px;
   padding: var(--space-3) 0; /* sin padding-left extra */
   text-decoration: none;
