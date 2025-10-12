@@ -6,6 +6,10 @@
   --rail-expanded: 280px;
   --content-max: 1440px;
 
+  /* Derivados para alineación precisa */
+  --rail-btn: 40px;                          /* tamaño del botón bars */
+  --rail-gutter: calc((var(--rail-collapsed) - var(--rail-btn)) / 2); /* 12px */
+
   /* Espacios y radios */
   --space-1: 6px;  --space-2: 10px; --space-3: 16px; --space-4: 24px;
   --radius: 14px;
@@ -86,14 +90,14 @@ body.sidebar-open .sidebar{ width: var(--rail-expanded) }
   height: var(--header-h);
   display: grid;
   grid-template-columns: var(--rail-collapsed) 1fr;   /* cerrado */
-  align-items: center;                                /* centra VERTICAL siempre */
+  align-items: center;                                /* centra vertical SIEMPRE */
   gap: 12px;
-  padding: 0 12px 0 0;                                /* inset solo a la derecha */
+  padding: 0 var(--rail-gutter) 0 0;                  /* colchón a la derecha */
   z-index: 1;
 }
-/* al abrir añadimos una 3ª columna fija para el botón: evita solapes y saltos */
+/* ABIERTO: 3ª columna EXACTA = 64px → el botón queda centrado dentro y con el mismo gutter */
 body.sidebar-open .rail-head{
-  grid-template-columns: var(--rail-collapsed) 1fr auto;
+  grid-template-columns: var(--rail-collapsed) 1fr var(--rail-collapsed);
 }
 
 /* Marca dentro del rail (siempre en la columna central) */
@@ -114,21 +118,21 @@ body.sidebar-open .rail .brand-name{ opacity:1; width:auto }
 /* Botón "bars" */
 .rail-head .rail-toggle{
   border:0; background:transparent;
-  width:40px; height:40px;
-  display:flex; align-items:center; justify-content:center;  /* centra el glifo */
-  line-height:0;                                             /* evita salto vertical */
+  width:var(--rail-btn); height:var(--rail-btn);
+  display:flex; align-items:center; justify-content:center;
+  line-height:0;
   margin:0;
   border-radius:12px;
   transition: background .15s ease, transform .2s ease;
   grid-column: 1;               /* cerrado: columna fija de 64px */
-  justify-self: center;         /* centrado horizontal */
+  justify-self: center;         /* centrado horizontal dentro de su celda */
 }
 .rail-head .rail-toggle:hover{ background:var(--panel-2) }
 .rail-head .rail-toggle:focus-visible{ outline:2px solid var(--brand); outline-offset:2px }
-/* abierto: pasa a la 3ª columna y se alinea al borde derecho (con el inset) */
+/* ABIERTO: sigue centrado dentro de una celda de 64px a la derecha */
 body.sidebar-open .rail-head .rail-toggle{
   grid-column: 3;
-  justify-self: end;
+  justify-self: center;         /* NO end → mantiene el mismo inset/gutter */
 }
 
 /* ===== Grupos de items ===== */
