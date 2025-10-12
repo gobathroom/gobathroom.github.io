@@ -200,15 +200,17 @@ body.sidebar-open .rail-item{
 .rail-item::before{
   content:"";
   position:absolute;
-  top:0; bottom:0;
-  left: var(--space-2);         /* margen izquierdo del fondo */
-  right: var(--space-2);        /* margen derecho del fondo */
+  /* deja aire arriba y abajo para que no se “toquen” */
+  top: 4px;                 /* ← separa del borde superior */
+  bottom: 4px;              /* ← separa del borde inferior */
+  left: var(--space-2);     /* margen lateral que ya tenías */
+  right: var(--space-2);
   border-radius:12px;
   background: var(--panel-2);
   opacity:0;
   transition: opacity .15s ease;
-  pointer-events:none;          /* no bloquea clics */
-  z-index: -1;
+  pointer-events:none;
+  z-index:-1;
 }
 .rail-item:hover::before,
 .rail-item.is-active::before{
