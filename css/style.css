@@ -188,6 +188,7 @@ body.sidebar-open .sidebar .rail-head .brand-name{
   transition: grid-template-columns .2s ease; /* el fondo ya no se anima aquí */
   position: relative;           /* para el pseudo-fondo */
   overflow: visible;
+  z-index: 0;
 }
 body.sidebar-open .rail-item{
   grid-template-columns: var(--rail-collapsed) 1fr;
@@ -207,6 +208,7 @@ body.sidebar-open .rail-item{
   opacity:0;
   transition: opacity .15s ease;
   pointer-events:none;          /* no bloquea clics */
+  z-index: -1;
 }
 .rail-item:hover::before,
 .rail-item.is-active::before{
