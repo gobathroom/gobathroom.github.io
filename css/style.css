@@ -166,11 +166,8 @@ body.sidebar-open .sidebar .rail-head .brand-name{
 
 
 /* ===== Grupos de items ===== */
-.rail-group, .rail-footer{
-  list-style:none;
-  margin:0;
-  padding:12px 0; 
-}
+.rail-group, .rail-footer{ list-style:none; margin:0; padding:12px 0 }
+
 
 
 /* ===== Items del rail ===== */
