@@ -78,7 +78,7 @@ body{
   justify-content: space-between;
   transition: width .2s ease;
   z-index: 45;
-  padding-top: var(--header-h);
+  padding-top: 0;
   overflow: hidden;
 }
 body.sidebar-open .sidebar{ width: var(--rail-expanded) }
@@ -98,7 +98,7 @@ body.sidebar-open .sidebar{ width: var(--rail-expanded) }
   padding: var(--rail-gutter) var(--rail-gutter) var(--rail-gutter) 0;  /* 12px arriba/abajo y derecha */
   align-items: center;    /* ← centrado vertical como Freepik */
 
-  z-index: 1;
+  z-index: 2;
 }
 body.sidebar-open .rail-head{
   grid-template-columns: var(--rail-collapsed) 1fr var(--rail-collapsed);
