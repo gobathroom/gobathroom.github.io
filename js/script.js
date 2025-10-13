@@ -650,14 +650,6 @@ document.addEventListener('DOMContentLoaded', () => {
 /* =========================================================
    5) OTROS (Idioma, Notifybar, etc.)
    ========================================================= */
-// Idioma (placeholder)
-const langSel = $('#lang');
-if (langSel){
-  langSel.addEventListener('change', (e) => {
-    console.log('Language:', e.target.value);
-  });
-}
-
 // ===== Ajuste real de la altura de la notifybar
 const notify = document.getElementById('notifybar');
 function setNotifyHeight(){
