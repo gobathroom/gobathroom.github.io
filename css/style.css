@@ -498,11 +498,12 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   position:absolute;
   inset:0;
   border-radius:8px;
-  background: var(--panel-2);
+  background: var(--hover-bg, rgba(125,125,125,.08)); /* mismo fondo que sidebar hover */
   opacity:0;
   transition: opacity .15s ease;
   z-index:-1;
 }
+
 .share-field .field-copy:hover::before{ opacity:1; }
 
 /* Efecto hover y focus igual que los íconos del sidebar */
