@@ -241,25 +241,6 @@ body.sidebar-open .rail-item .txt{
 
 .rail-item.ghost{ opacity:.85 }
 
-/* Quitar foco visual en el rail (todos los botones, incl. Share) */
-.sidebar .rail-item,
-.sidebar .rail-item:focus,
-.sidebar .rail-item:focus-visible,
-.sidebar .rail-item:-moz-focusring,
-.sidebar .rail-item:focus-within {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* Extra por si algún botón del rail usa .icon-btn */
-.sidebar .icon-btn:focus,
-.sidebar .icon-btn:focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* Firefox: elimina el borde interno por defecto de los botones */
-.sidebar button::-moz-focus-inner { border: 0; }
 
 
 /* ===== Header fijo alineado al rail ===== */
