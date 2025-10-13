@@ -552,8 +552,13 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   width: 0;
   height: 0;
 }
-
-
+/* Borde del triángulo */
+.rail-tip::before {
+  right: 100%;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid var(--border);
+}
 
 /* Relleno del triángulo (superpuesto) */
 .rail-tip::after {
@@ -573,7 +578,7 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   filter: drop-shadow(0 8px 20px rgba(17,24,39,.10)); /* sombra más leve en light */
 }
 :root[data-theme="light"] .rail-tip::before{
-  border-right-color: rgba(17,24,39,.06);  /* “borde” del pico */
+  display: none;
 }
 :root[data-theme="light"] .rail-tip::after{
   border-right-color: var(--panel);        /* relleno del pico */
