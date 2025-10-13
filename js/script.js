@@ -427,27 +427,14 @@ document.addEventListener('click', (e) => {
   if (!inside) closeSharePopover();
 });
 
-// Esc: cerrar y, si el puntero sigue sobre el icono, reabrir (estilo Freepik)
-// Sin devolver el foco, y quitando el foco activo para evitar el ring
-document.addEventListener('keydown', (e) => {
-  if (e.key !== 'Escape' || sharePop.hidden) return;
-
-  // Cierra sin devolver foco
-  closeSharePopover({ returnFocus: false });
-
-  // Quita el foco del elemento activo (evita outline residual en algunos navegadores)
-  if (document.activeElement && typeof document.activeElement.blur === 'function') {
-    document.activeElement.blur();
-  }
-
-  // Esc: cierre estilo Freepik (si el puntero sigue sobre el icono, se reabre)
+// Esc: cierre estilo Freepik (si el puntero sigue sobre el icono, se reabre)
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape' || !sharePop || sharePop.hidden) return;
 
-  // Cierra sin devolver foco (evitamos el anillo)
+  // Cierra sin devolver foco (evita contorno)
   closeSharePopover({ returnFocus: false });
 
-  // Quita foco activo para evitar contornos residuales
+  // Limpia foco activo (algunos navegadores dejan ring)
   if (document.activeElement && typeof document.activeElement.blur === 'function') {
     document.activeElement.blur();
   }
@@ -457,15 +444,14 @@ document.addEventListener('keydown', (e) => {
     const r = shareBtn.getBoundingClientRect();
     const overBtn = lastMouseX >= r.left && lastMouseX <= r.right &&
                     lastMouseY >= r.top  && lastMouseY <= r.bottom;
-
     if (overBtn) {
       setTimeout(() => {
-        // solo si sigue cerrado (por si el usuario movió el mouse)
         if (sharePop.hidden) openSharePopover();
       }, 120);
     }
   }
 });
+
 
 
 
