@@ -292,7 +292,7 @@ body.sidebar-open .rail-item .txt{
   height: var(--header-h);
   display:flex; align-items:center; gap:var(--space-3);
   padding:0 var(--space-4);
-  background:var(--panel);
+  background:var(--bg);
   border-bottom:1px solid var(--border);
   z-index: 1100;
   transition: left .2s ease;
