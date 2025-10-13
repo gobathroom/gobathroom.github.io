@@ -262,15 +262,15 @@ function openSharePopover(){
   setTimeout(()=> shareCopy && shareCopy.focus(), 0);
 }
 
-function closeSharePopover(){
+function closeSharePopover({ returnFocus = false } = {}){
   if (!sharePop || sharePop.hidden) return;
-  shareBtn && shareBtn.setAttribute('aria-expanded','false');
+  if (shareBtn) shareBtn.setAttribute('aria-expanded','false');
   sharePop.hidden = true;
   window.removeEventListener('resize', positionSharePopover);
   window.removeEventListener('scroll', positionSharePopover);
-  // devolver foco al trigger (accesibilidad)
-  shareBtn && shareBtn.focus();
+  if (returnFocus && shareBtn) shareBtn.focus();
 }
+
 
 function positionSharePopover(){
   if (!shareBtn || !sharePop) return;
