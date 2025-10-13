@@ -46,12 +46,23 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Accesibilidad: cerrar con ESC en móvil (y opcionalmente en desktop)
+// Esc NO cierra el sidebar en desktop; solo en móvil y si no hay popovers abiertos
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && body.classList.contains('sidebar-open')) {
+  if (e.key !== 'Escape') return;
+
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const shareOpen = (typeof sharePop !== 'undefined') && sharePop && !sharePop.hidden;
+  const themeOpen = (typeof themePop !== 'undefined') && themePop && !themePop.hidden;
+
+  // Si algún popover está abierto, dejamos que sus propios handlers gestionen Esc
+  if (shareOpen || themeOpen) return;
+
+  // Solo en móvil cerramos el sidebar con Esc
+  if (isMobile && body.classList.contains('sidebar-open')) {
     setSidebar(false);
   }
 });
+
 
 // ===== Tema: Light / Dark / System (Popover con iconos) =====
 const themeBtn   = $('#themeBtn');
