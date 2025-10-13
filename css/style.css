@@ -22,6 +22,10 @@
   --border: rgba(255,255,255,.12);
   --brand: #00d1ff;
   --brand-2: #7ef0ff;
+  
+   /* mismo fondo que el hover del rail */
+  --hover-bg: var(--panel-2);
+
 }
 
 /* Contenido alineado con el marco lateral */
@@ -496,9 +500,9 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 .share-field .field-copy::before{
   content:"";
   position:absolute;
-  inset:0;
+  inset: 2px;                  /* margen como el rail: no pega a los bordes */
   border-radius:8px;
-  background: var(--hover-bg, rgba(125,125,125,.08)); /* mismo fondo que sidebar hover */
+  background: var(--hover-bg, rgba(125,125,125,.08));
   opacity:0;
   transition: opacity .15s ease;
   z-index:-1;
