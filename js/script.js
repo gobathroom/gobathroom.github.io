@@ -283,7 +283,7 @@ if (mode === 'system'){
    ---------------------------------------------------------
    4.1) Selectores y estado del mouse
    4.2) Detección de dispositivo
-   4.3) Tooltip de rail (solo desktop, rail cerrado, sin popovers)
+   // 4.3) Tooltip inteligente del rail (desktop cerrado, sin popovers)
    4.4) Lógica de Share (links, abrir/cerrar, posicionamiento, hover corridor)
    4.5) Cierre por clic-fuera y Esc (estilo Freepik)
    ========================================================= */
@@ -320,7 +320,7 @@ function useNativeShare(){
 }
 
 
-// 4.3) Tooltip de rail (solo desktop, rail cerrado, sin popovers)
+// 4.3) Tooltip inteligente del rail (desktop cerrado, sin popovers)
 const railTip = (() => {
   const el = document.createElement('div');
   el.id = 'railTip';
@@ -330,59 +330,100 @@ const railTip = (() => {
   return el;
 })();
 
+let tipHideTimer = null;
+let currentTipAnchor = null;
+
+function positionRailTip(btn){
+  const r = btn.getBoundingClientRect();
+  const tipW = railTip.offsetWidth;
+  const tipH = railTip.offsetHeight;
+  const gap  = 10;
+
+  let left = r.right + gap;
+  let top  = r.top; // alineado al borde superior del item
+
+  left = Math.max(8, Math.min(left, window.innerWidth  - tipW - 8));
+  top  = Math.max(8, Math.min(top,  window.innerHeight - tipH - 8));
+
+  railTip.style.left = `${Math.round(left)}px`;
+  railTip.style.top  = `${Math.round(top)}px`;
+}
+
 function showRailTip(btn){
-  if (!btn) return;
-  if (!isDesktop()) return;
-  if (body.classList.contains('sidebar-open')) return; // solo cuando está cerrado
-  if (btn.hasAttribute('data-popover')) return;        // excluir share/theme
+  // Solo desktop, sidebar cerrado, y sin popover (share/theme)
+  if (!btn || !isDesktop() || body.classList.contains('sidebar-open') || btn.hasAttribute('data-popover')) return;
+
+  // Cancela cualquier ocultado pendiente para evitar “blink”
+  clearTimeout(tipHideTimer);
 
   const txt = btn.querySelector('.txt')?.textContent?.trim();
   if (!txt) return;
 
+  currentTipAnchor = btn;
   railTip.textContent = txt;
   railTip.hidden = false;
-
-  // posición: a la derecha del botón, alineado arriba (no centrado)
-  const r = btn.getBoundingClientRect();
-  const tipW = railTip.offsetWidth;
-  const tipH = railTip.offsetHeight;
-  const gap = 10;
-
-  let left = r.right + gap;
-  let top  = r.top; // alineado al borde superior del “fondo” del item
-
-  // clamping
-  left = Math.max(8, Math.min(left, window.innerWidth - tipW - 8));
-  top  = Math.max(8, Math.min(top, window.innerHeight - tipH - 8));
-
-  railTip.style.left = `${Math.round(left)}px`;
-  railTip.style.top  = `${Math.round(top)}px`;
-
-  // animación
-  requestAnimationFrame(()=> railTip.classList.add('is-visible'));
+  positionRailTip(btn);
+  requestAnimationFrame(() => railTip.classList.add('is-visible'));
 }
 
-function hideRailTip(){
+function scheduleHideRailTip(delay = 120){
+  clearTimeout(tipHideTimer);
+  tipHideTimer = setTimeout(() => {
+    currentTipAnchor = null;
+    railTip.classList.remove('is-visible');
+    setTimeout(() => { railTip.hidden = true; }, 120);
+  }, delay);
+}
+
+function hideRailTipNow(){
+  clearTimeout(tipHideTimer);
+  currentTipAnchor = null;
   railTip.classList.remove('is-visible');
-  // esperar la transición para ocultar
-  setTimeout(()=> { railTip.hidden = true; }, 120);
+  railTip.hidden = true;
 }
 
 // Activar tooltips en los botones del rail sin data-popover
 const railItems = Array.from(document.querySelectorAll('.sidebar .rail-item'));
 railItems.forEach(btn => {
-  // nada de tooltips para los que tienen ventana flotante
-  if (btn.hasAttribute('data-popover')) return;
-
-  btn.addEventListener('mouseenter', () => showRailTip(btn));
-  btn.addEventListener('mouseleave', hideRailTip);
+  if (btn.hasAttribute('data-popover')) return; // excluye share/theme
+  btn.addEventListener('pointerenter', () => showRailTip(btn));
+  btn.addEventListener('pointerleave', () => scheduleHideRailTip());
 });
 
-// Ocultar tooltip si cambia algo del viewport/scroll o si se abre el sidebar
-window.addEventListener('scroll', hideRailTip, { passive:true });
-window.addEventListener('resize', hideRailTip, { passive:true });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideRailTip(); });
-// Sugerencia: en setSidebar(open) puedes llamar a hideRailTip() cuando open=true
+// Mantener estable en scroll/resize
+window.addEventListener('scroll', () => {
+  if (!currentTipAnchor) return;
+  if (currentTipAnchor.matches(':hover')) {
+    positionRailTip(currentTipAnchor);
+  } else {
+    scheduleHideRailTip(0);
+  }
+}, { passive: true });
+
+window.addEventListener('resize', () => {
+  if (!currentTipAnchor) return;
+  if (currentTipAnchor.matches(':hover')) {
+    positionRailTip(currentTipAnchor);
+  } else {
+    scheduleHideRailTip(0);
+  }
+}, { passive: true });
+
+// Esc cierra el tooltip (no interfiere con popovers)
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') scheduleHideRailTip(0);
+});
+
+// Si el sidebar cambia de estado, oculta el tooltip
+// (Puedes dejar esta llamada aquí por si se invoca setSidebar desde otros flujos)
+if (typeof setSidebar === 'function') {
+  const _setSidebar = setSidebar;
+  setSidebar = function(open){
+    _setSidebar(open);
+    hideRailTipNow();
+  };
+}
+
 
 
 // 4.4) Lógica de Share
