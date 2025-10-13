@@ -484,6 +484,30 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   flex: 0 0 18px;
 }
 
+/* ===== Rail tooltip (solo desktop con sidebar cerrado) ===== */
+.rail-tip[hidden] { display: none !important; }
+
+.rail-tip{
+  position: fixed;
+  z-index: 3000;
+  max-width: 220px;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  box-shadow: 0 10px 26px rgba(0,0,0,.32);
+  font-size: 14px;
+  line-height: 1.2;
+  pointer-events: none;
+  /* animación sutil */
+  opacity: 0; transform: translateY(2px);
+  transition: opacity .12s ease, transform .12s ease;
+}
+.rail-tip.is-visible{
+  opacity: 1; transform: translateY(0);
+}
+
 
 
 
