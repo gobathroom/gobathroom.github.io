@@ -330,14 +330,15 @@ function positionSharePopover(){
   let left, top;
 
   if (railOpen){
-  // Sidebar ABIERTO: popover a la DERECHA del rail, centrado verticalmente
+  // Sidebar ABIERTO: a la derecha del rail, alineado con el borde superior del item
   left = r.right + gap;
-  top  = r.top + (r.height - popH) / 2;
+  top  = r.top;                  // ← ALINEADO (no centrado)
 } else {
-  // Sidebar CERRADO: (ya estaba) a la derecha del botón, centrado verticalmente
+  // Sidebar CERRADO: a la derecha del botón, alineado arriba también
   left = r.right + gap;
-  top  = r.top + (r.height - popH) / 2;
+  top  = r.top;                  // ← ALINEADO (no centrado)
 }
+
 
 
   // Limitar al viewport
