@@ -405,11 +405,7 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 .share-inner{ display:flex; flex-direction:column; gap:10px }
 .share-head{ display:flex; align-items:center; justify-content:space-between; gap:8px }
 .share-head h3{ margin:0; font-size:16px }
-.share-close{
-  appearance:none; border:0; background:transparent; color:var(--text);
-  width:32px; height:32px; border-radius:8px; cursor:pointer;
-}
-.share-close:hover{ background: var(--panel-2) }
+
 
 .share-body{ display:flex; flex-direction:column; gap:10px }
 .share-actions{ display:flex; flex-wrap:wrap; gap:10px; }
