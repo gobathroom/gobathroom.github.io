@@ -569,6 +569,33 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 }
 
 
+/* === Rail-tip: sincronizar colores por tema === */
+
+/* Tema claro: fondo y borde del pico iguales al tooltip */
+:root[data-theme="light"] .rail-tip{
+  background: var(--panel);       /* #ffffff en tu tema */
+  border-color: var(--border);    /* borde suave del tooltip */
+}
+:root[data-theme="light"] .rail-tip::before{
+  border-right-color: var(--border);  /* borde del pico = borde del tooltip */
+}
+:root[data-theme="light"] .rail-tip::after{
+  border-right-color: var(--panel);   /* relleno del pico = fondo del tooltip */
+}
+
+/* (Opcional) Tema oscuro explícito, por si un navegador no propaga bien las vars */
+:root[data-theme="dark"] .rail-tip{
+  background: var(--panel);
+  border-color: var(--border);
+}
+:root[data-theme="dark"] .rail-tip::before{
+  border-right-color: var(--border);
+}
+:root[data-theme="dark"] .rail-tip::after{
+  border-right-color: var(--panel);
+}
+
+
 
 
 /* =========================================================
