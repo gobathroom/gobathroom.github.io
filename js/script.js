@@ -330,15 +330,15 @@ function positionSharePopover(){
   let left, top;
 
   if (railOpen){
-    // Sidebar ABIERTO: arriba del botón (si no cabe, debajo)
-    left = r.left + (r.width - popW) / 2;
-    top  = r.top - gap - popH;
-    if (top < 8) top = r.bottom + gap;
-  } else {
-    // Sidebar CERRADO: a la derecha del rail
-    left = r.right + gap;
-    top  = r.top + (r.height - popH) / 2;
-  }
+  // Sidebar ABIERTO: popover a la DERECHA del rail, centrado verticalmente
+  left = r.right + gap;
+  top  = r.top + (r.height - popH) / 2;
+} else {
+  // Sidebar CERRADO: (ya estaba) a la derecha del botón, centrado verticalmente
+  left = r.right + gap;
+  top  = r.top + (r.height - popH) / 2;
+}
+
 
   // Limitar al viewport
   left = Math.max(8, Math.min(left, window.innerWidth - popW - 8));
@@ -347,6 +347,9 @@ function positionSharePopover(){
   sharePop.style.left = `${Math.round(left)}px`;
   sharePop.style.top  = `${Math.round(top)}px`;
 }
+
+if (!sharePop.hidden) buildCorridor();
+
 
 /* ============ Interacción ============ */
 
