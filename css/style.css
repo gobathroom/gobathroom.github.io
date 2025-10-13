@@ -388,6 +388,38 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   z-index: 2000;
 }
 
+/* ===== Share Popover (nuevo) ===== */
+.share-popover[hidden]{ display:none !important; }
+
+.share-popover{
+  position: fixed;                 /* posicionado por JS, como el de tema */
+  width: min(360px, 92vw);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 10px 26px rgba(0,0,0,.32);
+  padding: 10px;
+  z-index: 2100;                   /* sobre el theme-popover */
+}
+
+.share-inner{ display:flex; flex-direction:column; gap:10px }
+.share-head{ display:flex; align-items:center; justify-content:space-between; gap:8px }
+.share-head h3{ margin:0; font-size:16px }
+.share-close{
+  appearance:none; border:0; background:transparent; color:var(--text);
+  width:32px; height:32px; border-radius:8px; cursor:pointer;
+}
+.share-close:hover{ background: var(--panel-2) }
+
+.share-body{ display:flex; flex-direction:column; gap:10px }
+.share-actions{ display:flex; flex-wrap:wrap; gap:10px; }
+
+.sr-only{
+  position:absolute !important;
+  width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;
+}
+
+
 /* contenedor de opciones (si tu HTML ya lo tiene) */
 .theme-list{
   display: flex;
