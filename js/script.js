@@ -58,6 +58,34 @@ const themeBtn   = $('#themeBtn');
 const themeLabel = $('#themeLabel');
 const ICON_BY_THEME = { system: 'fa-laptop', light: 'fa-sun', dark: 'fa-moon' };
 
+// --- Detectar tema del sistema y decidir icono dinámico ---
+const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+// Icono actual del sistema (si el usuario eligió "system")
+function systemIcon(){
+  return mediaDark.matches ? 'fa-moon' : 'fa-sun';
+}
+
+// Pinta el icono del botón según el modo actual
+function setThemeButtonIcon(mode){
+  const btnIcon = themeBtn ? themeBtn.querySelector('.ico') : null;
+  if (!btnIcon) return;
+
+  // Limpiar posibles iconos previos
+  btnIcon.classList.remove('fa-circle-half-stroke','fa-laptop','fa-sun','fa-moon');
+
+  // Si es "system", mostramos sun/moon real; si no, el icono propio del modo
+  const cls = (mode === 'system') ? systemIcon() : (ICON_BY_THEME[mode] || 'fa-circle-half-stroke');
+  btnIcon.classList.add(cls);
+}
+
+// Cuando el sistema cambia (solo importa si el usuario eligió "system")
+function onSystemThemeChange(){
+  const saved = (localStorage.getItem('theme') || 'system').toLowerCase();
+  if (saved === 'system') setThemeButtonIcon('system');
+}
+
+
 let themePop = document.getElementById('themePopover');
 
 // Crea el popover si no existe en el HTML
