@@ -1,10 +1,17 @@
+/* =========================================================
+   1) HELPERS & GLOBALS
+   ========================================================= */
 // Helpers
 const $ = (s, d=document) => d.querySelector(s);
 
 const body  = document.body;
 const root  = document.documentElement;
 
-// ====== SIDEBAR TOGGLE (header mobile + rail button) ======
+
+
+/* =========================================================
+   2) SIDEBAR TOGGLE (header mobile + rail button)
+   ========================================================= */
 const togglers = document.querySelectorAll('.hamburger, .rail-toggle');
 
 function syncBrandA11y(open){
@@ -64,12 +71,21 @@ document.addEventListener('keydown', (e) => {
 });
 
 
-// ===== Tema: Light / Dark / System (Popover con iconos) =====
+
+/* =========================================================
+   3) THEME: Light / Dark / System
+   ---------------------------------------------------------
+   3.1) Botón y label
+   3.2) Icono dinámico (System = sun/moon según SO)
+   3.3) Popover: creación, apertura, navegación, posicionamiento
+   3.4) applyTheme + listeners de sistema
+   ========================================================= */
+// 3.1) Botón y label
 const themeBtn   = $('#themeBtn');
 const themeLabel = $('#themeLabel');
 const ICON_BY_THEME = { system: 'fa-laptop', light: 'fa-sun', dark: 'fa-moon' };
 
-// --- Detectar tema del sistema y decidir icono dinámico ---
+// 3.2) Icono dinámico (System = sun/moon)
 const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
 
 // Icono actual del sistema (si el usuario eligió "system")
@@ -97,6 +113,7 @@ function onSystemThemeChange(){
 }
 
 
+// 3.3) Popover de Theme
 let themePop = document.getElementById('themePopover');
 
 // Crea el popover si no existe en el HTML
@@ -233,6 +250,7 @@ function positionThemePopover(){
 }
 
 
+// 3.4) applyTheme + listeners de sistema
 function applyTheme(val){
   const mode = (val || 'system').toLowerCase();
   root.setAttribute('data-theme', mode);
@@ -259,7 +277,17 @@ if (mode === 'system'){
 }
 
 
-// ===== Share: Desktop con hover tipo Freepik + nativo en tablet/móvil =====
+
+/* =========================================================
+   4) SHARE: Desktop hover (Freepik) + Mobile nativo
+   ---------------------------------------------------------
+   4.1) Selectores y estado del mouse
+   4.2) Detección de dispositivo
+   4.3) Tooltip de rail (solo desktop, rail cerrado, sin popovers)
+   4.4) Lógica de Share (links, abrir/cerrar, posicionamiento, hover corridor)
+   4.5) Cierre por clic-fuera y Esc (estilo Freepik)
+   ========================================================= */
+// 4.1) Selectores y estado del mouse
 const shareBtn    = $('#shareBtn');
 const shareModal  = $('#shareModal'); // fallback muy viejo
 const sharePop    = $('#sharePopover');
@@ -276,6 +304,7 @@ document.addEventListener('mousemove', (e) => {
 }, { passive: true });
 
 
+// 4.2) Detección de dispositivo
 function isTouchDevice(){
   return ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
 }
@@ -290,7 +319,8 @@ function useNativeShare(){
   return (typeof navigator.share === 'function') && (isTouchDevice() || isTabletOrSmaller());
 }
 
-// ===== Tooltip para ítems sin popover (solo desktop, sidebar cerrado) =====
+
+// 4.3) Tooltip de rail (solo desktop, rail cerrado, sin popovers)
 const railTip = (() => {
   const el = document.createElement('div');
   el.id = 'railTip';
@@ -352,12 +382,10 @@ railItems.forEach(btn => {
 window.addEventListener('scroll', hideRailTip, { passive:true });
 window.addEventListener('resize', hideRailTip, { passive:true });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideRailTip(); });
-
-// Cuando cambie el estado del sidebar (por tu setSidebar), asegúrate de ocultar
-// -> Si quieres, dentro de setSidebar(open) añade: if(open) hideRailTip();
+// Sugerencia: en setSidebar(open) puedes llamar a hideRailTip() cuando open=true
 
 
-
+// 4.4) Lógica de Share
 function setupShareLinks(url, title){
   if (shareEmail) shareEmail.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`;
   if (shareX)     shareX.href     = `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
@@ -536,7 +564,8 @@ document.addEventListener('mousemove', (e) => {
   }
 });
 
-// 4) Cerrar por clic-fuera y por Esc (desktop)
+
+// 4.5) Cerrar por clic-fuera y por Esc (desktop)
 document.addEventListener('click', (e) => {
   if (useNativeShare()) return; // en móvil/tablet no hay popover
   if (sharePop.hidden) return;
@@ -570,16 +599,17 @@ document.addEventListener('keydown', (e) => {
 });
 
 
-
-
-// 5) Inicializar input/links con la URL actual al cargar popover
+// 4.6) Inicialización de campo de enlace
 document.addEventListener('DOMContentLoaded', () => {
   if (shareInput) shareInput.value = location.href;
 });
 
 
 
-// ===== Idioma (placeholder)
+/* =========================================================
+   5) OTROS (Idioma, Notifybar, etc.)
+   ========================================================= */
+// Idioma (placeholder)
 const langSel = $('#lang');
 if (langSel){
   langSel.addEventListener('change', (e) => {
