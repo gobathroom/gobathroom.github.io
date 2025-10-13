@@ -1,3 +1,6 @@
+/* =========================================================
+   1) VARIABLES & THEME TOKENS
+   ========================================================= */
 :root{ 
   --header-h: 64px;
   --notify-h: 40px;
@@ -21,7 +24,7 @@
   --brand-2: #7ef0ff;
 }
 
-/* Marco lateral igual al contenido */
+/* Contenido alineado con el marco lateral */
 .topbar, .notifybar, .footer-inner{
   padding-inline: clamp(16px, calc((100% - var(--content-max)) / 2), 24px);
 }
@@ -34,7 +37,11 @@
 body.sidebar-open .topbar .brand{ opacity:0; width:0; margin:0; pointer-events:none }
 body.sidebar-open .topbar .top-actions .divider{ opacity:0; width:0 }
 
-/* Temas */
+
+
+/* =========================================================
+   2) THEMES (System / Light / Dark)
+   ========================================================= */
 @media (prefers-color-scheme: light){
   :root[data-theme="system"]{
     --bg:#f5f7fb; --panel:#ffffff; --panel-2:#f1f4fa; --text:#111827; --muted:#55627a; --border:rgba(17,24,39,.1);
@@ -47,7 +54,11 @@ body.sidebar-open .topbar .top-actions .divider{ opacity:0; width:0 }
   --bg:#0d1117; --panel:#161b22; --panel-2:#1c2230; --text:#dbe5ff; --muted:#9fb0d0; --border:rgba(255,255,255,.12);
 }
 
-/* Reset */
+
+
+/* =========================================================
+   3) RESET & BASE TYPOGRAPHY
+   ========================================================= */
 *{ box-sizing:border-box }
 html,body{ height:100% }
 body{
@@ -57,7 +68,21 @@ body{
   font: 400 16px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans";
 }
 
-/* ===== Sidebar ===== */
+
+
+/* =========================================================
+   4) SIDEBAR (Rail)
+   ---------------------------------------------------------
+   4.1) Contenedor
+   4.2) Cabecera del rail
+   4.3) Marca dentro del sidebar
+   4.4) Grupos
+   4.5) Items
+   4.6) Estados de foco (sin ring)
+   ========================================================= */
+
+
+/* 4.1) Contenedor */
 .sidebar{
   position: fixed;
   top: 0; bottom: 0; left: 0;
@@ -74,7 +99,7 @@ body{
 }
 body.sidebar-open .sidebar{ width: var(--rail-expanded) }
 
-/* ===== Cabecera del rail ===== */
+/* 4.2) Cabecera del rail */
 .rail-head{
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -98,7 +123,7 @@ body.sidebar-open .rail-head{
 /* Footer abajo sin space-between */
 .rail-footer{ margin-top: auto; }
 
-/* ===== Botón "bars" ===== */
+/* Botón "bars" */
 .rail-head .rail-toggle{
   border:0; background:transparent;
   width:var(--rail-btn); height:var(--rail-btn);
@@ -117,13 +142,11 @@ body.sidebar-open .rail-head .rail-toggle{
   justify-self: center;
 }
 
-/* ===== Brand dentro del sidebar (Go Bathroom) ===== */
-/* CERRADO: NO se muestra */
+
+/* 4.3) Marca dentro del sidebar */
 .sidebar .rail-head .brand{
   display: none;
 }
-
-/* ABIERTO: aparece y se alinea a la columna de íconos */
 body.sidebar-open .sidebar .rail-head .brand{
   display: grid;
   grid-template-columns: var(--rail-collapsed) 1fr; /* [icono | texto] */
@@ -136,15 +159,11 @@ body.sidebar-open .sidebar .rail-head .brand{
   color: var(--text);
   border-radius: var(--radius);
 }
-
-/* Icono del brand centrado como los de la lista */
 .sidebar .rail-head .brand-icon{
   font-size: 20px;
   line-height: 1;
   justify-self: center;
 }
-
-/* Texto (oculto por defecto y con animación suave) */
 .sidebar .rail-head .brand-name{
   font-weight: 700;
   white-space: nowrap;
@@ -155,8 +174,6 @@ body.sidebar-open .sidebar .rail-head .brand{
   transform: translateX(-4px);
   transition: opacity .2s ease, transform .2s ease;
 }
-
-/* Al abrir: mostrar texto y acercarlo al ícono */
 body.sidebar-open .sidebar .rail-head .brand-name{
   opacity: 1;
   width: auto;
@@ -164,7 +181,8 @@ body.sidebar-open .sidebar .rail-head .brand-name{
   margin-left: -6px;   /* “pegadito” al icono */
 }
 
-/* ===== Grupos de items ===== */
+
+/* 4.4) Grupos */
 .rail-group, .rail-footer{
   list-style:none;
   margin:0;
@@ -172,9 +190,7 @@ body.sidebar-open .sidebar .rail-head .brand-name{
 }
 
 
-
-
-/* ===== Items del rail ===== */
+/* 4.5) Items */
 .rail-item{
   appearance:none; background:transparent; border:0; font:inherit;
   width:100%; min-height:40px;
@@ -200,10 +216,9 @@ body.sidebar-open .rail-item{
 .rail-item::before{
   content:"";
   position:absolute;
-  /* deja aire arriba y abajo para que no se “toquen” */
-  top: 2px;                 /* ← separa del borde superior */
-  bottom: 2px;              /* ← separa del borde inferior */
-  left: var(--space-2);     /* margen lateral que ya tenías */
+  top: 2px;                
+  bottom: 2px;              
+  left: var(--space-2);     
   right: var(--space-2);
   border-radius:12px;
   background: var(--panel-2);
@@ -216,18 +231,14 @@ body.sidebar-open .rail-item{
 .rail-item.is-active::before{
   opacity:1;
 }
-
-/* ya no pintamos el fondo directamente en el item */
 .rail-item:hover{ background: transparent }
 .rail-item.is-active{ background: transparent }
 
-/* Icono */
+/* Icono y texto */
 .rail-item .ico{
   justify-self:center;
   width:24px; text-align:center; flex:0 0 24px;
 }
-
-/* Texto */
 .rail-item .txt{
   opacity:0; white-space:nowrap; overflow:hidden;
   transition: opacity .2s ease;
@@ -241,7 +252,7 @@ body.sidebar-open .rail-item .txt{
 
 .rail-item.ghost{ opacity:.85 }
 
-/* Quitar foco visual en el rail (todos los botones, incl. Share) */
+/* 4.6) Sin focus ring en rail */
 .sidebar .rail-item,
 .sidebar .rail-item:focus,
 .sidebar .rail-item:focus-visible,
@@ -250,8 +261,6 @@ body.sidebar-open .rail-item .txt{
   outline: none !important;
   box-shadow: none !important;
 }
-
-/* Extra por si algún botón del rail usa .icon-btn */
 .sidebar .icon-btn:focus,
 .sidebar .icon-btn:focus-visible {
   outline: none !important;
@@ -262,7 +271,10 @@ body.sidebar-open .rail-item .txt{
 .sidebar button::-moz-focus-inner { border: 0; }
 
 
-/* ===== Header fijo alineado al rail ===== */
+
+/* =========================================================
+   5) TOPBAR (Header fijo)
+   ========================================================= */
 .topbar{
   position: fixed;
   top: 0; left: var(--rail-collapsed); right: 0;
@@ -277,10 +289,10 @@ body.sidebar-open .rail-item .txt{
 }
 body.sidebar-open .topbar{ left: var(--rail-expanded) }
 
-/* ===== Brand en TOPBAR (Go Bathroom) — visible con sidebar CERRADO ===== */
+/* Marca topbar cuando sidebar cerrado */
 .topbar .topbar-brand{
   display: grid;
-  grid-auto-flow: column;         /* [icono | texto] */
+  grid-auto-flow: column;        
   grid-auto-columns: max-content;
   align-items: center;
   gap: 6px;
@@ -289,21 +301,15 @@ body.sidebar-open .topbar{ left: var(--rail-expanded) }
   color: var(--text);
   border-radius: var(--radius);
 }
-.topbar .topbar-brand .brand-icon{
-  font-size: 18px;                /* un poco más chico que en el sidebar */
-  line-height: 1;
-}
+.topbar .topbar-brand .brand-icon{ font-size: 18px; line-height: 1; }
 .topbar .topbar-brand .brand-name{
-  font-weight: 700;               /* mismo peso que en el sidebar */
+  font-weight: 700;               
   letter-spacing: .2px;
   margin-left: 12px;
 }
-/* Con sidebar ABIERTO, oculta el brand de la topbar */
-body.sidebar-open .topbar .topbar-brand{
-  display: none;
-}
+body.sidebar-open .topbar .topbar-brand{ display: none; }
 
-/* Genéricos */
+/* Genéricos UI header */
 .icon-btn{
   display:grid; place-items:center; width:40px; height:40px;
   border:1px solid var(--border); background:transparent; color:var(--text);
@@ -319,7 +325,11 @@ body.sidebar-open .topbar .topbar-brand{
   padding:8px 12px; border-radius:10px;
 }
 
-/* ===== Notify bar ===== */
+
+
+/* =========================================================
+   6) NOTIFY BAR
+   ========================================================= */
 .notifybar{
   position: fixed;
   top: var(--header-h);
@@ -337,7 +347,11 @@ body.sidebar-open .topbar .topbar-brand{
 body.sidebar-open .notifybar{ left: var(--rail-expanded) }
 .notifybar a{ color:var(--brand); text-decoration:none }
 
-/* ===== Page ===== */
+
+
+/* =========================================================
+   7) PAGE LAYOUT (Main, Cards, Footer)
+   ========================================================= */
 .page{
   min-height:100svh;
   display:flex; flex-direction:column;
@@ -347,7 +361,7 @@ body.sidebar-open .notifybar{ left: var(--rail-expanded) }
 }
 body.sidebar-open .page{ margin-left: var(--rail-expanded) }
 
-/* ===== Main ===== */
+/* Main */
 .content{
   width: min(100% - 48px, var(--content-max));
   margin: var(--space-4) auto;
@@ -355,6 +369,7 @@ body.sidebar-open .page{ margin-left: var(--rail-expanded) }
   gap: var(--space-4);
 }
 
+/* Cards & hero */
 .card{
   background:var(--panel);
   border:1px solid var(--border);
@@ -376,7 +391,7 @@ body.sidebar-open .page{ margin-left: var(--rail-expanded) }
 .placeholder{ height:160px; display:grid; place-items:center; color:var(--muted); border:1px dashed var(--border); border-radius:12px }
 .placeholder.tall{ height:320px }
 
-/* ===== Footer ===== */
+/* Footer */
 .site-footer{ margin-top:auto; background:var(--panel); border-top:1px solid var(--border) }
 .footer-inner{
   width:min(100% - 32px, var(--content-max));
@@ -386,7 +401,11 @@ body.sidebar-open .page{ margin-left: var(--rail-expanded) }
 .footer-links{ margin-left:auto; display:flex; gap:16px }
 .footer-links a{ color:var(--muted); text-decoration:none }
 
-/* ===== Dialog ===== */
+
+
+/* =========================================================
+   8) DIALOG (fallback)
+   ========================================================= */
 dialog{
   border:1px solid var(--border); border-radius:12px; padding:20px; background:var(--panel); color:var(--text)
 }
@@ -394,7 +413,11 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 .input{ width:100%; padding:10px 12px; border:1px solid var(--border); background:transparent; color:var(--text); border-radius:10px }
 .dialog-actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:14px }
 
-/* ===== Theme Popover ===== */
+
+
+/* =========================================================
+   9) THEME POPOVER
+   ========================================================= */
 .theme-popover[hidden]{ display: none !important; }
 
 .theme-popover{
@@ -408,7 +431,11 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   z-index: 2000;
 }
 
-/* ===== Share Popover (nuevo) ===== */
+
+
+/* =========================================================
+   10) SHARE POPOVER
+   ========================================================= */
 .share-popover[hidden]{ display:none !important; }
 
 .share-popover{
@@ -436,7 +463,10 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 }
 
 
-/* contenedor de opciones (si tu HTML ya lo tiene) */
+
+/* =========================================================
+   11) THEME OPTION LIST (dentro del popover)
+   ========================================================= */
 .theme-list{
   display: flex;
   flex-direction: column;
@@ -484,7 +514,11 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   flex: 0 0 18px;
 }
 
-/* ===== Rail tooltip (solo desktop con sidebar cerrado) ===== */
+
+
+/* =========================================================
+   12) RAIL TOOLTIP (solo desktop con sidebar cerrado)
+   ========================================================= */
 .rail-tip[hidden] { display: none !important; }
 
 .rail-tip{
@@ -510,8 +544,9 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 
 
 
-
-/* ===== Responsive ===== */
+/* =========================================================
+   13) RESPONSIVE
+   ========================================================= */
 @media (max-width: 1024px){ }
 @media (max-width: 768px){
   .sidebar{
@@ -532,7 +567,11 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   .topbar .brand .brand-name{ display:none }
 }
 
-/* Utilidad: solo móvil */
+
+
+/* =========================================================
+   14) UTILIDADES
+   ========================================================= */
 .only-mobile { display: none }
 @media (max-width: 768px){
   .only-mobile { display: grid }
