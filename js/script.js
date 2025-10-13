@@ -214,45 +214,28 @@ function applyTheme(val){
 }
 
 
-// ===== Share: HÍBRIDO (nativo en mobile/tablet, popover en desktop) =====
+// ===== Share: Desktop con hover tipo Freepik + nativo en tablet/móvil =====
 const shareBtn    = $('#shareBtn');
-const shareModal  = $('#shareModal');  // fallback de seguridad
+const shareModal  = $('#shareModal'); // fallback muy viejo
 const sharePop    = $('#sharePopover');
 const shareInput  = $('#shareInput');
 const shareCopy   = $('#shareCopy');
-const shareClose  = sharePop ? sharePop.querySelector('.share-close') : null;
 const shareEmail  = $('#shareEmail');
 const shareX      = $('#shareX');
 const shareWhats  = $('#shareWhats');
 
 function isTouchDevice(){
-  return ( 'ontouchstart' in window ) || navigator.maxTouchPoints > 0;
+  return ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
 }
 function isTabletOrSmaller(){
-  // Usamos 1024px para incluir tablets en modo landscape
+  // tablet incl. landscape
   return window.matchMedia('(max-width: 1024px)').matches;
 }
-function useNativeShare(){
-  // Prioriza nativo en móviles/tablets si está disponible
-  return (typeof navigator.share === 'function') && (isTouchDevice() || isTabletOrSmaller());
+function isDesktop(){
+  return !isTouchDevice() && window.matchMedia('(min-width: 1025px)').matches;
 }
-
-function openShare(e){
-  e && e.preventDefault();
-
-  const url = location.href;
-  const title = document.title;
-
-  // Rutas rápidas si hay share nativo (mobile/tablet)
-  if (useNativeShare()){
-    navigator.share({ title, url }).catch(()=>{});
-    return;
-  }
-
-  // Desktop → popover anclado
-  if (shareInput) shareInput.value = url;
-  setupShareLinks(url, title);
-  openSharePopover();
+function useNativeShare(){
+  return (typeof navigator.share === 'function') && (isTouchDevice() || isTabletOrSmaller());
 }
 
 function setupShareLinks(url, title){
@@ -263,25 +246,22 @@ function setupShareLinks(url, title){
 
 function openSharePopover(){
   if (!shareBtn || !sharePop) return;
-
-  // Marcar estado y mostrar
   shareBtn.setAttribute('aria-expanded', 'true');
   sharePop.hidden = false;
-
   positionSharePopover();
   window.addEventListener('resize', positionSharePopover, { passive:true });
   window.addEventListener('scroll', positionSharePopover, { passive:true });
-
-  // Enfocar el botón Copy por accesibilidad
+  // Accesibilidad: enfoca acción primaria
   setTimeout(()=> shareCopy && shareCopy.focus(), 0);
 }
 
 function closeSharePopover(){
-  if (!sharePop) return;
+  if (!sharePop || sharePop.hidden) return;
   shareBtn && shareBtn.setAttribute('aria-expanded','false');
   sharePop.hidden = true;
   window.removeEventListener('resize', positionSharePopover);
   window.removeEventListener('scroll', positionSharePopover);
+  // devolver foco al trigger (accesibilidad)
   shareBtn && shareBtn.focus();
 }
 
@@ -298,17 +278,17 @@ function positionSharePopover(){
   let left, top;
 
   if (railOpen){
-    // Sidebar ABIERTO: sobre el botón (arriba preferente, abajo si no cabe)
+    // Sidebar ABIERTO: arriba del botón (si no cabe, debajo)
     left = r.left + (r.width - popW) / 2;
     top  = r.top - gap - popH;
     if (top < 8) top = r.bottom + gap;
   } else {
-    // Sidebar CERRADO: a la derecha del rail, centrado verticalmente
+    // Sidebar CERRADO: a la derecha del rail
     left = r.right + gap;
     top  = r.top + (r.height - popH) / 2;
   }
 
-  // Limitar dentro del viewport
+  // Limitar al viewport
   left = Math.max(8, Math.min(left, window.innerWidth - popW - 8));
   top  = Math.max(8, Math.min(top, window.innerHeight - popH - 8));
 
@@ -316,42 +296,138 @@ function positionSharePopover(){
   sharePop.style.top  = `${Math.round(top)}px`;
 }
 
-// Listeners Share
-if (shareBtn) shareBtn.addEventListener('click', openShare);
+/* ============ Interacción ============ */
 
+// 1) Copiar
 if (shareCopy) shareCopy.addEventListener('click', async () => {
   try{
-    if (shareInput) await navigator.clipboard.writeText(shareInput.value);
+    await navigator.clipboard.writeText(shareInput.value || location.href);
     shareCopy.textContent = 'Copied!';
     setTimeout(()=> shareCopy.textContent = 'Copy', 1200);
   } catch{}
 });
 
-if (shareClose) shareClose.addEventListener('click', closeSharePopover);
+// 2) Click en el botón Share
+// - En móvil/tablet → nativo
+// - En desktop → también permite toggle con click (accesibilidad/teclado)
+if (shareBtn) shareBtn.addEventListener('click', (e) => {
+  const url = location.href;
+  const title = document.title;
 
-// Cerrar popover por click-fuera y por Escape
+  if (useNativeShare()){
+    e.preventDefault();
+    navigator.share({ title, url }).catch(()=>{});
+    return;
+  }
+
+  // Desktop: toggle por click (fallback accesible)
+  e.preventDefault();
+  if (sharePop.hidden){
+    if (shareInput) shareInput.value = url;
+    setupShareLinks(url, title);
+    openSharePopover();
+  } else {
+    closeSharePopover();
+  }
+});
+
+// 3) Hover tipo Freepik (solo desktop)
+let hoverCloseTimer = null;    // temporizador de cierre diferido
+let tracking = false;          // ¿estamos siguiendo trayectoria?
+let corridor = null;           // “buffer” entre botón y popover
+
+function buildCorridor(){
+  // Rectángulo tolerante desde el botón hasta el popover
+  const br = shareBtn.getBoundingClientRect();
+  const pr = sharePop.getBoundingClientRect();
+  const pad = 12; // tolerancia lateral
+
+  const left = Math.min(br.right, pr.left) - pad;
+  const right = Math.max(br.right, pr.left) + pad;
+  const top = Math.min(br.top, pr.top) - pad;
+  const bottom = Math.max(br.bottom, pr.bottom) + pad;
+
+  corridor = { left, right, top, bottom };
+}
+
+function inCorridor(x, y){
+  if (!corridor) return false;
+  return x >= corridor.left && x <= corridor.right && y >= corridor.top && y <= corridor.bottom;
+}
+
+function startHoverOpen(){
+  if (!isDesktop()) return; // solo desktop
+  const url = location.href;
+  const title = document.title;
+
+  if (sharePop.hidden){
+    if (shareInput) shareInput.value = url;
+    setupShareLinks(url, title);
+    openSharePopover();
+  }
+  buildCorridor();
+}
+
+function scheduleHoverClose(){
+  // cierra si no entra al popover y no sigue la trayectoria
+  if (!isDesktop()) return;
+
+  clearTimeout(hoverCloseTimer);
+  tracking = true;
+
+  hoverCloseTimer = setTimeout(() => {
+    tracking = false;
+    // si aún no entró a la ventana y no está sobre el botón, cerrar
+    if (!sharePop.matches(':hover') && !shareBtn.matches(':hover')){
+      closeSharePopover();
+    }
+  }, 180); // ventana breve para “cruzar” hacia el popover
+}
+
+function cancelHoverClose(){
+  clearTimeout(hoverCloseTimer);
+  tracking = false;
+}
+
+// Eventos de hover
+if (shareBtn){
+  shareBtn.addEventListener('mouseenter', startHoverOpen);
+  shareBtn.addEventListener('mouseleave', scheduleHoverClose);
+}
+if (sharePop){
+  sharePop.addEventListener('mouseenter', cancelHoverClose);
+  sharePop.addEventListener('mouseleave', () => {
+    if (isDesktop()) closeSharePopover();
+  });
+}
+
+// Seguimiento de trayectoria: si el cursor se desvía del corredor antes de llegar
+document.addEventListener('mousemove', (e) => {
+  if (!isDesktop() || !tracking || sharePop.hidden) return;
+  if (!inCorridor(e.clientX, e.clientY) && !sharePop.matches(':hover') && !shareBtn.matches(':hover')){
+    // cambió de dirección → cerrar
+    clearTimeout(hoverCloseTimer);
+    tracking = false;
+    closeSharePopover();
+  }
+});
+
+// 4) Cerrar por clic-fuera y por Esc (desktop)
 document.addEventListener('click', (e) => {
-  if (!sharePop || sharePop.hidden) return;
+  if (useNativeShare()) return; // en móvil/tablet no hay popover
+  if (sharePop.hidden) return;
   const inside = e.target.closest('#sharePopover, #shareBtn');
   if (!inside) closeSharePopover();
 });
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && sharePop && !sharePop.hidden) closeSharePopover();
+  if (e.key === 'Escape' && !sharePop.hidden) closeSharePopover();
 });
 
-// ===== Fallback modal para navegadores muy viejos (opcional) =====
-const shareLink  = $('#shareLink');
-const copyLink   = $('#copyLink');
-const closeShare = $('#closeShare');
-
-if (copyLink) copyLink.addEventListener('click', async () => {
-  try{
-    await navigator.clipboard.writeText(shareLink.value || location.href);
-    copyLink.textContent = 'Copied!';
-    setTimeout(()=>copyLink.textContent='Copy', 1200);
-  }catch{}
+// 5) Inicializar input/links con la URL actual al cargar popover
+document.addEventListener('DOMContentLoaded', () => {
+  if (shareInput) shareInput.value = location.href;
 });
-if (closeShare) closeShare.addEventListener('click', () => shareModal && shareModal.close());
+
 
 
 // ===== Idioma (placeholder)
