@@ -283,19 +283,21 @@ if (mode === 'system'){
    ---------------------------------------------------------
    4.1) Selectores y estado del mouse
    4.2) Detección de dispositivo
-   // 4.3) Tooltip inteligente del rail (desktop cerrado, sin popovers)
+   4.3) Tooltip inteligente del rail (desktop cerrado, sin popovers)
    4.4) Lógica de Share (links, abrir/cerrar, posicionamiento, hover corridor)
    4.5) Cierre por clic-fuera y Esc (estilo Freepik)
+   4.6) Inicialización de campo de enlace
    ========================================================= */
 // 4.1) Selectores y estado del mouse
 const shareBtn    = $('#shareBtn');
 const shareModal  = $('#shareModal'); // fallback muy viejo
 const sharePop    = $('#sharePopover');
 const shareInput  = $('#shareInput');
-const shareCopy   = $('#shareCopy');
 const shareEmail  = $('#shareEmail');
 const shareX      = $('#shareX');
 const shareWhats  = $('#shareWhats');
+const shareField = $('#shareField');
+const shareCopyInline = $('#shareCopyInline');
 // Posición del mouse (para saber si Esc se pulsa con el puntero sobre el botón)
 let lastMouseX = -1, lastMouseY = -1;
 document.addEventListener('mousemove', (e) => {
@@ -440,8 +442,9 @@ function openSharePopover(){
   positionSharePopover();
   window.addEventListener('resize', positionSharePopover, { passive:true });
   window.addEventListener('scroll', positionSharePopover, { passive:true });
-  // Accesibilidad: enfoca acción primaria
-  setTimeout(()=> shareCopy && shareCopy.focus(), 0);
+  // Accesibilidad: enfoca el botón Copy inline
+  setTimeout(()=> shareCopyInline && shareCopyInline.focus(), 0);
+
 }
 
 function closeSharePopover({ returnFocus = false } = {}){
@@ -491,14 +494,35 @@ if (!sharePop.hidden) buildCorridor();
 
 /* ============ Interacción ============ */
 
-// 1) Copiar
-if (shareCopy) shareCopy.addEventListener('click', async () => {
-  try{
-    await navigator.clipboard.writeText(shareInput.value || location.href);
-    shareCopy.textContent = 'Copied!';
-    setTimeout(()=> shareCopy.textContent = 'Copy', 1200);
-  } catch{}
-});
+// 1) Copiar (inline con feedback)
+if (shareCopyInline) {
+  shareCopyInline.addEventListener('click', async () => {
+    try {
+      const url = shareInput?.value || location.href;
+      await navigator.clipboard.writeText(url);
+
+      // feedback visual en el campo
+      shareField?.classList.add('copied');
+
+      const ico = shareCopyInline.querySelector('i');
+      const label = shareCopyInline.querySelector('.copy-text');
+      const prevIcon = ico?.className || '';
+      const prevValue = shareInput?.value || '';
+
+      if (ico) ico.className = 'fa-solid fa-check';
+      if (label) label.textContent = 'Copied!';
+      if (shareInput) shareInput.value = 'Copied successfully!';
+
+      setTimeout(() => {
+        shareField?.classList.remove('copied');
+        if (ico && prevIcon) ico.className = prevIcon;   // vuelve al icono de copy
+        if (label) label.textContent = 'Copy';
+        if (shareInput) shareInput.value = prevValue;     // restaura la URL
+      }, 1400);
+    } catch {}
+  });
+}
+
 
 // 2) Click en el botón Share
 // - En móvil/tablet → nativo
