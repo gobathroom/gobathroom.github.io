@@ -8,8 +8,6 @@ const root  = document.documentElement;
 const togglers = document.querySelectorAll('.hamburger, .rail-toggle');
 
 function syncBrandA11y(open){
-  // La marca de la topbar se oculta visualmente vía CSS cuando open=true.
-  // Aquí solo reflejamos accesibilidad.
   const topbarBrand = document.querySelector('.topbar .brand');
   if (topbarBrand) topbarBrand.setAttribute('aria-hidden', open ? 'true' : 'false');
 }
@@ -193,7 +191,6 @@ function positionThemePopover(){
   themePop.style.top  = `${Math.round(top)}px`;
 }
 
-
 function applyTheme(val){
   const mode = (val || 'system').toLowerCase();
   root.setAttribute('data-theme', mode);
@@ -213,32 +210,144 @@ function applyTheme(val){
   });
 }
 
+// ===== Share: HÍBRIDO (nativo en mobile/tablet, popover en desktop) =====
+const shareBtn    = $('#shareBtn');
+const shareModal  = $('#shareModal');  // fallback de seguridad
+const sharePop    = $('#sharePopover');
+const shareInput  = $('#shareInput');
+const shareCopy   = $('#shareCopy');
+const shareClose  = sharePop ? sharePop.querySelector('.share-close') : null;
+const shareEmail  = $('#shareEmail');
+const shareX      = $('#shareX');
+const shareWhats  = $('#shareWhats');
 
-// ===== Share: Web Share API + fallback modal
-const shareBtn   = $('#shareBtn');
-const shareModal = $('#shareModal');
+function isTouchDevice(){
+  return ( 'ontouchstart' in window ) || navigator.maxTouchPoints > 0;
+}
+function isTabletOrSmaller(){
+  // Usamos 1024px para incluir tablets en modo landscape
+  return window.matchMedia('(max-width: 1024px)').matches;
+}
+function useNativeShare(){
+  // Prioriza nativo en móviles/tablets si está disponible
+  return (typeof navigator.share === 'function') && (isTouchDevice() || isTabletOrSmaller());
+}
+
+function openShare(e){
+  e && e.preventDefault();
+
+  const url = location.href;
+  const title = document.title;
+
+  // Rutas rápidas si hay share nativo (mobile/tablet)
+  if (useNativeShare()){
+    navigator.share({ title, url }).catch(()=>{});
+    return;
+  }
+
+  // Desktop → popover anclado
+  if (shareInput) shareInput.value = url;
+  setupShareLinks(url, title);
+  openSharePopover();
+}
+
+function setupShareLinks(url, title){
+  if (shareEmail) shareEmail.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`;
+  if (shareX)     shareX.href     = `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+  if (shareWhats) shareWhats.href = `https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`;
+}
+
+function openSharePopover(){
+  if (!shareBtn || !sharePop) return;
+
+  // Marcar estado y mostrar
+  shareBtn.setAttribute('aria-expanded', 'true');
+  sharePop.hidden = false;
+
+  positionSharePopover();
+  window.addEventListener('resize', positionSharePopover, { passive:true });
+  window.addEventListener('scroll', positionSharePopover, { passive:true });
+
+  // Enfocar el botón Copy por accesibilidad
+  setTimeout(()=> shareCopy && shareCopy.focus(), 0);
+}
+
+function closeSharePopover(){
+  if (!sharePop) return;
+  shareBtn && shareBtn.setAttribute('aria-expanded','false');
+  sharePop.hidden = true;
+  window.removeEventListener('resize', positionSharePopover);
+  window.removeEventListener('scroll', positionSharePopover);
+  shareBtn && shareBtn.focus();
+}
+
+function positionSharePopover(){
+  if (!shareBtn || !sharePop) return;
+
+  const r = shareBtn.getBoundingClientRect();
+  const railOpen = body.classList.contains('sidebar-open');
+  const gap = 10;
+
+  const popW = sharePop.offsetWidth;
+  const popH = sharePop.offsetHeight;
+
+  let left, top;
+
+  if (railOpen){
+    // Sidebar ABIERTO: sobre el botón (arriba preferente, abajo si no cabe)
+    left = r.left + (r.width - popW) / 2;
+    top  = r.top - gap - popH;
+    if (top < 8) top = r.bottom + gap;
+  } else {
+    // Sidebar CERRADO: a la derecha del rail, centrado verticalmente
+    left = r.right + gap;
+    top  = r.top + (r.height - popH) / 2;
+  }
+
+  // Limitar dentro del viewport
+  left = Math.max(8, Math.min(left, window.innerWidth - popW - 8));
+  top  = Math.max(8, Math.min(top, window.innerHeight - popH - 8));
+
+  sharePop.style.left = `${Math.round(left)}px`;
+  sharePop.style.top  = `${Math.round(top)}px`;
+}
+
+// Listeners Share
+if (shareBtn) shareBtn.addEventListener('click', openShare);
+
+if (shareCopy) shareCopy.addEventListener('click', async () => {
+  try{
+    if (shareInput) await navigator.clipboard.writeText(shareInput.value);
+    shareCopy.textContent = 'Copied!';
+    setTimeout(()=> shareCopy.textContent = 'Copy', 1200);
+  } catch{}
+});
+
+if (shareClose) shareClose.addEventListener('click', closeSharePopover);
+
+// Cerrar popover por click-fuera y por Escape
+document.addEventListener('click', (e) => {
+  if (!sharePop || sharePop.hidden) return;
+  const inside = e.target.closest('#sharePopover, #shareBtn');
+  if (!inside) closeSharePopover();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && sharePop && !sharePop.hidden) closeSharePopover();
+});
+
+// Fallback modal (si algo falla en desktop antiguo)
 const shareLink  = $('#shareLink');
 const copyLink   = $('#copyLink');
 const closeShare = $('#closeShare');
 
-function openShare(){
-  const url = location.href;
-  if (navigator.share){
-    navigator.share({ title: document.title, url }).catch(()=>{});
-  } else {
-    if (shareLink) shareLink.value = url;
-    if (shareModal) shareModal.showModal();
-  }
-}
-if (shareBtn) shareBtn.addEventListener('click', openShare);
 if (copyLink) copyLink.addEventListener('click', async () => {
   try{
-    await navigator.clipboard.writeText(shareLink.value);
+    await navigator.clipboard.writeText(shareLink.value || location.href);
     copyLink.textContent = 'Copied!';
     setTimeout(()=>copyLink.textContent='Copy', 1200);
   }catch{}
 });
-if (closeShare) closeShare.addEventListener('click', () => shareModal.close());
+if (closeShare) closeShare.addEventListener('click', () => shareModal && shareModal.close());
 
 // ===== Idioma (placeholder)
 const langSel = $('#lang');
