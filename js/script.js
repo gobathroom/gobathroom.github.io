@@ -337,7 +337,7 @@ function positionRailTip(btn){
   const r = btn.getBoundingClientRect();
   const tipW = railTip.offsetWidth;
   const tipH = railTip.offsetHeight;
-  const gap  = 10;
+  const gap  = 6;
 
   let left = r.right + gap;
   let top  = r.top; // alineado al borde superior del item
