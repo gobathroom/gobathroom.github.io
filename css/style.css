@@ -574,18 +574,18 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 
 /* Tema claro: fondo y borde del pico iguales al tooltip */
 :root[data-theme="light"] .rail-tip{
-  background: var(--panel);       /* #ffffff en tu tema */
-  border-color: var(--border);    /* borde suave del tooltip */
+  background: var(--panel);
+  border-color: rgba(0,0,0,0.05); /* borde ultra suave para que no se vea línea dura */
+  filter: drop-shadow(0 8px 20px rgba(17,24,39,.12));
 }
+
+/* Pico: mismo tono que el fondo */
 :root[data-theme="light"] .rail-tip::before{
-  border-right-color: var(--border);  /* borde del pico = borde del tooltip */
+  border-right-color: rgba(0,0,0,0.05); /* igual de suave */
 }
 :root[data-theme="light"] .rail-tip::after{
-  border-right-color: var(--panel);   /* relleno del pico = fondo del tooltip */
+  border-right-color: var(--panel);
 }
-
-
-
 
 
 
