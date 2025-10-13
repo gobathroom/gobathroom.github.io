@@ -1,6 +1,12 @@
 <!doctype html>
 <html lang="en" data-theme="system">
 <head>
+
+
+
+    <!-- =====================================================
+       1) HEAD: Meta, Título, Fuentes, CSS
+       ===================================================== -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Go Bathroom</title>
@@ -8,24 +14,30 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body class="no-sidebar">
-  <!-- Header fijo (alineado a la derecha del sidebar) -->
+ 
+
+
+   <!-- =====================================================
+       2) TOPBAR (Header fijo, alineado al rail)
+       ===================================================== -->
   <header class="topbar" role="banner">
-    <!-- Solo en móvil (oculto en desktop) -->
+    
+    <!-- 2.1) Botón menú (solo móvil) -->
     <button class="icon-btn hamburger only-mobile" aria-label="Open menu" aria-expanded="false">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
       </svg>
     </button>
-
-    <!-- Marca visible en topbar cuando sidebar está cerrado -->
+    
+    <!-- 2.2) Marca en topbar (visible cuando el sidebar está cerrado) -->
     <a class="brand topbar-brand" href="/" aria-label="Go Bathroom NYC — Home">
       <i class="fa-solid fa-restroom brand-icon" aria-hidden="true"></i>
       <span class="brand-name">Go Bathroom</span>
     </a>
 
+     <!-- 2.3) Acciones topbar (idioma, etc.) -->
     <nav class="top-actions" aria-label="Primary">
       <div class="divider"></div>
-      <!-- Idioma al extremo derecho -->
       <label class="lang-select" aria-label="Language">
         <select id="lang">
           <option value="en" selected>English</option>
@@ -36,28 +48,42 @@
     </nav>
   </header>
 
-  <!-- Notification bar fijo bajo el header -->
+
+  
+ <!-- =====================================================
+       3) NOTIFY BAR (bajo el header)
+       ===================================================== -->
   <div class="notifybar" id="notifybar" role="region" aria-label="Notice">
     NYC Law (Passed 2021, Active Since 2022): Couriers have the right to use restrooms at pickup locations (if in a common area).
     <a href="#">Learn more</a>
   </div>
 
-  <!-- Sidebar lateral estilo Freepik (fijo desde top:0 a bottom:0) -->
-<aside class="sidebar" aria-label="App menu">
-  <!-- Fila superior del rail: nombre (aparece al abrir) + botón ☰ a la derecha -->
-  <div class="rail-head">
 
-    <!-- NUEVO: nombre + ícono -->
+  
+  <!-- =====================================================
+       4) SIDEBAR (Rail estilo Freepik)
+       -----------------------------------------------------
+       4.1) Cabecera del rail (marca + botón bars)
+       4.2) Grupo principal (acciones)
+       4.3) Footer del rail (Theme + popover)
+       ===================================================== -->
+<aside class="sidebar" aria-label="App menu">
+  
+    <!-- 4.1) Cabecera del rail -->
+  <div class="rail-head">
+<!-- Marca del producto (visible con sidebar abierto) -->
     <a href="/" class="brand">
       <i class="fa-solid fa-restroom brand-icon" aria-hidden="true"></i>
       <span class="brand-name">Go Bathroom</span>
     </a>
-
+    
+    <!-- Botón bars -->
     <button class="icon-btn rail-toggle hamburger" aria-label="Toggle menu" aria-expanded="false">
       <i class="fa-solid fa-bars" aria-hidden="true"></i>
     </button>
   </div>
 
+      <!-- 4.2) Grupo principal de acciones -->
   <ul class="rail-group" role="list">
     <li>
       <button class="rail-item" data-action="suggest">
@@ -85,14 +111,15 @@
     </li>
   </ul>
 
+      <!-- 4.3) Footer del rail: Theme + Popover -->
  <div class="rail-footer">
-  <!-- Botón disparador -->
+     <!-- Disparador del popover de temas -->
   <button class="rail-item ghost" id="themeBtn" aria-haspopup="listbox" aria-expanded="false" data-popover="true">
     <i class="fa-solid fa-circle-half-stroke ico" aria-hidden="true"></i>
     <span class="txt">Theme: <b id="themeLabel">System</b></span>
   </button>
 
-  <!-- Popover con opciones (se muestra/oculta por JS) -->
+      <!-- Popover theme (listbox) -->
   <div id="themePopover" class="theme-popover" role="listbox" aria-label="Select theme" hidden>
     <button class="theme-opt" role="option" data-value="system" aria-selected="false">
       <i class="fa-solid fa-laptop opt-ico" aria-hidden="true"></i>
@@ -108,13 +135,21 @@
     </button>
   </div>
 </div>
-
 </aside>
 
 
-  <!-- Contenido principal (empujado por el sidebar) -->
+  
+   <!-- =====================================================
+       5) PAGE (Contenido principal empujado por el rail)
+       -----------------------------------------------------
+       5.1) Hero
+       5.2) Secciones (Icon Key / Emoji Key)
+       5.3) Footer
+       ===================================================== -->
   <div class="page">
     <main class="content" id="appmain">
+      
+         <!-- 5.1) Hero -->
       <section class="card hero" aria-labelledby="h-title">
         <h1 id="h-title">Find accessible bathrooms near you</h1>
         <p class="lead">Collaborative • Free • Updated monthly.</p>
@@ -126,6 +161,7 @@
         </div>
       </section>
 
+            <!-- 5.2) Secciones de contenido -->
       <section class="card" aria-labelledby="icon-key">
         <h2 id="icon-key">ICON KEY</h2>
         <div class="placeholder tall">Icon legend goes here</div>
@@ -137,7 +173,7 @@
       </section>
     </main>
 
-    <!-- Footer al final del documento (sin superponerse) -->
+    <!-- 5.3) Footer del sitio -->
     <footer class="site-footer" role="contentinfo">
       <div class="footer-inner">
         <span>2025 Go Bathroom NYC</span>
@@ -149,7 +185,11 @@
     </footer>
   </div>
 
-  <!-- Modal simple para Share (fallback) -->
+
+  
+ <!-- =====================================================
+       6) DIALOG (fallback Share muy antiguo)
+       ===================================================== -->
   <dialog id="shareModal" aria-labelledby="shareTitle">
     <h3 id="shareTitle">Share</h3>
     <p>Copy the link or share it:</p>
@@ -160,7 +200,11 @@
     </div>
   </dialog>
 
-  <!-- Popover de Share (anclado al botón) -->
+
+  
+  <!-- =====================================================
+       7) SHARE POPOVER (anclado al botón del rail)
+       ===================================================== -->
 <div id="sharePopover" class="share-popover" role="dialog" aria-modal="false" aria-labelledby="sharePopoverTitle" hidden>
   <div class="share-inner">
     <div class="share-head">
@@ -180,6 +224,10 @@
 </div>
 
 
+
+    <!-- =====================================================
+       8) SCRIPTS
+       ===================================================== -->
   <script src="js/script.js"></script>
 </body>
 </html>
