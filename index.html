@@ -78,7 +78,7 @@
       </button>
     </li>
     <li>
-      <button class="rail-item" id="shareBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="sharePopover">
+      <button class="rail-item" id="shareBtn">
         <i class="fa-solid fa-share-nodes ico" aria-hidden="true"></i>
         <span class="txt">Share</span>
       </button>
@@ -159,28 +159,6 @@
       <button class="btn primary" id="closeShare">Close</button>
     </div>
   </dialog>
-
-  <!-- Popover de Share (anclado al botón) -->
-  <div id="sharePopover" class="share-popover" role="dialog" aria-modal="false" aria-labelledby="sharePopoverTitle" hidden>
-    <div class="share-inner">
-      <div class="share-head">
-        <h3 id="sharePopoverTitle">Share</h3>
-        <button class="share-close" aria-label="Close share panel">
-          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-        </button>
-      </div>
-      <div class="share-body">
-        <label class="sr-only" for="shareInput">Page link</label>
-        <input id="shareInput" class="input" readonly />
-        <div class="share-actions">
-          <button class="btn" id="shareCopy">Copy</button>
-          <a class="btn" id="shareEmail" href="#" rel="noopener">Email</a>
-          <a class="btn" id="shareX" href="#" target="_blank" rel="noopener">X</a>
-          <a class="btn" id="shareWhats" href="#" target="_blank" rel="noopener">WhatsApp</a>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <script src="js/script.js"></script>
 </body>
