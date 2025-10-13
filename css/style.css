@@ -252,6 +252,17 @@ body.sidebar-open .rail-item .txt{
 
 .rail-item.ghost{ opacity:.85 }
 
+
+/* 4.5.1) Enlaces del rail: sin subrayado en ningún estado */
+.sidebar .rail-item,
+.sidebar .rail-item:hover,
+.sidebar .rail-item:focus,
+.sidebar .rail-item:visited {
+  text-decoration: none;
+  color: var(--text);
+}
+
+
 /* 4.6) Sin focus ring en rail */
 .sidebar .rail-item,
 .sidebar .rail-item:focus,
