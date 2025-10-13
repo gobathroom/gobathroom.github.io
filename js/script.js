@@ -228,12 +228,18 @@ function applyTheme(val){
   themeLabel && (themeLabel.textContent = mode[0].toUpperCase() + mode.slice(1));
   localStorage.setItem('theme', mode);
 
-  // Icono del botón según el tema
-  const btnIcon = themeBtn ? themeBtn.querySelector('.ico') : null;
-  if (btnIcon){
-    btnIcon.classList.remove('fa-circle-half-stroke','fa-laptop','fa-sun','fa-moon');
-    btnIcon.classList.add(ICON_BY_THEME[mode] || 'fa-circle-half-stroke');
-  }
+  // Icono del botón según el tema (Freepik-style para "system")
+setThemeButtonIcon(mode);
+
+// Suscribir o desuscribir el listener del sistema
+if (mode === 'system'){
+  if (mediaDark.addEventListener) mediaDark.addEventListener('change', onSystemThemeChange);
+  else mediaDark.addListener(onSystemThemeChange); // Safari antiguo
+} else {
+  if (mediaDark.removeEventListener) mediaDark.removeEventListener('change', onSystemThemeChange);
+  else mediaDark.removeListener(onSystemThemeChange);
+}
+
 
   // Actualiza aria-selected del popover
   themePop.querySelectorAll('.theme-opt').forEach(opt => {
