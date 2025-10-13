@@ -335,6 +335,21 @@ body.sidebar-open .topbar .topbar-brand{ display: none; }
 
 
 /* =========================================================
+   BOTÓN DE IDIOMA – EFECTO ZOOM AL PASAR EL MOUSE
+   ========================================================= */
+.top-actions .btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.top-actions .btn:hover {
+  transform: scale(1.05);              /* pequeño zoom */
+  box-shadow: 0 0 8px rgba(0,0,0,0.25); /* leve sombra opcional */
+}
+
+
+
+
+/* =========================================================
    6) NOTIFY BAR
    ========================================================= */
 .notifybar{
