@@ -331,10 +331,6 @@ body.sidebar-open .topbar .topbar-brand{ display: none; }
 
 .top-actions{ margin-left:auto; display:flex; align-items:center; gap:var(--space-3)}
 .top-actions .divider{ width:1px; height:22px; background:var(--border) }
-.lang-select select{
-  appearance:none; border:1px solid var(--border); background:transparent; color:var(--text);
-  padding:8px 12px; border-radius:10px;
-}
 
 
 
