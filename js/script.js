@@ -223,6 +223,13 @@ const shareCopy   = $('#shareCopy');
 const shareEmail  = $('#shareEmail');
 const shareX      = $('#shareX');
 const shareWhats  = $('#shareWhats');
+// Posición del mouse (para saber si Esc se pulsa con el puntero sobre el botón)
+let lastMouseX = -1, lastMouseY = -1;
+document.addEventListener('mousemove', (e) => {
+  lastMouseX = e.clientX;
+  lastMouseY = e.clientY;
+}, { passive: true });
+
 
 function isTouchDevice(){
   return ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
