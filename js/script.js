@@ -419,9 +419,33 @@ document.addEventListener('click', (e) => {
   const inside = e.target.closest('#sharePopover, #shareBtn');
   if (!inside) closeSharePopover();
 });
+
+// ===== Esc: comportamiento estilo Freepik =====
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !sharePop.hidden) closeSharePopover();
+  if (e.key !== 'Escape') return;
+  if (!sharePopover) return;
+
+  closeSharePopover({ returnFocus: true });
+
+  // Si el mouse sigue sobre el icono, vuelve a abrir después de un breve instante
+  const btnRect = shareBtn.getBoundingClientRect();
+  const withinIcon = (
+    window.event &&
+    window.event.clientX >= btnRect.left &&
+    window.event.clientX <= btnRect.right &&
+    window.event.clientY >= btnRect.top &&
+    window.event.clientY <= btnRect.bottom
+  );
+
+  if (withinIcon) {
+    setTimeout(() => {
+      if (matchMedia('(pointer:fine)').matches) { // solo desktop/laptop
+        openSharePopover();
+      }
+    }, 120);
+  }
 });
+
 
 // 5) Inicializar input/links con la URL actual al cargar popover
 document.addEventListener('DOMContentLoaded', () => {
