@@ -208,14 +208,22 @@
       <h3 id="sharePopoverTitle">Share</h3>
     </div>
     <div class="share-body">
-      <label class="sr-only" for="shareInput">Page link</label>
-      <input id="shareInput" class="input" readonly />
-      <div class="share-actions">
-        <button class="btn" id="shareCopy">Copy</button>
-        <a class="btn" id="shareEmail" href="#" rel="noopener">Email</a>
-        <a class="btn" id="shareX" href="#" target="_blank" rel="noopener">X</a>
-        <a class="btn" id="shareWhats" href="#" target="_blank" rel="noopener">WhatsApp</a>
-      </div>
+      <!-- Campo compuesto: icono + URL + botón Copy -->
+<div class="share-field" id="shareField">
+  <i class="fa-solid fa-link field-icon" aria-hidden="true"></i>
+  <input id="shareInput" class="field-input" readonly />
+  <button class="field-copy" id="shareCopyInline" type="button" aria-label="Copy link">
+    <i class="fa-regular fa-copy" aria-hidden="true"></i>
+    <span class="copy-text">Copy</span>
+  </button>
+</div>
+
+<!-- Acciones (sin el botón Copy antiguo) -->
+<div class="share-actions">
+  <a class="btn" id="shareEmail" href="#" rel="noopener">Email</a>
+  <a class="btn" id="shareX" href="#" target="_blank" rel="noopener">X</a>
+  <a class="btn" id="shareWhats" href="#" target="_blank" rel="noopener">WhatsApp</a>
+</div>
     </div>
   </div>
 </div>
