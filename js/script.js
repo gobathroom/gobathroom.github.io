@@ -440,39 +440,33 @@ document.addEventListener('keydown', (e) => {
     document.activeElement.blur();
   }
 
-  // Si el puntero sigue sobre el botón, reabrir tras breve instante (sólo desktop)
-  const btnRect = shareBtn.getBoundingClientRect();
-  const { clientX, clientY } = e;
-  const mx = window?.event?.clientX ?? -1;
-  const my = window?.event?.clientY ?? -1;
-  const overBtn = mx >= btnRect.left && mx <= btnRect.right && my >= btnRect.top && my <= btnRect.bottom;
+  // Esc: cierre estilo Freepik (si el puntero sigue sobre el icono, se reabre)
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape' || !sharePop || sharePop.hidden) return;
 
-  if (overBtn && matchMedia('(pointer:fine)').matches) {
-    setTimeout(() => openSharePopover(), 120);
+  // Cierra sin devolver foco (evitamos el anillo)
+  closeSharePopover({ returnFocus: false });
+
+  // Quita foco activo para evitar contornos residuales
+  if (document.activeElement && typeof document.activeElement.blur === 'function') {
+    document.activeElement.blur();
+  }
+
+  // Si el puntero sigue sobre el botón, reabrir tras un instante (solo desktop)
+  if (matchMedia('(pointer:fine)').matches && shareBtn) {
+    const r = shareBtn.getBoundingClientRect();
+    const overBtn = lastMouseX >= r.left && lastMouseX <= r.right &&
+                    lastMouseY >= r.top  && lastMouseY <= r.bottom;
+
+    if (overBtn) {
+      setTimeout(() => {
+        // solo si sigue cerrado (por si el usuario movió el mouse)
+        if (sharePop.hidden) openSharePopover();
+      }, 120);
+    }
   }
 });
 
-
-  closeSharePopover({ returnFocus: true });
-
-  // Si el mouse sigue sobre el icono, vuelve a abrir después de un breve instante
-  const btnRect = shareBtn.getBoundingClientRect();
-  const withinIcon = (
-    window.event &&
-    window.event.clientX >= btnRect.left &&
-    window.event.clientX <= btnRect.right &&
-    window.event.clientY >= btnRect.top &&
-    window.event.clientY <= btnRect.bottom
-  );
-
-  if (withinIcon) {
-    setTimeout(() => {
-      if (matchMedia('(pointer:fine)').matches) { // solo desktop/laptop
-        openSharePopover();
-      }
-    }, 120);
-  }
-});
 
 
 // 5) Inicializar input/links con la URL actual al cargar popover
