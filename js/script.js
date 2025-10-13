@@ -290,6 +290,74 @@ function useNativeShare(){
   return (typeof navigator.share === 'function') && (isTouchDevice() || isTabletOrSmaller());
 }
 
+// ===== Tooltip para ítems sin popover (solo desktop, sidebar cerrado) =====
+const railTip = (() => {
+  const el = document.createElement('div');
+  el.id = 'railTip';
+  el.className = 'rail-tip';
+  el.hidden = true;
+  document.body.appendChild(el);
+  return el;
+})();
+
+function showRailTip(btn){
+  if (!btn) return;
+  if (!isDesktop()) return;
+  if (body.classList.contains('sidebar-open')) return; // solo cuando está cerrado
+  if (btn.hasAttribute('data-popover')) return;        // excluir share/theme
+
+  const txt = btn.querySelector('.txt')?.textContent?.trim();
+  if (!txt) return;
+
+  railTip.textContent = txt;
+  railTip.hidden = false;
+
+  // posición: a la derecha del botón, alineado arriba (no centrado)
+  const r = btn.getBoundingClientRect();
+  const tipW = railTip.offsetWidth;
+  const tipH = railTip.offsetHeight;
+  const gap = 10;
+
+  let left = r.right + gap;
+  let top  = r.top; // alineado al borde superior del “fondo” del item
+
+  // clamping
+  left = Math.max(8, Math.min(left, window.innerWidth - tipW - 8));
+  top  = Math.max(8, Math.min(top, window.innerHeight - tipH - 8));
+
+  railTip.style.left = `${Math.round(left)}px`;
+  railTip.style.top  = `${Math.round(top)}px`;
+
+  // animación
+  requestAnimationFrame(()=> railTip.classList.add('is-visible'));
+}
+
+function hideRailTip(){
+  railTip.classList.remove('is-visible');
+  // esperar la transición para ocultar
+  setTimeout(()=> { railTip.hidden = true; }, 120);
+}
+
+// Activar tooltips en los botones del rail sin data-popover
+const railItems = Array.from(document.querySelectorAll('.sidebar .rail-item'));
+railItems.forEach(btn => {
+  // nada de tooltips para los que tienen ventana flotante
+  if (btn.hasAttribute('data-popover')) return;
+
+  btn.addEventListener('mouseenter', () => showRailTip(btn));
+  btn.addEventListener('mouseleave', hideRailTip);
+});
+
+// Ocultar tooltip si cambia algo del viewport/scroll o si se abre el sidebar
+window.addEventListener('scroll', hideRailTip, { passive:true });
+window.addEventListener('resize', hideRailTip, { passive:true });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideRailTip(); });
+
+// Cuando cambie el estado del sidebar (por tu setSidebar), asegúrate de ocultar
+// -> Si quieres, dentro de setSidebar(open) añade: if(open) hideRailTip();
+
+
+
 function setupShareLinks(url, title){
   if (shareEmail) shareEmail.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`;
   if (shareX)     shareX.href     = `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
