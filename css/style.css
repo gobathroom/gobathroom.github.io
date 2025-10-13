@@ -575,17 +575,17 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 /* Tema claro: fondo y borde del pico iguales al tooltip */
 :root[data-theme="light"] .rail-tip{
   background: var(--panel);
-  border-color: rgba(0,0,0,0.05); /* borde ultra suave para que no se vea línea dura */
-  filter: drop-shadow(0 8px 20px rgba(17,24,39,.12));
+  border-color: rgba(17,24,39,.06);        /* borde muy suave */
+  filter: drop-shadow(0 8px 20px rgba(17,24,39,.10)); /* sombra más leve en light */
 }
-
-/* Pico: mismo tono que el fondo */
 :root[data-theme="light"] .rail-tip::before{
-  border-right-color: rgba(0,0,0,0.05); /* igual de suave */
+  border-right-color: rgba(17,24,39,.06);  /* “borde” del pico */
 }
 :root[data-theme="light"] .rail-tip::after{
-  border-right-color: var(--panel);
+  border-right-color: var(--panel);        /* relleno del pico */
+  right: calc(100% - 2px);                 /* + solape → sin costura */
 }
+
 
 
 
