@@ -494,10 +494,16 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   position: relative;
 }
 .share-field .field-copy::before{
-  content:""; position:absolute; left:-8px; top:6px; bottom:6px;
-  width:1px; background: var(--border);
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:8px;
+  background: var(--panel-2);
+  opacity:0;
+  transition: opacity .15s ease;
+  z-index:-1;
 }
-.share-field .field-copy:hover{ background: var(--panel-2); }
+.share-field .field-copy:hover::before{ opacity:1; }
 
 /* Feedback de copiado */
 .share-field.copied{
@@ -505,10 +511,6 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   border-color: rgba(16,185,129,.35);
 }
 .share-field.copied .field-copy .copy-text{ font-weight:600; }
-
-/* (opcional) micro-zoom del botón Copy */
-.share-field .field-copy{ transition: transform .12s ease; }
-.share-field .field-copy:hover{ transform: scale(1.04); }
 
 
 .share-inner{ display:flex; flex-direction:column; gap:10px }
