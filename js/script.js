@@ -630,10 +630,18 @@ function startHoverOpen(){
   const title = document.title;
 
   if (sharePop.hidden){
-    if (shareInput) shareInput.value = url;
-    setupShareLinks(url, title);
-    openSharePopover();
+  const normalized = normalizeUrl(url);
+  const displayUrl = (normalized === HOME_URL) ? HOME_URL : url;
+
+  if (shareInput){
+    shareInput.value = displayUrl;
+    shareInput.title = url;
+    shareInput.setAttribute('aria-label', url);
   }
+
+  setupShareLinks(url, title);
+  openSharePopover();
+}
   buildCorridor();
 }
 
