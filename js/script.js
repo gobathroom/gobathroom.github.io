@@ -293,7 +293,7 @@ const shareBtn    = $('#shareBtn');
 const shareModal  = $('#shareModal'); // fallback muy viejo
 const sharePop    = $('#sharePopover');
 const shareInput  = $('#shareInput');
-const shareEmail  = $('#shareEmail');
+const shareFacebook = $('#shareFacebook');
 const shareX      = $('#shareX');
 const shareWhats  = $('#shareWhats');
 const shareField = $('#shareField');
@@ -449,7 +449,7 @@ if (typeof setSidebar === 'function') {
 
 // 4.4) Lógica de Share
 function setupShareLinks(url, title){
-  if (shareEmail) shareEmail.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`;
+  if (shareFacebook) shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
   if (shareX)     shareX.href     = `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
   if (shareWhats) shareWhats.href = `https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`;
 }
