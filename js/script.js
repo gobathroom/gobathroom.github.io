@@ -300,6 +300,25 @@ const shareField = $('#shareField');
 const shareCopyInline = $('#shareCopyInline');
 // Posición del mouse (para saber si Esc se pulsa con el puntero sobre el botón)
 let lastMouseX = -1, lastMouseY = -1;
+
+// URL principal que queremos mostrar siempre completa
+const HOME_URL = 'https://gobathroom.github.io/';
+
+// Normaliza una URL (quita query y hash, asegura slash final)
+function normalizeUrl(u){
+  try{
+    const a = new URL(u);
+    a.hash = '';
+    a.search = '';
+    let s = a.origin + a.pathname;
+    if (!s.endsWith('/')) s += '/';
+    return s;
+  }catch{
+    return u;
+  }
+}
+
+
 document.addEventListener('mousemove', (e) => {
   lastMouseX = e.clientX;
   lastMouseY = e.clientY;
@@ -562,14 +581,23 @@ if (shareBtn) shareBtn.addEventListener('click', (e) => {
   }
 
   // Desktop: toggle por click (fallback accesible)
-  e.preventDefault();
-  if (sharePop.hidden){
-    if (shareInput) shareInput.value = url;
-    setupShareLinks(url, title);
-    openSharePopover();
-  } else {
-    closeSharePopover();
+e.preventDefault();
+if (sharePop.hidden){
+  // --- HOME siempre completa; otras se muestran y si no caben, ellipsis CSS ---
+  const normalized = normalizeUrl(url);
+  const displayUrl = (normalized === HOME_URL) ? HOME_URL : url;
+
+  if (shareInput){
+    shareInput.value = displayUrl;          // lo que se ve
+    shareInput.title = url;                 // tooltip con URL completa
+    shareInput.setAttribute('aria-label', url); // accesible
   }
+
+  setupShareLinks(url, title);
+  openSharePopover();
+} else {
+  closeSharePopover();
+}
 });
 
 // 3) Hover tipo Freepik (solo desktop)
@@ -690,8 +718,17 @@ document.addEventListener('keydown', (e) => {
 
 // 4.6) Inicialización de campo de enlace
 document.addEventListener('DOMContentLoaded', () => {
-  if (shareInput) shareInput.value = location.href;
+  const url = location.href;
+  const normalized = normalizeUrl(url);
+  const displayUrl = (normalized === HOME_URL) ? HOME_URL : url;
+
+  if (shareInput){
+    shareInput.value = displayUrl;
+    shareInput.title = url;
+    shareInput.setAttribute('aria-label', url);
+  }
 });
+
 
 
 
