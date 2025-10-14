@@ -551,6 +551,28 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 .share-body{ display:flex; flex-direction:column; gap:10px }
 .share-actions{ display:flex; flex-wrap:wrap; gap:10px; }
 
+/* Iconos en una sola fila y con anchos iguales */
+.share-actions.icons-only{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 partes iguales */
+  gap: 10px;
+}
+
+/* Cada botón ocupa su parte y centra el icono */
+.share-actions.icons-only .btn{
+  display: grid;
+  place-items: center;   /* centra el icono */
+  padding: 0;            /* sin padding extra horizontal */
+  height: 40px;          /* ya coincide con tus botones */
+}
+
+/* Tamaño visual del icono: homogéneo */
+.share-actions.icons-only .btn i{
+  font-size: 18px;       /* suficiente contraste y equilibrio */
+  line-height: 1;
+}
+
+
 .sr-only{
   position:absolute !important;
   width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;
