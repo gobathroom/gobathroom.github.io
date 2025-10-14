@@ -532,12 +532,11 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   outline: none;
   box-shadow: none;
 }
-/* mientras .share-field tiene la clase .copied, esconde el botón */
-.share-field.copied .field-copy{
-  opacity: 0;
-  pointer-events: none;
+/* mientras .share-field tiene la clase .copied, esconde el botón y icon_link */
+.share-field.copied .field-copy,
+.share-field.copied .field-icon{
+  display: none;
 }
-
 
 
 /* Feedback de copiado */
@@ -547,11 +546,6 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 }
 .share-field.copied .field-copy .copy-text{ font-weight:600; }
 
-/* 1) Oculta icono de link y botón Copy durante el éxito */
-.share-field.copied .field-icon,
-.share-field.copied .field-copy{
-  display: none;
-}
 
 /* 2) Centra el mensaje en el input */
 .share-field.copied .field-input{
