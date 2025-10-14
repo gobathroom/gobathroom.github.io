@@ -511,7 +511,7 @@ if (shareCopyInline) {
 
       if (ico) ico.className = 'fa-solid fa-check';
       if (label) label.textContent = 'Copied!';
-      if (shareInput) shareInput.value = 'Copied successfully!';
+      if (shareInput) shareInput.value = '✔ Copied successfully!';
 
       setTimeout(() => {
         shareField?.classList.remove('copied');
