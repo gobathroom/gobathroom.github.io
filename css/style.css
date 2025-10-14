@@ -471,7 +471,8 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 
 .share-popover{
   position: fixed;                 /* posicionado por JS, como el de tema */
-  width: min(360px, 92vw);
+  /* Antes: width: min(360px, 92vw);  */
+  width: min(var(--share-popover-w, 360px), 92vw);
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 12px;
