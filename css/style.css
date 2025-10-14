@@ -496,6 +496,7 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   border:0; background:transparent; color:var(--text);
   padding:6px 10px; border-radius:8px; cursor:pointer;
   position: relative;
+  z-index: 0;   /* crea un stacking context local para su ::before */
 }
 .share-field .field-copy::before{
   content:"";
@@ -505,7 +506,6 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   background: var(--hover-bg, rgba(125,125,125,.08));
   opacity:0;
   transition: opacity .15s ease;
-  z-index:-1;
 }
 
 .share-field .field-copy:hover::before{ opacity:1; }
