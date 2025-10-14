@@ -487,9 +487,9 @@ function positionSharePopover(){
   const popH = sharePop.offsetHeight;
 
    // === Calcular ancho deseado y máximo posible hacia la derecha ===
-  // 1) Ancho base que quieres (HOME más cómoda), ej. 480px; resto 360px
+  // 1) Ancho base que quieres (HOME más cómoda), ej. 370px; resto 360px
   const isHome = (normalizeUrl(location.href) === HOME_URL);
-  const desired = isHome ? 480 : 360;
+  const desired = isHome ? 370 : 360;
 
   // 2) Máximo permitido hacia la derecha sin mover el borde izquierdo
   const maxRightWidth = Math.max(240, Math.floor(window.innerWidth - 8 - (r.right + gap)));
