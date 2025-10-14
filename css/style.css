@@ -495,6 +495,9 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   flex:1; min-width:0;
   border:0; background:transparent; color:var(--text);
   font: inherit; outline:none;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
 }
 .share-field .field-copy{
   display:inline-flex; align-items:center; gap:8px;
