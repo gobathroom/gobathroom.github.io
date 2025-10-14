@@ -519,9 +519,12 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   outline: none;
   box-shadow: none;
 }
-.share-field .field-copy:focus::before{
-  opacity: 1; /* mismo fondo que hover */
+/* mientras .share-field tiene la clase .copied, esconde el botón */
+.share-field.copied .field-copy{
+  opacity: 0;
+  pointer-events: none;
 }
+
 
 
 /* Feedback de copiado */
