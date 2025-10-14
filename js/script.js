@@ -504,6 +504,18 @@ if (shareCopyInline) {
       // feedback visual en el campo
       shareField?.classList.add('copied');
 
+       // --- Accesibilidad: anunciar éxito y conservar foco ---
+if (shareField) {
+  // Región de estado para lectores de pantalla
+  shareField.setAttribute('role', 'status');
+  shareField.setAttribute('aria-live', 'polite');
+
+  // Foco temporal en el contenedor (Copy está oculto con display:none)
+  shareField.setAttribute('tabindex', '-1');
+  shareField.focus({ preventScroll: true });
+}
+
+
       const ico = shareCopyInline.querySelector('i');
       const label = shareCopyInline.querySelector('.copy-text');
       const prevIcon = ico?.className || '';
@@ -518,6 +530,18 @@ if (shareCopyInline) {
         if (ico && prevIcon) ico.className = prevIcon;   // vuelve al icono de copy
         if (label) label.textContent = 'Copy';
         if (shareInput) shareInput.value = prevValue;     // restaura la URL
+
+         
+        // --- Restaurar foco y limpiar atributos temporales ---
+        if (shareField) {
+           shareField.removeAttribute('tabindex');
+        }
+         if (shareCopyInline) {
+            // El botón Copy ya volvió a mostrarse; devuelve el foco para teclado
+            shareCopyInline.focus();
+         }
+
+         
       }, 1400);
     } catch {}
   });
