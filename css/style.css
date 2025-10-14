@@ -506,7 +506,15 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   background: var(--hover-bg, rgba(125,125,125,.08));
   opacity:0;
   transition: opacity .15s ease;
+  z-index: -1;              /* ⬅️ queda DETRÁS del contenido del botón */
 }
+
+/* Eleva icono y texto del botón por encima del ::before */
+.share-field .field-copy > *{
+  position: relative;
+  z-index: 1;
+}
+
 
 .share-field .field-copy:hover::before{ opacity:1; }
 
