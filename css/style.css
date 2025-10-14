@@ -547,6 +547,16 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 }
 .share-field.copied .field-copy .copy-text{ font-weight:600; }
 
+/* 1) Oculta icono de link y botón Copy durante el éxito */
+.share-field.copied .field-icon,
+.share-field.copied .field-copy{
+  display: none;
+}
+
+/* 2) Centra el mensaje en el input */
+.share-field.copied .field-input{
+  text-align: center;
+}
 
 .share-inner{ display:flex; flex-direction:column; gap:10px }
 .share-head{ display:flex; align-items:center; justify-content:space-between; gap:8px }
