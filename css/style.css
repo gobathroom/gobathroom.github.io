@@ -577,11 +577,16 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   line-height: 1;
 }
 
-/* Hover/focus: el borde toma el tono del panel del popover según tema */
+/* Bordes en hover/focus iguales al color del icono (currentColor) */
+.share-actions .btn{
+  transition: border-color .15s ease; /* suaviza el cambio */
+}
+
 .share-actions .btn:hover,
 .share-actions .btn:focus-visible{
-  border-color: var(--social-border-hover);
+  border-color: currentColor;         /* mismo color que el icono */
 }
+
 
 
 .sr-only{
