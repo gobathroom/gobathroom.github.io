@@ -423,7 +423,7 @@ body.sidebar-open .page{ margin-left: var(--rail-expanded) }
 .placeholder.tall{ height:320px }
 
 /* Footer */
-.site-footer{ margin-top:auto; background:var(--panel); border-top:1px solid var(--border) }
+.site-footer{ margin-top:auto; background:var(--bg); border-top:1px solid var(--border) }
 .footer-inner{
   width:min(100% - 32px, var(--content-max));
   margin:0 auto; height:56px; display:flex; align-items:center; gap:12px;
