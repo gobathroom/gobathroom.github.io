@@ -1,8 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 210" role="img" aria-label="Go Bathroom">
-  <!-- fondo: turquesa con esquinas redondeadas -->
-  <rect width="210" height="210" rx="35.451" fill="#20a3a4"/>
-  <!-- símbolo WC (blanco), mismo dibujo y posición que tu versión -->
-  <g transform="translate(-82.124 90.034)">
-    <path fill="#fff" d="m176.12-68.675c-2.6935 0-4.8607 2.1703-4.8607 4.8638v0.18707h-42.985c-2.6934 0-4.8643 2.1708-4.8643 4.8643 0 0.92135 0.25406 1.7811 0.69608 2.5136-0.24686 1.4817-0.37207 3.0104-0.37207 4.563v78.732c0 5.8495 1.8083 11.263 4.9041 15.711h0.0165c4.9602 7.11 13.206 11.746 22.578 11.746h-40.42c-7.291 0-13.16 5.2444-13.16 11.759 0 2.6572 0.97731 5.1002 2.6267 7.0647h10.683c4.8471 8.8927 16.694 16.613 33.192 21.63l-10.923 20.363c-1.127 2.1003 0.39457 4.6433 2.7781 4.6431h102.25c2.3761 0 3.8874-2.5415 2.7528-4.6292l-11.051-20.337c16.566-5.0156 28.464-12.753 33.325-21.671h10.683c1.6497-1.9645 2.6272-4.4088 2.6272-7.0647 0-6.5151-5.8695-11.759-13.16-11.759h-40.419c9.3715 0 17.618-4.636 22.578-11.746h0.015c3.0957-4.4472 4.9072-9.8611 4.9072-15.711v-78.732c0-1.5522-0.132-3.0798-0.3757-4.561 0.4429-0.73295 0.6971-1.5933 0.6971-2.5156 0-2.6935-2.1704-4.8643-4.8638-4.8643h-42.985v-0.18707c0-2.6935-2.1667-4.8638-4.8601-4.8638zm-36.225 18.376c3.7948 1e-3 6.8702 3.0782 6.8694 6.873-1e-3 3.7932-3.0762 6.8677-6.8694 6.8688-3.7946 8.7e-4 -6.8716-3.0742-6.873-6.8688-8.8e-4 -3.7962 3.0768-6.8739 6.873-6.873z"/>
-  </g>
+<!-- Save this as /assets/favicon.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 210">
+  <!-- Background with rounded corners (turquoise) -->
+  <rect width="210" height="210" rx="40" fill="#20a3a4"/>
+  <!-- Big bold G (white). Using text is OK for SVG favicons; we pin a common font stack. -->
+  <text x="105" y="132"
+        text-anchor="middle"
+        font-family="Arial, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif"
+        font-weight="900"
+        font-size="160"
+        fill="#ffffff">G</text>
 </svg>
+
+<!-- Add these tags inside <head> of every page -->
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<!-- Optional PNG fallback for older browsers + iOS PWA icons -->
+<link rel="icon" href="/assets/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
