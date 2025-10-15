@@ -1,18 +1,10 @@
-<!-- Save this as /assets/favicon.svg -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 210">
-  <!-- Background with rounded corners (turquoise) -->
-  <rect width="210" height="210" rx="40" fill="#20a3a4"/>
-  <!-- Big bold G (white). Using text is OK for SVG favicons; we pin a common font stack. -->
-  <text x="105" y="132"
-        text-anchor="middle"
-        font-family="Arial, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif"
-        font-weight="900"
-        font-size="160"
-        fill="#ffffff">G</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 210" width="32" height="32">
+<g transform="translate(656.17 87.842)">
+<rect x="-656.17" y="-87.842" width="210" height="210" ry="39.688" fill="#20a3a4"/>
+<text transform="matrix(.95094 .013064 -.014444 1.0514 0 0)" x="-578.10718" y="90.195114"
+fill="#20a3a4" font-family="Arial" font-size="186.3px" font-weight="900"
+letter-spacing=".5589px" text-anchor="middle">
+<tspan x="0" y="0" fill="#ffffff" font-size="186.3px">G</tspan>
+</text>
+</g>
 </svg>
-
-<!-- Add these tags inside <head> of every page -->
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<!-- Optional PNG fallback for older browsers + iOS PWA icons -->
-<link rel="icon" href="/assets/favicon-192.png" sizes="192x192" type="image/png">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
