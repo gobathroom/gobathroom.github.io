@@ -327,7 +327,7 @@ body.sidebar-open .topbar{ left: var(--rail-expanded) }
 .topbar .topbar-brand .brand-name{
   font-weight: 700;               
   letter-spacing: .2px;
-  margin-left: 12px;
+  margin-left: 6px;
 }
 body.sidebar-open .topbar .topbar-brand{ display: none; }
 
