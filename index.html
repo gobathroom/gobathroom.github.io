@@ -82,9 +82,12 @@
   <div class="rail-head">
 <!-- Marca del producto (visible con sidebar abierto) -->
     <a href="/" class="brand">
-      <i class="fa-solid fa-restroom brand-icon" aria-hidden="true"></i>
-      <span class="brand-name">Go Bathroom</span>
-    </a>
+  <svg class="brand-icon" aria-hidden="true" width="20" height="20">
+    <use href="/assets/svg/logo.svg#gb-logo-circle"></use>
+    <use xlink:href="/assets/svg/logo.svg#gb-logo-circle"></use> <!-- fallback -->
+  </svg>
+  <span class="brand-name">Go Bathroom</span>
+</a>
     
     <!-- Botón bars -->
     <button class="icon-btn rail-toggle hamburger" aria-label="Toggle menu" aria-expanded="false">
