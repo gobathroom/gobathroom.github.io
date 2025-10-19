@@ -44,6 +44,19 @@ body.sidebar-open .topbar .brand{ opacity:0; width:0; margin:0; pointer-events:n
 body.sidebar-open .topbar .top-actions .divider{ opacity:0; width:0 }
 
 
+.topbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+.brand-logo {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+}
+
+
+
 
 /* =========================================================
    2) THEMES (System / Light / Dark)
