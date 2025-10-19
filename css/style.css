@@ -22,6 +22,9 @@
   --border: rgba(255,255,255,.12);
   --brand: #00d1ff;
   --brand-2: #7ef0ff;
+   --brand-row-h: 56px;  /* alto de la fila de marca */
+  --brand-gap:   8px;   /* separación logo ↔ nombre */
+  --brand-ico:   24px;  /* tamaño visual del logo */
   
    /* mismo fondo que el hover del rail */
   --hover-bg: var(--panel-2);
@@ -170,11 +173,13 @@ body.sidebar-open .sidebar .rail-head .brand{
   color: var(--text);
   border-radius: var(--radius);
 }
-.sidebar .rail-head .brand-icon{
-  font-size: 20px;
-  line-height: 1;
+/* El logo en el rail usa el mismo tamaño que en topbar */
+.sidebar .rail-head .brand .brand-logo{
+  width: var(--brand-ico);
+  height: var(--brand-ico);
   justify-self: center;
 }
+
 .sidebar .rail-head .brand-name{
   font-weight: 700;
   white-space: nowrap;
@@ -318,16 +323,15 @@ body.sidebar-open .topbar{ left: var(--rail-expanded) }
   grid-auto-columns: max-content;
   align-items: center;
   gap: 6px;
-  height: 56px;
+   height: var(--brand-row-h);
   text-decoration: none;
   color: var(--text);
   border-radius: var(--radius);
 }
-.topbar .topbar-brand .brand-icon{ font-size: 18px; line-height: 1; }
 .topbar .topbar-brand .brand-name{
   font-weight: 700;               
   letter-spacing: .2px;
-  margin-left: 6px;
+   margin-left: 0; /* el gap ya separa */
 }
 body.sidebar-open .topbar .topbar-brand{ display: none; }
 
@@ -337,7 +341,19 @@ body.sidebar-open .topbar .topbar-brand{ display: none; }
   border:1px solid var(--border); background:transparent; color:var(--text);
   border-radius:10px; cursor:pointer;
 }
-.brand{ display:flex; align-items:center; gap:10px; color:var(--text); text-decoration:none; }
+.brand{
+  display:flex; align-items:center;
+  gap:var(--brand-gap);
+  color:var(--text); text-decoration:none;
+}
+/* Logo unificado (topbar + sidebar) */
+.brand .brand-logo{
+  display:block;
+  width:var(--brand-ico);
+  height:var(--brand-ico);
+  flex:0 0 var(--brand-ico);
+}
+
 .brand .brand-name{ font-weight:600 }
 
 .top-actions{ margin-left:auto; display:flex; align-items:center; gap:var(--space-3)}
