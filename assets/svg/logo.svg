@@ -1,19 +1,23 @@
-<!-- 0 iCon -->
-<!--  GB - GoBathroom icon  -->
 <!-- assets/svg/logo.svg -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <symbol id="gb-marker" viewBox="0 0 127.22 127.22" aria-hidden="true">
-    <g transform="translate(389.89 7.4835)">
-      <!-- Fondo del marcador (negro por defecto) -->
-      <g class="bg" transform="matrix(1.7899 0 0 1.7899 -7.7612 -282.85)"
-         fill="var(--gb-bg, #111111)">
-        <path d="m-195.33 192.61 5.4454 9.4846 11.482 21.366 11.553-19.975 6.2839-10.973c-12.435 8.2475-24.137 6.7852-34.77 0.0215z"/>
-        <ellipse cx="-177.95" cy="185.39" rx="29.506" ry="30.093"/>
-      </g>
 
-      <!-- Icono del WC (blanco por defecto) -->
-      <g class="wc" transform="matrix(2.2426 0 0 2.2426 68.774 -346.29)"
-         fill="var(--gb-wc, #ffffff)">
+  <!-- … tu símbolo #gb-marker existente … -->
+
+  <!-- GB - Logo circular a tres franjas (verde/azul/naranja) -->
+  <symbol id="gb-logo-circle" viewBox="0 0 210 210" aria-hidden="true">
+    <!-- Fondo a tres franjas (permite override por CSS variables si quieres) -->
+    <g class="bg">
+      <path d="m203.99 140h-197.99a105 105 0 0 0 98.995 70 105 105 0 0 0 98.995-70z"
+            fill="var(--gb-orange, #f29416)"/>
+      <path d="m203.99 70h-197.99a105 105 0 0 0-6.0048 35 105 105 0 0 0 6.0048 35h197.99a105 105 0 0 0 6.0053-35 105 105 0 0 0-6.0053-35z"
+            fill="var(--gb-blue, #3589ca)"/>
+      <path d="m6.0048 70h197.99a105 105 0 0 0-98.995-70 105 105 0 0 0-98.995 70z"
+            fill="var(--gb-green, #55ce36)"/>
+    </g>
+
+    <!-- WC en blanco (puedes cambiar con --gb-wc) -->
+    <g class="wc" transform="translate(389.89 7.4835)" fill="var(--gb-wc, #ffffff)">
+      <g transform="matrix(4.3702 0 0 4.3702 484.99 -686.71)">
         <path d="m-169.59 189.74c-2.0793 0.82577-4.6109 1.0092-7.213 1.0092-2.1141-1.4e-4 -3.913-0.34488-5.9257-0.94879l2.0324 3.6174-0.13329 4.4933 10.041-0.0114-0.68988-4.3625z" stroke-width=".52889"/>
         <path d="m-165.33 185.81h-21.671a11.178 5.2044 0 0 0 10.835 3.9261 11.178 5.2044 0 0 0 10.837-3.9261z"/>
         <path transform="matrix(4.4787 0 0 4.4787 -523.46 -326.32)" d="m75.12 113.51c-0.23158 0-0.41801 0.16658-0.41801 0.37352 0 0.0844 0.03105 0.16199 0.08344 0.22439h5.5169c0.0524-0.0624 0.08344-0.14003 0.08344-0.22439 0-0.20694-0.18643-0.37352-0.41801-0.37352z"/>
@@ -23,4 +27,5 @@
       </g>
     </g>
   </symbol>
+
 </svg>
