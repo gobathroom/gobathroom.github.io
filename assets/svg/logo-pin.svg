@@ -1,7 +1,8 @@
 <!-- assets/svg/logo-pin.svg -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 210" aria-hidden="true">
+
+  <!-- 1) Definimos el símbolo reutilizable -->
   <defs>
-    <!-- Símbolo reutilizable para el pin completo -->
     <symbol id="gb-logo-pin" viewBox="0 0 210 210">
       <g transform="translate(389.89 7.4835)">
         <g transform="matrix(1.0885 0 0 1.0885 22.695 1.1917)">
@@ -16,7 +17,7 @@
             <path d="m6.0048 70h197.99a105 105 0 0 0-98.995-70 105 105 0 0 0-98.995 70z" fill="#55ce36"/>
           </g>
 
-          <!-- Ícono de baño blanco -->
+          <!-- Ícono WC blanco -->
           <g transform="matrix(3.319 0 0 3.319 302.11 -510.09)" fill="#fff">
             <path d="m-169.59 189.74c-2.0793 0.82577-4.6109 1.0092-7.213 1.0092-2.1141-1.4e-4 -3.913-0.34488-5.9257-0.94879l2.0324 3.6174-0.13329 4.4933 10.041-0.0114-0.68988-4.3625z"/>
             <path d="m-165.33 185.81h-21.671a11.178 5.2044 0 0 0 10.835 3.9261 11.178 5.2044 0 0 0 10.837-3.9261z"/>
@@ -25,12 +26,11 @@
             <path d="m-185.12 164.14v11.9c0 0.832 0.257 1.602 0.698 2.235h16.64c0.441-0.633 0.698-1.403 0.698-2.235v-11.9zm2.237 0.896a0.978 0.978 0 1 1 0 1.955 0.978 0.978 0 0 1 0-1.955z"/>
             <path d="m-177.73 160.98c-0.383 0-0.691 0.309-0.691 0.692v0.027h-6.115c-0.383 0-0.692 0.309-0.692 0.692s0.309 0.691 0.692 0.691h16.744c0.383 0 0.692-0.308 0.692-0.691s-0.309-0.692-0.692-0.692h-6.115v-0.027c0-0.383-0.308-0.692-0.691-0.692z"/>
           </g>
-
         </g>
       </g>
     </symbol>
   </defs>
 
-  <!-- Esto dibuja el logo (para previsualizarlo en GitHub) -->
+  <!-- 2) Renderiza el logo para preview -->
   <use href="#gb-logo-pin"/>
 </svg>
