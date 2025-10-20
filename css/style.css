@@ -24,7 +24,7 @@
   --brand-2: #7ef0ff;
    --brand-row-h: 56px;  /* alto de la fila de marca */
   --brand-gap:   8px;   /* separación logo ↔ nombre */
-  --brand-logo:   24px;  /* tamaño visual del logo */
+  --brand-logo:   28px;  /* tamaño visual del logo */
   
    /* mismo fondo que el hover del rail */
   --hover-bg: var(--panel-2);
