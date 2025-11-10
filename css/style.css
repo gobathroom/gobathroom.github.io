@@ -791,13 +791,13 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 /* =========================================================
    15) BOTTOM BAR
    ========================================================= */
-/* bottom bar base */
+/* --- Bottom bar (estilo App Store) --- */
 .bottom-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60px;
+  height: 72px;
   background: rgba(13, 17, 23, 0.9);
   backdrop-filter: blur(10px);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -805,70 +805,73 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   transition: transform 0.25s ease-out;
 }
 
-/* oculto cuando scrolleo hacia abajo */
+/* Ocultar al deslizar */
 .bottom-bar.hidden {
   transform: translateY(100%);
 }
 
-/* reusar rail-group pero en horizontal */
+/* Estructura horizontal */
 .bottom-rail {
   display: flex;
   justify-content: space-around;
   align-items: center;
   height: 100%;
   margin: 0;
-  padding: 0 8px;
-  gap: 6px;
+  padding: 0;
 }
 
-/* adaptar rail-item al formato pequeño de bottom */
+/* Ítem */
 .bottom-bar .rail-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  height: 100%;
-  flex: 1;
-  gap: 2px;
-  font-size: 12px;
-  color: #d1e9ff;
+  color: #94a3b8;
+  font-size: 11px;
+  transition: color 0.2s ease;
 }
 
-/* icono */
+/* Iconos */
 .bottom-bar .rail-item .ico {
-  font-size: 18px;
+  font-size: 20px;
+  margin-bottom: 3px;
 }
 
-/* activo */
+/* Activo */
 .bottom-bar .rail-item.is-active {
   color: #00bcd4;
 }
 
+.bottom-bar .rail-item:hover {
+  color: #00bcd4;
+}
+
+/* Tema claro */
 @media (prefers-color-scheme: light) {
   .bottom-bar {
     background: rgba(255, 255, 255, 0.95);
-    border-top: 1px solid rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
   }
   .bottom-bar .rail-item {
-    color: #0f172a;
+    color: #475569;
   }
   .bottom-bar .rail-item.is-active {
     color: #00bcd4;
   }
 }
 
-/* solo mobile */
+/* Ocultar en escritorio */
 @media (min-width: 769px) {
   .bottom-bar {
     display: none;
   }
 }
 
-/* para que el contenido no quede tapado */
+/* Espaciado para el body */
 @media (max-width: 768px) {
   body {
-    padding-bottom: 70px;
+    padding-bottom: 80px;
   }
 }
 
