@@ -793,36 +793,29 @@ if ("serviceWorker" in navigator) {
    6) bottom bar actions
    ========================================================= */
 const bottomBar = document.getElementById("bottomBar");
+let lastScrollY = window.scrollY;
 
-if (bottomBar) {
-  bottomBar.addEventListener("click", (e) => {
-    const btn = e.target.closest(".bottom-item");
-    if (!btn) return;
+window.addEventListener("scroll", () => {
+  const current = window.scrollY;
 
-    const action = btn.dataset.action;
+  // bajando
+  if (current > lastScrollY + 5) {
+    bottomBar?.classList.add("hidden");
+  }
+  // subiendo
+  else if (current < lastScrollY - 5) {
+    bottomBar?.classList.remove("hidden");
+  }
 
-    switch (action) {
-      case "donate":
-        // TODO: pon aquí tu enlace real de donaciones
-        window.open("https://tu-enlace-de-donate.com", "_blank");
-        break;
-      case "suggest":
-        // TODO: Google Form de sugerir baño
-        window.open("https://tu-google-form-suggest", "_blank");
-        break;
-      case "map":
-        // TODO: scroll al mapa o abrir tu vista de mapa
-        // ejemplo: document.getElementById("mapSection").scrollIntoView({ behavior: "smooth" });
-        console.log("open map");
-        break;
-      case "report":
-        // TODO: Google Form de report
-        window.open("https://tu-google-form-report", "_blank");
-        break;
-      case "info":
-        // TODO: ir a tu página de información
-        window.location.href = "/info.html";
-        break;
-    }
+  lastScrollY = current;
+});
+
+// opcional: marcar activo cuando hacen click
+const bottomLinks = document.querySelectorAll(".bottom-bar .rail-item");
+bottomLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    bottomLinks.forEach((l) => l.classList.remove("is-active"));
+    link.classList.add("is-active");
   });
-}
+});
+
