@@ -278,28 +278,42 @@
   <!-- =====================================================
        8) BOTTOM BAR
        ===================================================== -->
-<nav class="bottom-bar" id="bottomBar">
-  <button class="bottom-item" data-action="donate">
-    <span class="icon">💰</span>
-    <span class="label">Donate</span>
-  </button>
-  <button class="bottom-item" data-action="suggest">
-    <span class="icon">➕</span>
-    <span class="label">Suggest</span>
-  </button>
-  <button class="bottom-item bottom-item--primary" data-action="map">
-    <span class="icon">📍</span>
-    <span class="label">Map</span>
-  </button>
-  <button class="bottom-item" data-action="report">
-    <span class="icon">🚻</span>
-    <span class="label">Report</span>
-  </button>
-  <button class="bottom-item" data-action="info">
-    <span class="icon">ℹ️</span>
-    <span class="label">Info</span>
-  </button>
+<!-- Bottom Bar (mobile only) -->
+<nav class="bottom-bar" id="bottomBar" role="navigation" aria-label="Mobile main actions">
+  <ul class="rail-group" role="list">
+    <li>
+      <a class="rail-item" data-action="donate" href="https://www.paypal.com/donate/?hosted_button_id=K773CAM5X3QBC" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-paypal ico" aria-hidden="true"></i>
+        <span class="txt">Donate</span>
+      </a>
+    </li>
+    <li>
+      <a class="rail-item" data-action="suggest" href="https://forms.gle/oVjnNqzavacu8osk6" target="_blank" rel="noopener noreferrer">
+        <i class="fa-regular fa-lightbulb ico" aria-hidden="true"></i>
+        <span class="txt">Suggest</span>
+      </a>
+    </li>
+    <li>
+      <a class="rail-item rail-item--primary" data-action="open-map" href="https://rebrand.ly/open-map" target="_blank" rel="noopener noreferrer">
+        <i class="fa-solid fa-location-dot ico" aria-hidden="true"></i>
+        <span class="txt">Map</span>
+      </a>
+    </li>
+    <li>
+      <a class="rail-item" data-action="report" href="https://forms.gle/RKrdJqEcsdPvna8o8" target="_blank" rel="noopener noreferrer">
+        <i class="fa-solid fa-flag ico" aria-hidden="true"></i>
+        <span class="txt">Report</span>
+      </a>
+    </li>
+    <li>
+      <a class="rail-item" data-action="info" href="https://www.gobathroom.io/info" rel="noopener noreferrer">
+        <i class="fa-regular fa-bell ico" aria-hidden="true"></i>
+        <span class="txt">Info</span>
+      </a>
+    </li>
+  </ul>
 </nav>
+
 
     
 
