@@ -790,7 +790,7 @@ if ("serviceWorker" in navigator) {
 
 
 /* =========================================================
-   5) bottom bar actions
+   6) bottom bar actions
    ========================================================= */
 const bottomBar = document.getElementById("bottomBar");
 
