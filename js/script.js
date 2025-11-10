@@ -787,3 +787,42 @@ if ("serviceWorker" in navigator) {
       });
   });
 }
+
+
+/* =========================================================
+   5) bottom bar actions
+   ========================================================= */
+const bottomBar = document.getElementById("bottomBar");
+
+if (bottomBar) {
+  bottomBar.addEventListener("click", (e) => {
+    const btn = e.target.closest(".bottom-item");
+    if (!btn) return;
+
+    const action = btn.dataset.action;
+
+    switch (action) {
+      case "donate":
+        // TODO: pon aquí tu enlace real de donaciones
+        window.open("https://tu-enlace-de-donate.com", "_blank");
+        break;
+      case "suggest":
+        // TODO: Google Form de sugerir baño
+        window.open("https://tu-google-form-suggest", "_blank");
+        break;
+      case "map":
+        // TODO: scroll al mapa o abrir tu vista de mapa
+        // ejemplo: document.getElementById("mapSection").scrollIntoView({ behavior: "smooth" });
+        console.log("open map");
+        break;
+      case "report":
+        // TODO: Google Form de report
+        window.open("https://tu-google-form-report", "_blank");
+        break;
+      case "info":
+        // TODO: ir a tu página de información
+        window.location.href = "/info.html";
+        break;
+    }
+  });
+}
