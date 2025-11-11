@@ -791,21 +791,21 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 /* =========================================================
    15) BOTTOM BAR
    ========================================================= */
-/* Bottom bar estilo App Store */
+/* --- Bottom bar estilo App Store custom --- */
 .bottom-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 74px; /* más alto */
-  background: rgba(13, 17, 23, 0.9);
+  height: 88px; /* antes 74px → ahora más alta */
+  background: rgba(13, 17, 23, 0.92);
   backdrop-filter: blur(10px);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   z-index: 2000;
   transition: transform 0.25s ease-out;
 }
 
-/* se oculta al bajar */
+/* ocultar al bajar */
 .bottom-bar.hidden {
   transform: translateY(100%);
 }
@@ -814,35 +814,36 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 .bottom-rail {
   height: 100%;
   margin: 0;
-  padding: 0 4px;
+  /* padding lateral para que no toquen los bordes */
+  padding: 0 14px;
   list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 4px;
+  gap: 10px; /* más aire entre iconos */
 }
 
-/* item reutilizando tu estilo pero adaptado a bottom */
+/* item */
 .bottom-bar .rail-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 4px;
   text-decoration: none;
-  color: #94a3b8; /* slate-ish */
+  color: #94a3b8;
   font-size: 11px;
   height: 100%;
   flex: 1;
 }
 
-/* icono */
+/* icono más separado del borde y un poco más grande */
 .bottom-bar .rail-item .ico {
-  font-size: 21px;
+  font-size: 22px;
   line-height: 1;
 }
 
-/* activo: solo color, sin fondo feo */
+/* activo: solo color, sin fondo */
 .bottom-bar .rail-item.is-active {
   color: #00bcd4;
 }
@@ -851,11 +852,11 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   color: #00bcd4;
 }
 
-/* modo claro */
+/* seguir el theme */
 @media (prefers-color-scheme: light) {
   .bottom-bar {
-    background: rgba(255, 255, 255, 0.95);
-    border-top: 1px solid rgba(0, 0, 0, 0.03);
+    background: rgba(255, 255, 255, 0.96);
+    border-top: 1px solid rgba(0, 0, 0, 0.04);
   }
   .bottom-bar .rail-item {
     color: #475569;
@@ -872,10 +873,10 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   }
 }
 
-/* que el contenido no quede debajo de la barra */
+/* más espacio al final del contenido por la nueva altura */
 @media (max-width: 768px) {
   body {
-    padding-bottom: 85px;
+    padding-bottom: 100px; /* un poco más que la altura (88) */
   }
 }
 
