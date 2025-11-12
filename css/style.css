@@ -31,6 +31,16 @@
 
    --social-border-hover: rgba(255,255,255,.22); /* valor base para dark */
 
+
+     /* === Bottom bar safe-area & paddings === */
+  --bb-h: 64px;
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  --bb-pad-x: 20px;     /* margen lateral tipo App/Play Store */
+  --bb-pad-top: 6px;    /* empuje hacia arriba (iconos/labels no centrados) */
+
+
 }
 
 /* Contenido alineado con el marco lateral */
@@ -791,47 +801,57 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 /* =========================================================
    15) BOTTOM BAR (con .bottom-item independiente)
    ========================================================= */
-.bottom-bar {
+.bottom-bar{
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 88px;
-  background: rgba(13,17,23,0.92);
+  left: 0; right: 0; bottom: 0;
+  height: calc(var(--bb-h) + var(--safe-b));
+  background: rgba(13,17,23,.92);
   backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(255,255,255,.06);
   z-index: 2000;
   transition: transform .25s ease-out;
+
+  /* aire lateral y vertical seguro */
+  padding:
+    var(--bb-pad-top)
+    max(var(--bb-pad-x), var(--safe-r))
+    calc(8px + var(--safe-b))
+    max(var(--bb-pad-x), var(--safe-l));
 }
+
 
 .bottom-bar.hidden { transform: translateY(100%); }
 
-.bottom-rail {
+.bottom-rail{
   height: 100%;
   margin: 0;
-  padding: 0 14px;
   list-style: none;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+  align-items: flex-start;   /* ↑ sesgo hacia ARRIBA */
+  gap: 14px;
+  padding: 0;                /* ← quita el padding 0 14px anterior */
 }
 
-.bottom-bar .bottom-item {
+
+.bottom-bar .bottom-item{
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;  /* ↑ icono/label más arriba */
   gap: 4px;
   text-decoration: none;
   color: #94a3b8;
   font-size: 11px;
-  height: 100%;
-  flex: 1;
 }
 
-.bottom-bar .bottom-item .ico { font-size: 22px; line-height: 1; }
-.bottom-bar .bottom-item .txt { display: block; }
+
+.bottom-bar .bottom-item .ico{ font-size:22px; line-height:1; transform: translateY(2px); }
+.bottom-bar .bottom-item .txt{ display:block; line-height:1.1; }
+
 
 /* activo/hover: solo color */
 .bottom-bar .bottom-item.is-active,
@@ -848,15 +868,22 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   border-radius: 0;
 }
 
-@media (prefers-color-scheme: light) {
-  .bottom-bar {
-    background: rgba(255,255,255,0.96);
-    border-top: 1px solid rgba(0,0,0,0.04);
+@media (prefers-color-scheme: light){
+  .bottom-bar{
+    background: rgba(255,255,255,.96);
+    border-top: 1px solid rgba(0,0,0,.04);
   }
-  .bottom-bar .bottom-item { color: #475569; }
-  .bottom-bar .bottom-item.is-active { color: #00bcd4; }
+  .bottom-bar .bottom-item{ color:#475569; }
+  .bottom-bar .bottom-item.is-active{ color:#00bcd4; }
 }
 
+
 @media (min-width: 769px) { .bottom-bar { display: none; } }
-@media (max-width: 768px) { body { padding-bottom: 100px; } }
+@media (max-width:768px){
+  body{
+    /* deja espacio real para la barra + safe-area + un respiro extra */
+    padding-bottom: calc(var(--bb-h) + var(--safe-b) + 16px);
+  }
+}
+
 
