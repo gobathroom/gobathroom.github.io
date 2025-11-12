@@ -274,7 +274,13 @@ if (mode === 'system'){
   themePop.querySelectorAll('.theme-opt').forEach(opt => {
     opt.setAttribute('aria-selected', opt.dataset.value === mode ? 'true' : 'false');
   });
+
+  // 🔄 Sincroniza barra del navegador / status bar con el tema actual
+  if (typeof window.__applyThemeChrome === 'function') {
+    window.__applyThemeChrome();
+  }
 }
+
 
 
 
@@ -854,11 +860,17 @@ bottomLinks.forEach((link) => {
 
   // Si estás en "system", reacciona a cambios del SO
   const mm = matchMedia('(prefers-color-scheme: dark)');
-  mm.addEventListener?.('change', () => {
-    if ((root.getAttribute('data-theme') || 'system') === 'system') apply();
-  });
+  if (mm.addEventListener) {
+    mm.addEventListener('change', () => {
+      if ((root.getAttribute('data-theme') || 'system') === 'system') apply();
+    });
+  } else if (mm.addListener) {
+    // Safari antiguo
+    mm.addListener(() => {
+      if ((root.getAttribute('data-theme') || 'system') === 'system') apply();
+    });
+  }
 
   // Expón helper para cuando cambies el tema por UI
   window.__applyThemeChrome = apply;
 })();
-
