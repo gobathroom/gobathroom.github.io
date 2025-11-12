@@ -789,65 +789,35 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 
 
 /* =========================================================
-   15) BOTTOM BAR
+   15) BOTTOM BAR (con .bottom-item independiente)
    ========================================================= */
-/* --- Bottom bar estilo App Store custom --- */
-.bottom-bar .rail-item .txt {
+.bottom-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 88px; /* antes 74px → ahora más alta */
-  background: rgba(13, 17, 23, 0.92);
+  height: 88px;
+  background: rgba(13,17,23,0.92);
   backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255,255,255,0.05);
   z-index: 2000;
-  transition: transform 0.25s ease-out;
+  transition: transform .25s ease-out;
 }
 
-/* === Desvincular comportamiento del sidebar en el bottom bar === */
+.bottom-bar.hidden { transform: translateY(100%); }
 
-/* Asegura que el texto del bottom bar siempre sea visible */
-.bottom-bar .rail-item .txt {
-  display: block !important;
-  opacity: 1 !important; /* ← evita que dependa del sidebar */
-}
-
-/* Elimina el pseudo-fondo ::before heredado del sidebar */
-.bottom-bar .rail-item::before {
-  content: none !important;
-}
-
-/* Limpia cualquier fondo o sombra residual del rail */
-.bottom-bar .rail-item,
-.bottom-bar .rail-item:hover,
-.bottom-bar .rail-item.is-active {
-  background: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-} 
-
-
-/* ocultar al bajar */
-.bottom-bar.hidden {
-  transform: translateY(100%);
-}
-
-/* lista horizontal */
 .bottom-rail {
   height: 100%;
   margin: 0;
-  /* padding lateral para que no toquen los bordes */
   padding: 0 14px;
   list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px; /* más aire entre iconos */
+  gap: 10px;
 }
 
-/* item */
-.bottom-bar .rail-item {
+.bottom-bar .bottom-item {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -860,79 +830,33 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   flex: 1;
 }
 
-/* icono más separado del borde y un poco más grande */
-.bottom-bar .rail-item .ico {
-  font-size: 22px;
-  line-height: 1;
+.bottom-bar .bottom-item .ico { font-size: 22px; line-height: 1; }
+.bottom-bar .bottom-item .txt { display: block; }
+
+/* activo/hover: solo color */
+.bottom-bar .bottom-item.is-active,
+.bottom-bar .bottom-item:hover { color: #00bcd4; }
+
+/* NO heredar nada del sidebar */
+.bottom-bar .bottom-item::before { content: none; }
+.bottom-bar .bottom-item,
+.bottom-bar .bottom-item.is-active,
+.bottom-bar .bottom-item:focus,
+.bottom-bar .bottom-item:hover {
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
 }
 
-/* activo: solo color, sin fondo */
-.bottom-bar .rail-item.is-active {
-  color: #00bcd4;
-}
-
-.bottom-bar .rail-item:hover {
-  color: #00bcd4;
-}
-
-/* seguir el theme */
 @media (prefers-color-scheme: light) {
   .bottom-bar {
-    background: rgba(255, 255, 255, 0.96);
-    border-top: 1px solid rgba(0, 0, 0, 0.04);
+    background: rgba(255,255,255,0.96);
+    border-top: 1px solid rgba(0,0,0,0.04);
   }
-  .bottom-bar .rail-item {
-    color: #475569;
-  }
-  .bottom-bar .rail-item.is-active {
-    color: #00bcd4;
-  }
+  .bottom-bar .bottom-item { color: #475569; }
+  .bottom-bar .bottom-item.is-active { color: #00bcd4; }
 }
 
-/* solo mobile */
-@media (min-width: 769px) {
-  .bottom-bar {
-    display: none;
-  }
-}
-
-/* más espacio al final del contenido por la nueva altura */
-@media (max-width: 768px) {
-  body {
-    padding-bottom: 100px; /* un poco más que la altura (88) */
-  }
-}
-
-/* === overrides SOLO para el bottom bar === */
-
-/* que siempre se vea el texto en el bottom bar */
-.bottom-bar .rail-item .txt {
-  display: block !important;
-}
-
-/* que el item del bottom bar NO use el fondo del sidebar */
-.bottom-bar .rail-item,
-.bottom-bar .rail-item.is-active,
-.bottom-bar .rail-item:focus,
-.bottom-bar .rail-item:hover {
-  background: none !important;
-  box-shadow: none !important;
-}
-
-/* color base del bottom bar */
-.bottom-bar .rail-item {
-  color: #94a3b8;
-}
-
-/* color cuando está activo (esto sí queremos) */
-.bottom-bar .rail-item.is-active {
-  color: #00bcd4;
-}
-
-/* por si el sidebar pone border-radius raro */
-.bottom-bar .rail-item {
-  border-radius: 0 !important;
-}
-
-
+@media (min-width: 769px) { .bottom-bar { display: none; } }
+@media (max-width: 768px) { body { padding-bottom: 100px; } }
 
