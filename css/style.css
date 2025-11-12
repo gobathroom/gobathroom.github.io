@@ -801,13 +801,20 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 /* =========================================================
    15) BOTTOM BAR (con .bottom-item independiente)
    ========================================================= */
-.bottom-bar{
+..bottom-bar{
   position: fixed;
   left: 0; right: 0; bottom: 0;
   height: calc(var(--bb-h) + var(--safe-b));
-  background: rgba(13,17,23,.92);
+
+  /* FONDO IGUAL AL SIDEBAR (con ligera transparencia opcional) */
+  background: var(--panel);  /* fallback */
+  background: color-mix(in srgb, var(--panel) 94%, transparent);
+
   backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255,255,255,.06);
+
+  /* BORDE IGUAL AL SIDEBAR */
+  border-top: 1px solid var(--border);
+
   z-index: 2000;
   transition: transform .25s ease-out;
 
@@ -844,7 +851,7 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   justify-content: flex-start;  /* ↑ icono/label más arriba */
   gap: 4px;
   text-decoration: none;
-  color: #94a3b8;
+  color: var(--muted);
   font-size: 11px;
 }
 
@@ -855,7 +862,10 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 
 /* activo/hover: solo color */
 .bottom-bar .bottom-item.is-active,
-.bottom-bar .bottom-item:hover { color: #00bcd4; }
+.bottom-bar .bottom-item:hover{
+  color: var(--brand);
+}
+
 
 /* NO heredar nada del sidebar */
 .bottom-bar .bottom-item::before { content: none; }
@@ -866,15 +876,6 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   background: none;
   box-shadow: none;
   border-radius: 0;
-}
-
-@media (prefers-color-scheme: light){
-  .bottom-bar{
-    background: rgba(255,255,255,.96);
-    border-top: 1px solid rgba(0,0,0,.04);
-  }
-  .bottom-bar .bottom-item{ color:#475569; }
-  .bottom-bar .bottom-item.is-active{ color:#00bcd4; }
 }
 
 
