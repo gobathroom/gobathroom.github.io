@@ -768,26 +768,72 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
    13) RESPONSIVE
    ========================================================= */
 @media (max-width: 1024px){ }
+
 @media (max-width: 768px){
+  /* === SIDEBAR MOBILE: drawer tipo Reddit (≈82% ancho) === */
   .sidebar{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    /* ancho tipo Reddit: ~82% de la pantalla, máx 360px */
+    width: min(82vw, 360px);
+
     transform: translateX(-100%);
-    width: var(--rail-expanded);
     box-shadow: 16px 0 32px rgba(0,0,0,.35);
+
+    /* por encima de todo (topbar = 1100, popovers = 2000) */
+    z-index: 2200;
+
+    /* seguimos usando tu color de panel según tema */
+    background: var(--panel);
   }
-  body.sidebar-open .sidebar{ transform: translateX(0) }
 
-  .topbar, .notifybar, .page, .site-footer{
-    left: 0 !important; margin-left: 0 !important;
+  /* cuando está abierto, mismo ancho y entra en pantalla */
+  body.sidebar-open .sidebar{
+    transform: translateX(0);
+    width: min(82vw, 360px);
   }
 
-  .page{ padding-top: calc(var(--header-h) + var(--notify-h)) }
-  .topbar{ padding-inline:12px }
+  /* === OVERLAY DETRÁS DEL DRAWER === */
+  body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.42);   /* oscurece contenido */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+    z-index: 2100;                  /* debajo del sidebar, encima del resto */
+  }
+  body.sidebar-open::before{
+    opacity: 1;
+    pointer-events: auto;
+  }
 
-  /* oculta solo el nombre del brand de la topbar en móvil */
-  .topbar .brand .brand-name{ display:none }
+  /* contenido no se mueve: siempre pegado al borde izquierdo */
+  .topbar,
+  .notifybar,
+  .page,
+  .site-footer{
+    left: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  .page{
+    padding-top: calc(var(--header-h) + var(--notify-h));
+  }
+
+  .topbar{
+    padding-inline: 12px;
+  }
+
+  /* en móvil solo icono de brand en la topbar */
+  .topbar .brand .brand-name{
+    display: none;
+  }
 }
-
-
 
 /* =========================================================
    14) UTILIDADES
@@ -796,6 +842,7 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 @media (max-width: 768px){
   .only-mobile { display: grid }
 }
+
 
 
 /* =========================================================
