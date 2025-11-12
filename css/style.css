@@ -801,19 +801,15 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 /* =========================================================
    15) BOTTOM BAR (con .bottom-item independiente)
    ========================================================= */
-..bottom-bar{
+.bottom-bar{
   position: fixed;
   left: 0; right: 0; bottom: 0;
   height: calc(var(--bb-h) + var(--safe-b));
 
-  /* FONDO IGUAL AL SIDEBAR (con ligera transparencia opcional) */
-  background: var(--panel);  /* fallback */
-  background: color-mix(in srgb, var(--panel) 94%, transparent);
-
-  backdrop-filter: blur(10px);
-
-  /* BORDE IGUAL AL SIDEBAR */
+  /* 👇 ahora usa tus tokens de tema */
+  background: var(--panel-2);
   border-top: 1px solid var(--border);
+  backdrop-filter: blur(10px);
 
   z-index: 2000;
   transition: transform .25s ease-out;
@@ -826,7 +822,6 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
     max(var(--bb-pad-x), var(--safe-l));
 }
 
-
 .bottom-bar.hidden { transform: translateY(100%); }
 
 .bottom-rail{
@@ -835,11 +830,10 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   list-style: none;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;   /* ↑ sesgo hacia ARRIBA */
+  align-items: flex-start;
   gap: 14px;
-  padding: 0;                /* ← quita el padding 0 14px anterior */
+  padding: 0;
 }
-
 
 .bottom-bar .bottom-item{
   flex: 1 1 0;
@@ -848,24 +842,30 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;  /* ↑ icono/label más arriba */
+  justify-content: flex-start;
   gap: 4px;
   text-decoration: none;
+
+  /* 👇 colores también desde los tokens */
   color: var(--muted);
   font-size: 11px;
 }
 
-
-.bottom-bar .bottom-item .ico{ font-size:22px; line-height:1; transform: translateY(2px); }
-.bottom-bar .bottom-item .txt{ display:block; line-height:1.1; }
-
-
-/* activo/hover: solo color */
-.bottom-bar .bottom-item.is-active,
-.bottom-bar .bottom-item:hover{
-  color: var(--brand);
+.bottom-bar .bottom-item .ico{
+  font-size:22px;
+  line-height:1;
+  transform: translateY(2px);
+}
+.bottom-bar .bottom-item .txt{
+  display:block;
+  line-height:1.1;
 }
 
+/* activo/hover: solo color, con el brand del sitio */
+.bottom-bar .bottom-item.is-active,
+.bottom-bar .bottom-item:hover {
+  color: var(--brand);
+}
 
 /* NO heredar nada del sidebar */
 .bottom-bar .bottom-item::before { content: none; }
@@ -878,13 +878,11 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   border-radius: 0;
 }
 
-
-@media (min-width: 769px) { .bottom-bar { display: none; } }
+@media (min-width: 769px) {
+  .bottom-bar { display: none; }
+}
 @media (max-width:768px){
   body{
-    /* deja espacio real para la barra + safe-area + un respiro extra */
     padding-bottom: calc(var(--bb-h) + var(--safe-b) + 16px);
   }
 }
-
-
