@@ -811,7 +811,7 @@ window.addEventListener("scroll", () => {
 });
 
 // opcional: marcar activo cuando hacen click
-const bottomLinks = document.querySelectorAll(".bottom-bar .rail-item");
+const bottomLinks = document.querySelectorAll(".bottom-bar .bottom-item");
 bottomLinks.forEach((link) => {
   link.addEventListener("click", () => {
     bottomLinks.forEach((l) => l.classList.remove("is-active"));
