@@ -1,4 +1,4 @@
-const CACHE_NAME = "gobathroom-v12";
+const CACHE_NAME = "gobathroom-v13";
 
 // pon aquí los archivos que siempre quieres que carguen
 const URLS_TO_CACHE = [
