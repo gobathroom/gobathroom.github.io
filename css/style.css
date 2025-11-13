@@ -878,10 +878,27 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 /* =========================================================
    14) UTILIDADES
    ========================================================= */
-.only-mobile { display: none }
-@media (max-width: 768px){
-  .only-mobile { display: grid }
+
+/* Mostrar solo en móvil */
+.only-mobile { 
+  display: none;
 }
+
+@media (max-width: 768px){
+  .only-mobile { 
+    display: grid;
+  }
+}
+
+/* 🔒 Ocultar HAMBURGER en desktop/tablet aunque exista en HTML */
+@media (min-width: 769px){
+  .topbar .hamburger {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
 
 
 
