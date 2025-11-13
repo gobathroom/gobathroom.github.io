@@ -846,11 +846,6 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
     padding-inline: 12px;
   }
 
-  /* en móvil solo icono de brand en la topbar */
-  .topbar .brand .brand-name{
-    display: none;
-  }
-}
 
 /* =========================================================
    14) UTILIDADES
