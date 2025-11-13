@@ -38,53 +38,42 @@
  
 
 
-  <!-- =====================================================
-     2) TOPBAR (Header fijo, alineado al rail)
-===================================================== -->
-<header class="topbar" role="banner">
-  
-  <!-- 2.1) Botón menú (solo móvil) -->
-  <button
-    class="icon-btn hamburger only-mobile"
-    type="button"                <!-- ✅ mejor especificar -->
-    aria-label="Open menu"
-    aria-expanded="false">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M3 6h18M3 12h18M3 18h18"
-            stroke="currentColor" stroke-width="2"
-            fill="none" stroke-linecap="round" />
-    </svg>
-  </button>
-  
-  <!-- 2.2) Marca en topbar (visible cuando el sidebar está cerrado) -->
-  <a class="brand topbar-brand" href="/" aria-label="Go Bathroom NYC — Home">
-    <svg class="brand-logo" width="28" height="28" aria-hidden="true">
-      <use href="/assets/svg/logo-pin.svg#gb-logo-pin"></use>
-    </svg>
-    <span class="brand-name">Go Bathroom</span>
-  </a>
-
-  <!-- 2.3) Acciones topbar (alerts + idioma) -->
-  <nav class="top-actions" aria-label="Primary">
-    <!-- 🔔 NOTIFICATIONS BUTTON -->
-    <button
-      class="icon-btn top-alerts-btn"
-      type="button"              <!-- ✅ igual aquí -->
-      aria-label="Alerts">
-      <i class="fa-solid fa-bell" aria-hidden="true"></i>
+ <!-- =====================================================
+       2) TOPBAR (Header fijo, alineado al rail)
+       ===================================================== -->
+  <header class="topbar" role="banner">
+    
+    <!-- 2.1) Botón menú (solo móvil) -->
+    <button class="icon-btn hamburger only-mobile" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
     </button>
+    
+    <!-- 2.2) Marca en topbar (visible cuando el sidebar está cerrado) -->
+    <!-- Topbar brand -->
+<a class="brand topbar-brand" href="/" aria-label="Go Bathroom NYC — Home">
+  <svg class="brand-logo" width="28" height="28" aria-hidden="true">
+  <use href="/assets/svg/logo-pin.svg#gb-logo-pin"></use>
+  </svg>
+  <span class="brand-name">Go Bathroom</span>
+</a>
 
-    <div class="divider"></div>
+    <!-- 2.3) Acciones topbar (idioma, etc.) -->
+<nav class="top-actions" aria-label="Primary">
+  <!-- 🔔 NOTIFICATIONS BUTTON -->
+  <button class="icon-btn top-alerts-btn" aria-label="Alerts">
+    <i class="fa-solid fa-bell"></i>
+  </button>  
+  <div class="divider"></div>
+  <!-- ⬇️ Inserta este <a> justo DESPUÉS de <div class="divider"></div> y ANTES de </nav> -->
+  <a class="btn" href="/es/" hreflang="es" aria-label="Cambiar a Español">
+    <i class="fa-solid fa-globe" aria-hidden="true"></i>
+    <span>Español</span>
+  </a>
+</nav>
 
-    <a class="btn"
-       href="/es/" hreflang="es"
-       aria-label="Cambiar a Español">
-      <i class="fa-solid fa-globe" aria-hidden="true"></i>
-      <span>Español</span>
-    </a>
-  </nav>
-
-</header>
+  </header>
 
 
   
