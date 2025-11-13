@@ -111,8 +111,9 @@ body{
 /* 4.1) Contenedor */
 .sidebar{
   position: fixed;
-  top: var(--safe-t);  /* respeta el status bar */;
-  bottom: 0; left: 0;
+  top: 0;               /* ← otra vez 0, para pintar detrás de la hora */
+  bottom: 0;
+  left: 0;
   width: var(--rail-collapsed);
   background: var(--panel);
   border-right: 1px solid var(--border);
@@ -122,14 +123,18 @@ body{
   transition: width .2s ease;
   z-index: 45;
   padding-top: 0;
-  overflow: hidden;
+  /* ANTES: overflow: hidden;  */
+  overflow-y: auto;           /* ← permite scroll si hay muchas opciones */
+  overscroll-behavior: contain; /* ← evita que se desplace el fondo */
 }
 body.sidebar-open .sidebar{ width: var(--rail-expanded) }
+
 
 /* 4.2) Cabecera del rail */
 .rail-head{
   position: absolute;
-  top: 0; left: 0; right: 0;
+  top: var(--safe-t);   /* ← antes era 0 */;
+  left: 0; right: 0;
   height: var(--header-h);
   display: grid;
   grid-template-columns: var(--rail-collapsed) 1fr; /* simetría al cerrar */
@@ -142,10 +147,11 @@ body.sidebar-open .rail-head{
   grid-template-columns: var(--rail-collapsed) 1fr var(--rail-collapsed);
 }
 
-/* Reserva espacio bajo la barra para el grupo */
+/* Reserva espacio bajo la barra + safe-area para el grupo */
 .sidebar > .rail-head + .rail-group{
-  padding-top: var(--header-h);
+  padding-top: calc(var(--safe-t) + var(--header-h));
 }
+
 
 /* Footer abajo sin space-between */
 .rail-footer{ margin-top: auto; }
