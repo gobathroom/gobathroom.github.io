@@ -827,9 +827,8 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
     margin-left: 0 !important;
   }
 
-  .page{
-    padding-top: calc(var(--header-h) + var(--notify-h));
-  }
+    .page{ padding-top: calc(var(--safe-t) + var(--header-h) + var(--notify-h)) }
+
 
   .topbar{
     padding-inline: 12px;
