@@ -391,7 +391,7 @@ body.sidebar-open .topbar .topbar-brand{ display: none; }
 
 
 /* =========================================================
-   ALERTS
+   5.1) ALERTS
    ========================================================= */
 .top-alerts-btn {
   border: 1px solid var(--border);
@@ -414,10 +414,17 @@ body.sidebar-open .topbar .topbar-brand{ display: none; }
   font-size: 18px;
 }
 
+/* Ocultar campana en móvil */
+@media (max-width: 768px) {
+  .top-alerts-btn {
+    display: none;
+  }
+}
+
 
 
 /* =========================================================
-   BOTÓN DE IDIOMA – EFECTO ZOOM AL PASAR EL MOUSE
+   5.2) BOTÓN DE IDIOMA – EFECTO ZOOM AL PASAR EL MOUSE
    ========================================================= */
 .top-actions .btn {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
