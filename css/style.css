@@ -878,26 +878,15 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 /* =========================================================
    14) UTILIDADES
    ========================================================= */
-
-/* Mostrar solo en móvil */
 .only-mobile { 
   display: none;
 }
-
 @media (max-width: 768px){
   .only-mobile { 
     display: grid;
   }
 }
 
-/* 🔒 Ocultar HAMBURGER en desktop/tablet aunque exista en HTML */
-@media (min-width: 769px){
-  .topbar .hamburger {
-    display: none !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-  }
-}
 
 
 
@@ -988,5 +977,26 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 @media (max-width:768px){
   body{
     padding-bottom: calc(var(--bb-h) + var(--safe-b) + 16px);
+  }
+}
+
+
+/* =========================================================
+   16) Hamburger de la topbar: solo visible en móvi
+   ========================================================= */
+/* Desktop + tablet: oculto SIEMPRE */
+@media (min-width: 769px){
+  .topbar .hamburger {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+/* Móvil: se muestra (incluso si otra regla lo esconde) */
+@media (max-width: 768px){
+  .topbar .hamburger {
+    display: grid !important;   /* porque el botón usa layout de grid */
+    place-items: center;
   }
 }
