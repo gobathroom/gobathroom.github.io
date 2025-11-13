@@ -323,18 +323,24 @@ body.sidebar-open .sidebar .rail-item .txt{
    ========================================================= */
 .topbar{
   position: fixed;
-  top: var(--safe-t);  /* baja bajo el status bar */;
+  top: 0;                         /* cubre también la zona de la hora */
   left: var(--rail-collapsed);
   right: 0;
-  height: var(--header-h);
+
+  /* alto total = barra + zona segura superior */
+  height: calc(var(--header-h) + var(--safe-t));
+
+  /* bajamos el contenido para que no se meta en el notch */
+  padding: var(--safe-t) var(--space-4) 0;
+
   display:flex; align-items:center; gap:var(--space-3);
-  padding:0 var(--space-4);
   background:var(--bg);
   border-bottom:1px solid var(--border);
   z-index: 1100;
   transition: left .2s ease;
   will-change: left;
 }
+
 body.sidebar-open .topbar{ left: var(--rail-expanded) }
 
 /* Marca topbar cuando sidebar cerrado */
