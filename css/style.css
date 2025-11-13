@@ -37,6 +37,8 @@
   --safe-b: env(safe-area-inset-bottom, 0px);
   --safe-l: env(safe-area-inset-left, 0px);
   --safe-r: env(safe-area-inset-right, 0px);
+     /* 👇 NUEVO: margen superior para notch / status bar de iOS */
+  --safe-t: env(safe-area-inset-top, 0px);
   --bb-pad-x: 20px;     /* margen lateral tipo App/Play Store */
   --bb-pad-top: 6px;    /* empuje hacia arriba (iconos/labels no centrados) */
 
@@ -109,7 +111,8 @@ body{
 /* 4.1) Contenedor */
 .sidebar{
   position: fixed;
-  top: 0; bottom: 0; left: 0;
+  top: var(--safe-t);  /* respeta el status bar */;
+  bottom: 0; left: 0;
   width: var(--rail-collapsed);
   background: var(--panel);
   border-right: 1px solid var(--border);
@@ -314,7 +317,9 @@ body.sidebar-open .sidebar .rail-item .txt{
    ========================================================= */
 .topbar{
   position: fixed;
-  top: 0; left: var(--rail-collapsed); right: 0;
+  top: var(--safe-t);  /* baja bajo el status bar */;
+  left: var(--rail-collapsed);
+  right: 0;
   height: var(--header-h);
   display:flex; align-items:center; gap:var(--space-3);
   padding:0 var(--space-4);
@@ -391,7 +396,7 @@ body.sidebar-open .topbar .topbar-brand{ display: none; }
    ========================================================= */
 .notifybar{
   position: fixed;
-  top: var(--header-h);
+  top: calc(var(--safe-t) + var(--header-h));  /* header + safe-top */;
   left: var(--rail-collapsed);
   right: 0;
   min-height: 36px;
@@ -413,10 +418,11 @@ body.sidebar-open .notifybar{ left: var(--rail-expanded) }
    ========================================================= */
 .page{
   min-height:100svh;
-  display:flex; flex-direction:column;
+  display:flex;
+  flex-direction:column;
   margin-left: var(--rail-collapsed);
   transition: margin-left .2s ease;
-  padding-top: calc(var(--header-h) + var(--notify-h));
+  padding-top: calc(var(--safe-t) + var(--header-h) + var(--notify-h));
 }
 body.sidebar-open .page{ margin-left: var(--rail-expanded) }
 
