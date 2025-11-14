@@ -83,78 +83,81 @@ document.addEventListener('keydown', (e) => {
 /* =========================================================
    3) THEME: Light / Dark – estilo Reddit/TikTok
    ---------------------------------------------------------
-   - Un solo botón de rail: #themeToggle
-   - Sidebar CERRADO: solo icono (muestra el modo al que vas a cambiar)
-   - Sidebar ABIERTO: "🌙 Dark mode [switch]"
+   - Botón compacto en rail cerrado (#themeCompactBtn)
+   - Fila "🌙 Dark mode [switch]" en rail abierto (#themeSwitch)
    ========================================================= */
 
-// Botón del rail (tanto abierto como cerrado)
-const themeToggle = $('#themeToggle');          // <button id="themeToggle" class="rail-item theme-toggle">
-const themeIcon   = themeToggle ? themeToggle.querySelector('.theme-icon') : null; // span / i con el icono
+// Botón SOLO icono (cuando el rail está CERRADO)
+const themeCompactBtn = $('#themeCompactBtn');         // <button id="themeCompactBtn" class="rail-item theme-compact">
+const themeIcon       = themeCompactBtn ? themeCompactBtn.querySelector('.theme-icon') : null;
+
+// Switch deslizante (cuando el rail está ABIERTO)
+const themeSwitch     = $('#themeSwitch');             // <button id="themeSwitch" class="theme-toggle">
 
 const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
 const THEME_KEY = 'theme';
 
-/** Tema inicial: lo que haya en localStorage, si no, la preferencia del sistema */
 function getInitialTheme(){
   const stored = (localStorage.getItem(THEME_KEY) || '').toLowerCase();
   if (stored === 'light' || stored === 'dark') return stored;
   return mediaDark.matches ? 'dark' : 'light';
 }
 
-/** Actualiza solo el icono del botón, según tema y estado del sidebar */
-function updateThemeIcon(mode){
+// Actualiza el switch tipo TikTok (ON = dark)
+function updateSwitchUI(mode){
+  if (!themeSwitch) return;
+  const isDark = (mode === 'dark');
+  themeSwitch.classList.toggle('is-on', isDark);
+  themeSwitch.setAttribute('aria-pressed', String(isDark));
+}
+
+// Actualiza el ICONO compacto (solo icono)
+// - si estás en dark → muestra ☀️ (vas a light)
+// - si estás en light → muestra 🌙 (vas a dark)
+function updateCompactIcon(mode){
   if (!themeIcon) return;
-
-  // Sidebar ABIERTO → icono fijo de luna (Dark mode)
-  if (body.classList.contains('sidebar-open')){
-    themeIcon.textContent = '🌙';
-    return;
-  }
-
-  // Sidebar CERRADO → icono muestra el modo al que vas a cambiar
-  // - si estás en dark → se muestra ☀️ (vas a light)
-  // - si estás en light → se muestra 🌙 (vas a dark)
   themeIcon.textContent = (mode === 'dark') ? '☀️' : '🌙';
 }
 
-/** Aplica el tema, lo guarda y sincroniza UI */
+// Aplica el tema, guarda y sincroniza UI
 function applyTheme(mode){
   mode = (mode === 'light') ? 'light' : 'dark';
 
-  // 1) Atributo en <html> para el CSS
   root.setAttribute('data-theme', mode);
-
-  // 2) Guardar preferencia
   localStorage.setItem(THEME_KEY, mode);
 
-  // 3) Actualizar icono del rail
-  updateThemeIcon(mode);
+  updateSwitchUI(mode);
+  updateCompactIcon(mode);
 
-  // 4) Actualizar barra del navegador / status bar iOS
   if (typeof window.__applyThemeChrome === 'function'){
     window.__applyThemeChrome();
   }
 }
 
-/** Alterna entre light/dark */
+// Alterna entre light/dark
 function toggleTheme(){
   const current = (root.getAttribute('data-theme') || getInitialTheme()).toLowerCase();
   const next    = current === 'dark' ? 'light' : 'dark';
   applyTheme(next);
 }
 
-/* --------- Listeners de UI --------- */
-
-// Click en el botón del rail (abierto o cerrado)
-if (themeToggle){
-  themeToggle.addEventListener('click', (e) => {
+// Click en el switch (rail ABIERTO)
+if (themeSwitch){
+  themeSwitch.addEventListener('click', (e) => {
     e.preventDefault();
     toggleTheme();
   });
 }
 
-/* Estado inicial: aplica tema guardado o el del sistema */
+// Click en el botón solo icono (rail CERRADO)
+if (themeCompactBtn){
+  themeCompactBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    toggleTheme();
+  });
+}
+
+// Estado inicial
 applyTheme(getInitialTheme());
 
 
@@ -174,7 +177,7 @@ applyTheme(getInitialTheme());
 // 4.1) Selectores y estado del mouse
 const shareBtn    = $('#shareBtn');
 const shareModal  = $('#shareModal'); // fallback muy viejo
-const sharePop    = $('#sharePopover');   // 👈 FALTABA ESTA LÍNEA
+const sharePop    = window.sharePop = $('#sharePopover');  // ⬅️ AQUÍ creamos sharePop correctamente
 const shareInput  = $('#shareInput');
 const shareFacebook = $('#shareFacebook');
 const shareX      = $('#shareX');
