@@ -105,6 +105,7 @@ body{
    4.4) Grupos
    4.5) Items
    4.6) Estados de foco (sin ring)
+   4.7) Control de tema en el footer del rail
    ========================================================= */
 
 
@@ -315,6 +316,112 @@ body.sidebar-open .sidebar .rail-item .txt{
 
 /* Firefox: elimina el borde interno por defecto de los botones */
 .sidebar button::-moz-focus-inner { border: 0; }
+
+
+
+/* 4.7) Control de tema en el footer del rail
+   - theme-compact: botón pequeño cuando el rail está cerrado
+   - theme-row + theme-toggle: fila con switch cuando el rail está abierto
+   - theme-caption: texto "Theme: Auto / Light / Dark"
+*/
+
+/* Botón compacto (usa estilos base de .rail-item) */
+.theme-compact{
+  /* nada especial por ahora, solo controlamos visibilidad */
+}
+
+/* Fila con el switch + iconos (solo rail abierto) */
+.theme-row{
+  display: none;                     /* oculto por defecto (rail cerrado) */
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 4px var(--space-2) 0;
+  padding: 6px 10px;
+  border-radius: 12px;
+  background: var(--panel-2);
+}
+
+/* Texto pequeño debajo del switch */
+.theme-caption{
+  display: none;                     /* también solo con rail abierto */
+  margin: 4px var(--space-2) 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Iconos sol / luna */
+.theme-sun,
+.theme-moon{
+  font-size: 16px;
+  color: var(--muted);
+}
+
+/* Switch tipo pastilla */
+.theme-toggle{
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.theme-toggle-track{
+  position: relative;
+  width: 46px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  display: inline-block;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.theme-toggle-thumb{
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.4);
+  transform: translateX(0);
+  transition: transform .18s ease;
+}
+
+/* Estado ON (modo oscuro) – la JS añadirá .is-on */
+.theme-toggle.is-on .theme-toggle-thumb{
+  transform: translateX(20px);
+}
+.theme-toggle.is-on .theme-toggle-track{
+  background: var(--brand);
+  border-color: var(--brand);
+}
+
+/* Visibilidad según si el rail está abierto o cerrado */
+.theme-compact{
+  display: flex;                     /* visible mientras el rail está cerrado */
+}
+body.sidebar-open .theme-compact{
+  display: none;                     /* se oculta al abrir el sidebar */
+}
+
+body.sidebar-open .theme-row{
+  display: flex;                     /* aparece la fila con el switch */
+}
+body.sidebar-open .theme-caption{
+  display: block;                    /* aparece el texto debajo */
+}
+
+/* Resaltar iconos según tema elegido explícitamente */
+:root[data-theme="light"] .theme-sun{
+  color: var(--brand);
+}
+:root[data-theme="dark"] .theme-moon{
+  color: var(--brand);
+}
+
 
 
 
