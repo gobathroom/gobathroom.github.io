@@ -384,6 +384,12 @@ body.sidebar-open .sidebar .rail-item .txt{
   flex:0 0 24px;
 }
 
+.rail-footer{
+  margin-top: auto;
+  padding: 12px 0 16px;  /* antes: 12px 8px 16px */
+}
+
+
 
 
 
