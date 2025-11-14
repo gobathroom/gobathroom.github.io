@@ -74,15 +74,16 @@ document.addEventListener('keydown', (e) => {
 
 
 /* =========================================================
-   3) THEME: Light / Dark (single button #themeToggle)
+   3) THEME: Light / Dark – un solo botón (#themeToggle)
    ========================================================= */
 
-const themeToggleBtn = $('#themeToggle');                                    // <button id="themeToggle">
-const themeIcon      = themeToggleBtn ? themeToggleBtn.querySelector('.theme-icon') : null;
+// Botón en el footer del rail
+const themeToggleBtn = $('#themeToggle');              // <button id="themeToggle" ...>
+const themeIcon      = themeToggleBtn ? themeToggleBtn.querySelector('.theme-icon')  : null;
 const themeLabel     = themeToggleBtn ? themeToggleBtn.querySelector('.theme-label') : null;
 
-const THEME_KEY = 'theme';
 const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
+const THEME_KEY = 'theme';
 
 function getInitialTheme(){
   const stored = (localStorage.getItem(THEME_KEY) || '').toLowerCase();
@@ -90,33 +91,26 @@ function getInitialTheme(){
   return mediaDark.matches ? 'dark' : 'light';
 }
 
+// Actualiza icono, texto y aria-pressed según el modo
 function updateThemeUI(mode){
   const isDark = (mode === 'dark');
 
-  // Estado del botón
   if (themeToggleBtn){
     themeToggleBtn.setAttribute('aria-pressed', String(isDark));
-    themeToggleBtn.setAttribute(
-      'aria-label',
-      isDark ? 'Switch to light mode' : 'Switch to dark mode'
-    );
   }
 
-  // Icono:
-  //   - en dark → ☀️ (el siguiente clic va a light)
-  //   - en light → 🌙 (el siguiente clic va a dark)
-  if (themeIcon){
-    themeIcon.textContent = isDark ? '☀️' : '🌙';
-  }
-
-  // Texto:
-  //   - en dark → "Light mode"
-  //   - en light → "Dark mode"
   if (themeLabel){
-    themeLabel.textContent = isDark ? 'Light mode' : 'Dark mode';
+    themeLabel.textContent = isDark ? 'Dark mode' : 'Light mode';
+  }
+
+  if (themeIcon){
+    // Luna para dark, sol para light
+    themeIcon.classList.toggle('fa-moon', isDark);
+    themeIcon.classList.toggle('fa-sun', !isDark);
   }
 }
 
+// Aplica tema + guarda en localStorage + sincroniza barras del navegador
 function applyTheme(mode){
   mode = (mode === 'light') ? 'light' : 'dark';
 
@@ -130,6 +124,7 @@ function applyTheme(mode){
   }
 }
 
+// Alternar entre light/dark
 function toggleTheme(){
   const current = (root.getAttribute('data-theme') || getInitialTheme()).toLowerCase();
   const next    = current === 'dark' ? 'light' : 'dark';
@@ -144,9 +139,8 @@ if (themeToggleBtn){
   });
 }
 
-// Estado inicial al cargar
+// Estado inicial
 applyTheme(getInitialTheme());
-
 
 
 
