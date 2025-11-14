@@ -33,7 +33,7 @@ function setSidebar(open){
   body.classList.toggle('sidebar-open', open);
   reflectAria(open);
   syncBrandA11y(open);
-
+}
 
 
 
