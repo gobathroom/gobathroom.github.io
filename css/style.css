@@ -377,35 +377,32 @@ body.sidebar-open .sidebar .rail-item .txt{
   left: 22px;
 }
 
-/* Sidebar CERRADO: solo el icono (sin texto ni switch) */
-body:not(.sidebar-open) #themeToggle .txt{
-  display: none;
-}
-body:not(.sidebar-open) #themeToggle{
-  padding-inline: 0;
+/* === Mostrar UNO u OTRO control de tema según el estado del sidebar === */
+
+/* Botón compacto solo icono (cuando el rail está cerrado)
+   Asegúrate de que el botón tenga la clase .theme-compact en el HTML */
+.theme-compact {
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-/* Sidebar ABIERTO: mostramos texto+switch */
-body.sidebar-open #themeToggle{
-  padding-inline: 0;
+/* Sidebar ABIERTO → ocultamos el botón compacto de icono */
+body.sidebar-open .theme-compact {
+  display: none;
 }
 
-/* Botón del footer (hereda base de .rail-item) */
-.theme-toggle{
-  cursor: pointer;
+/* Fila “Dark mode [switch]” (.theme-row):
+   - Sidebar CERRADO → oculta
+   - Sidebar ABIERTO → muestra */
+body:not(.sidebar-open) .theme-row {
+  display: none;
 }
 
-/* Focus accesible */
-.theme-toggle:focus-visible{
-  outline: 2px solid var(--brand);
-  outline-offset: 2px;
+body.sidebar-open .theme-row {
+  display: flex;
 }
 
-/* Icono ligeramente más fuerte en dark */
-:root[data-theme="dark"] .theme-icon{
-  color: var(--brand-2);
-}
 
 
 
