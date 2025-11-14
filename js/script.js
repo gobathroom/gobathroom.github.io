@@ -74,15 +74,15 @@ document.addEventListener('keydown', (e) => {
 
 
 /* =========================================================
-   3) THEME: Light / Dark – un solo botón (#themeToggle)
+   3) THEME: Light / Dark (single button #themeToggle)
    ========================================================= */
 
-const themeToggleBtn = $('#themeToggle');                       // <button id="themeToggle">
-const themeIcon      = themeToggleBtn?.querySelector('.theme-icon');   // icono 🌙 / ☀️
-const themeLabel     = themeToggleBtn?.querySelector('.theme-label');  // texto "Dark mode" / "Light mode"
+const themeToggleBtn = $('#themeToggle');                                    // <button id="themeToggle">
+const themeIcon      = themeToggleBtn ? themeToggleBtn.querySelector('.theme-icon') : null;
+const themeLabel     = themeToggleBtn ? themeToggleBtn.querySelector('.theme-label') : null;
 
-const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
 const THEME_KEY = 'theme';
+const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
 
 function getInitialTheme(){
   const stored = (localStorage.getItem(THEME_KEY) || '').toLowerCase();
@@ -90,30 +90,33 @@ function getInitialTheme(){
   return mediaDark.matches ? 'dark' : 'light';
 }
 
-// Actualiza icono, texto y aria-pressed
 function updateThemeUI(mode){
   const isDark = (mode === 'dark');
 
+  // Estado del botón
   if (themeToggleBtn){
     themeToggleBtn.setAttribute('aria-pressed', String(isDark));
+    themeToggleBtn.setAttribute(
+      'aria-label',
+      isDark ? 'Switch to light mode' : 'Switch to dark mode'
+    );
   }
 
   // Icono:
-  // - si estás en dark → muestra ☀️ (porque el siguiente clic te lleva a light)
-  // - si estás en light → muestra 🌙 (el siguiente clic te lleva a dark)
+  //   - en dark → ☀️ (el siguiente clic va a light)
+  //   - en light → 🌙 (el siguiente clic va a dark)
   if (themeIcon){
     themeIcon.textContent = isDark ? '☀️' : '🌙';
   }
 
   // Texto:
-  // - en dark: "Light mode"
-  // - en light: "Dark mode"
+  //   - en dark → "Light mode"
+  //   - en light → "Dark mode"
   if (themeLabel){
     themeLabel.textContent = isDark ? 'Light mode' : 'Dark mode';
   }
 }
 
-// Aplica el tema, guarda y sincroniza UI
 function applyTheme(mode){
   mode = (mode === 'light') ? 'light' : 'dark';
 
@@ -127,7 +130,6 @@ function applyTheme(mode){
   }
 }
 
-// Alterna entre light/dark
 function toggleTheme(){
   const current = (root.getAttribute('data-theme') || getInitialTheme()).toLowerCase();
   const next    = current === 'dark' ? 'light' : 'dark';
@@ -142,8 +144,9 @@ if (themeToggleBtn){
   });
 }
 
-// Estado inicial al cargar la página
+// Estado inicial al cargar
 applyTheme(getInitialTheme());
+
 
 
 
