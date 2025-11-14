@@ -405,6 +405,41 @@ body:not(.sidebar-open) .rail-footer{
 
 
 
+/* === Tema: qué mostrar según el estado del sidebar === */
+
+/* 1) SIDEBAR CERRADO → solo icono, centrado como los demás */
+body:not(.sidebar-open) #themeToggle .txt{
+  display: none;                /* no mostramos texto ni switch */
+}
+
+body:not(.sidebar-open) #themeToggle{
+  grid-template-columns: var(--rail-collapsed);  /* solo la columna del icono */
+  padding: 6px 8px 6px 0;       /* igual que .sidebar .rail-item */
+}
+
+body:not(.sidebar-open) #themeToggle .ico{
+  display: block;               /* aseguramos que el icono existe */
+  justify-self: center;         /* centrado en la única columna */
+}
+
+
+/* 2) SIDEBAR ABIERTO → texto + switch, sin icono */
+body.sidebar-open #themeToggle{
+  grid-template-columns: var(--rail-collapsed) 1fr;
+  padding: 6px 8px 6px 0;       /* mismo padding que el resto */
+}
+
+body.sidebar-open #themeToggle .txt{
+  display: block;
+}
+
+body.sidebar-open #themeToggle .ico{
+  display: none;
+}
+
+
+
+
 
 
 
