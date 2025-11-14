@@ -398,10 +398,34 @@ body.sidebar-open .sidebar .rail-item .txt{
   padding: 12px 0 16px;  /* antes: 12px 8px 16px */
 }
 
-/* Footer del rail solo visible cuando el sidebar está ABIERTO */
-body:not(.sidebar-open) .rail-footer{
-  display: none;
+/* --- Theme item: comportamiento según estado del sidebar --- */
+
+/* Aseguramos que el contenido interno no tenga rarezas de opacidad */
+#themeToggle .theme-row{
+  opacity: 1;
+  white-space: nowrap;
+  overflow: visible;
+  transition: none;
 }
+
+/* Sidebar CERRADO → solo icono, como los demás items */
+body:not(.sidebar-open) #themeToggle{
+  grid-template-columns: var(--rail-collapsed);  /* solo columna del icono */
+}
+
+body:not(.sidebar-open) #themeToggle .theme-row{
+  display: none;   /* ocultamos "Light mode" + switch */
+}
+
+/* Sidebar ABIERTO → icono + texto + switch */
+body.sidebar-open #themeToggle{
+  grid-template-columns: var(--rail-collapsed) 1fr;
+}
+
+body.sidebar-open #themeToggle .theme-row{
+  display: flex;   /* mostramos la fila interna normal */
+}
+
 
 
 
