@@ -154,8 +154,6 @@ body.sidebar-open .rail-head{
 }
 
 
-/* Footer abajo sin space-between */
-.rail-footer{ margin-top: auto; }
 
 /* Botón "bars" */
 .rail-head .rail-toggle{
@@ -219,11 +217,18 @@ body.sidebar-open .sidebar .rail-head .brand-name{
 
 
 /* 4.4) Grupos */
-.rail-group, .rail-footer{
+.rail-group{
   list-style:none;
   margin:0;
-  padding:12px 0;   /* ← sin gutter lateral */
+  padding:12px 0;   /* solo para los grupos, no para el footer */
 }
+
+/* Footer abajo y con padding propio */
+.rail-footer{
+  margin-top: auto;
+  padding: 12px 8px 16px;
+}
+
 
 
 /* 4.5) Items */
@@ -320,106 +325,86 @@ body.sidebar-open .sidebar .rail-item .txt{
 
 
 /* 4.7) Control de tema en el footer del rail
-   - theme-compact: botón pequeño cuando el rail está cerrado
-   - theme-row + theme-toggle: fila con switch cuando el rail está abierto
-   - theme-caption: texto "Theme: Auto / Light / Dark"
-*/
+   🌙 Dark mode [switch] – tipo Reddit/TikTok
+   --------------------------------------------------------- */
 
-/* Botón compacto (usa estilos base de .rail-item) */
-.theme-compact{
-  /* nada especial por ahora, solo controlamos visibilidad */
-}
-
-/* Fila con el switch + iconos (solo rail abierto) */
+/* Fila interior: "Dark mode" + switch */
 .theme-row{
-  display: none;                     /* oculto por defecto (rail cerrado) */
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin: 4px var(--space-2) 0;
-  padding: 6px 10px;
-  border-radius: 12px;
-  background: var(--panel-2);
+  justify-content: space-between;
+  gap: 8px;
 }
 
-/* Texto pequeño debajo del switch */
-.theme-caption{
-  display: none;                     /* también solo con rail abierto */
-  margin: 4px var(--space-2) 8px;
-  font-size: 12px;
-  color: var(--muted);
+.theme-label{
+  font-size: 14px;
 }
 
-/* Iconos sol / luna */
-.theme-sun,
-.theme-moon{
-  font-size: 16px;
-  color: var(--muted);
-}
-
-/* Switch tipo pastilla */
-.theme-toggle{
-  border: 0;
-  padding: 0;
-  background: transparent;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-}
-
-.theme-toggle-track{
+/* Switch visual */
+.theme-switch{
   position: relative;
-  width: 46px;
-  height: 24px;
-  border-radius: 999px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  display: inline-block;
-  padding: 2px;
-  box-sizing: border-box;
-}
-
-.theme-toggle-thumb{
-  position: relative;
-  width: 18px;
+  width: 38px;
   height: 18px;
   border-radius: 999px;
-  background: #ffffff;
-  box-shadow: 0 1px 3px rgba(0,0,0,.4);
-  transform: translateX(0);
-  transition: transform .18s ease;
+  background: var(--panel-2);       /* OFF: gris */
+  flex-shrink: 0;
 }
 
-/* Estado ON (modo oscuro) – la JS añadirá .is-on */
-.theme-toggle.is-on .theme-toggle-thumb{
-  transform: translateX(20px);
-}
-.theme-toggle.is-on .theme-toggle-track{
-  background: var(--brand);
-  border-color: var(--brand);
-}
-
-/* Visibilidad según si el rail está abierto o cerrado */
-.theme-compact{
-  display: flex;                     /* visible mientras el rail está cerrado */
-}
-body.sidebar-open .theme-compact{
-  display: none;                     /* se oculta al abrir el sidebar */
+.theme-knob{
+  position: absolute;
+  top: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.35);
+  transition: left .18s ease, background .18s ease;
 }
 
-body.sidebar-open .theme-row{
-  display: flex;                     /* aparece la fila con el switch */
+/* Estado OFF (light) -> [⚪      ] */
+:root[data-theme="light"] .theme-switch{
+  background: var(--panel-2);
 }
-body.sidebar-open .theme-caption{
-  display: block;                    /* aparece el texto debajo */
+:root[data-theme="light"] .theme-knob{
+  left: 2px;
 }
 
-/* Resaltar iconos según tema elegido explícitamente */
-:root[data-theme="light"] .theme-sun{
-  color: var(--brand);
+/* Estado ON (dark) -> [🟦🟦⚪] */
+:root[data-theme="dark"] .theme-switch{
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
 }
-:root[data-theme="dark"] .theme-moon{
-  color: var(--brand);
+:root[data-theme="dark"] .theme-knob{
+  left: 22px;
+}
+
+/* Sidebar CERRADO: solo el icono (sin texto ni switch) */
+body:not(.sidebar-open) #themeToggle .txt{
+  display: none;
+}
+body:not(.sidebar-open) #themeToggle{
+  padding-inline: 0;
+  justify-content: center;
+}
+
+/* Sidebar ABIERTO: mostramos texto+switch */
+body.sidebar-open #themeToggle{
+  padding-inline: 0;
+}
+
+/* Botón del footer (hereda base de .rail-item) */
+.theme-toggle{
+  cursor: pointer;
+}
+
+/* Focus accesible */
+.theme-toggle:focus-visible{
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* Icono ligeramente más fuerte en dark */
+:root[data-theme="dark"] .theme-icon{
+  color: var(--brand-2);
 }
 
 
@@ -724,24 +709,7 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 
 
 /* =========================================================
-   9) THEME POPOVER
-   ========================================================= */
-.theme-popover[hidden]{ display: none !important; }
-
-.theme-popover{
-  position: fixed;                 /* lo posiciona el JS */
-  min-width: 180px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 8px;                    /* +aire para que 1er/último item no peguen */
-  z-index: 2000;
-}
-
-
-
-/* =========================================================
-   10) SHARE POPOVER
+   9) SHARE POPOVER
    ========================================================= */
 .share-popover[hidden]{ display:none !important; }
 
@@ -889,61 +857,8 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 }
 
 
-
 /* =========================================================
-   11) THEME OPTION LIST (dentro del popover)
-   ========================================================= */
-.theme-list{
-  display: flex;
-  flex-direction: column;
-  gap: 4px;                        /* separación entre opciones */
-}
-
-.theme-opt{
-  position: relative;              /* necesario para el pseudo-fondo */
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
-  padding: 8px 12px;               /* acolchado interno del item */
-  border: 0;
-  background: transparent;         /* sin fondo directo */
-  color: var(--text);
-  border-radius: 10px;
-  cursor: pointer;
-  font: inherit;
-  text-align: left;
-}
-
-/* Fondo “inset” que deja margen en todos los lados (no se pega a bordes) */
-.theme-opt::before{
-  content: "";
-  position: absolute;
-  inset: 4px;                      /* margen interno top/right/bottom/left */
-  border-radius: 10px;
-  background: var(--panel-2);
-  opacity: 0;
-  transition: opacity .15s ease;
-  z-index: -1;                     /* detrás del icono y texto */
-}
-
-.theme-opt:hover::before,
-.theme-opt[aria-selected="true"]::before{
-  opacity: 1;
-}
-
-/* Iconos dentro de las opciones del popover */
-.theme-opt .opt-ico{
-  width: 18px;
-  text-align: center;
-  flex: 0 0 18px;
-}
-
-
-
-/* =========================================================
-   12) RAIL TOOLTIP (solo desktop con sidebar cerrado)
+   10) RAIL TOOLTIP (solo desktop con sidebar cerrado)
    ========================================================= */
 .rail-tip[hidden] { display: none !important; }
 
@@ -1014,7 +929,7 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 
 
 /* =========================================================
-   13) RESPONSIVE
+   11) RESPONSIVE
    ========================================================= */
 @media (max-width: 1024px){ }
 
@@ -1082,7 +997,7 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 
 
 /* =========================================================
-   14) UTILIDADES
+   12) UTILIDADES
    ========================================================= */
 .only-mobile { 
   display: none;
@@ -1098,7 +1013,7 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 
 
 /* =========================================================
-   15) BOTTOM BAR (con .bottom-item independiente)
+   13) BOTTOM BAR (con .bottom-item independiente)
    ========================================================= */
 .bottom-bar{
   position: fixed;
