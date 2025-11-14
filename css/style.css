@@ -398,6 +398,10 @@ body.sidebar-open .sidebar .rail-item .txt{
   padding: 12px 0 16px;  /* antes: 12px 8px 16px */
 }
 
+/* Footer del rail solo visible cuando el sidebar está ABIERTO */
+body:not(.sidebar-open) .rail-footer{
+  display: none;
+}
 
 
 
