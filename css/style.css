@@ -377,31 +377,27 @@ body.sidebar-open .sidebar .rail-item .txt{
   left: 22px;
 }
 
-/* === Mostrar UNO u OTRO control de tema según el estado del sidebar === */
+/* === Tema: qué mostrar según el estado del sidebar === */
 
-/* Botón compacto solo icono (cuando el rail está cerrado)
-   Asegúrate de que el botón tenga la clase .theme-compact en el HTML */
-.theme-compact {
-  display: flex;
-  align-items: center;
+/* 1) Sidebar CERRADO → solo icono */
+body:not(.sidebar-open) #themeToggle .txt{
+  display: none;
+}
+
+body:not(.sidebar-open) #themeToggle{
+  padding-inline: 0;
   justify-content: center;
 }
 
-/* Sidebar ABIERTO → ocultamos el botón compacto de icono */
-body.sidebar-open .theme-compact {
+/* 2) Sidebar ABIERTO → solo texto + switch */
+body.sidebar-open #themeToggle .txt{
+  display: block;
+}
+
+body.sidebar-open #themeToggle .ico{
   display: none;
 }
 
-/* Fila “Dark mode [switch]” (.theme-row):
-   - Sidebar CERRADO → oculta
-   - Sidebar ABIERTO → muestra */
-body:not(.sidebar-open) .theme-row {
-  display: none;
-}
-
-body.sidebar-open .theme-row {
-  display: flex;
-}
 
 
 
