@@ -503,6 +503,95 @@ body.sidebar-open .page{ margin-left: var(--rail-expanded) }
 .placeholder{ height:160px; display:grid; place-items:center; color:var(--muted); border:1px dashed var(--border); border-radius:12px }
 .placeholder.tall{ height:320px }
 
+
+/* --- Hero titles por dispositivo --- */
+.hero-title-mobile {
+  display: none;
+}
+
+.hero-title-desktop {
+  display: block;
+}
+
+/* --- Layout base de los botones --- */
+.hero .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2, 0.5rem);
+}
+
+/* Por defecto mostramos solo el CTA de desktop */
+.hero-cta-desktop {
+  display: inline-flex;
+}
+
+.hero-cta-mobile {
+  display: none;
+}
+
+/* ========================================
+   DESKTOP / TABLET  (>= 768px)
+   ======================================== */
+@media (min-width: 768px) {
+  .hero-title-desktop {
+    display: block;
+  }
+
+  .hero-title-mobile {
+    display: none;
+  }
+
+  /* todos los botones en una sola fila */
+  .hero .actions {
+    flex-wrap: nowrap;
+  }
+
+  .hero .actions .btn {
+    flex: 0 0 auto; /* tamaño natural de cada botón */
+  }
+
+  .hero-cta-desktop {
+    display: inline-flex;
+  }
+
+  .hero-cta-mobile {
+    display: none;
+  }
+}
+
+/* ========================================
+   MOBILE  (< 768px)
+   ======================================== */
+@media (max-width: 767px) {
+  .hero-title-desktop {
+    display: none;
+  }
+
+  .hero-title-mobile {
+    display: block;
+  }
+
+  /* CTA principal: FILA 1, ocupa todo el ancho */
+  .hero-cta-desktop {
+    display: none;
+  }
+
+  .hero-cta-mobile {
+    display: inline-flex;
+    flex: 1 0 100%;     /* 100% de ancho */
+    justify-content: center;
+  }
+
+  /* Botones secundarios: FILA 2, comparten espacio */
+  .hero .actions .btn:not(.primary) {
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: center;
+  }
+}
+
+
+
 /* Footer */
 .site-footer{ margin-top:auto; background:var(--bg); border-top:1px solid var(--border) }
 .footer-inner{
@@ -879,22 +968,6 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
 
   .topbar{
     padding-inline: 12px;
-  }
-}
-
-
-/* Hero titles: desktop/tablet vs mobile */
-.hero-title-mobile {
-  display: none;
-}
-
-/* Mobile: usar versión corta del título */
-@media (max-width: 768px) {
-  .hero-title-desktop {
-    display: none;
-  }
-  .hero-title-mobile {
-    display: block;
   }
 }
 
