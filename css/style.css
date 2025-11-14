@@ -384,11 +384,6 @@ body:not(.sidebar-open) #themeToggle .txt{
   display: none;
 }
 
-body:not(.sidebar-open) #themeToggle{
-  padding-inline: 0;
-  justify-content: center;
-}
-
 /* 2) Sidebar ABIERTO → solo texto + switch */
 body.sidebar-open #themeToggle .txt{
   display: block;
