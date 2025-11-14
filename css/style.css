@@ -384,6 +384,11 @@ body:not(.sidebar-open) #themeToggle .txt{
   display: none;
 }
 
+body:not(.sidebar-open) #themeToggle{
+  grid-template-columns: var(--rail-collapsed);
+}
+
+
 /* 2) Sidebar ABIERTO → solo texto + switch */
 body.sidebar-open #themeToggle .txt{
   display: block;
