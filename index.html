@@ -154,45 +154,27 @@
 
             <!-- 4.3) Footer del rail: Theme -->
       <div class="rail-footer">
+  <button
+    id="themeToggle"
+    class="rail-item ghost theme-toggle"
+    type="button"
+    aria-pressed="false"
+  >
+    <!-- Icono del rail (cambia cuando está CERRADO, se fija en 🌙 cuando está ABIERTO) -->
+    <i class="fa-solid fa-moon ico theme-icon" aria-hidden="true"></i>
 
-        <!-- A) Icono compacto (cuando el rail está colapsado) -->
-        <button
-          class="rail-item ghost theme-compact"
-          id="themeCompactBtn"
-          type="button"
-          aria-label="Toggle color theme">
-          <i class="fa-solid fa-moon ico" aria-hidden="true"></i>
-          <span class="txt">Theme</span>
-        </button>
+    <!-- Columna de texto (solo visible con sidebar ABIERTO) -->
+    <span class="txt">
+      <span class="theme-row">
+        <span class="theme-label">Dark mode</span>
+        <span class="theme-switch" aria-hidden="true">
+          <span class="theme-knob"></span>
+        </span>
+      </span>
+    </span>
+  </button>
+</div>
 
-        <!-- B) Fila completa con switch estilo Reddit (cuando el rail está abierto) -->
-        <div class="theme-row" aria-label="Color theme">
-          <!-- icono Light -->
-          <i class="fa-solid fa-sun theme-sun" aria-hidden="true"></i>
-
-          <!-- switch central -->
-          <button
-            id="themeSwitch"
-            class="theme-toggle"
-            type="button"
-            role="switch"
-            aria-checked="false">
-            <span class="theme-toggle-track">
-              <span class="theme-toggle-thumb"></span>
-            </span>
-            <span class="sr-only">Toggle dark mode</span>
-          </button>
-
-          <!-- icono Dark -->
-          <i class="fa-solid fa-moon theme-moon" aria-hidden="true"></i>
-        </div>
-
-        <!-- Etiqueta de estado (texto pequeño abajo) -->
-        <div class="theme-caption">
-          Theme: <span id="themeModeLabel">Auto</span>
-        </div>
-
-      </div>
 
 </aside>
 
