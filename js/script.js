@@ -81,18 +81,17 @@ document.addEventListener('keydown', (e) => {
 
 
 /* =========================================================
-   3) THEME: Light / Dark – estilo Reddit/TikTok
+   3) THEME: Light / Dark – un solo botón (#themeToggle)
    ---------------------------------------------------------
-   - Botón compacto en rail cerrado (#themeCompactBtn)
-   - Fila "🌙 Dark mode [switch]" en rail abierto (#themeSwitch)
+   - Mismo botón para rail abierto y cerrado
+   - El CSS decide si se ve solo el icono o "Dark mode + switch"
    ========================================================= */
 
-// Botón SOLO icono (cuando el rail está CERRADO)
-const themeCompactBtn = $('#themeCompactBtn');         // <button id="themeCompactBtn" class="rail-item theme-compact">
-const themeIcon       = themeCompactBtn ? themeCompactBtn.querySelector('.theme-icon') : null;
-
-// Switch deslizante (cuando el rail está ABIERTO)
-const themeSwitch     = $('#themeSwitch');             // <button id="themeSwitch" class="theme-toggle">
+// Botón único de tema
+const themeToggle = $('#themeToggle');  // <button id="themeToggle" ...>
+const themeIcon   = themeToggle ? themeToggle.querySelector('.theme-icon') : null;
+// El switch visual (no hace falta tocarlo, solo leerlo si quieres)
+const themeSwitch = themeToggle ? themeToggle.querySelector('.theme-switch') : null;
 
 const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
 const THEME_KEY = 'theme';
@@ -103,20 +102,20 @@ function getInitialTheme(){
   return mediaDark.matches ? 'dark' : 'light';
 }
 
-// Actualiza el switch tipo TikTok (ON = dark)
+// Actualiza ARIA para accesibilidad
 function updateSwitchUI(mode){
-  if (!themeSwitch) return;
+  if (!themeToggle) return;
   const isDark = (mode === 'dark');
-  themeSwitch.classList.toggle('is-on', isDark);
-  themeSwitch.setAttribute('aria-pressed', String(isDark));
+  themeToggle.setAttribute('aria-pressed', String(isDark));
 }
 
-// Actualiza el ICONO compacto (solo icono)
-// - si estás en dark → muestra ☀️ (vas a light)
-// - si estás en light → muestra 🌙 (vas a dark)
-function updateCompactIcon(mode){
+// Actualiza el icono Font Awesome
+// - modo "dark" → se muestra ☀ (fa-sun) porque al click vas a ir a light
+// - modo "light" → se muestra 🌙 (fa-moon) porque al click vas a ir a dark
+function updateThemeIcon(mode){
   if (!themeIcon) return;
-  themeIcon.textContent = (mode === 'dark') ? '☀️' : '🌙';
+  themeIcon.classList.remove('fa-moon', 'fa-sun');
+  themeIcon.classList.add(mode === 'dark' ? 'fa-sun' : 'fa-moon');
 }
 
 // Aplica el tema, guarda y sincroniza UI
@@ -127,7 +126,7 @@ function applyTheme(mode){
   localStorage.setItem(THEME_KEY, mode);
 
   updateSwitchUI(mode);
-  updateCompactIcon(mode);
+  updateThemeIcon(mode);
 
   if (typeof window.__applyThemeChrome === 'function'){
     window.__applyThemeChrome();
@@ -141,17 +140,9 @@ function toggleTheme(){
   applyTheme(next);
 }
 
-// Click en el switch (rail ABIERTO)
-if (themeSwitch){
-  themeSwitch.addEventListener('click', (e) => {
-    e.preventDefault();
-    toggleTheme();
-  });
-}
-
-// Click en el botón solo icono (rail CERRADO)
-if (themeCompactBtn){
-  themeCompactBtn.addEventListener('click', (e) => {
+// Click en el mismo botón siempre (abierto o cerrado)
+if (themeToggle){
+  themeToggle.addEventListener('click', (e) => {
     e.preventDefault();
     toggleTheme();
   });
