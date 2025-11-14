@@ -377,34 +377,11 @@ body.sidebar-open .sidebar .rail-item .txt{
   left: 22px;
 }
 
-/* === Tema: qué mostrar según el estado del sidebar === */
-
-/* 1) Sidebar CERRADO → solo icono, centrado como los demás items */
-body:not(.sidebar-open) #themeToggle .txt{
-  display: none;               /* ocultamos "Dark mode" + switch */
-}
-
-body:not(.sidebar-open) #themeToggle{
-  grid-template-columns: var(--rail-collapsed);  /* solo la columna del icono */
-  padding: 6px 8px 6px 0;                                /* ⬅ igual que .sidebar .rail-item */
-}
-
-body:not(.sidebar-open) #themeToggle .ico{
-  justify-self: center;        /* icono centrado en la columna */
-}
-
-/* 2) Sidebar ABIERTO → texto + switch, sin icono de la primera columna */
-body.sidebar-open #themeToggle{
-  grid-template-columns: var(--rail-collapsed) 1fr;
-  padding: 6px 8px 6px 0;      /* igual que el resto de rail-item */
-}
-
-body.sidebar-open #themeToggle .txt{
-  display: block;
-}
-
-body.sidebar-open #themeToggle .ico{
-  display: none;
+.sidebar .rail-item .ico{
+  justify-self:center;
+  width:24px;
+  text-align:center;
+  flex:0 0 24px;
 }
 
 
