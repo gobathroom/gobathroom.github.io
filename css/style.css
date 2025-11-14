@@ -1048,10 +1048,10 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   right: 0;
   bottom: 0;
 
-  /* Altura visible de la barra (el espacio para la barra de gestos
-     lo damos con el padding-bottom, no sumando en la altura) */
+  /* altura visible de la barra */
   height: var(--bb-h);
 
+  /* colores del tema */
   background: var(--panel);
   border-top: 1px solid var(--border);
   backdrop-filter: blur(10px);
@@ -1060,30 +1060,30 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   transition: transform .25s ease-out;
 
   /* padding:
-     - arriba: muy pequeño, para que los iconos se vean más “abajo”
-     - lados: respeta safe-area izquierda/derecha
-     - abajo: safe-area + un poco de aire visual
+     - arriba: usamos --bb-pad-top (ahora 0px)
+     - lados: safe-area izquierda/derecha
+     - abajo: solo el safe-area para no chocar con la barra blanca
   */
   padding:
     var(--bb-pad-top)
     max(var(--bb-pad-x), var(--safe-r))
-    calc(var(--safe-b) + 4px)
+    var(--safe-b)
     max(var(--bb-pad-x), var(--safe-l));
 }
 
-/* estado oculto (se mueve fuera de pantalla) */
+/* se oculta deslizando hacia abajo */
 .bottom-bar.hidden {
   transform: translateY(100%);
 }
 
-/* rail interno: los items se apoyan al FONDO de la barra */
+/* rail interno: apoyado al fondo de la barra */
 .bottom-rail{
   height: 100%;
   margin: 0;
   list-style: none;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;   /* antes: flex-start */
+  align-items: flex-end;   /* 👈 iconos pegados abajo */
   gap: 14px;
   padding: 0;
 }
@@ -1113,7 +1113,7 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   line-height:1.1;
 }
 
-/* activo/hover: solo color */
+/* activo/hover: solo color, igual que antes */
 .bottom-bar .bottom-item.is-active,
 .bottom-bar .bottom-item:hover {
   color: var(--brand);
@@ -1130,17 +1130,16 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   border-radius: 0;
 }
 
-/* solo móvil: visible; en desktop se oculta */
+/* Desktop: sin bottom bar */
 @media (min-width: 769px) {
   .bottom-bar { display: none; }
 }
 
-/* en móvil reservamos el espacio para que el contenido
-   no quede escondido detrás del bottom bar */
+/* Móvil: dejamos espacio para que el contenido
+   no quede debajo de la barra */
 @media (max-width:768px){
   body{
-    padding-bottom: calc(var(--bb-h) + var(--safe-b) + 8px);
-    /* antes +16px → los empujaba demasiado hacia arriba */
+    padding-bottom: calc(var(--bb-h) + var(--safe-b));
   }
 }
 
