@@ -174,11 +174,7 @@ applyTheme(getInitialTheme());
 // 4.1) Selectores y estado del mouse
 const shareBtn    = $('#shareBtn');
 const shareModal  = $('#shareModal'); // fallback muy viejo
-const shareOpen = (typeof sharePop !== 'undefined') && sharePop && !sharePop.hidden;
-
-// Si algún popover está abierto, dejamos que sus propios handlers gestionen Esc
-if (shareOpen || themeOpen) return;
-
+const sharePop    = $('#sharePopover');   // 👈 FALTABA ESTA LÍNEA
 const shareInput  = $('#shareInput');
 const shareFacebook = $('#shareFacebook');
 const shareX      = $('#shareX');
