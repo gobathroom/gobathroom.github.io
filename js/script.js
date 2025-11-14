@@ -59,7 +59,6 @@ document.addEventListener('keydown', (e) => {
 
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
   const shareOpen = (typeof sharePop !== 'undefined') && sharePop && !sharePop.hidden;
-  const themeOpen = (typeof themePop !== 'undefined') && themePop && !themePop.hidden;
 
   // Si algún popover está abierto, dejamos que sus propios handlers gestionen Esc
   if (shareOpen || themeOpen) return;
@@ -75,211 +74,136 @@ document.addEventListener('keydown', (e) => {
 /* =========================================================
    3) THEME: Light / Dark / System
    ---------------------------------------------------------
-   3.1) Botón y label
-   3.2) Icono dinámico (System = sun/moon según SO)
-   3.3) Popover: creación, apertura, navegación, posicionamiento
-   3.4) applyTheme + listeners de sistema
+   - Botón compacto en rail cerrado (#themeCompactBtn)
+   - Switch sun / moon + caption en rail abierto
+   - Modos: system (Auto), light, dark
    ========================================================= */
-// 3.1) Botón y label
-const themeBtn   = $('#themeBtn');
-const themeLabel = $('#themeLabel');
-const ICON_BY_THEME = { system: 'fa-laptop', light: 'fa-sun', dark: 'fa-moon' };
 
-// 3.2) Icono dinámico (System = sun/moon)
+// Controles del rail
+const themeCompactBtn = $('#themeCompactBtn');   // botón cuando el rail está cerrado
+const themeSwitch     = $('#themeSwitch');       // pastilla tipo Reddit
+const themeModeLabel  = $('#themeModeLabel');    // texto: Auto / Light / Dark
+
 const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
+const THEME_KEY = 'theme';
 
-// Icono actual del sistema (si el usuario eligió "system")
-function systemIcon(){
-  return mediaDark.matches ? 'fa-moon' : 'fa-sun';
+// Devuelve la preferencia de sistema: "light" o "dark"
+function getSystemPref(){
+  return mediaDark.matches ? 'dark' : 'light';
 }
 
-// Pinta el icono del botón según el modo actual
-function setThemeButtonIcon(mode){
-  const btnIcon = themeBtn ? themeBtn.querySelector('.ico') : null;
-  if (!btnIcon) return;
-
-  // Limpiar posibles iconos previos
-  btnIcon.classList.remove('fa-circle-half-stroke','fa-laptop','fa-sun','fa-moon');
-
-  // Si es "system", mostramos sun/moon real; si no, el icono propio del modo
-  const cls = (mode === 'system') ? systemIcon() : (ICON_BY_THEME[mode] || 'fa-circle-half-stroke');
-  btnIcon.classList.add(cls);
-}
-
-// Cuando el sistema cambia (solo importa si el usuario eligió "system")
-function onSystemThemeChange(){
-  const saved = (localStorage.getItem('theme') || 'system').toLowerCase();
-  if (saved === 'system') setThemeButtonIcon('system');
-}
-
-
-// 3.3) Popover de Theme
-let themePop = document.getElementById('themePopover');
-
-// Crea el popover si no existe en el HTML
-if (!themePop) {
-  themePop = document.createElement('div');
-  themePop.id = 'themePopover';
-  themePop.className = 'theme-popover';
-  themePop.setAttribute('role','listbox');
-  themePop.setAttribute('aria-label','Select theme');
-  themePop.hidden = true;
-  themePop.innerHTML = `
-    <button class="theme-opt" role="option" data-value="system" aria-selected="false">
-      <i class="fa-solid fa-laptop opt-ico" aria-hidden="true"></i><span>System</span>
-    </button>
-    <button class="theme-opt" role="option" data-value="light" aria-selected="false">
-      <i class="fa-solid fa-sun opt-ico" aria-hidden="true"></i><span>Light</span>
-    </button>
-    <button class="theme-opt" role="option" data-value="dark" aria-selected="false">
-      <i class="fa-solid fa-moon opt-ico" aria-hidden="true"></i><span>Dark</span>
-    </button>
-  `;
-  document.body.appendChild(themePop);
-}
-
-// Estado inicial
-applyTheme(localStorage.getItem('theme') || 'system');
-
-// Abrir/cerrar popover
-if (themeBtn) {
-  themeBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    toggleThemePopover();
-  });
-}
-
-// Cerrar por click fuera o Esc
-document.addEventListener('click', (e) => {
-  if (!themePop.hidden && !themePop.contains(e.target) && e.target !== themeBtn) {
-    closeThemePopover();
+// Actualiza la UI del switch (posición y texto)
+function updateSwitchUI(mode){
+  if (themeSwitch){
+    themeSwitch.dataset.mode = mode;
+    // Solo "dark" enciende la pastilla visualmente
+    themeSwitch.classList.toggle('is-on', mode === 'dark');
   }
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !themePop.hidden) closeThemePopover();
-});
 
-// Selección (siempre cierra, aunque repitas la misma)
-themePop.addEventListener('click', (e) => {
-  const opt = e.target.closest('.theme-opt');
-  if (!opt) return;
-  const val = opt.dataset.value;
-  applyTheme(val);
-  closeThemePopover();
-  themeBtn && themeBtn.focus();
-});
-
-// Navegación por teclado dentro del listbox
-themePop.addEventListener('keydown', (e) => {
-  const opts = Array.from(themePop.querySelectorAll('.theme-opt'));
-  const idx  = opts.indexOf(document.activeElement);
-  if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    (opts[(idx + 1 + opts.length) % opts.length]).focus();
-  } else if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    (opts[(idx - 1 + opts.length) % opts.length]).focus();
-  } else if (e.key === 'Home') {
-    e.preventDefault(); opts[0].focus();
-  } else if (e.key === 'End') {
-    e.preventDefault(); opts[opts.length - 1].focus();
-  } else if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault(); document.activeElement.click();
+  if (themeModeLabel){
+    let label = 'Auto';
+    if (mode === 'light') label = 'Light';
+    else if (mode === 'dark') label = 'Dark';
+    themeModeLabel.textContent = label;
   }
-});
-
-function toggleThemePopover(){
-  if (themePop.hidden) openThemePopover(); else closeThemePopover();
 }
 
-function openThemePopover(){
-  if (!themeBtn) return;
-  themeBtn.setAttribute('aria-expanded', 'true');
-  themePop.hidden = false;
+// Actualiza el icono del botón compacto (cuando el rail está cerrado)
+function updateCompactIcon(mode){
+  if (!themeCompactBtn) return;
+  const ico = themeCompactBtn.querySelector('i');
+  if (!ico) return;
 
-  // Marcar opción seleccionada y enfocar
-  const current = (root.getAttribute('data-theme') || 'system').toLowerCase();
-  themePop.querySelectorAll('.theme-opt').forEach(opt => {
-    const sel = opt.dataset.value === current;
-    opt.setAttribute('aria-selected', sel ? 'true' : 'false');
-    if (sel) setTimeout(() => opt.focus(), 0);
-  });
+  ico.classList.remove('fa-sun', 'fa-moon', 'fa-circle-half-stroke', 'fa-laptop');
 
-  positionThemePopover();
-  window.addEventListener('resize', positionThemePopover, { passive:true });
-  window.addEventListener('scroll', positionThemePopover, { passive:true });
-}
-
-function closeThemePopover(){
-  themeBtn && themeBtn.setAttribute('aria-expanded', 'false');
-  themePop.hidden = true;
-  window.removeEventListener('resize', positionThemePopover);
-  window.removeEventListener('scroll', positionThemePopover);
-}
-
-function positionThemePopover(){
-  if (!themeBtn) return;
-
-  const r = themeBtn.getBoundingClientRect();
-  const isOpen = body.classList.contains('sidebar-open');
-  const gap = 8;
-
-  // medidas del popover (ya visible)
-  const popW = themePop.offsetWidth;
-  const popH = themePop.offsetHeight;
-
-  let left, top;
-
-  if (isOpen){
-    // Sidebar ABIERTO: popover arriba y centrado respecto al botón
-    left = r.left + (r.width - popW) / 2;
-    top  = r.top - gap - popH;          // arriba del icono
-    if (top < 8) top = r.bottom + gap;  // fallback: debajo si no hay espacio
+  if (mode === 'system'){
+    // en "Auto" mostramos sol o luna según el sistema
+    ico.classList.add(mediaDark.matches ? 'fa-moon' : 'fa-sun');
+  } else if (mode === 'light'){
+    ico.classList.add('fa-sun');
+  } else if (mode === 'dark'){
+    ico.classList.add('fa-moon');
   } else {
-    // Sidebar CERRADO: popover a la DERECHA, centrado verticalmente
-    left = r.right + gap;
-    top  = r.top + (r.height - popH) / 2;
+    ico.classList.add('fa-circle-half-stroke');
+  }
+}
+
+// Reacciona a cambios de tema del sistema cuando estás en "system"
+function onSystemChange(){
+  const saved = (localStorage.getItem(THEME_KEY) || 'system').toLowerCase();
+  if (saved === 'system'){
+    updateCompactIcon('system');
+    if (typeof window.__applyThemeChrome === 'function'){
+      window.__applyThemeChrome();
+    }
+  }
+}
+
+// Función principal: aplica el tema
+function applyTheme(val){
+  let mode = (val || 'system').toLowerCase();
+  if (mode !== 'light' && mode !== 'dark' && mode !== 'system'){
+    mode = 'system';
   }
 
-  // Limites de viewport
-  left = Math.max(8, Math.min(left, window.innerWidth - popW - 8));
-  top  = Math.max(8, Math.min(top, window.innerHeight - popH - 8));
-
-  themePop.style.left = `${Math.round(left)}px`;
-  themePop.style.top  = `${Math.round(top)}px`;
-}
-
-
-// 3.4) applyTheme + listeners de sistema
-function applyTheme(val){
-  const mode = (val || 'system').toLowerCase();
+  // 1) Atributo en <html> → CSS usa :root[data-theme="..."]
   root.setAttribute('data-theme', mode);
-  themeLabel && (themeLabel.textContent = mode[0].toUpperCase() + mode.slice(1));
-  localStorage.setItem('theme', mode);
 
-  // Icono del botón según el tema (Freepik-style para "system")
-setThemeButtonIcon(mode);
+  // 2) Persistimos en localStorage
+  localStorage.setItem(THEME_KEY, mode);
 
-// Suscribir o desuscribir el listener del sistema
-if (mode === 'system'){
-  if (mediaDark.addEventListener) mediaDark.addEventListener('change', onSystemThemeChange);
-  else mediaDark.addListener(onSystemThemeChange); // Safari antiguo
-} else {
-  if (mediaDark.removeEventListener) mediaDark.removeEventListener('change', onSystemThemeChange);
-  else mediaDark.removeListener(onSystemThemeChange);
-}
+  // 3) Sincronizamos UI del switch y botón compacto
+  updateSwitchUI(mode);
+  updateCompactIcon(mode);
 
+  // 4) Suscripción a cambios de sistema solo en "system"
+  if (mode === 'system'){
+    if (mediaDark.addEventListener) mediaDark.addEventListener('change', onSystemChange);
+    else if (mediaDark.addListener) mediaDark.addListener(onSystemChange); // Safari viejo
+  } else {
+    if (mediaDark.removeEventListener) mediaDark.removeEventListener('change', onSystemChange);
+    else if (mediaDark.removeListener) mediaDark.removeListener(onSystemChange);
+  }
 
-  // Actualiza aria-selected del popover
-  themePop.querySelectorAll('.theme-opt').forEach(opt => {
-    opt.setAttribute('aria-selected', opt.dataset.value === mode ? 'true' : 'false');
-  });
-
-  // 🔄 Sincroniza barra del navegador / status bar con el tema actual
-  if (typeof window.__applyThemeChrome === 'function') {
+  // 5) Actualiza barra del navegador / status bar iOS
+  if (typeof window.__applyThemeChrome === 'function'){
     window.__applyThemeChrome();
   }
 }
+
+// Decide el siguiente modo al hacer click en el switch
+function nextTheme(current){
+  // ciclo: system → dark → light → system
+  if (current === 'system') return 'dark';
+  if (current === 'dark')   return 'light';
+  return 'system';
+}
+
+/* --------- Listeners de UI --------- */
+
+// Click en la pastilla (rail abierto)
+if (themeSwitch){
+  themeSwitch.addEventListener('click', (e) => {
+    e.preventDefault();
+    const current = (root.getAttribute('data-theme') || 'system').toLowerCase();
+    const next = nextTheme(current);
+    applyTheme(next);
+  });
+}
+
+// Click en el botón compacto (rail cerrado)
+if (themeCompactBtn){
+  themeCompactBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const current = (root.getAttribute('data-theme') || 'system').toLowerCase();
+    const next = nextTheme(current);
+    applyTheme(next);
+  });
+}
+
+// Estado inicial: lee de localStorage o "system"
+applyTheme(localStorage.getItem(THEME_KEY) || 'system');
+
 
 
 
@@ -297,7 +221,7 @@ if (mode === 'system'){
 // 4.1) Selectores y estado del mouse
 const shareBtn    = $('#shareBtn');
 const shareModal  = $('#shareModal'); // fallback muy viejo
-const sharePop    = $('#sharePopover');
+const sharePop    = window.sharePop = $('#sharePopover');
 const shareInput  = $('#shareInput');
 const shareFacebook = $('#shareFacebook');
 const shareX      = $('#shareX');
