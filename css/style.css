@@ -386,7 +386,7 @@ body:not(.sidebar-open) #themeToggle .txt{
 
 body:not(.sidebar-open) #themeToggle{
   grid-template-columns: var(--rail-collapsed);  /* solo la columna del icono */
-  padding: 6px 0;                                /* sin padding lateral raro */
+  padding: 6px 8px 6px 0;                                /* ⬅ igual que .sidebar .rail-item */
 }
 
 body:not(.sidebar-open) #themeToggle .ico{
