@@ -923,7 +923,7 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
     width: min(82vw, 360px);
 
     transform: translateX(-100%);
-    box-shadow: 16px 0 32px rgba(0,0,0,.35);
+    box-shadow: none; /* 👈 SIN sombra cuando está cerrado */
 
     /* por encima de todo (topbar = 1100, popovers = 2000) */
     z-index: 2200;
@@ -936,6 +936,7 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   body.sidebar-open .sidebar{
     transform: translateX(0);
     width: min(82vw, 360px);
+    box-shadow: 16px 0 32px rgba(0,0,0,.35); /* 👈 sombra SOLO abierto */
   }
 
   /* === OVERLAY DETRÁS DEL DRAWER === */
