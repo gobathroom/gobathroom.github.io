@@ -34,13 +34,6 @@ function setSidebar(open){
   reflectAria(open);
   syncBrandA11y(open);
 
-  // Sincroniza el icono del tema cuando se abre/cierra el sidebar
-  if (themeIcon){
-    const current = (root.getAttribute('data-theme') || getInitialTheme()).toLowerCase();
-    updateThemeIcon(current);
-  }
-}
-
 
 
 
@@ -82,16 +75,11 @@ document.addEventListener('keydown', (e) => {
 
 /* =========================================================
    3) THEME: Light / Dark – un solo botón (#themeToggle)
-   ---------------------------------------------------------
-   - Mismo botón para rail abierto y cerrado
-   - El CSS decide si se ve solo el icono o "Dark mode + switch"
    ========================================================= */
 
-// Botón único de tema
-const themeToggle = $('#themeToggle');  // <button id="themeToggle" ...>
-const themeIcon   = themeToggle ? themeToggle.querySelector('.theme-icon') : null;
-// El switch visual (no hace falta tocarlo, solo leerlo si quieres)
-const themeSwitch = themeToggle ? themeToggle.querySelector('.theme-switch') : null;
+const themeToggleBtn = $('#themeToggle');                       // <button id="themeToggle">
+const themeIcon      = themeToggleBtn?.querySelector('.theme-icon');   // icono 🌙 / ☀️
+const themeLabel     = themeToggleBtn?.querySelector('.theme-label');  // texto "Dark mode" / "Light mode"
 
 const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
 const THEME_KEY = 'theme';
@@ -102,20 +90,27 @@ function getInitialTheme(){
   return mediaDark.matches ? 'dark' : 'light';
 }
 
-// Actualiza ARIA para accesibilidad
-function updateSwitchUI(mode){
-  if (!themeToggle) return;
+// Actualiza icono, texto y aria-pressed
+function updateThemeUI(mode){
   const isDark = (mode === 'dark');
-  themeToggle.setAttribute('aria-pressed', String(isDark));
-}
 
-// Actualiza el icono Font Awesome
-// - modo "dark" → se muestra ☀ (fa-sun) porque al click vas a ir a light
-// - modo "light" → se muestra 🌙 (fa-moon) porque al click vas a ir a dark
-function updateThemeIcon(mode){
-  if (!themeIcon) return;
-  themeIcon.classList.remove('fa-moon', 'fa-sun');
-  themeIcon.classList.add(mode === 'dark' ? 'fa-sun' : 'fa-moon');
+  if (themeToggleBtn){
+    themeToggleBtn.setAttribute('aria-pressed', String(isDark));
+  }
+
+  // Icono:
+  // - si estás en dark → muestra ☀️ (porque el siguiente clic te lleva a light)
+  // - si estás en light → muestra 🌙 (el siguiente clic te lleva a dark)
+  if (themeIcon){
+    themeIcon.textContent = isDark ? '☀️' : '🌙';
+  }
+
+  // Texto:
+  // - en dark: "Light mode"
+  // - en light: "Dark mode"
+  if (themeLabel){
+    themeLabel.textContent = isDark ? 'Light mode' : 'Dark mode';
+  }
 }
 
 // Aplica el tema, guarda y sincroniza UI
@@ -125,8 +120,7 @@ function applyTheme(mode){
   root.setAttribute('data-theme', mode);
   localStorage.setItem(THEME_KEY, mode);
 
-  updateSwitchUI(mode);
-  updateThemeIcon(mode);
+  updateThemeUI(mode);
 
   if (typeof window.__applyThemeChrome === 'function'){
     window.__applyThemeChrome();
@@ -140,15 +134,15 @@ function toggleTheme(){
   applyTheme(next);
 }
 
-// Click en el mismo botón siempre (abierto o cerrado)
-if (themeToggle){
-  themeToggle.addEventListener('click', (e) => {
+// Click en el botón del rail
+if (themeToggleBtn){
+  themeToggleBtn.addEventListener('click', (e) => {
     e.preventDefault();
     toggleTheme();
   });
 }
 
-// Estado inicial
+// Estado inicial al cargar la página
 applyTheme(getInitialTheme());
 
 
