@@ -33,7 +33,16 @@ function setSidebar(open){
   body.classList.toggle('sidebar-open', open);
   reflectAria(open);
   syncBrandA11y(open);
+
+  // Sincroniza el icono del tema cuando se abre/cierra el sidebar
+  if (themeIcon){
+    const current = (root.getAttribute('data-theme') || getInitialTheme()).toLowerCase();
+    updateThemeIcon(current);
+  }
 }
+
+
+
 
 function toggleSidebar(){
   setSidebar(!body.classList.contains('sidebar-open'));
@@ -72,137 +81,81 @@ document.addEventListener('keydown', (e) => {
 
 
 /* =========================================================
-   3) THEME: Light / Dark / System
+   3) THEME: Light / Dark – estilo Reddit/TikTok
    ---------------------------------------------------------
-   - Botón compacto en rail cerrado (#themeCompactBtn)
-   - Switch sun / moon + caption en rail abierto
-   - Modos: system (Auto), light, dark
+   - Un solo botón de rail: #themeToggle
+   - Sidebar CERRADO: solo icono (muestra el modo al que vas a cambiar)
+   - Sidebar ABIERTO: "🌙 Dark mode [switch]"
    ========================================================= */
 
-// Controles del rail
-const themeCompactBtn = $('#themeCompactBtn');   // botón cuando el rail está cerrado
-const themeSwitch     = $('#themeSwitch');       // pastilla tipo Reddit
-const themeModeLabel  = $('#themeModeLabel');    // texto: Auto / Light / Dark
+// Botón del rail (tanto abierto como cerrado)
+const themeToggle = $('#themeToggle');          // <button id="themeToggle" class="rail-item theme-toggle">
+const themeIcon   = themeToggle ? themeToggle.querySelector('.theme-icon') : null; // span / i con el icono
 
 const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
 const THEME_KEY = 'theme';
 
-// Devuelve la preferencia de sistema: "light" o "dark"
-function getSystemPref(){
+/** Tema inicial: lo que haya en localStorage, si no, la preferencia del sistema */
+function getInitialTheme(){
+  const stored = (localStorage.getItem(THEME_KEY) || '').toLowerCase();
+  if (stored === 'light' || stored === 'dark') return stored;
   return mediaDark.matches ? 'dark' : 'light';
 }
 
-// Actualiza la UI del switch (posición y texto)
-function updateSwitchUI(mode){
-  if (themeSwitch){
-    themeSwitch.dataset.mode = mode;
-    // Solo "dark" enciende la pastilla visualmente
-    themeSwitch.classList.toggle('is-on', mode === 'dark');
+/** Actualiza solo el icono del botón, según tema y estado del sidebar */
+function updateThemeIcon(mode){
+  if (!themeIcon) return;
+
+  // Sidebar ABIERTO → icono fijo de luna (Dark mode)
+  if (body.classList.contains('sidebar-open')){
+    themeIcon.textContent = '🌙';
+    return;
   }
 
-  if (themeModeLabel){
-    let label = 'Auto';
-    if (mode === 'light') label = 'Light';
-    else if (mode === 'dark') label = 'Dark';
-    themeModeLabel.textContent = label;
-  }
+  // Sidebar CERRADO → icono muestra el modo al que vas a cambiar
+  // - si estás en dark → se muestra ☀️ (vas a light)
+  // - si estás en light → se muestra 🌙 (vas a dark)
+  themeIcon.textContent = (mode === 'dark') ? '☀️' : '🌙';
 }
 
-// Actualiza el icono del botón compacto (cuando el rail está cerrado)
-function updateCompactIcon(mode){
-  if (!themeCompactBtn) return;
-  const ico = themeCompactBtn.querySelector('i');
-  if (!ico) return;
+/** Aplica el tema, lo guarda y sincroniza UI */
+function applyTheme(mode){
+  mode = (mode === 'light') ? 'light' : 'dark';
 
-  ico.classList.remove('fa-sun', 'fa-moon', 'fa-circle-half-stroke', 'fa-laptop');
-
-  if (mode === 'system'){
-    // en "Auto" mostramos sol o luna según el sistema
-    ico.classList.add(mediaDark.matches ? 'fa-moon' : 'fa-sun');
-  } else if (mode === 'light'){
-    ico.classList.add('fa-sun');
-  } else if (mode === 'dark'){
-    ico.classList.add('fa-moon');
-  } else {
-    ico.classList.add('fa-circle-half-stroke');
-  }
-}
-
-// Reacciona a cambios de tema del sistema cuando estás en "system"
-function onSystemChange(){
-  const saved = (localStorage.getItem(THEME_KEY) || 'system').toLowerCase();
-  if (saved === 'system'){
-    updateCompactIcon('system');
-    if (typeof window.__applyThemeChrome === 'function'){
-      window.__applyThemeChrome();
-    }
-  }
-}
-
-// Función principal: aplica el tema
-function applyTheme(val){
-  let mode = (val || 'system').toLowerCase();
-  if (mode !== 'light' && mode !== 'dark' && mode !== 'system'){
-    mode = 'system';
-  }
-
-  // 1) Atributo en <html> → CSS usa :root[data-theme="..."]
+  // 1) Atributo en <html> para el CSS
   root.setAttribute('data-theme', mode);
 
-  // 2) Persistimos en localStorage
+  // 2) Guardar preferencia
   localStorage.setItem(THEME_KEY, mode);
 
-  // 3) Sincronizamos UI del switch y botón compacto
-  updateSwitchUI(mode);
-  updateCompactIcon(mode);
+  // 3) Actualizar icono del rail
+  updateThemeIcon(mode);
 
-  // 4) Suscripción a cambios de sistema solo en "system"
-  if (mode === 'system'){
-    if (mediaDark.addEventListener) mediaDark.addEventListener('change', onSystemChange);
-    else if (mediaDark.addListener) mediaDark.addListener(onSystemChange); // Safari viejo
-  } else {
-    if (mediaDark.removeEventListener) mediaDark.removeEventListener('change', onSystemChange);
-    else if (mediaDark.removeListener) mediaDark.removeListener(onSystemChange);
-  }
-
-  // 5) Actualiza barra del navegador / status bar iOS
+  // 4) Actualizar barra del navegador / status bar iOS
   if (typeof window.__applyThemeChrome === 'function'){
     window.__applyThemeChrome();
   }
 }
 
-// Decide el siguiente modo al hacer click en el switch
-function nextTheme(current){
-  // ciclo: system → dark → light → system
-  if (current === 'system') return 'dark';
-  if (current === 'dark')   return 'light';
-  return 'system';
+/** Alterna entre light/dark */
+function toggleTheme(){
+  const current = (root.getAttribute('data-theme') || getInitialTheme()).toLowerCase();
+  const next    = current === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
 }
 
 /* --------- Listeners de UI --------- */
 
-// Click en la pastilla (rail abierto)
-if (themeSwitch){
-  themeSwitch.addEventListener('click', (e) => {
+// Click en el botón del rail (abierto o cerrado)
+if (themeToggle){
+  themeToggle.addEventListener('click', (e) => {
     e.preventDefault();
-    const current = (root.getAttribute('data-theme') || 'system').toLowerCase();
-    const next = nextTheme(current);
-    applyTheme(next);
+    toggleTheme();
   });
 }
 
-// Click en el botón compacto (rail cerrado)
-if (themeCompactBtn){
-  themeCompactBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    const current = (root.getAttribute('data-theme') || 'system').toLowerCase();
-    const next = nextTheme(current);
-    applyTheme(next);
-  });
-}
-
-// Estado inicial: lee de localStorage o "system"
-applyTheme(localStorage.getItem(THEME_KEY) || 'system');
+/* Estado inicial: aplica tema guardado o el del sistema */
+applyTheme(getInitialTheme());
 
 
 
@@ -221,7 +174,11 @@ applyTheme(localStorage.getItem(THEME_KEY) || 'system');
 // 4.1) Selectores y estado del mouse
 const shareBtn    = $('#shareBtn');
 const shareModal  = $('#shareModal'); // fallback muy viejo
-const sharePop    = window.sharePop = $('#sharePopover');
+const shareOpen = (typeof sharePop !== 'undefined') && sharePop && !sharePop.hidden;
+
+// Si algún popover está abierto, dejamos que sus propios handlers gestionen Esc
+if (shareOpen || themeOpen) return;
+
 const shareInput  = $('#shareInput');
 const shareFacebook = $('#shareFacebook');
 const shareX      = $('#shareX');
@@ -359,6 +316,9 @@ window.addEventListener('resize', () => {
     scheduleHideRailTip(0);
   }
 }, { passive: true });
+
+let themeOpen = false;  // ya no usamos popover de tema, pero evitamos ReferenceError
+
 
 // Esc cierra el tooltip (no interfiere con popovers)
 document.addEventListener('keydown', (e) => {
