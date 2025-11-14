@@ -93,22 +93,33 @@ function getInitialTheme(){
 
 // Actualiza icono, texto y aria-pressed según el modo
 function updateThemeUI(mode){
-  const isDark = (mode === 'dark');
+  const isDark = (mode === 'dark');          // modo ACTUAL
+  const target = isDark ? 'light' : 'dark';  // modo al que vas a cambiar
 
   if (themeToggleBtn){
+    // aria-pressed = true cuando estás en dark (como antes)
     themeToggleBtn.setAttribute('aria-pressed', String(isDark));
+    // etiqueta accesible describe la acción
+    themeToggleBtn.setAttribute(
+      'aria-label',
+      target === 'light' ? 'Switch to light mode' : 'Switch to dark mode'
+    );
   }
 
   if (themeLabel){
-    themeLabel.textContent = isDark ? 'Dark mode' : 'Light mode';
+    // El texto muestra el modo al que vas a cambiar
+    themeLabel.textContent = target === 'light' ? 'Light mode' : 'Dark mode';
   }
 
   if (themeIcon){
-    // Luna para dark, sol para light
-    themeIcon.classList.toggle('fa-moon', isDark);
-    themeIcon.classList.toggle('fa-sun', !isDark);
+    // Icono = modo de destino (invertido)
+    // Si estás en dark → target=light → icono ☀
+    // Si estás en light → target=dark → icono 🌙
+    themeIcon.classList.toggle('fa-sun',  isDark);   // dark → sun
+    themeIcon.classList.toggle('fa-moon', !isDark);  // light → moon
   }
 }
+
 
 // Aplica tema + guarda en localStorage + sincroniza barras del navegador
 function applyTheme(mode){
