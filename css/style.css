@@ -390,17 +390,32 @@ body.sidebar-open .sidebar .rail-item .txt{
   padding: 12px 0 16px;  /* antes: 12px 8px 16px */
 }
 
-/* === Evitar salto visual al cerrar el sidebar (footer + theme) === */
-body:not(.sidebar-open) .rail-footer{
-  overflow: hidden;      
-  padding-left: 0;      
-  padding-right: 0;
+/* === Arreglo REAL del salto visual del theme al cerrar el sidebar === */
+
+/* El texto NO se usa con display:none porque eso causa el salto.
+   Solo se ocultará automáticamente porque la segunda columna se contrae. */
+body:not(.sidebar-open) #themeToggle .txt{
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Cuando el sidebar está ABIERTO → mostrar texto y ocultar icono */
+body.sidebar-open #themeToggle .txt{
+  opacity: 1;
+}
+body.sidebar-open #themeToggle .ico{
+  display: none;
+}
+
+/* Asegura que el theme-toggle colapse igual que los demás y no se mueva */
+#themeToggle{
+  transition: opacity .18s ease, transform .18s ease;
 }
 
 body:not(.sidebar-open) #themeToggle{
-  width: 100%;
   overflow: hidden;
 }
+
 
 
 
