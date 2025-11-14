@@ -390,25 +390,17 @@ body.sidebar-open .sidebar .rail-item .txt{
   padding: 12px 0 16px;  /* antes: 12px 8px 16px */
 }
 
-
-/* === Evitar salto visual al cerrar el sidebar === */
+/* === Evitar salto visual al cerrar el sidebar (footer + theme) === */
 body:not(.sidebar-open) .rail-footer{
-  overflow: hidden;        /* evita que nada salga o asome */
-  padding-left: 0;         /* igual que los items comprimidos */
+  overflow: hidden;      
+  padding-left: 0;      
   padding-right: 0;
-  height: auto;            /* se mantiene estable */
 }
 
-/* el botón del theme se comporta EXACTO al resto de items */
 body:not(.sidebar-open) #themeToggle{
-  width: 100%;             /* ocupa su columna usual */
+  width: 100%;
   overflow: hidden;
 }
-
-
-
-
-
 
 
 
