@@ -40,7 +40,7 @@
      /* 👇 NUEVO: margen superior para notch / status bar de iOS */
   --safe-t: env(safe-area-inset-top, 0px);
   --bb-pad-x: 20px;     /* margen lateral tipo App/Play Store */
-  --bb-pad-top: 6px;    /* empuje hacia arriba (iconos/labels no centrados) */
+  --bb-pad-top: 3px;    /* empuje hacia arriba (iconos/labels no centrados) */
 
 
 }
@@ -1044,10 +1044,14 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
    ========================================================= */
 .bottom-bar{
   position: fixed;
-  left: 0; right: 0; bottom: 0;
-  height: calc(var(--bb-h) + var(--safe-b));
+  left: 0;
+  right: 0;
+  bottom: 0;
 
-  /* 👇 ahora usa tus tokens de tema */
+  /* Altura visible de la barra (el espacio para la barra de gestos
+     lo damos con el padding-bottom, no sumando en la altura) */
+  height: var(--bb-h);
+
   background: var(--panel);
   border-top: 1px solid var(--border);
   backdrop-filter: blur(10px);
@@ -1055,23 +1059,31 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   z-index: 2000;
   transition: transform .25s ease-out;
 
-  /* aire lateral y vertical seguro */
+  /* padding:
+     - arriba: muy pequeño, para que los iconos se vean más “abajo”
+     - lados: respeta safe-area izquierda/derecha
+     - abajo: safe-area + un poco de aire visual
+  */
   padding:
     var(--bb-pad-top)
     max(var(--bb-pad-x), var(--safe-r))
-    calc(8px + var(--safe-b))
+    calc(var(--safe-b) + 4px)
     max(var(--bb-pad-x), var(--safe-l));
 }
 
-.bottom-bar.hidden { transform: translateY(100%); }
+/* estado oculto (se mueve fuera de pantalla) */
+.bottom-bar.hidden {
+  transform: translateY(100%);
+}
 
+/* rail interno: los items se apoyan al FONDO de la barra */
 .bottom-rail{
   height: 100%;
   margin: 0;
   list-style: none;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: flex-end;   /* antes: flex-start */
   gap: 14px;
   padding: 0;
 }
@@ -1087,7 +1099,6 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   gap: 4px;
   text-decoration: none;
 
-  /* 👇 colores también desde los tokens */
   color: var(--muted);
   font-size: 11px;
 }
@@ -1102,7 +1113,7 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   line-height:1.1;
 }
 
-/* activo/hover: solo color, con el brand del sitio */
+/* activo/hover: solo color */
 .bottom-bar .bottom-item.is-active,
 .bottom-bar .bottom-item:hover {
   color: var(--brand);
@@ -1119,12 +1130,18 @@ dialog::backdrop{ background:rgba(0,0,0,.4) }
   border-radius: 0;
 }
 
+/* solo móvil: visible; en desktop se oculta */
 @media (min-width: 769px) {
   .bottom-bar { display: none; }
 }
+
+/* en móvil reservamos el espacio para que el contenido
+   no quede escondido detrás del bottom bar */
 @media (max-width:768px){
   body{
-    padding-bottom: calc(var(--bb-h) + var(--safe-b) + 16px);
+    padding-bottom: calc(var(--bb-h) + var(--safe-b) + 8px);
+    /* antes +16px → los empujaba demasiado hacia arriba */
   }
 }
+
 
