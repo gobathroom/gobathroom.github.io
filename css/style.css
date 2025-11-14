@@ -377,22 +377,6 @@ body.sidebar-open .sidebar .rail-item .txt{
   left: 22px;
 }
 
-/* === Tema: qué mostrar según el estado del sidebar === */
-
-/* 1) Sidebar CERRADO → solo icono */
-body:not(.sidebar-open) #themeToggle .txt{
-  display: none;
-}
-
-/* 2) Sidebar ABIERTO → texto + switch, sin icono */
-body.sidebar-open #themeToggle .txt{
-  display: block;
-}
-
-body.sidebar-open #themeToggle .ico{
-  display: none;
-}
-
 
 .sidebar .rail-item .ico{
   justify-self:center;
