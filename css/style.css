@@ -40,7 +40,7 @@
      /* 👇 NUEVO: margen superior para notch / status bar de iOS */
   --safe-t: env(safe-area-inset-top, 0px);
   --bb-pad-x: 20px;     /* margen lateral tipo App/Play Store */
-  --bb-pad-top: 3px;    /* empuje hacia arriba (iconos/labels no centrados) */
+  --bb-pad-top: 6px;    /* empuje hacia arriba (iconos/labels no centrados) */
 
 
 }
