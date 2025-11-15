@@ -91,3 +91,18 @@
     padding-bottom: calc(var(--bb-h) + var(--safe-b));
   }
 }
+
+
+/* =========================================================
+   2) FIX: iOS Safari PWA (standalone) – ajustar espacio inferior
+   ========================================================= */
+@supports (-webkit-touch-callout: none) {
+  @media (display-mode: standalone) and (max-width: 768px) {
+    /* En el PWA de iOS quitamos el extra de safe-area en el body.
+       La barra ya tiene su propio padding con safe-area, así que
+       aquí solo dejamos espacio para la altura visible de la barra. */
+    body {
+      padding-bottom: var(--bb-h);
+    }
+  }
+}
