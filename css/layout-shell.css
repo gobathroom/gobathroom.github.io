@@ -284,7 +284,7 @@ body.sidebar-open .page{ margin-left: var(--rail-expanded) }
 
 
 /* =========================================================
-   11) RESPONSIVE (parte de layout)
+   4) RESPONSIVE (parte de layout)
    ========================================================= */
 @media (max-width: 1024px){ }
 
