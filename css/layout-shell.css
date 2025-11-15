@@ -1,0 +1,306 @@
+/* Contenido alineado con el marco lateral */
+.topbar, .notifybar, .footer-inner{
+  padding-inline: clamp(16px, calc((100% - var(--content-max)) / 2), 24px);
+}
+
+
+/* =========================================================
+   1) TOPBAR (Header fijo) (5/-)
+     1.1) ALERTS
+     1.2) BOTÓN DE IDIOMA – EFECTO ZOOM AL PASAR EL MOUSE
+   ========================================================= */
+.topbar{
+  position: fixed;
+  top: 0;                         /* cubre también la zona de la hora */
+  left: var(--rail-collapsed);
+  right: 0;
+
+  /* alto total = barra + zona segura superior */
+  height: calc(var(--header-h) + var(--safe-t));
+
+  /* bajamos el contenido para que no se meta en el notch */
+  padding: var(--safe-t) var(--space-4) 0;
+
+  display:flex; align-items:center; gap:var(--space-3);
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+  z-index: 1100;
+  transition: left .2s ease;
+  will-change: left;
+}
+
+body.sidebar-open .topbar{ left: var(--rail-expanded) }
+
+/* Marca topbar cuando sidebar cerrado */
+.topbar .topbar-brand{
+  display: grid;
+  grid-auto-flow: column;        
+  grid-auto-columns: max-content;
+  align-items: center;
+  gap: 6px;
+  height: var(--brand-row-h);
+  text-decoration: none;
+  color: var(--text);
+  border-radius: var(--radius);
+}
+.topbar .topbar-brand .brand-name{
+  font-weight: 700;               
+  letter-spacing: .2px;
+  margin-left: 0; /* el gap ya separa */
+}
+body.sidebar-open .topbar .topbar-brand{ display: none; }
+
+/* Genéricos UI header */
+.icon-btn{
+  display:grid; place-items:center; width:40px; height:40px;
+  border:1px solid var(--border); background:transparent; color:var(--text);
+  border-radius:10px; cursor:pointer;
+}
+.brand{
+  display:flex; align-items:center;
+  gap:var(--brand-gap);
+  color:var(--text); text-decoration:none;
+}
+/* Logo unificado (topbar + sidebar) */
+.brand .brand-logo{
+  display:block;
+  width:var(--brand-ico);
+  height:var(--brand-ico);
+  flex:0 0 var(--brand-ico);
+}
+
+.brand .brand-name{ font-weight:600 }
+
+.top-actions{ margin-left:auto; display:flex; align-items:center; gap:var(--space-3)}
+.top-actions .divider{ width:1px; height:22px; background:var(--border) }
+
+
+/* =========================================================
+   1.1) ALERTS
+   ========================================================= */
+.top-alerts-btn {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+
+.top-alerts-btn:hover {
+  background: var(--panel-2);
+}
+
+.top-alerts-btn i {
+  font-size: 18px;
+}
+
+/* Ocultar campana en móvil */
+@media (max-width: 768px) {
+  .top-alerts-btn {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   1.2) BOTÓN DE IDIOMA – EFECTO ZOOM AL PASAR EL MOUSE
+   ========================================================= */
+.top-actions .btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.top-actions .btn:hover {
+  transform: scale(1.05);              /* pequeño zoom */
+  box-shadow: 0 0 8px rgba(0,0,0,0.25); /* leve sombra opcional */
+}
+
+
+/* =========================================================
+   2) NOTIFY BAR (6/-)
+   ========================================================= */
+.notifybar{
+  position: fixed;
+  top: calc(var(--safe-t) + var(--header-h));  /* header + safe-top */ ;
+  left: var(--rail-collapsed);
+  right: 0;
+  min-height: 36px;
+  display:flex; align-items:center; gap:10px; justify-content:center;
+  background:var(--panel-2); border-bottom:1px solid var(--border);
+  padding: 8px var(--space-4);
+  color:var(--muted);
+  z-index: 1050;
+  transition: left .2s ease;
+  will-change: left;
+}
+body.sidebar-open .notifybar{ left: var(--rail-expanded) }
+.notifybar a{ color:var(--brand); text-decoration:none }
+
+
+/* =========================================================
+   3) PAGE LAYOUT (Main, Cards, Footer) (7/-)
+   ========================================================= */
+.page{
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  margin-left: var(--rail-collapsed);
+  transition: margin-left .2s ease;
+  padding-top: calc(var(--safe-t) + var(--header-h) + var(--notify-h));
+}
+body.sidebar-open .page{ margin-left: var(--rail-expanded) }
+
+/* Main */
+.content{
+  width: min(100% - 48px, var(--content-max));
+  margin: var(--space-4) auto;
+  display: grid;
+  gap: var(--space-4);
+}
+
+/* Cards & hero */
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding: var(--space-4);
+}
+.card h2{ margin:0 0 var(--space-2) 0; font-size:18px }
+
+.hero h1{ margin:0 0 6px 0; font-size: clamp(20px, 2.6vw, 28px) }
+.lead{ color:var(--muted); margin:0 0 var(--space-3) 0 }
+.actions{ display:flex; flex-wrap:wrap; gap:10px }
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  height:40px; padding:0 14px;
+  border:1px solid var(--border); background:transparent; color:var(--text);
+  border-radius:12px; text-decoration:none;
+}
+.btn.primary{ background:linear-gradient(90deg, var(--brand), var(--brand-2)); color:#00131a; border:0; font-weight:600 }
+.placeholder{ height:160px; display:grid; place-items:center; color:var(--muted); border:1px dashed var(--border); border-radius:12px }
+.placeholder.tall{ height:320px }
+
+
+/* --- Hero titles por dispositivo --- */
+.hero-title-mobile {
+  display: none;
+}
+
+.hero-title-desktop {
+  display: block;
+}
+
+/* --- Layout base de los botones --- */
+.hero .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2, 0.5rem);
+}
+
+/* Por defecto mostramos solo el CTA de desktop */
+.hero-cta-desktop {
+  display: inline-flex;
+}
+
+.hero-cta-mobile {
+  display: none;
+}
+
+/* ========================================
+   DESKTOP / TABLET  (>= 768px)
+   ======================================== */
+@media (min-width: 768px) {
+  .hero-title-desktop {
+    display: block;
+  }
+
+  .hero-title-mobile {
+    display: none;
+  }
+
+  /* todos los botones en una sola fila */
+  .hero .actions {
+    flex-wrap: nowrap;
+  }
+
+  .hero .actions .btn {
+    flex: 0 0 auto; /* tamaño natural de cada botón */
+  }
+
+  .hero-cta-desktop {
+    display: inline-flex;
+  }
+
+  .hero-cta-mobile {
+    display: none;
+  }
+}
+
+/* ========================================
+   MOBILE  (< 768px)
+   ======================================== */
+@media (max-width: 767px) {
+  .hero-title-desktop {
+    display: none;
+  }
+
+  .hero-title-mobile {
+    display: block;
+  }
+
+  /* CTA principal: FILA 1, ocupa todo el ancho */
+  .hero-cta-desktop {
+    display: none;
+  }
+
+  .hero-cta-mobile {
+    display: inline-flex;
+    flex: 1 0 100%;     /* 100% de ancho */
+    justify-content: center;
+  }
+
+  /* Botones secundarios: FILA 2, comparten espacio */
+  .hero .actions .btn:not(.primary) {
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: center;
+  }
+}
+
+
+/* Footer */
+.site-footer{ margin-top:auto; background:var(--bg); border-top:1px solid var(--border) }
+.footer-inner{
+  width:min(100% - 32px, var(--content-max));
+  margin:0 auto; height:56px; display:flex; align-items:center; gap:12px;
+  color:var(--muted);
+}
+.footer-links{ margin-left:auto; display:flex; gap:16px }
+.footer-links a{ color:var(--muted); text-decoration:none }
+
+
+/* =========================================================
+   11) RESPONSIVE (parte de layout)
+   ========================================================= */
+@media (max-width: 1024px){ }
+
+@media (max-width: 768px){
+  /* contenido no se mueve: siempre pegado al borde izquierdo */
+  .topbar,
+  .notifybar,
+  .page,
+  .site-footer{
+    left: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  .page{ padding-top: calc(var(--safe-t) + var(--header-h) + var(--notify-h)) }
+
+  .topbar{
+    padding-inline: 12px;
+  }
+}
