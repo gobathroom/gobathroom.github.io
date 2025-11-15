@@ -7,32 +7,21 @@
   right: 0;
   bottom: 0;
 
-  /* altura visible de la barra */
-  height: var(--bb-h);
+  /* Altura mínima = barra + zona segura inferior */
+  min-height: calc(var(--bb-h) + var(--safe-b));
 
-  /* colores del tema */
   background: var(--panel);
   border-top: 1px solid var(--border);
   backdrop-filter: blur(10px);
 
   z-index: 2000;
-  transition: transform .25s ease-out;
+  transition: none; /* ya no usamos transform para ocultar/mostrar */
 
-  /* padding:
-     - arriba: usamos --bb-pad-top (ahora 0px)
-     - lados: safe-area izquierda/derecha
-     - abajo: solo el safe-area para no chocar con la barra blanca
-  */
   padding:
     var(--bb-pad-top)
     max(var(--bb-pad-x), var(--safe-r))
     var(--safe-b)
     max(var(--bb-pad-x), var(--safe-l));
-}
-
-/* se oculta deslizando hacia abajo */
-.bottom-bar.hidden {
-  transform: translateY(100%);
 }
 
 /* rail interno: apoyado al fondo de la barra */
@@ -42,7 +31,7 @@
   list-style: none;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;   /* 👈 iconos pegados abajo */
+  align-items: center;   /* 👈 iconos+texto centrados verticalmente */
   gap: 14px;
   padding: 0;
 }
@@ -54,7 +43,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;  /* antes: flex-start */
   gap: 4px;
   text-decoration: none;
 
@@ -65,8 +54,9 @@
 .bottom-bar .bottom-item .ico{
   font-size:22px;
   line-height:1;
-  transform: translateY(2px);
+  transform: translateY(1px); /* antes 2px */
 }
+
 .bottom-bar .bottom-item .txt{
   display:block;
   line-height:1.1;
