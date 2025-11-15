@@ -1,0 +1,434 @@
+/* =========================================================
+   1) SIDEBAR (Rail) (4/-)
+     /* 1.1) Contenedor */
+     /* 1.2) Cabecera del rail */
+     /* 1.3) Marca dentro del sidebar */
+     /* 1.4) Grupos */
+     /* 1.5) Items */
+        /* 1.5.1) Enlaces del rail: sin subrayado en ningún estado */
+     /* 1.6) Sin focus ring en rail */
+     /* 1.7) Control de tema en el footer del rail
+    🌙 Dark mode [switch] – tipo Reddit/TikTok
+   ========================================================= */
+
+/* 1.1) Contenedor */
+.sidebar{
+  position: fixed;
+  top: 0;               /* ← otra vez 0, para pintar detrás de la hora */
+  bottom: 0;
+  left: 0;
+  width: var(--rail-collapsed);
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: width .2s ease;
+  z-index: 45;
+  padding-top: 0;
+  /* ANTES: overflow: hidden;  */
+  overflow-y: auto;           /* ← permite scroll si hay muchas opciones */
+  overscroll-behavior: contain; /* ← evita que se desplace el fondo */
+  overflow-x: hidden;   /* evita overflow horizontal interno en el rail */
+}
+body.sidebar-open .sidebar{ width: var(--rail-expanded) }
+
+
+/* 1.2) Cabecera del rail */
+.rail-head{
+  position: absolute;
+  top: var(--safe-t);   /* ← antes era 0 */ ;
+  left: 0; right: 0;
+  height: var(--header-h);
+  display: grid;
+  grid-template-columns: var(--rail-collapsed) 1fr; /* simetría al cerrar */
+  gap: 12px;
+  padding: var(--rail-gutter) var(--rail-gutter) var(--rail-gutter) 0; /* left=0 */
+  align-items: center;
+  z-index: 2;
+}
+body.sidebar-open .rail-head{
+  grid-template-columns: var(--rail-collapsed) 1fr var(--rail-collapsed);
+}
+
+/* Reserva espacio bajo la barra + safe-area para el grupo */
+.sidebar > .rail-head + .rail-group{
+  padding-top: calc(var(--safe-t) + var(--header-h));
+}
+
+/* Botón "bars" */
+.rail-head .rail-toggle{
+  border:0; background:transparent;
+  width:var(--rail-btn); height:var(--rail-btn);
+  display:flex; align-items:center; justify-content:center;
+  line-height:0; margin:0;
+  border-radius:12px;
+  transition: background .15s ease, transform .2s ease;
+  grid-column: 1;               
+  justify-self: center;
+  align-self: center;
+}
+.rail-head .rail-toggle:hover{ background:var(--panel-2) }
+.rail-head .rail-toggle:focus-visible{ outline:2px solid var(--brand); outline-offset:2px }
+body.sidebar-open .rail-head .rail-toggle{
+  grid-column: 3;
+  justify-self: center;
+}
+
+
+/* 1.3) Marca dentro del sidebar */
+.sidebar .rail-head .brand{
+  display: none;
+}
+body.sidebar-open .sidebar .rail-head .brand{
+  display: grid;
+  grid-template-columns: var(--rail-collapsed) 1fr; /* [icono | texto] */
+  align-items: center;
+  grid-column: 1 / 3;        /* ocupa col 1-2; deja 3 para el botón ☰ */
+  gap: 6px;
+  height: 56px;
+  padding: var(--space-3) 0; /* sin padding-left extra */
+  text-decoration: none;
+  color: var(--text);
+  border-radius: var(--radius);
+}
+/* El logo en el rail usa el mismo tamaño que en topbar */
+.sidebar .rail-head .brand .brand-logo{
+  width: var(--brand-ico);
+  height: var(--brand-ico);
+  justify-self: center;
+}
+
+.sidebar .rail-head .brand-name{
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  min-width: 0;
+  opacity: 0;
+  width: 0;
+  transform: translateX(-4px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+body.sidebar-open .sidebar .rail-head .brand-name{
+  opacity: 1;
+  width: auto;
+  transform: none;
+  margin-left: -6px;   /* “pegadito” al icono */
+}
+
+
+/* 1.4) Grupos */
+.rail-group{
+  list-style:none;
+  margin:0;
+  padding:12px 0;   /* solo para los grupos, no para el footer */
+}
+
+/* Footer abajo y con padding propio */
+.rail-footer{
+  margin-top: auto;
+  padding: 12px 8px 16px;
+}
+
+
+/* 1.5) Items */
+.sidebar .rail-item{
+  appearance:none; background:transparent; border:0; font:inherit;
+  width:100%; min-height:40px;
+  display:grid;
+  grid-template-columns: var(--rail-collapsed) 0fr;  /* texto colapsado */
+  align-items:center;
+  gap:12px;
+  padding:6px 8px 6px 0;
+  border-radius:12px;
+  color:var(--text); cursor:pointer;
+  transition: grid-template-columns .2s ease; /* el fondo ya no se anima aquí */
+  position: relative;           /* para el pseudo-fondo */
+  overflow: visible;
+  z-index: 0;
+}
+body.sidebar-open .rail-item{
+  grid-template-columns: var(--rail-collapsed) 1fr;
+  gap: 4px;                     /* separa un poco icono ↔ texto (mejor que 0) */
+  text-align: left;             /* el botón deja de centrar el contenido */
+}
+
+/* Fondo de hover con margen a ambos lados (no toca bordes) */
+.sidebar .rail-item::before{
+  content:"";
+  position:absolute;
+  top: 2px;                
+  bottom: 2px;              
+  left: var(--space-2);     
+  right: var(--space-2);
+  border-radius:12px;
+  background: var(--panel-2);
+  opacity:0;
+  transition: opacity .15s ease;
+  pointer-events:none;
+  z-index:-1;
+}
+.sidebar .rail-item:hover::before,
+.sidebar .rail-item.is-active::before{
+  opacity:1;
+}
+.rail-item:hover{ background: transparent }
+.rail-item.is-active{ background: transparent }
+
+/* Icono y texto */
+.sidebar .rail-item .ico{
+  justify-self:center;
+  width:24px; text-align:center; flex:0 0 24px;
+}
+.sidebar .rail-item .txt{
+  opacity:0; white-space:nowrap; overflow:hidden;
+  transition: opacity .2s ease;
+}
+body.sidebar-open .sidebar .rail-item .txt{
+  opacity:1;
+  display:block;
+  justify-self:start;
+  text-align:left;
+}
+
+.rail-item.ghost{ opacity:.85 }
+
+
+/* 1.5.1) Enlaces del rail: sin subrayado en ningún estado */
+.sidebar .rail-item,
+.sidebar .rail-item:hover,
+.sidebar .rail-item:focus,
+.sidebar .rail-item:visited {
+  text-decoration: none;
+  color: var(--text);
+}
+
+
+/* 1.6) Sin focus ring en rail */
+.sidebar .rail-item,
+.sidebar .rail-item:focus,
+.sidebar .rail-item:focus-visible,
+.sidebar .rail-item:-moz-focusring,
+.sidebar .rail-item:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.sidebar .icon-btn:focus,
+.sidebar .icon-btn:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Firefox: elimina el borde interno por defecto de los botones */
+.sidebar button::-moz-focus-inner { border: 0; }
+
+
+/* 1.7) Control de tema en el footer del rail
+   🌙 Dark mode [switch] – tipo Reddit/TikTok
+   --------------------------------------------------------- */
+
+/* Fila interior: "Dark mode" + switch */
+.theme-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.theme-label{
+  font-size: 14px;
+}
+
+/* Switch visual */
+.theme-switch{
+  position: relative;
+  width: 38px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--panel-2);       /* OFF: gris */
+  flex-shrink: 0;
+}
+
+.theme-knob{
+  position: absolute;
+  top: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.35);
+  transition: left .18s ease, background .18s ease;
+}
+
+/* Estado OFF (light) -> [⚪      ] */
+:root[data-theme="light"] .theme-switch{
+  background: var(--panel-2);
+}
+:root[data-theme="light"] .theme-knob{
+  left: 2px;
+}
+
+/* Estado ON (dark) -> [🟦🟦⚪] */
+:root[data-theme="dark"] .theme-switch{
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+}
+:root[data-theme="dark"] .theme-knob{
+  left: 22px;
+}
+
+.sidebar .rail-item .ico{
+  justify-self:center;
+  width:24px;
+  text-align:center;
+  flex:0 0 24px;
+}
+
+/* Footer override */
+.rail-footer{
+  margin-top: auto;
+  padding: 12px 0 16px;  /* antes: 12px 8px 16px */
+}
+
+/* --- Theme item: comportamiento según estado del sidebar --- */
+#themeToggle .theme-row{
+  opacity: 1;
+  white-space: nowrap;
+  overflow: visible;
+  transition: none;
+}
+
+/* Sidebar CERRADO → solo icono, como los demás items */
+body:not(.sidebar-open) #themeToggle{
+  grid-template-columns: var(--rail-collapsed);  /* solo columna del icono */
+}
+
+body:not(.sidebar-open) #themeToggle .theme-row{
+  display: none;   /* ocultamos "Light mode" + switch */
+}
+
+/* Sidebar ABIERTO → icono + texto + switch */
+body.sidebar-open #themeToggle{
+  grid-template-columns: var(--rail-collapsed) 1fr;
+}
+
+body.sidebar-open #themeToggle .theme-row{
+  display: flex;   /* mostramos la fila interna normal */
+}
+
+
+/* =========================================================
+   10) RAIL TOOLTIP (solo desktop con sidebar cerrado)
+   ========================================================= */
+.rail-tip[hidden] { display: none !important; }
+
+.rail-tip{
+  position: fixed;
+  z-index: 3000;
+  max-width: 220px;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  /* Sombra que incluye también el pico */
+  font-size: 14px;
+  line-height: 1.2;
+  pointer-events: none;
+  /* animación sutil */
+  opacity: 0; transform: translateY(2px);
+  transition: opacity .12s ease, transform .12s ease;
+}
+.rail-tip.is-visible{
+  opacity: 1; transform: translateY(0);
+}
+/* Triángulo lateral del tooltip */
+.rail-tip::before,
+.rail-tip::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+}
+/* Borde del triángulo */
+.rail-tip::before {
+  right: 100%;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid var(--border);
+}
+
+/* Relleno del triángulo (superpuesto) */
+.rail-tip::after {
+  right: calc(100% - 1px);
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 7px solid var(--panel);
+}
+
+
+/* === Rail-tip: sincronizar colores por tema === */
+
+/* Tema claro: fondo y borde del pico iguales al tooltip */
+:root[data-theme="light"] .rail-tip{
+  background: var(--panel);
+  border-color: rgba(17,24,39,.06);        /* borde muy suave */
+  filter: drop-shadow(0 8px 20px rgba(17,24,39,.10)); /* sombra más leve en light */
+}
+:root[data-theme="light"] .rail-tip::before{
+  display: none;
+}
+:root[data-theme="light"] .rail-tip::after{
+  border-right-color: var(--panel);        /* relleno del pico */
+  right: calc(100% - 2px);                 /* + solape → sin costura */
+}
+
+
+/* =========================================================
+   RESPONSIVE (solo parte del sidebar)
+   ========================================================= */
+@media (max-width: 768px){
+  /* === SIDEBAR MOBILE: drawer tipo Reddit (≈82% ancho) === */
+  .sidebar{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    /* ancho tipo Reddit: ~82% de la pantalla, máx 360px */
+    width: min(82vw, 360px);
+
+    transform: translateX(-100%);
+    box-shadow: none; /* 👈 SIN sombra cuando está cerrado */
+
+    /* por encima de todo (topbar = 1100, popovers = 2000) */
+    z-index: 2200;
+
+    /* seguimos usando tu color de panel según tema */
+    background: var(--panel);
+  }
+
+  /* cuando está abierto, mismo ancho y entra en pantalla */
+  body.sidebar-open .sidebar{
+    transform: translateX(0);
+    width: min(82vw, 360px);
+    box-shadow: 16px 0 32px rgba(0,0,0,.35); /* 👈 sombra SOLO abierto */
+  }
+
+  /* === OVERLAY DETRÁS DEL DRAWER === */
+  body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.42);   /* oscurece contenido */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+    z-index: 2100;                  /* debajo del sidebar, encima del resto */
+  }
+  body.sidebar-open::before{
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
