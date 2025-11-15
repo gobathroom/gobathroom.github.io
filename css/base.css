@@ -32,10 +32,6 @@
   --social-border-hover: rgba(255,255,255,.22);
 
 
-  /* Safe top para notch (solo cabecera / sidebar) */
-  --safe-t: env(safe-area-inset-top, 0px);
-}
-
 
  
 
