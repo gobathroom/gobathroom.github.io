@@ -31,16 +31,7 @@
 
   --social-border-hover: rgba(255,255,255,.22); /* valor base para dark */
 
-  /* === Bottom bar safe-area & paddings === */
-  --bb-h: 64px;
-  --safe-b: env(safe-area-inset-bottom, 0px);
-  --safe-l: env(safe-area-inset-left, 0px);
-  --safe-r: env(safe-area-inset-right, 0px);
-  /* 👇 NUEVO: margen superior para notch / status bar de iOS */
-  --safe-t: env(safe-area-inset-top, 0px);
-  --bb-pad-x: 20px;     /* margen lateral tipo App/Play Store */
-  --bb-pad-top: 6px;    /* empuje hacia arriba (iconos/labels no centrados) */
-}
+ 
 
 
 /* =========================================================
