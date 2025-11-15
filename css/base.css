@@ -22,14 +22,22 @@
   --border: rgba(255,255,255,.12);
   --brand: #00d1ff;
   --brand-2: #7ef0ff;
-  --brand-row-h: 56px;  /* alto de la fila de marca */
-  --brand-gap:   8px;   /* separación logo ↔ nombre */
-  --brand-logo:   28px;  /* tamaño visual del logo */
-  
+  --brand-row-h: 56px;
+  --brand-gap: 8px;
+  --brand-logo: 28px;
+
   /* mismo fondo que el hover del rail */
   --hover-bg: var(--panel-2);
 
-  --social-border-hover: rgba(255,255,255,.22); /* valor base para dark */
+  --social-border-hover: rgba(255,255,255,.22);
+
+  /* ALTURA fija de la bottom bar (solo esto, sin safe-area) */
+  --bb-h: 64px;
+
+  /* Safe top para notch (solo cabecera / sidebar) */
+  --safe-t: env(safe-area-inset-top, 0px);
+}
+
 
  
 
