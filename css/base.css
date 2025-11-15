@@ -1,0 +1,99 @@
+/* =========================================================
+   1) VARIABLES & THEME TOKENS
+   ========================================================= */
+:root{ 
+  --header-h: 64px;
+  --notify-h: 40px;
+  --rail-collapsed: 64px;
+  --rail-expanded: 280px;
+  --content-max: 1440px;
+
+  --rail-btn: 40px;
+  --rail-gutter: calc((var(--rail-collapsed) - var(--rail-btn)) / 2);
+
+  --space-1: 6px;  --space-2: 10px; --space-3: 16px; --space-4: 24px;
+  --radius: 14px;
+
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #1c2230;
+  --text: #dbe5ff;
+  --muted: #9fb0d0;
+  --border: rgba(255,255,255,.12);
+  --brand: #00d1ff;
+  --brand-2: #7ef0ff;
+  --brand-row-h: 56px;  /* alto de la fila de marca */
+  --brand-gap:   8px;   /* separación logo ↔ nombre */
+  --brand-logo:   28px;  /* tamaño visual del logo */
+  
+  /* mismo fondo que el hover del rail */
+  --hover-bg: var(--panel-2);
+
+  --social-border-hover: rgba(255,255,255,.22); /* valor base para dark */
+
+  /* === Bottom bar safe-area & paddings === */
+  --bb-h: 64px;
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  /* 👇 NUEVO: margen superior para notch / status bar de iOS */
+  --safe-t: env(safe-area-inset-top, 0px);
+  --bb-pad-x: 20px;     /* margen lateral tipo App/Play Store */
+  --bb-pad-top: 6px;    /* empuje hacia arriba (iconos/labels no centrados) */
+}
+
+
+/* =========================================================
+   2) THEMES (System / Light / Dark)
+   ========================================================= */
+@media (prefers-color-scheme: light){
+  :root[data-theme="system"]{
+    --bg:#f5f7fb; --panel:#ffffff; --panel-2:#f1f4fa; --text:#111827; --muted:#55627a; --border:rgba(17,24,39,.1);
+    --social-border-hover: rgba(17,24,39,.18);  /* borde un poco más oscuro que el normal */
+  }
+}
+:root[data-theme="light"]{
+  --bg:#f5f7fb; --panel:#ffffff; --panel-2:#f1f4fa; --text:#111827; --muted:#55627a; --border:rgba(17,24,39,.1);
+  --social-border-hover: rgba(17,24,39,.18);
+}
+:root[data-theme="dark"]{
+  --bg:#0d1117; --panel:#161b22; --panel-2:#1c2230; --text:#dbe5ff; --muted:#9fb0d0; --border:rgba(255,255,255,.12);
+  --social-border-hover: rgba(255,255,255,.22); /* borde un poco más claro que el normal */
+}
+
+
+/* =========================================================
+   3) RESET & BASE TYPOGRAPHY
+   ========================================================= */
+*{ box-sizing:border-box }
+
+html,
+body{
+  height:100%;
+  overflow-x: hidden;   /* 👈 ESTA ES LA CLAVE */
+}
+
+body{
+  margin:0;
+  color:var(--text);
+  background:var(--bg);
+  font: 400 16px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans";
+}
+
+
+/* =========================================================
+   12) UTILIDADES
+   ========================================================= */
+.only-mobile { 
+  display: none;
+}
+@media (max-width: 768px){
+  .only-mobile { 
+    display: grid;
+  }
+}
+
+.sr-only{
+  position:absolute !important;
+  width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;
+}
