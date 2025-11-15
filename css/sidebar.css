@@ -317,7 +317,7 @@ body.sidebar-open #themeToggle .theme-row{
 
 
 /* =========================================================
-   10) RAIL TOOLTIP (solo desktop con sidebar cerrado)
+   2) RAIL TOOLTIP (solo desktop con sidebar cerrado) (10/-)
    ========================================================= */
 .rail-tip[hidden] { display: none !important; }
 
@@ -386,7 +386,7 @@ body.sidebar-open #themeToggle .theme-row{
 
 
 /* =========================================================
-   RESPONSIVE (solo parte del sidebar)
+    3) RESPONSIVE (solo parte del sidebar)
    ========================================================= */
 @media (max-width: 768px){
   /* === SIDEBAR MOBILE: drawer tipo Reddit (≈82% ancho) === */
