@@ -31,8 +31,6 @@
 
   --social-border-hover: rgba(255,255,255,.22);
 
-  /* ALTURA fija de la bottom bar (solo esto, sin safe-area) */
-  --bb-h: 64px;
 
   /* Safe top para notch (solo cabecera / sidebar) */
   --safe-t: env(safe-area-inset-top, 0px);
