@@ -1,0 +1,65 @@
+/* =========================================================
+   1) Dark theme
+   ========================================================= */
+.dark {
+  --bg: #0d1117;          /* fondo global */
+  --panel: #161b22;       /* tarjetas / navegación */
+  --panel-2: #1c2230;     /* paneles elevados o barras laterales */
+
+  /* TEXTO */
+  --text: #e6edf3;        /* texto principal: alto contraste */
+  --text-strong: #f0f6fc; /* títulos */
+  --muted: #9fb0d0;       /* texto secundario */
+  --muted-2: #7f8ca8;     /* descripciones, timestamps */
+
+  /* COLOR DE MARCA */
+  --brand: #00d1ff;       /* tu color de acento */
+  --brand-2: #7efaff;     /* versión más clara para hover */
+
+  /* BORDES Y LÍNEAS */
+  --border: rgba(255,255,255,0.12);
+  --border-strong: rgba(255,255,255,0.2);
+
+  /* ACCIONES */
+  --success: #2ecc71;     /* verde suave tipo “OK” */
+  --warning: #f1c40f;     /* amarillo alerta */
+  --danger: #ff6b6b;      /* rojo moderno, visible pero no agresivo */
+
+  /* HOVERS */
+  --hover: rgba(255,255,255,0.05); 
+  --active: rgba(255,255,255,0.08);
+}
+
+
+
+/* =========================================================
+   2) Light Theme
+   ========================================================= */
+:root {
+  --bg: #f5f7fb;        /* fondo global */
+  --panel: #ffffff;     /* tarjetas */
+  --panel-2: #C3E7F0;   /* secciones resaltadas */
+
+  /* TEXTO */
+  --text: #2d3748;       /* gris oscuro profesional */
+  --text-strong: #1a202c;/* casi negro para títulos */
+  --muted: #6b7280;      /* gris suave */
+  --muted-2: #9ca3af;    /* notas, fechas */
+
+  /* COLOR DE MARCA (mismo para ambos temas) */
+  --brand: #00b4d8;      /* acento más elegante en light */
+  --brand-2: #009ec0;    /* hover */
+
+  /* BORDES Y LÍNEAS */
+  --border: rgba(0,0,0,0.1);
+  --border-strong: rgba(0,0,0,0.18);
+
+  /* ACCIONES */
+  --success: #2ecc71;
+  --warning: #ffbb33;
+  --danger: #ff4d4d;
+
+  /* HOVERS */
+  --hover: rgba(0,0,0,0.04); 
+  --active: rgba(0,0,0,0.08);
+}
