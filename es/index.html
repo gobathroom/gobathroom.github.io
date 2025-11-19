@@ -107,9 +107,54 @@
   </button>
 
   <!-- Compartir -->
-  <button class="icon-btn" aria-label="Compartir" data-label="Share">
+<div class="share-wrapper">
+  <button
+    class="icon-btn share-btn"
+    id="shareBtn"
+    type="button"
+    aria-label="Compartir"
+    data-label="Share"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
     <i class="fas fa-share-nodes"></i>
   </button>
+
+  <!-- Panel flotante de compartir (desktop) -->
+  <div class="share-popover" id="sharePopover" role="dialog" aria-hidden="true">
+    <div class="share-popover-header title">Share</div>
+
+    <div class="share-url-row">
+      <input
+        type="text"
+        id="shareUrl"
+        class="share-url-input text"
+        readonly
+      >
+      <button type="button" id="copyShareUrl" class="share-copy-btn title">
+        Copy
+      </button>
+    </div>
+
+    <div class="share-actions">
+      <button type="button" class="share-action-btn text" data-share-target="facebook">
+        <i class="fab fa-facebook-f"></i>
+        <span>Facebook</span>
+      </button>
+
+      <button type="button" class="share-action-btn text" data-share-target="x">
+        <i class="fab fa-x-twitter"></i>
+        <span>X</span>
+      </button>
+
+      <button type="button" class="share-action-btn text" data-share-target="whatsapp">
+        <i class="fab fa-whatsapp"></i>
+        <span>WhatsApp</span>
+      </button>
+    </div>
+  </div>
+</div>
+
 
   <!-- Modo oscuro -->
 <button
