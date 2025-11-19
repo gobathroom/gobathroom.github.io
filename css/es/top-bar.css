@@ -44,6 +44,47 @@
 
 
 /* ===========================
+   CENTER: TOOLTIP PARA NAV-ITEMS
+   =========================== */
+
+.main-nav .nav-item::before {
+  content: attr(data-label);   /* texto desde data-label */
+
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+
+  /* Colocado fuera del topbar, justo debajo */
+  bottom: -34px;               /* ajusta si lo quieres más arriba/abajo */
+
+  padding: 4px 10px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  white-space: nowrap;
+
+  background: var(--panel-2);  /* usa tu panel-2 para tooltip */
+  color: var(--text);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1200;
+
+  /* Pequeño delay para que salga después del hover */
+  transition:
+    opacity 0.18s ease-out 0.18s,
+    transform 0.18s ease-out 0.18s;
+}
+
+.main-nav .nav-item:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+
+
+/* ===========================
    LEFT: LOGO / BRAND
    =========================== */
 
