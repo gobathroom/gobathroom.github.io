@@ -41,7 +41,6 @@
 </head>
 
 <body>
-
   <!-- ============================= -->
   <!--          TOP BAR             -->
   <!-- ============================= -->
@@ -54,132 +53,124 @@
       </a>
     </div>
 
-      <div class="center">
-  <nav class="main-nav" aria-label="Navegación principal">
-    <a href= "/es"
-       class="nav-item is-active"
-       data-label="Inicio"
-       aria-label="Inicio">
-      <i class="fa-solid fa-house"></i>
-    </a>
+    <div class="center">
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="/es"
+           class="nav-item is-active"
+           data-label="Inicio"
+           aria-label="Inicio">
+          <i class="fa-solid fa-house"></i>
+        </a>
 
-    <a href="/es/maps"
-       class="nav-item"
-       data-label="Mapa"
-       aria-label="Mapa">
-      <i class="fa-solid fa-map-location-dot"></i>
-    </a>
+        <a href="/es/maps"
+           class="nav-item"
+           data-label="Mapa"
+           aria-label="Mapa">
+          <i class="fa-solid fa-map-location-dot"></i>
+        </a>
 
-    <a href="https://TU_LINK_GOOGLE_FORM_SUGGEST"
-       class="nav-item"
-       target="_blank"
-       rel="noopener"
-       data-label="Sugerir"
-       aria-label="Sugerir">
-      <i class="fa-solid fa-lightbulb"></i>
-    </a>
+        <a href="https://TU_LINK_GOOGLE_FORM_SUGGEST"
+           class="nav-item"
+           target="_blank"
+           rel="noopener"
+           data-label="Sugerir"
+           aria-label="Sugerir">
+          <i class="fa-solid fa-lightbulb"></i>
+        </a>
 
-    <a href="https://TU_LINK_GOOGLE_FORM_REPORT"
-       class="nav-item"
-       target="_blank"
-       rel="noopener"
-       data-label="Reportar"
-       aria-label="Reportar">
-      <i class="fa-solid fa-flag"></i>
-    </a>
+        <a href="https://TU_LINK_GOOGLE_FORM_REPORT"
+           class="nav-item"
+           target="_blank"
+           rel="noopener"
+           data-label="Reportar"
+           aria-label="Reportar">
+          <i class="fa-solid fa-flag"></i>
+        </a>
 
-    <a href="https://TU_LINK_PAYPAL_DONATE"
-       class="nav-item"
-       target="_blank"
-       rel="noopener"
-       data-label="Donar"
-       aria-label="Donar">
-      <i class="fa-solid fa-hand-holding-heart"></i>
-    </a>
-  </nav>
-</div>
+        <a href="https://TU_LINK_PAYPAL_DONATE"
+           class="nav-item"
+           target="_blank"
+           rel="noopener"
+           data-label="Donar"
+           aria-label="Donar">
+          <i class="fa-solid fa-hand-holding-heart"></i>
+        </a>
+      </nav>
+    </div>
 
     <div class="right">
-  <!-- Notificaciones -->
-  <button class="icon-btn" aria-label="Notificaciones" data-label="Notifications">
-    <i class="fas fa-bell"></i>
-  </button>
-
- <!-- Compartir -->
-<div class="share-wrapper">
-  <button
-    class="icon-btn share-btn"
-    id="shareBtn"
-    type="button"
-    aria-label="Compartir"
-    data-label="Share"
-    aria-haspopup="true"
-    aria-expanded="false"
-  >
-    <i class="fas fa-share-nodes"></i>
-  </button>
-
-  <!-- Panel flotante de compartir (desktop) -->
-  <div class="share-popover" id="sharePopover" role="dialog" aria-hidden="true">
-    <div class="share-popover-header title">Share</div>
-
-    <div class="share-url-row">
-      <input
-        type="text"
-        id="shareUrl"
-        class="share-url-input text"
-        readonly
-      >
-      <button type="button" id="copyShareUrl" class="share-copy-btn title">
-        Copy
+      <!-- Notificaciones -->
+      <button class="icon-btn" aria-label="Notificaciones" data-label="Notifications">
+        <i class="fas fa-bell"></i>
       </button>
+
+      <!-- Compartir -->
+      <div class="share-wrapper">
+        <button
+          class="icon-btn share-btn"
+          id="shareBtn"
+          type="button"
+          aria-label="Compartir"
+          data-label="Share"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="fas fa-share-nodes"></i>
+        </button>
+
+        <!-- Panel flotante de compartir (desktop) -->
+        <div class="share-popover" id="sharePopover" role="dialog" aria-hidden="true">
+          <div class="share-popover-header title">Share</div>
+
+          <div class="share-url-row">
+            <input
+              type="text"
+              id="shareUrl"
+              class="share-url-input text"
+              readonly
+            >
+            <button type="button" id="copyShareUrl" class="share-copy-btn title">
+              Copy
+            </button>
+          </div>
+
+          <div class="share-actions">
+            <button type="button" class="share-action-btn text" data-share-target="facebook">
+              <i class="fab fa-facebook-f"></i>
+              <span>Facebook</span>
+            </button>
+
+            <button type="button" class="share-action-btn text" data-share-target="x">
+              <i class="fab fa-x-twitter"></i>
+              <span>X</span>
+            </button>
+
+            <button type="button" class="share-action-btn text" data-share-target="whatsapp">
+              <i class="fab fa-whatsapp"></i>
+              <span>WhatsApp</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modo oscuro -->
+      <button id="themeToggle" class="icon-btn" aria-label="Modo oscuro" data-label="Dark / Light">
+        <i class="fas fa-moon"></i>
+      </button>
+
+      <!-- Idioma -->
+      <a href="/en" class="lang-btn" aria-label="Change language">
+        <i class="fas fa-globe"></i>
+        <span class="lang-text">English</span>
+      </a>
     </div>
-
-    <div class="share-actions">
-      <button type="button" class="share-action-btn text" data-share-target="facebook">
-        <i class="fab fa-facebook-f"></i>
-        <span>Facebook</span>
-      </button>
-
-      <button type="button" class="share-action-btn text" data-share-target="x">
-        <i class="fab fa-x-twitter"></i>
-        <span>X</span>
-      </button>
-
-      <button type="button" class="share-action-btn text" data-share-target="whatsapp">
-        <i class="fab fa-whatsapp"></i>
-        <span>WhatsApp</span>
-      </button>
-    </div>
-  </div>
-</div>
-
-
-  <!-- Modo oscuro -->
-  <button id="themeToggle" class="icon-btn" aria-label="Modo oscuro" data-label="Dark / Light">
-    <i class="fas fa-moon"></i>
-  </button>
-
-  <!-- Idioma -->
-  <a href="/en" class="lang-btn" aria-label="Change language">
-    <i class="fas fa-globe"></i>
-    <span class="lang-text">English</span>
-  </a>
-</div>
-
-
-
   </header>
 
   <!-- ============================= -->
   <!--          MAIN CONTENT         -->
   <!-- ============================= -->
   <main class="content">
-    <!-- tu contenido principal inicia aquí -->
     <h1>Bienvenido a Go Bathroom</h1>
   </main>
-
-  
-
 </body>
 </html>
