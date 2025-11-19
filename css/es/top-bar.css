@@ -89,12 +89,11 @@
   align-items: center;
   gap: 6px;
 
-  /* casi toda la altura del header, dejando un margen arriba/abajo */
-  height: calc(var(--header-h, 64px) - 16px);  /* margen ~8px arriba/abajo */
+  /* casi toda la altura del header, dejando un margen pequeño arriba/abajo */
+  height: calc(var(--header-h, 64px) - 6px);  /* 3px arriba + 3px abajo */
   padding: 0 14px;
 
-  /* 1) Rectángulo con esquinas suaves, no pastilla completa */
-  border-radius: 14px;
+  border-radius: 14px; /* rectángulo suave, no pastilla completa */
 
   font-size: 14px;
   text-decoration: none;
@@ -118,25 +117,24 @@
   transform: translateY(-1px);
 }
 
-/* 2) Línea inferior estilo Facebook */
+/* Línea inferior estilo Facebook */
 .main-nav .nav-item::after {
   content: "";
   position: absolute;
 
-  /* mismo ancho que el fondo de la opción */
   left: 0;
   right: 0;
 
-  /* colocada justo al borde inferior del topbar */
-  bottom: -8px;              /* 8px ≈ margen que dejamos entre nav-item y borde */
-  height: 3px;
+  /* la línea queda justo debajo del fondo, dentro del topbar */
+  bottom: -3px;          /* desplaza la línea 3px (su propio alto) hacia abajo */
+  height: 3px;           /* grosor de la línea = margen que dejamos arriba/abajo */
   border-radius: 999px;
-  background: transparent;   /* solo se ve en el activo */
+  background: transparent;
 }
 
 /* Estado activo (sección actual) */
 .main-nav .nav-item.is-active {
-  color: var(--brand);        /* turquesa para icono + texto */
+  color: var(--brand);   /* turquesa para icono + texto */
 }
 
 .main-nav .nav-item.is-active i {
@@ -144,7 +142,7 @@
 }
 
 .main-nav .nav-item.is-active::after {
-  background: var(--brand);   /* la línea turquesa */
+  background: var(--brand);  /* la línea turquesa */
 }
 
 
