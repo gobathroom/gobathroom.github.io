@@ -90,109 +90,135 @@ function applyThemeUI(dark) {
    3.SHARE BUTTON (desktop popover + Web Share API)
    ========================================================= */
 
-(function () {
-  const shareBtn     = document.getElementById('shareBtn');
-  const sharePopover = document.getElementById('sharePopover');
-  const shareUrlInput = document.getElementById('shareUrl');
-  const copyBtn      = document.getElementById('copyShareUrl');
-  const shareActionButtons = document.querySelectorAll('.share-action-btn');
+document.addEventListener('DOMContentLoaded', () => {
+  const shareBtn      = document.getElementById('shareBtn');
+  const sharePopover  = document.getElementById('sharePopover');
+  const shareUrlSpan  = sharePopover.querySelector('.share-url-text');
+  const copyRow       = sharePopover.querySelector('.share-copy-row');
+  const copiedRow     = sharePopover.querySelector('.share-copied-row');
+  const copyBtn       = sharePopover.querySelector('.share-copy-btn');
+  const sharePills    = sharePopover.querySelectorAll('.share-pill');
 
-  if (!shareBtn || !sharePopover) return;
+  let copyTimeout = null;
 
-  // URL actual
-  const currentUrl = window.location.href;
-  shareUrlInput.value = currentUrl;
+  // siempre usamos la URL actual de la página
+  function getCurrentUrl() {
+    return window.location.href;
+  }
 
-  // helper para abrir/cerrar popover
-  function setShareOpen(open) {
-    sharePopover.classList.toggle('is-open', open);
-    shareBtn.classList.toggle('is-open', open);
-    shareBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    sharePopover.setAttribute('aria-hidden', open ? 'false' : 'true');
+  function openPopover() {
+    shareUrlSpan.textContent = getCurrentUrl();
+    sharePopover.classList.add('is-open');
+    sharePopover.setAttribute('aria-hidden', 'false');
+  }
+
+  function closePopover() {
+    sharePopover.classList.remove('is-open');
+    sharePopover.setAttribute('aria-hidden', 'true');
+
+    // volver del estado "copiado" al normal
+    if (copyTimeout) {
+      clearTimeout(copyTimeout);
+      copyTimeout = null;
+    }
+    copyRow.hidden = false;
+    copiedRow.hidden = true;
   }
 
   // click en botón compartir
   shareBtn.addEventListener('click', async () => {
-    const isMobile = window.innerWidth <= 768;
+    const url = getCurrentUrl();
+    const title = 'Go Bathroom';
+    const text = 'Check this restroom map:';
 
-    // 1) Mobile / tablet con Web Share API
-    if (navigator.share && isMobile) {
+    // Si el navegador soporta Web Share (ideal móvil/tablet)
+    if (navigator.share) {
       try {
-        await navigator.share({
-          title: document.title || 'Go Bathroom',
-          text: 'Open Restroom Map',
-          url: currentUrl
-        });
+        await navigator.share({ title, text, url });
+        return; // no abrimos popover
       } catch (err) {
-        // usuario canceló → no hacemos nada
+        // si el usuario cancela o falla -> fallback al popover
       }
-      return;
     }
 
-    // 2) Desktop → alternar popover
-    const isOpen = sharePopover.classList.contains('is-open');
-    setShareOpen(!isOpen);
+    // desktop o sin Web Share -> popover
+    if (sharePopover.classList.contains('is-open')) {
+      closePopover();
+    } else {
+      openPopover();
+    }
   });
 
-  // copiar URL
-  if (copyBtn) {
-    copyBtn.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(currentUrl);
-        copyBtn.textContent = 'Copied';
-        setTimeout(() => {
-          copyBtn.textContent = 'Copy';
-        }, 1500);
-      } catch (err) {
-        // fallback: seleccionar texto
-        shareUrlInput.select();
+  // botón "Copy"
+  copyBtn.addEventListener('click', async () => {
+    const url = getCurrentUrl();
+
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(url);
+      } else {
+        // fallback muy básico
+        const tmp = document.createElement('textarea');
+        tmp.value = url;
+        document.body.appendChild(tmp);
+        tmp.select();
         document.execCommand('copy');
-        copyBtn.textContent = 'Copied';
-        setTimeout(() => {
-          copyBtn.textContent = 'Copy';
-        }, 1500);
+        document.body.removeChild(tmp);
       }
-    });
-  }
+
+      // mostrar mensaje "copied"
+      copyRow.hidden = true;
+      copiedRow.hidden = false;
+
+      copyTimeout = setTimeout(() => {
+        copyRow.hidden = false;
+        copiedRow.hidden = true;
+      }, 2000);
+    } catch (err) {
+      console.error('No se pudo copiar:', err);
+    }
+  });
 
   // botones Facebook / X / WhatsApp
-  shareActionButtons.forEach(btn => {
+  sharePills.forEach(btn => {
     btn.addEventListener('click', () => {
-      const target = btn.getAttribute('data-share-target');
-      const encodedUrl = encodeURIComponent(currentUrl);
-      let shareLink = '';
+      const url = encodeURIComponent(getCurrentUrl());
+      let shareUrl = '';
 
-      if (target === 'facebook') {
-        shareLink = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-      } else if (target === 'x') {
-        shareLink = `https://twitter.com/intent/tweet?url=${encodedUrl}`;
-      } else if (target === 'whatsapp') {
-        shareLink = `https://api.whatsapp.com/send?text=${encodedUrl}`;
+      switch (btn.dataset.network) {
+        case 'facebook':
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+          break;
+        case 'x':
+          shareUrl = `https://twitter.com/intent/tweet?url=${url}`;
+          break;
+        case 'whatsapp':
+          shareUrl = `https://wa.me/?text=${url}`;
+          break;
       }
 
-      if (shareLink) {
-        window.open(shareLink, '_blank', 'noopener,noreferrer');
+      if (shareUrl) {
+        window.open(shareUrl, '_blank', 'noopener,noreferrer');
       }
     });
   });
 
-  // cerrar popover haciendo click fuera
+  // cerrar al hacer click fuera
   document.addEventListener('click', (e) => {
     if (!sharePopover.classList.contains('is-open')) return;
 
-    const clickInside =
-      sharePopover.contains(e.target) ||
-      shareBtn.contains(e.target);
+    const withinButton = shareBtn.contains(e.target);
+    const withinPopover = sharePopover.contains(e.target);
 
-    if (!clickInside) {
-      setShareOpen(false);
+    if (!withinButton && !withinPopover) {
+      closePopover();
     }
   });
 
-  // cerrar con Escape
+  // cerrar con Esc
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      setShareOpen(false);
+    if (e.key === 'Escape' && sharePopover.classList.contains('is-open')) {
+      closePopover();
     }
   });
-})();
+});
