@@ -212,7 +212,7 @@
   border-radius: 999px;
   cursor: pointer;
 
-  background: var(--panel-2);  /* fondo fijo gris suave */
+  background: var(--hover);  /* fondo fijo gris suave */
   color: var(--text);
 
   transition:
@@ -226,7 +226,7 @@
 
 /* Hover: se oscurece un poco (como FB) */
 .icon-btn:hover {
-  background: var(--hover);
+  background: var(--panel-2);
   transform: translateY(-1px);
 }
 
