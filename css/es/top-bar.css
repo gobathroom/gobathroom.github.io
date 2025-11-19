@@ -1,5 +1,5 @@
 /* ===========================
-   TOP BAR
+   TOP BAR (SHELL GENERAL)
    =========================== */
 
 .topbar {
@@ -42,27 +42,11 @@
   margin-left: auto;
 }
 
-/* Botones de icono (campana, idioma) */
-.icon-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
 
-  width: 36px;
-  height: 36px;
+/* ===========================
+   LEFT: LOGO / BRAND
+   =========================== */
 
-  border: none;
-  border-radius: 999px;
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-}
-
-.icon-btn i {
-  font-size: 17px;
-}
-
-/* Marca (logo + texto) */
 .topbar .brand {
   display: inline-flex;
   align-items: center;
@@ -84,7 +68,82 @@
   width: auto;
   display: block;
 }
- 
+
+
+/* ===========================
+   CENTER: NAV CENTRAL
+   =========================== */
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.main-nav .nav-item {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 10px;
+  border-radius: 999px;
+
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--muted);
+  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.main-nav .nav-item i {
+  font-size: 15px;
+}
+
+/* Hover */
+.main-nav .nav-item:hover {
+  background: var(--hover);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+/* Activo (sección actual) */
+.main-nav .nav-item.is-active {
+  background: var(--brand);
+  color: #ffffff;
+}
+
+/* Icono activo en modo brand */
+.main-nav .nav-item.is-active i {
+  color: #ffffff;
+}
+
+
+
+/* ===========================
+   RIGHT: ICON BUTTONS 
+   =========================== */
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.icon-btn i {
+  font-size: 17px;
+}
+
+
+
 /* ===========================
    RESPONSIVE
    =========================== */
@@ -94,8 +153,8 @@
     padding: 0 8px;
   }
 
-
-  /* Si no quieres nada en el centro, puedes esconderlo */
+  /* De momento, el centro se puede ocultar en mobile.
+     Cuando hagamos la topbar mobile, lo cambiamos. */
   .topbar .center {
     display: none;
   }
