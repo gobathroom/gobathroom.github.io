@@ -247,7 +247,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(4px);
 
-  bottom: -34px;  /* debajo del topbar */
+  bottom: -31px;  /* debajo del topbar */
   padding: 4px 10px;
   border-radius: 999px;
 
