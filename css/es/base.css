@@ -55,4 +55,6 @@ a, p, span, label, button, li {
    =========================== */
 main.content {
   padding: 16px;
+  background: var(--bg);      /* ← usa el color del tema (light/dark) */
+  min-height: calc(100vh - var(--header-h, 64px)); /* opcional, para cubrir toda la pantalla debajo del header */
 }
