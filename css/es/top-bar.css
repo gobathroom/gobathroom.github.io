@@ -226,7 +226,7 @@
 
 /* Hover: se oscurece un poco (como FB) */
 .icon-btn:hover {
-  background: var(--hover);
+  background: var(--panel-2);
   transform: translateY(-1px);
 }
 
@@ -254,7 +254,7 @@
   font-size: 12px;
   white-space: nowrap;
 
-  background: var(--panel-2);
+  background: var(--hover);
   color: var(--text);
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 
