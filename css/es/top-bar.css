@@ -132,11 +132,6 @@
     padding: 0 8px;
   }
 
-  /* En móvil ocultamos el texto "GO BATHROOM"
-     para dar más espacio horizontal */
-  .topbar .brand span {
-    display: none;
-  }
 
   /* Si no quieres nada en el centro, puedes esconderlo */
   .topbar .center {
