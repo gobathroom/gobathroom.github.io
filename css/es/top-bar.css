@@ -274,6 +274,52 @@
 
 
 /* ===========================
+   RIGHT1.2: BOTÓN DE IDIOMA (texto + icono)
+   =========================== */
+
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  height: 40px;            /* misma altura que los iconos circulares */
+  padding: 0 14px;         /* rectángulo */
+
+  background: var(--hover);
+  color: var(--text);
+  border-radius: 14px;     /* similar a FB, suave */
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 14px;
+
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
+}
+
+.lang-btn i {
+  font-size: 18px; /* un poquito más pequeño que los iconos principales */
+}
+
+.lang-btn:hover {
+  background: var(--panel-2);
+  transform: translateY(-1px);
+}
+
+.lang-btn:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.lang-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;       /* Texto normal */
+  letter-spacing: 0.4px;  /* separa un poco las letras */
+}
+
+
+
+/* ===========================
    RESPONSIVE
    =========================== */
 
