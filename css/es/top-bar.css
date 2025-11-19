@@ -74,48 +74,79 @@
    CENTER: NAV CENTRAL
    =========================== */
 
+/* ===========================
+   CENTER: MAIN NAV
+   =========================== */
+
 .main-nav {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
+/* Cada opción del menú */
 .main-nav .nav-item {
+  position: relative;
+
   display: inline-flex;
   flex-direction: row;
   align-items: center;
   gap: 6px;
 
-  padding: 6px 10px;
+  padding: 6px 10px 10px; /* un poco más abajo para dar espacio a la línea */
   border-radius: 999px;
 
   font-size: 14px;
   text-decoration: none;
-  color: var(--muted);
-  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+
+  /* Mismo color base que campana / globo (topbar usa color: var(--text)) */
+  color: var(--text);
+  opacity: 0.8;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    opacity 0.15s ease,
+    transform 0.1s ease;
 }
 
 .main-nav .nav-item i {
-  font-size: 15px;
+  font-size: 16px;
 }
 
-/* Hover */
+/* Hover (no activo) */
 .main-nav .nav-item:hover {
   background: var(--hover);
-  color: var(--text);
+  opacity: 1;
   transform: translateY(-1px);
 }
 
-/* Activo (sección actual) */
-.main-nav .nav-item.is-active {
-  background: var(--brand);
-  color: #ffffff;
+/* Línea inferior estilo Facebook: solo en el activo */
+.main-nav .nav-item::after {
+  content: "";
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  bottom: -1px;           /* pegado al borde interno de la topbar */
+  height: 3px;
+  border-radius: 999px;
+  background: transparent; /* solo se ve en el activo */
 }
 
-/* Icono activo en modo brand */
-.main-nav .nav-item.is-active i {
-  color: #ffffff;
+/* Estado activo (sección actual) */
+.main-nav .nav-item.is-active {
+  color: var(--brand);    /* turquesa para icono + texto */
+  opacity: 1;
 }
+
+.main-nav .nav-item.is-active i {
+  color: var(--brand);
+}
+
+.main-nav .nav-item.is-active::after {
+  background: var(--brand); /* la línea turquesa */
+}
+
 
 
 
