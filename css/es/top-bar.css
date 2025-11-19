@@ -91,7 +91,7 @@
 
   /* casi toda la altura del header, dejando un margen pequeño arriba/abajo */
   height: calc(var(--header-h, 64px) - 6px);  /* 3px arriba + 3px abajo */
-  padding: 0 14px;
+  padding: 0 20px;
 
   border-radius: 14px; /* rectángulo suave, no pastilla completa */
 
@@ -108,7 +108,7 @@
 }
 
 .main-nav .nav-item i {
-  font-size: 16px;
+  font-size: 20px;
 }
 
 /* Hover SOLO en los que NO están activos */
