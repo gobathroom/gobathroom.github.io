@@ -38,7 +38,7 @@
 :root {
   --bg: #f5f7fb;        /* fondo global */
   --panel: #ffffff;     /* tarjetas */
-  --panel-2: #C3E7F0;   /* secciones resaltadas */
+  --panel-2: #DEDEDE;   /* paneles elevados o barras laterales */
 
   /* TEXTO */
   --text: #2d3748;       /* gris oscuro profesional */
