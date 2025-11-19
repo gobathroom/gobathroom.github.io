@@ -15,7 +15,7 @@
   justify-content: space-between;
 
   background: var(--panel);
-  color: var(--text);
+  color: var(--text);          /* <-- color base de todo: logo, centro, right */
   border-bottom: 1px solid var(--border);
 }
 
@@ -53,7 +53,7 @@
   gap: 8px;
 
   text-decoration: none;
-  color: var(--text);
+  color: var(--text);          /* <-- mismo color que íconos center/right */
 
   font-family: "Poppins", sans-serif;
   font-weight: 800;
@@ -89,20 +89,22 @@
   align-items: center;
   gap: 6px;
 
-  padding: 6px 10px 10px; /* un poco más abajo para dar espacio a la línea */
+  /* casi toda la altura del header, dejando un margen arriba/abajo */
+  height: calc(var(--header-h, 64px) - 16px);  /* margen de 8px top/bottom aprox */
+  padding: 0 14px;                              /* pill horizontal */
+
   border-radius: 999px;
 
   font-size: 14px;
   text-decoration: none;
 
-  /* Mismo color base que campana / globo (topbar usa color: var(--text)) */
+  /* mismo color que campana / globo, SIN opacidad gris */
   color: var(--text);
-  opacity: 0.8;
+  opacity: 1;
 
   transition:
     background 0.15s ease,
     color 0.15s ease,
-    opacity 0.15s ease,
     transform 0.1s ease;
 }
 
@@ -110,29 +112,29 @@
   font-size: 16px;
 }
 
-/* Hover (no activo) */
-.main-nav .nav-item:hover {
+/* 2) Hover SOLO en los que NO están activos */
+.main-nav .nav-item:not(.is-active):hover {
   background: var(--hover);
-  opacity: 1;
   transform: translateY(-1px);
 }
 
-/* Línea inferior estilo Facebook: solo en el activo */
+/* Línea inferior estilo Facebook */
 .main-nav .nav-item::after {
   content: "";
   position: absolute;
   left: 20%;
   right: 20%;
-  bottom: -1px;           /* pegado al borde interno de la topbar */
+
+  /* 4) al ras interno inferior del topbar */
+  bottom: 4px;                /* dentro del pill, casi tocando el borde inferior */
   height: 3px;
   border-radius: 999px;
-  background: transparent; /* solo se ve en el activo */
+  background: transparent;    /* solo se ve en el activo */
 }
 
 /* Estado activo (sección actual) */
 .main-nav .nav-item.is-active {
-  color: var(--brand);    /* turquesa para icono + texto */
-  opacity: 1;
+  color: var(--brand);        /* turquesa para icono + texto */
 }
 
 .main-nav .nav-item.is-active i {
@@ -140,10 +142,8 @@
 }
 
 .main-nav .nav-item.is-active::after {
-  background: var(--brand); /* la línea turquesa */
+  background: var(--brand);   /* la línea turquesa */
 }
-
-
 
 
 /* ===========================
@@ -161,14 +161,13 @@
   border: none;
   border-radius: 999px;
   background: transparent;
-  color: inherit;
+  color: inherit;             /* <-- hereda var(--text) de .topbar */
   cursor: pointer;
 }
 
 .icon-btn i {
   font-size: 17px;
 }
-
 
 
 /* ===========================
