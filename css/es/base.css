@@ -1,3 +1,44 @@
+/* ===========================
+   1. VARIABLES (THEME)
+   =========================== */
+:root {
+  /* tus variables de color */
+}
+
+/* ===========================
+   2. RESET BÁSICO
+   =========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===========================
+   3. TIPOGRAFÍA GLOBAL
+   =========================== */
 html, body {
   font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  line-height: 1.4;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ===========================
+   4. TITULOS + TEXTOS
+   =========================== */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600; /* SemiBold */
+}
+
+p, span, label, button, li {
+  font-weight: 400; /* Regular */
+}
+
+/* ===========================
+   5. LAYOUT GLOBAL
+   =========================== */
+main.content {
+  padding: 16px;
 }
