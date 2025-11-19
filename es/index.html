@@ -106,9 +106,54 @@
   </button>
 
   <!-- Compartir -->
-  <button id="shareBtn" class="icon-btn share-btn" aria-label="Compartir">
+<div class="share-wrapper">
+  <button
+    class="icon-btn share-btn"
+    id="shareBtn"
+    type="button"
+    aria-label="Compartir"
+    data-label="Share"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
     <i class="fas fa-share-nodes"></i>
   </button>
+
+  <!-- Panel flotante de compartir (desktop) -->
+  <div class="share-popover" id="sharePopover" role="dialog" aria-hidden="true">
+    <div class="share-popover-header title">Share</div>
+
+    <div class="share-url-row">
+      <input
+        type="text"
+        id="shareUrl"
+        class="share-url-input text"
+        readonly
+      >
+      <button type="button" id="copyShareUrl" class="share-copy-btn title">
+        Copy
+      </button>
+    </div>
+
+    <div class="share-actions">
+      <button type="button" class="share-action-btn text" data-share-target="facebook">
+        <i class="fab fa-facebook-f"></i>
+        <span>Facebook</span>
+      </button>
+
+      <button type="button" class="share-action-btn text" data-share-target="x">
+        <i class="fab fa-x-twitter"></i>
+        <span>X</span>
+      </button>
+
+      <button type="button" class="share-action-btn text" data-share-target="whatsapp">
+        <i class="fab fa-whatsapp"></i>
+        <span>WhatsApp</span>
+      </button>
+    </div>
+  </div>
+</div>
+
 
   <!-- Modo oscuro -->
   <button id="themeToggle" class="icon-btn" aria-label="Modo oscuro" data-label="Dark / Light">
@@ -122,42 +167,7 @@
   </a>
 </div>
 
-<!-- POPOVER DE COMPARTIR -->
-<div id="sharePopover" class="share-popover" aria-hidden="true">
-  <div class="share-header">Share</div>
 
-  <!-- Estado "copiar" normal -->
-  <div class="share-copy-row" data-state="idle">
-    <div class="share-url">
-      <i class="fas fa-link"></i>
-      <span class="share-url-text"></span>
-    </div>
-
-    <button class="share-copy-btn" type="button">
-      <i class="far fa-copy"></i>
-      <span>Copy</span>
-    </button>
-  </div>
-
-  <!-- Estado "copiado" -->
-  <div class="share-copied-row" hidden>
-    <span>✓ Copied successfully!</span>
-  </div>
-
-  <div class="share-actions">
-    <button class="share-pill" data-network="facebook" type="button" aria-label="Share on Facebook">
-      <i class="fab fa-facebook-f"></i>
-    </button>
-
-    <button class="share-pill" data-network="x" type="button" aria-label="Share on X">
-      <i class="fab fa-x-twitter"></i>
-    </button>
-
-    <button class="share-pill" data-network="whatsapp" type="button" aria-label="Share on WhatsApp">
-      <i class="fab fa-whatsapp"></i>
-    </button>
-  </div>
-</div>
 
   </header>
 
