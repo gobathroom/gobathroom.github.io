@@ -1,1 +1,101 @@
-hola mundo
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- META BÁSICOS -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/logo.svg">
+  <link rel="alternate icon" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="alternate icon" href="/assets/favicon-48.png" sizes="48x48">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180">
+  <meta name="theme-color" content="#0d1117" />
+
+  <!-- TÍTULO -->
+  <title>Go Bathroom</title>
+
+  <!-- ICONOS EXTERNOS (FONT AWESOME) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css">
+
+  <!-- CSS GLOBAL (THEME + BASE CSS) -->
+  <link rel="stylesheet" href="css/es/theme.css">
+  <link rel="stylesheet" href="css//es/base.css">
+
+  <!-- CSS DE COMPONENTES -->
+  <link rel="stylesheet" href="css/es/top-bar.css">
+  <link rel="stylesheet" href="css/es/side-bar.css">
+  <link rel="stylesheet" href="css/es/bottom-bar.css">
+  <link rel="stylesheet" href="css/es/dialog.css">
+
+  <!-- MANIFEST PWA -->
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <!-- REGISTRO DEL SERVICE WORKER (DEFER IMPORTANTE) -->
+  <script src="js/es/sw-register.js" defer></script>
+
+  <!-- SCRIPTS DE COMPONENTES (DEFER PARA RENDIR MEJOR) -->
+  <script src="js/es/base.js" defer></script>
+  <script src="js/es/top-bar.js" defer></script>
+  <script src="js/es/side-bar.js" defer></script>
+  <script src="js/es/bottom-bar.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ============================= -->
+  <!--          TOP BAR             -->
+  <!-- ============================= -->
+  <header class="topbar">
+    <div class="left">
+      <!-- ícono hamburguesa -->
+      <button class="hamburger" aria-label="Abrir menú">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Logo -->
+      <a class="brand" href="#">
+        <img src="assets/svg/logo.svg" alt="Go Bathroom Logo">
+        <span>GO BATHROOM</span>
+      </a>
+    </div>
+
+    <div class="center">
+      <!-- (Vacío por ahora — aquí puede ir una búsqueda futura) -->
+    </div>
+
+    <div class="right">
+      <!-- Notificaciones -->
+      <button class="icon-btn" aria-label="Notificaciones">
+        <i class="fas fa-bell"></i>
+      </button>
+
+      <!-- Idioma -->
+      <button class="icon-btn" aria-label="Cambiar idioma">
+        <i class="fas fa-globe"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============================= -->
+  <!--          SIDE BAR            -->
+  <!-- ============================= -->
+  <aside class="sidebar">
+    <!-- aquí va el menú lateral -->
+  </aside>
+
+  <!-- ============================= -->
+  <!--          MAIN CONTENT         -->
+  <!-- ============================= -->
+  <main class="content">
+    <!-- tu contenido principal inicia aquí -->
+    <h1>Bienvenido a Go Bathroom</h1>
+  </main>
+
+  <!-- ============================= -->
+  <!--        BOTTOM BAR (MÓVIL)     -->
+  <!-- ============================= -->
+  <nav class="bottom-bar">
+    <!-- navegación móvil -->
+  </nav>
+
+</body>
+</html>
