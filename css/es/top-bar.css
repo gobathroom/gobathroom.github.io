@@ -166,8 +166,8 @@
   font-size: 12px;
   white-space: nowrap;
 
-  background: var(--panel-2);  /* usa tu panel-2 para tooltip */
-  color: var(--text);
+  background: var(--text);  /* usa tu panel-2 para tooltip */
+  color: var(--panel);
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 
   opacity: 0;
