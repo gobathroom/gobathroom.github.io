@@ -109,7 +109,7 @@
   text-decoration: none;
   color: var(--text);
 
-  font-family: "Poppins", sans-serif
+  font-family: "Poppins", sans-serif;
   font-weight: 800;
   font-size: 20px;
   letter-spacing: 0.02em;
@@ -122,22 +122,7 @@
   width: auto;
   display: block;
 }
-
-/* ===========================
-   AJUSTES GENERALES
-   =========================== */
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-}
-
-/* Que el contenido no quede pegado al borde */
-main.content {
-  padding: 16px;
-}
-
+ 
 /* ===========================
    RESPONSIVE
    =========================== */
