@@ -318,6 +318,132 @@
 }
 
 
+/* ===========================
+   RIGHT1.3: PANEL DE COMPARTIR
+   =========================== */
+
+/* contenedor del botón + popover */
+.share-wrapper {
+  position: relative;
+}
+
+/* cajita flotante */
+.share-popover {
+  position: absolute;
+  top: calc(100% + 8px);   /* debajo del botón compartir */
+  right: 0;                /* alineado al lado derecho del botón (no invade el botón de idioma) */
+
+  min-width: 260px;
+  max-width: 320px;
+
+  padding: 10px 12px 12px;
+  border-radius: 14px;
+
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  border: 1px solid var(--border);
+
+  opacity: 0;
+  transform: translateY(4px);
+  pointer-events: none;
+  z-index: 1400;
+
+  transition:
+    opacity 0.18s ease-out,
+    transform 0.18s ease-out;
+}
+
+/* estado visible */
+.share-popover.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* cabecera "Share" */
+.share-popover-header {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+/* fila URL + botón Copy */
+.share-url-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.share-url-input {
+  flex: 1 1 auto;
+  padding: 6px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--text);
+  font-size: 12px;
+  outline: none;
+}
+
+.share-url-input:focus-visible {
+  outline: 1px solid var(--brand);
+  outline-offset: 1px;
+}
+
+.share-copy-btn {
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: var(--brand);
+  color: #fff;
+  font-size: 12px;
+}
+
+.share-copy-btn:hover {
+  background: var(--brand-2);
+}
+
+/* botones Facebook / X / WhatsApp */
+.share-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.share-action-btn {
+  flex: 1 1 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 6px 8px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+
+  background: var(--hover);
+  color: var(--text);
+  font-size: 12px;
+}
+
+.share-action-btn i {
+  font-size: 14px;
+}
+
+.share-action-btn:hover {
+  background: var(--panel-2);
+}
+
+/* Cuando el panel está abierto, ocultamos el tooltip del botón compartir */
+.share-btn.is-open::before {
+  opacity: 0 !important;
+}
+
+
+
 
 /* ===========================
    RESPONSIVE
