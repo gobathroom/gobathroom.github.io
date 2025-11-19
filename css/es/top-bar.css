@@ -90,15 +90,15 @@
   gap: 6px;
 
   /* casi toda la altura del header, dejando un margen arriba/abajo */
-  height: calc(var(--header-h, 64px) - 16px);  /* margen de 8px top/bottom aprox */
-  padding: 0 14px;                              /* pill horizontal */
+  height: calc(var(--header-h, 64px) - 16px);  /* margen ~8px arriba/abajo */
+  padding: 0 14px;
 
-  border-radius: 999px;
+  /* 1) Rectángulo con esquinas suaves, no pastilla completa */
+  border-radius: 14px;
 
   font-size: 14px;
   text-decoration: none;
 
-  /* mismo color que campana / globo, SIN opacidad gris */
   color: var(--text);
   opacity: 1;
 
@@ -112,24 +112,26 @@
   font-size: 16px;
 }
 
-/* 2) Hover SOLO en los que NO están activos */
+/* Hover SOLO en los que NO están activos */
 .main-nav .nav-item:not(.is-active):hover {
   background: var(--hover);
   transform: translateY(-1px);
 }
 
-/* Línea inferior estilo Facebook */
+/* 2) Línea inferior estilo Facebook */
 .main-nav .nav-item::after {
   content: "";
   position: absolute;
-  left: 20%;
-  right: 20%;
 
-  /* 4) al ras interno inferior del topbar */
-  bottom: 4px;                /* dentro del pill, casi tocando el borde inferior */
+  /* mismo ancho que el fondo de la opción */
+  left: 0;
+  right: 0;
+
+  /* colocada justo al borde inferior del topbar */
+  bottom: -8px;              /* 8px ≈ margen que dejamos entre nav-item y borde */
   height: 3px;
   border-radius: 999px;
-  background: transparent;    /* solo se ve en el activo */
+  background: transparent;   /* solo se ve en el activo */
 }
 
 /* Estado activo (sección actual) */
