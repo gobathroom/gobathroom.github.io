@@ -18,8 +18,29 @@ html, body {
   color: var(--text);
 }
 
+
 /* ===========================
-   3. TITULOS + TEXTOS
+   3. SISTEMA TIPOGRÁFICO GLOBAL
+   =========================== */
+
+/* Texto normal */
+.text {
+  font-weight: 400; /* Regular (default) */
+}
+
+/* Títulos de UI / labels importantes */
+.title {
+  font-weight: 600; /* SemiBold */
+}
+
+/* Marca / logo */
+.logo {
+  font-weight: 800; /* ExtraBold */
+}
+
+
+/* ===========================
+   4. TITULOS + TEXTOS
    =========================== */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600; /* SemiBold */
@@ -30,7 +51,7 @@ p, span, label, button, li {
 }
 
 /* ===========================
-   4. LAYOUT GLOBAL
+   5. LAYOUT GLOBAL
    =========================== */
 main.content {
   padding: 16px;
