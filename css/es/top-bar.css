@@ -188,7 +188,7 @@
 
 
 /* ===========================
-   RIGHT: ICON BUTTONS (4 ICONOS)
+   RIGHT1.0: ICON BUTTONS (4 ICONOS)
    =========================== */
 
 .topbar .right {
@@ -237,7 +237,7 @@
 }
 
 /* ===========================
-   Tooltips para icon-btn
+   RIGHT1.1: Tooltips para icon-btn
    =========================== */
 
 .icon-btn::before {
