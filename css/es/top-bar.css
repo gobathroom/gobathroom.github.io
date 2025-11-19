@@ -188,26 +188,88 @@
 
 
 /* ===========================
-   RIGHT: ICON BUTTONS 
+   RIGHT: ICON BUTTONS (4 ICONOS)
    =========================== */
 
+.topbar .right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Botón circular con fondo SIEMPRE visible */
 .icon-btn {
+  position: relative;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
 
   border: none;
   border-radius: 999px;
-  background: transparent;
-  color: inherit;             /* <-- hereda var(--text) de .topbar */
   cursor: pointer;
+
+  background: var(--panel-2);  /* fondo fijo gris suave */
+  color: var(--text);
+
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
 }
 
 .icon-btn i {
-  font-size: 17px;
+  font-size: 20px; /* más grande, igual que FB */
+}
+
+/* Hover: se oscurece un poco (como FB) */
+.icon-btn:hover {
+  background: var(--hover);
+  transform: translateY(-1px);
+}
+
+/* Foco accesible */
+.icon-btn:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* ===========================
+   Tooltips para icon-btn
+   =========================== */
+
+.icon-btn::before {
+  content: attr(data-label);
+
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+
+  bottom: -34px;  /* debajo del topbar */
+  padding: 4px 10px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  white-space: nowrap;
+
+  background: var(--panel-2);
+  color: var(--text);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1200;
+
+  transition:
+    opacity 0.18s ease-out 0.18s,
+    transform 0.18s ease-out 0.18s;
+}
+
+.icon-btn:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 
