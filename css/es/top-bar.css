@@ -89,12 +89,10 @@
   align-items: center;
   gap: 6px;
 
-  /* casi toda la altura del header, dejando un margen arriba/abajo */
-  height: calc(var(--header-h, 64px) - 16px);  /* margen ~8px arriba/abajo */
-  padding: 0 14px;
+  /* >>> Nuevo padding basado en el grosor de la línea (3px) <<< */
+  padding: 7px 16px;   /* 7px arriba/abajo = 3px (línea) + 4px de respiración */
 
-  /* 1) Rectángulo con esquinas suaves, no pastilla completa */
-  border-radius: 14px;
+  border-radius: 12px;  /* rectangular suave — FB style */
 
   font-size: 14px;
   text-decoration: none;
@@ -112,31 +110,28 @@
   font-size: 16px;
 }
 
-/* Hover SOLO en los que NO están activos */
+/* Hover SOLO para no-activos */
 .main-nav .nav-item:not(.is-active):hover {
   background: var(--hover);
   transform: translateY(-1px);
 }
 
-/* 2) Línea inferior estilo Facebook */
+/* Línea inferior del activo */
 .main-nav .nav-item::after {
   content: "";
   position: absolute;
+  left: 10px;
+  right: 10px;
 
-  /* mismo ancho que el fondo de la opción */
-  left: 0;
-  right: 0;
-
-  /* colocada justo al borde inferior del topbar */
-  bottom: -8px;              /* 8px ≈ margen que dejamos entre nav-item y borde */
-  height: 3px;
+  bottom: 0px;       /* pegado al borde inferior del fondo */
+  height: 3px;       /* grosor base */
   border-radius: 999px;
-  background: transparent;   /* solo se ve en el activo */
+  background: transparent;
 }
 
-/* Estado activo (sección actual) */
+/* Activo */
 .main-nav .nav-item.is-active {
-  color: var(--brand);        /* turquesa para icono + texto */
+  color: var(--brand);
 }
 
 .main-nav .nav-item.is-active i {
@@ -144,7 +139,7 @@
 }
 
 .main-nav .nav-item.is-active::after {
-  background: var(--brand);   /* la línea turquesa */
+  background: var(--brand);
 }
 
 
