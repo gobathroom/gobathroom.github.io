@@ -1,12 +1,5 @@
 /* ===========================
-   1. VARIABLES (THEME)
-   =========================== */
-:root {
-  /* tus variables de color */
-}
-
-/* ===========================
-   2. RESET BÁSICO
+   1. RESET BÁSICO
    =========================== */
 * {
   margin: 0;
@@ -15,18 +8,18 @@
 }
 
 /* ===========================
-   3. TIPOGRAFÍA GLOBAL
+   2. TIPOGRAFÍA GLOBAL
    =========================== */
 html, body {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   line-height: 1.4;
-  background: var(--bg);
+  background: var(--bg);   /* <-- usa los colores del theme.css */
   color: var(--text);
 }
 
 /* ===========================
-   4. TITULOS + TEXTOS
+   3. TITULOS + TEXTOS
    =========================== */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600; /* SemiBold */
@@ -37,7 +30,7 @@ p, span, label, button, li {
 }
 
 /* ===========================
-   5. LAYOUT GLOBAL
+   4. LAYOUT GLOBAL
    =========================== */
 main.content {
   padding: 16px;
