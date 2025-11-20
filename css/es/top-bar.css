@@ -537,6 +537,239 @@
   pointer-events: none;
 }
 
+/* ===========================
+   RIGHT1.4.1: NOTIFICACIONES: wrapper + panel
+   =========================== */
+
+/* El contenedor right ya es position:relative; ahí se ancla notif-panel y share-panel */
+.topbar .right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.notif-wrapper {
+  position: static;
+  display: flex;
+  align-items: center;
+}
+
+/* Panel flotante de notificaciones */
+.notif-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+
+  min-width: 320px;
+  max-width: 380px;
+
+  background: var(--panel);
+  border-radius: 14px;
+  padding: 10px 12px;
+
+  /* Elevación (usando las mismas variables que definimos antes) */
+  /* En light: solo sombra; en dark: solo borde */
+  border: var(--panel-elev-border);
+  box-shadow: var(--panel-elev-shadow);
+
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition:
+    opacity 0.18s ease-out,
+    transform 0.18s ease-out;
+  z-index: 1300;
+}
+
+/* Panel visible cuando el wrapper tiene is-open */
+.notif-wrapper.is-open .notif-panel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Icono activo + esconder tooltip cuando está abierto */
+.notif-wrapper.is-open .notif-btn {
+  color: var(--brand);
+}
+
+.notif-wrapper.is-open .notif-btn::before {
+  opacity: 0 !important;
+  transform: translateX(-50%) translateY(4px);
+  transition: none;
+}
+
+/* ===========================
+   RIGHT1.4.2: NOTIFICACIONES: contenido interno
+   =========================== */
+
+.notif-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.notif-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.notif-menu-btn {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.notif-menu-btn:hover {
+  background: var(--hover);
+  color: var(--text);
+}
+
+/* Tabs (Todas / No leídas) */
+.notif-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.notif-tab {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.notif-tab.is-active {
+  background: var(--hover);
+  color: var(--text);
+}
+
+/* Meta (mes + ver todo) */
+.notif-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.notif-view-all {
+  font-size: 12px;
+  color: var(--brand);
+  text-decoration: none;
+}
+
+.notif-view-all:hover {
+  text-decoration: underline;
+}
+
+/* Lista de notificaciones */
+.notif-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 420px;  /* límite vertical aprox. similar a FB */
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Cada item */
+.notif-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 8px 6px;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background 0.15s ease;
+}
+
+.notif-item:hover {
+  background: var(--hover);
+}
+
+.notif-main {
+  flex: 1;
+}
+
+.notif-text {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.notif-time {
+  display: inline-block;
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--muted-2);
+}
+
+/* Puntecito para no leída */
+.notif-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--brand);
+  margin-left: 4px;
+  margin-top: 6px;
+}
+
+/* Si quieres ocultar el dot cuando está leída, simplemente no pongas la clase is-unread,
+   o añade una regla extra si te hace falta. */
+
+/* Para ocultar items al aplicar el límite inicial de 6 */
+.notif-item.is-hidden {
+  display: none;
+}
+
+/* Footer: botón "Ver notificaciones anteriores" */
+.notif-footer {
+  margin-top: 6px;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
+
+.notif-more-btn {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--brand);
+  font-size: 13px;
+  padding: 6px 4px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.notif-more-btn:hover {
+  background: var(--hover);
+}
+
 
 
 
