@@ -85,3 +85,48 @@ function applyThemeUI(dark) {
   });
 })();
 
+
+// ===========================
+// 3. Compartir
+// ===========================
+
+document.addEventListener('DOMContentLoaded', () => {
+  const shareUrlInput = document.getElementById('shareUrl');
+  const copyBtn       = document.getElementById('copyShareUrl');
+  const shareBtn      = document.getElementById('shareBtn');
+
+  if (shareUrlInput) {
+    // URL actual de la página
+    shareUrlInput.value = window.location.href;
+  }
+
+  if (copyBtn && shareUrlInput) {
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(shareUrlInput.value)
+        .then(() => {
+          // Pequeño feedback visual
+          const originalText = copyBtn.textContent;
+          copyBtn.textContent = 'Copied';
+          setTimeout(() => {
+            copyBtn.textContent = originalText;
+          }, 1200);
+        })
+        .catch(err => {
+          console.error('Error copiando URL:', err);
+        });
+    });
+  }
+
+  // Opcional: marcar aria-expanded para accesibilidad
+  if (shareBtn) {
+    const wrapper = shareBtn.closest('.share-wrapper');
+    ['mouseenter', 'focus'].forEach(evt =>
+      wrapper.addEventListener(evt, () => shareBtn.setAttribute('aria-expanded', 'true'))
+    );
+    ['mouseleave', 'blur'].forEach(evt =>
+      wrapper.addEventListener(evt, () => shareBtn.setAttribute('aria-expanded', 'false'))
+    );
+  }
+});
+
+
