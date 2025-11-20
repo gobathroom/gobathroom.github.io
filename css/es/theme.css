@@ -68,7 +68,7 @@
   /* HOVERS */
   --hover: rgba(0,0,0,0.04); 
   --active: rgba(0,0,0,0.08);
-}
+
 
 /* ⭐ ELEVACIÓN PARA POPUPS / PANELES */
   --panel-elev-border: rgba(0, 0, 0, 0.05);        /* borde suave */
