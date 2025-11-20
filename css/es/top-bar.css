@@ -500,21 +500,20 @@
    =========================== */
 .share-social {
   margin-top: 12px;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
   gap: 10px;
 }
 
 /* Botones circulares */
 .social-btn {
-  width: 36px;
   height: 36px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 999px;
+  border-radius: 14px;
   border: 1px solid var(--border);
   background: transparent;
   color: var(--text);
