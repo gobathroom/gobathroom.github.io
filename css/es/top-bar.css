@@ -447,7 +447,7 @@
   padding: 6px 10px;
 
   background: #e6fbf1;        /* verde suave */
-  color: #116d3b;             /* verde texto */
+  color: var(--text);
   border: 1px solid #8be1b7;  /* borde verde claro */
 
   opacity: 0;
