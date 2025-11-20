@@ -327,7 +327,7 @@
 
 /* Wrapper del botón de compartir */
 .share-wrapper {
-  position: relative; /* por si algún día quieres anclar al icono */
+  position: static; /* por si algún día quieres anclar al icono */
   display: flex;
   align-items: center;
 }
@@ -404,24 +404,25 @@
   transform: translateY(-1px);
 }
 
-/* === Mostrar panel al hacer hover sobre el botón de compartir (o su wrapper) === */
-.share-wrapper:hover .share-panel {
+/* Panel visible SOLO cuando el wrapper tiene .is-open */
+.share-wrapper.is-open .share-panel {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
 }
 
-/* === Cambiar color del icono de compartir cuando el hover está activo === */
-.share-wrapper:hover .share-btn {
+/* Icono de compartir activo */
+.share-wrapper.is-open .share-btn {
   color: var(--brand);
 }
 
-/* === Ocultar el tooltip normal cuando el panel está visible === */
-.share-wrapper:hover .share-btn::before {
+/* Mientras está abierto, ocultar el tooltip del botón */
+.share-wrapper.is-open .share-btn::before {
   opacity: 0 !important;
   transform: translateX(-50%) translateY(4px);
   transition: none;
 }
+
 
 
 
