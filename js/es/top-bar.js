@@ -178,9 +178,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ===========================
-// 3.4 Abrir / cerrar panel
-  por click, Esc, click fuera
-// ===========================
+  // 3.4 Abrir / cerrar panel
+  // por click, Esc, click fuera
+  // ===========================
   // 3) 
   if (shareBtn && shareWrapper && sharePanel) {
 
