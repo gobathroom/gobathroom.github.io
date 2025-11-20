@@ -99,9 +99,127 @@
 
     <div class="right">
   <!-- Notificaciones -->
-  <button class="icon-btn" aria-label="Notificaciones" data-label="Notificaciones">
-    <i class="fas fa-bell"></i>
-  </button>
+  <div class="notif-wrapper">
+    <button
+      class="icon-btn notif-btn"
+      id="notifBtn"
+      type="button"
+      aria-label="Notificaciones"
+      data-label="Notifications"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      <i class="fas fa-bell"></i>
+    </button>
+
+    <!-- Panel flotante de notificaciones -->
+    <div class="notif-panel" id="notifPanel" aria-hidden="true">
+      <!-- Cabecera -->
+      <div class="notif-header">
+        <span class="notif-title">Notificaciones</span>
+        <button
+          type="button"
+          class="notif-menu-btn"
+          aria-label="Opciones de notificaciones"
+        >
+          <i class="fas fa-ellipsis-h"></i>
+        </button>
+      </div>
+
+      <!-- Tabs -->
+      <div class="notif-tabs">
+        <button
+          type="button"
+          class="notif-tab is-active"
+          id="notifTabAll"
+        >
+          Todas
+        </button>
+        <button
+          type="button"
+          class="notif-tab"
+          id="notifTabUnread"
+        >
+          No leídas
+        </button>
+      </div>
+
+      <!-- Meta (mes + ver todo) -->
+      <div class="notif-meta">
+        <span class="notif-month" id="notifMonthLabel">Noviembre 2025</span>
+        <a href="/notificaciones" class="notif-view-all">Ver todo</a>
+      </div>
+
+      <!-- Lista de notificaciones -->
+      <div class="notif-list" id="notifList">
+        <!-- Ejemplos: duplica / cambia contenido como quieras -->
+        <article class="notif-item is-unread">
+          <div class="notif-main">
+            <p class="notif-text">
+              <strong>Go Bathroom NYC</strong> se ha actualizado con nuevos baños accesibles.
+            </p>
+            <span class="notif-time">Hace 2 h</span>
+          </div>
+          <span class="notif-dot"></span>
+        </article>
+
+        <article class="notif-item is-unread">
+          <div class="notif-main">
+            <p class="notif-text">
+              Nueva guía para encontrar baños privados cerca de estaciones de metro en NYC.
+            </p>
+            <span class="notif-time">Hace 5 h</span>
+          </div>
+          <span class="notif-dot"></span>
+        </article>
+
+        <article class="notif-item">
+          <div class="notif-main">
+            <p class="notif-text">
+              Se añadió soporte para modo oscuro en Go Bathroom NYC.
+            </p>
+            <span class="notif-time">Ayer</span>
+          </div>
+        </article>
+
+        <article class="notif-item">
+          <div class="notif-main">
+            <p class="notif-text">
+              Nuevas categorías de baños accesibles para usuarios con movilidad reducida.
+            </p>
+            <span class="notif-time">Hace 3 días</span>
+          </div>
+        </article>
+
+        <article class="notif-item">
+          <div class="notif-main">
+            <p class="notif-text">
+              Recordatorio: revisa los filtros de búsqueda para encontrar baños gratuitos.
+            </p>
+            <span class="notif-time">Hace 5 días</span>
+          </div>
+        </article>
+
+        <article class="notif-item">
+          <div class="notif-main">
+            <p class="notif-text">
+              Se han actualizado los términos de uso de Go Bathroom NYC.
+            </p>
+            <span class="notif-time">Hace 1 semana</span>
+          </div>
+        </article>
+
+        <!-- Puedes añadir más; el JS controlará el “ver anteriores” -->
+      </div>
+
+      <!-- Footer (ver más) -->
+      <div class="notif-footer" id="notifFooter">
+        <button type="button" class="notif-more-btn">
+          Ver notificaciones anteriores
+        </button>
+      </div>
+    </div>
+  </div>
 
  <!-- Compartir -->
 <div class="share-wrapper">
