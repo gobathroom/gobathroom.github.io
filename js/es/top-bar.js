@@ -91,27 +91,32 @@ function applyThemeUI(dark) {
 // ===========================
 
 document.addEventListener('DOMContentLoaded', () => {
-  const shareUrlInput = document.getElementById('shareUrl');
-  const copyBtn       = document.getElementById('copyShareUrl');
-  const shareBtn      = document.getElementById('shareBtn');
-  const shareWrapper  = shareBtn ? shareBtn.closest('.share-wrapper') : null;
-  const sharePanel    = document.getElementById('sharePanel');
+  const shareUrlInput   = document.getElementById('shareUrl');
+  const copyBtn         = document.getElementById('copyShareUrl');
+  const shareBtn        = document.getElementById('shareBtn');
+  const shareWrapper    = shareBtn ? shareBtn.closest('.share-wrapper') : null;
+  const sharePanel      = document.getElementById('sharePanel');
+  const shareUrlWrapper = document.getElementById('shareUrlWrapper');
+  const shareSuccess    = shareUrlWrapper
+    ? shareUrlWrapper.querySelector('.share-success')
+    : null;
 
   // 1) Rellenar URL actual
   if (shareUrlInput) {
     shareUrlInput.value = window.location.href;
   }
 
-  // 2) Copiar + mensaje
-  if (copyBtn && shareUrlInput && shareSuccess) {
+  // 2) Copiar + animación "copiado correctamente"
+  if (copyBtn && shareUrlInput && shareUrlWrapper && shareSuccess) {
     copyBtn.addEventListener('click', () => {
       navigator.clipboard.writeText(shareUrlInput.value)
         .then(() => {
-          // Mostrar mensaje verde
-          shareSuccess.classList.add('copied');
-          // Ocultarlo después de 1s
+          // Ocultar pill de URL y mostrar mensaje verde
+          shareUrlWrapper.classList.add('copied');
+
+          // Volver al estado normal después de 1s
           setTimeout(() => {
-            shareSuccess.classList.remove('copied');
+            shareUrlWrapper.classList.remove('copied');
           }, 1000);
         })
         .catch(err => {
@@ -167,6 +172,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-
 
 
