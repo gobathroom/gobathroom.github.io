@@ -1,3 +1,12 @@
+// ===========================
+// 0. Helper i18n
+// ===========================
+const I18N = window.GB_I18N || {
+  t: (key) => key,
+  lang: 'en',
+};
+const t = I18N.t;
+
 
 // ===========================
 // 1.Refresh
@@ -9,11 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (brand) {
     const path = window.location.pathname;
 
-    // Detecta idioma automáticamente
-    if (path.startsWith("/es")) {
-      brand.href = "/es";
+    // Detecta idioma automáticamente por la ruta
+    if (path.startsWith('/es')) {
+      brand.href = '/es';
     } else {
-      brand.href = "/";
+      brand.href = '/';
     }
   }
 });
@@ -40,11 +49,12 @@ function applyThemeUI(dark) {
     icon.classList.remove('fa-moon');
     icon.classList.add('fa-sun');
 
-    // tooltip + accesibilidad
-    themeToggleBtn.setAttribute('aria-label', 'Modo claro');
-    themeToggleBtn.dataset.label = 'Modo claro';
+    // tooltip + accesibilidad (usando i18n)
+    const label = t('theme.lightLabel');
+    themeToggleBtn.setAttribute('aria-label', label);
+    themeToggleBtn.dataset.label = label;
 
-    // (opcional) recordar preferencia
+    // recordar preferencia
     localStorage.setItem('gb-theme', 'dark');
   } else {
     // tema claro
@@ -54,8 +64,9 @@ function applyThemeUI(dark) {
     icon.classList.remove('fa-sun');
     icon.classList.add('fa-moon');
 
-    themeToggleBtn.setAttribute('aria-label', 'Modo oscuro');
-    themeToggleBtn.dataset.label = 'Modo oscuro';
+    const label = t('theme.darkLabel');
+    themeToggleBtn.setAttribute('aria-label', label);
+    themeToggleBtn.dataset.label = label;
 
     localStorage.setItem('gb-theme', 'light');
   }
@@ -101,20 +112,16 @@ document.addEventListener('DOMContentLoaded', () => {
     ? shareUrlWrapper.querySelector('.share-success')
     : null;
 
-  
   // ===========================
-// 3.1 Rellenar URL actual
-// ===========================
+  // 3.1 Rellenar URL actual
+  // ===========================
   if (shareUrlInput) {
     shareUrlInput.value = window.location.href;
   }
 
-
   // ===========================
-  // 3.2 Copiar + animación
-  //  "copiado correctamente"
+  // 3.2 Copiar + animación "copiado correctamente"
   // ===========================
-
   if (copyBtn && shareUrlInput && shareUrlWrapper && shareSuccess) {
     copyBtn.addEventListener('click', () => {
       navigator.clipboard.writeText(shareUrlInput.value)
@@ -128,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 1000);
         })
         .catch(err => {
-          console.error('Error copiando URL:', err);
+          console.error(t('share.errorCopy'), err);
         });
     });
   }
@@ -173,15 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-
-
-
-
   // ===========================
   // 3.4 Abrir / cerrar panel
-  // por click, Esc, click fuera
   // ===========================
-  // 3) 
   if (shareBtn && shareWrapper && sharePanel) {
 
     function openShare() {
@@ -228,5 +229,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-
-
