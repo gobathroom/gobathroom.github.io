@@ -31,6 +31,12 @@
 }
 
 
+/* ⭐ ELEVACIÓN DARK: borde un poco más visible + sombra suave */
+  --panel-elev-border: rgba(255,255,255,0.08);  /* como Facebook */
+  --panel-elev-shadow: 0 10px 28px rgba(0,0,0,0.35); /* sombra más discreta */
+
+
+
 
 /* =========================================================
    2) Light Theme
@@ -62,4 +68,9 @@
   /* HOVERS */
   --hover: rgba(0,0,0,0.04); 
   --active: rgba(0,0,0,0.08);
+}
+
+/* ⭐ ELEVACIÓN PARA POPUPS / PANELES */
+  --panel-elev-border: rgba(0, 0, 0, 0.05);        /* borde suave */
+  --panel-elev-shadow: 0 18px 45px rgba(0, 0, 0, .16); /* sombra visible */
 }
