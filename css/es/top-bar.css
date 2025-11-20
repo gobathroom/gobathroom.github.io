@@ -128,7 +128,7 @@
   /* la línea queda justo debajo del fondo, dentro del topbar */
   bottom: -3px;          /* desplaza la línea 3px (su propio alto) hacia abajo */
   height: 3px;           /* grosor de la línea = margen que dejamos arriba/abajo */
-  border-radius: 999px;
+  border-radius: 14px;
   background: transparent;
 }
 
@@ -161,7 +161,7 @@
   bottom: -31px;               /* ajusta si lo quieres más arriba/abajo */
 
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: 14px;
 
   font-size: 12px;
   white-space: nowrap;
@@ -249,7 +249,7 @@
 
   bottom: -37px;  /* debajo del topbar */
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: 14px;
 
   font-size: 12px;
   white-space: nowrap;
