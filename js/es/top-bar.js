@@ -96,25 +96,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const shareBtn      = document.getElementById('shareBtn');
   const shareWrapper  = shareBtn ? shareBtn.closest('.share-wrapper') : null;
   const sharePanel    = document.getElementById('sharePanel');
-  const shareSuccess  = document.getElementById('shareSuccess');
 
   // 1) Rellenar URL actual
   if (shareUrlInput) {
     shareUrlInput.value = window.location.href;
   }
 
-  // 2) Botón Copy + mensaje "Copiado correctamente"
-  if (copyBtn && shareUrlInput && shareSuccess) {
+  // 2) Botón Copy
+  if (copyBtn && shareUrlInput) {
     copyBtn.addEventListener('click', () => {
       navigator.clipboard.writeText(shareUrlInput.value)
         .then(() => {
-          // Mostrar banda verde
-          shareSuccess.classList.add('visible');
-
-          // Ocultarla después de 2.5s
+          const originalText = copyBtn.textContent;
+          copyBtn.textContent = 'Copied';
           setTimeout(() => {
-            shareSuccess.classList.remove('visible');
-          }, 2500);
+            copyBtn.textContent = originalText;
+          }, 1200);
         })
         .catch(err => {
           console.error('Error copiando URL:', err);
@@ -169,5 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
 
 
