@@ -469,12 +469,6 @@
   transform: translateY(0);
 }
 
-/* Visible cuando se copia */
-.share-success.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* Panel visible SOLO cuando el wrapper tiene .is-open */
 .share-wrapper.is-open .share-panel {
   opacity: 1;
