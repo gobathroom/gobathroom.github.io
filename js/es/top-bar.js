@@ -87,7 +87,7 @@ function applyThemeUI(dark) {
 
 
 // ===========================
-// 3. Compartir
+// 3.0 Compartir
 // ===========================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -101,12 +101,20 @@ document.addEventListener('DOMContentLoaded', () => {
     ? shareUrlWrapper.querySelector('.share-success')
     : null;
 
-  // 1) Rellenar URL actual
+  
+  // ===========================
+// 3.1 Rellenar URL actual
+// ===========================
   if (shareUrlInput) {
     shareUrlInput.value = window.location.href;
   }
 
-  // 2) Copiar + animación "copiado correctamente"
+
+  // ===========================
+  // 3.2 Copiar + animación
+  //  "copiado correctamente"
+  // ===========================
+
   if (copyBtn && shareUrlInput && shareUrlWrapper && shareSuccess) {
     copyBtn.addEventListener('click', () => {
       navigator.clipboard.writeText(shareUrlInput.value)
@@ -125,7 +133,55 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 3) Abrir / cerrar panel por click, Esc, click fuera
+  // ======================================================
+  // 🔥 3.3 BOTONES SOCIALES (FB, X, WhatsApp)
+  // ======================================================
+
+  const btnFb = document.getElementById('shareFb');
+  const btnX  = document.getElementById('shareX');
+  const btnWa = document.getElementById('shareWa');
+
+  const currentUrl = encodeURIComponent(window.location.href);
+
+  // Facebook
+  if (btnFb) {
+    btnFb.addEventListener('click', () => {
+      window.open(
+        `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`,
+        '_blank'
+      );
+    });
+  }
+
+  // X (Twitter)
+  if (btnX) {
+    btnX.addEventListener('click', () => {
+      window.open(
+        `https://twitter.com/intent/tweet?url=${currentUrl}`,
+        '_blank'
+      );
+    });
+  }
+
+  // WhatsApp
+  if (btnWa) {
+    btnWa.addEventListener('click', () => {
+      window.open(
+        `https://api.whatsapp.com/send?text=${currentUrl}`,
+        '_blank'
+      );
+    });
+  }
+
+
+
+
+
+  // ===========================
+// 3.4 Abrir / cerrar panel
+  por click, Esc, click fuera
+// ===========================
+  // 3) 
   if (shareBtn && shareWrapper && sharePanel) {
 
     function openShare() {
