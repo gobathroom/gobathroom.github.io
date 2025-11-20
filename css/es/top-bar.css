@@ -443,7 +443,7 @@
   align-items: center;
   justify-content: center;
 
-  border-radius: 999px;
+  border-radius: 14px;
   padding: 6px 10px;
 
   background: rgba(16,185,129,.12);        /* verde suave */
