@@ -317,17 +317,20 @@
   letter-spacing: 0.4px;  /* separa un poco las letras */
 }
 
-/* === Right1.3: el contenedor necesita ser relativo para alinear el popup al borde derecho === */
+/* ===========================
+   RIGHT1.3: CONTENEDOR RIGHT
+   (alinear popup al borde derecho)
+   =========================== */
 .topbar .right {
   display: flex;
   align-items: center;
   gap: 10px;
-  position: relative;  /* 🔴 importante para right:0 del panel */
+  position: relative;  /* importante para que .share-panel use right:0 */
 }
 
 /* Wrapper del botón de compartir */
 .share-wrapper {
-  position: static; /* por si algún día quieres anclar al icono */
+  position: static;           /* el panel se ancla a .topbar .right */
   display: flex;
   align-items: center;
 }
