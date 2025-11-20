@@ -691,13 +691,14 @@
   gap: 4px;
 }
 
-/* Cuando activemos el modo “scroll” desde JS
-   (después de pulsar "Ver notificaciones anteriores") */
 .notif-list.is-scrollable {
-  max-height: 420px;      /* límite vertical aprox. similar a FB */
+  /* Crece mientras haya espacio bajo la barra superior */
+  max-height: calc(100vh - var(--header-h) - 40px);
+
   overflow-y: auto;
   padding-right: 4px;
 }
+
 
 /* Cada item */
 .notif-item {
