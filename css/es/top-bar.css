@@ -335,7 +335,11 @@
   align-items: center;
 }
 
-/* Ventana flotante "Compartir" */
+
+/* ===========================
+   RIGHT1.3.1:  Ventana
+   flotante "Compartir"
+   =========================== */
 .share-panel {
   position: absolute;
   top: calc(100% + 10px);  /* debajo de la barra */
@@ -488,6 +492,51 @@
   transform: translateX(-50%) translateY(4px);
   transition: none;
 }
+
+
+/* ===========================
+   RIGHT1.3.2:  Contenedor 
+    de los botones sociales
+   =========================== */
+.share-social {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Botones circulares */
+.social-btn {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 16px;
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease,
+    border-color 0.15s ease;
+}
+
+.social-btn:hover {
+  background: var(--hover);
+  transform: translateY(-1px);
+  border-color: var(--brand);
+}
+
+.social-btn i {
+  pointer-events: none;
+}
+
 
 
 
