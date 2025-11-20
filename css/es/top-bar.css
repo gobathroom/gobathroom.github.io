@@ -371,7 +371,11 @@
 .share-panel-body {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+}
+
+/* Contenedor que superpone URL y mensaje de éxito */
+.share-url-wrapper {
+  position: relative;
 }
 
 /* Rectángulo que agrupa icono + URL + botón Copy */
@@ -383,7 +387,7 @@
   padding: 6px 10px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: var(--panel-2);
+  background: transparent;
 }
 
 /* Icono de link a la izquierda */
@@ -429,21 +433,40 @@
   transform: translateY(-1px);
 }
 
-/* Mensaje “copiado correctamente” (tercera imagen) */
+/* Mensaje “copiado correctamente” superpuesto en el mismo lugar */
 .share-success {
-  font-size: 13px;
+  position: absolute;
+  inset: 0;  /* ocupa exactamente el mismo rectángulo */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   border-radius: 999px;
   padding: 6px 10px;
+
   background: #e6fbf1;        /* verde suave */
   color: #116d3b;             /* verde texto */
   border: 1px solid #8be1b7;  /* borde verde claro */
 
   opacity: 0;
-  transform: translateY(4px);
   pointer-events: none;
+  transform: translateY(2px);
   transition:
-    opacity 0.18s ease-out,
-    transform 0.18s ease-out;
+    opacity 0.15s ease-out,
+    transform 0.15s ease-out;
+}
+
+
+/* Cuando el wrapper está en estado “copiado” */
+.share-url-wrapper.copied .share-url-group {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.share-url-wrapper.copied .share-success {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Visible cuando se copia */
