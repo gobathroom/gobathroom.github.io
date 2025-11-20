@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     : [];
 
   const MAX_VISIBLE = 6;
+  let scrollMode = false; // se activa cuando el usuario pulsa "ver anteriores"
 
   // ===========================
   // 3.1 Compartir: rellenar URL
@@ -192,16 +193,40 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ======================================================
-  // 3.4 Notificaciones: límite inicial de 6 + "ver anteriores"
+  // 3.4 Notificaciones: límite inicial + "ver anteriores" + scroll por lotes
   // ======================================================
-  function applyInitialNotifLimit() {
+
+  // helper: revela hasta N notificaciones ocultas (las que tienen .is-hidden)
+  function revealNextBatch(batchSize) {
     if (!allNotifItems.length) return;
+
+    const hidden = allNotifItems.filter(item =>
+      item.classList.contains('is-hidden')
+    );
+
+    hidden.slice(0, batchSize).forEach(item => {
+      item.classList.remove('is-hidden');
+      // si estabas usando display:none a mano, lo aseguramos:
+      item.style.display = 'flex';
+    });
+  }
+
+  // estado inicial: hasta 6 sin scroll, resto ocultas y se muestra footer si hace falta
+  function applyInitialNotifLimit() {
+    if (!allNotifItems.length || !notifList) return;
+
+    scrollMode = false;
+    notifList.classList.remove('is-scrollable');
 
     let hiddenCount = 0;
 
     allNotifItems.forEach((item, index) => {
-      if (index >= MAX_VISIBLE) {
+      if (index < MAX_VISIBLE) {
+        item.classList.remove('is-hidden');
+        item.style.display = 'flex';
+      } else {
         item.classList.add('is-hidden');
+        item.style.display = 'none';
         hiddenCount++;
       }
     });
@@ -211,20 +236,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // se llama cuando el usuario pulsa “ver notificaciones anteriores”
   function loadMoreNotifications() {
-    if (!allNotifItems.length) return;
+    if (!allNotifItems.length || !notifList) return;
 
-    const hidden = allNotifItems.filter(item => item.classList.contains('is-hidden'));
-    hidden.slice(0, MAX_VISIBLE).forEach(item => {
-      item.classList.remove('is-hidden');
-    });
+    // activamos modo scroll y altura máxima
+    notifList.classList.add('is-scrollable');
+    scrollMode = true;
 
-    const stillHidden = allNotifItems.some(item => item.classList.contains('is-hidden'));
-    if (notifFooter && !stillHidden) {
-      notifFooter.style.display = 'none';
+    // mostramos un lote extra
+    revealNextBatch(MAX_VISIBLE);
+
+    // si después de este lote ya no queda nada oculto, ocultamos el footer
+    const stillHidden = allNotifItems.some(item =>
+      item.classList.contains('is-hidden')
+    );
+    if (notifFooter) {
+      notifFooter.style.display = stillHidden ? 'none' : 'none';
     }
   }
 
+  // botón "Ver notificaciones anteriores"
   if (notifFooter) {
     const moreBtn = notifFooter.querySelector('.notif-more-btn');
     if (moreBtn) {
@@ -234,7 +266,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // inicializamos al cargar la página
   applyInitialNotifLimit();
+
+  // scroll: cuando llegue al fondo, cargamos más en bloques de 6
+  if (notifList) {
+    notifList.addEventListener('scroll', () => {
+      if (!scrollMode) return;
+
+      const threshold = 40; // px antes del fondo
+      if (
+        notifList.scrollTop + notifList.clientHeight >=
+        notifList.scrollHeight - threshold
+      ) {
+        const beforeHidden = allNotifItems.filter(i => i.classList.contains('is-hidden')).length;
+        revealNextBatch(MAX_VISIBLE);
+        const afterHidden = allNotifItems.filter(i => i.classList.contains('is-hidden')).length;
+
+        // si ya no había más por mostrar, simplemente no hacemos nada más
+        if (afterHidden === beforeHidden) return;
+      }
+    });
+  }
 
   // ======================================================
   // 3.5 Notificaciones: filtro Todas / No leídas
