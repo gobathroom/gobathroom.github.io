@@ -102,16 +102,17 @@ document.addEventListener('DOMContentLoaded', () => {
     shareUrlInput.value = window.location.href;
   }
 
-  // 2) Botón Copy
-  if (copyBtn && shareUrlInput) {
+  // 2) Copiar + mensaje
+  if (copyBtn && shareUrlInput && shareSuccess) {
     copyBtn.addEventListener('click', () => {
       navigator.clipboard.writeText(shareUrlInput.value)
         .then(() => {
-          const originalText = copyBtn.textContent;
-          copyBtn.textContent = 'Copied';
+          // Mostrar mensaje verde
+          shareSuccess.classList.add('visible');
+          // Ocultarlo después de 2.5s
           setTimeout(() => {
-            copyBtn.textContent = originalText;
-          }, 1200);
+            shareSuccess.classList.remove('visible');
+          }, 2500);
         })
         .catch(err => {
           console.error('Error copiando URL:', err);
