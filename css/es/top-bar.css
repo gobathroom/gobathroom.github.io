@@ -413,7 +413,7 @@
 /* Botón Copy tipo pill */
 .share-copy-btn {
   border: none;
-  border-radius: 999px;
+  border-radius: 14px;
   padding: 4px 12px;
   background: transparent;
   color: var(--text);
