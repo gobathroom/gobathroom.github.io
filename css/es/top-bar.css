@@ -435,6 +435,7 @@
 
 /* Mensaje “copiado correctamente” superpuesto en el mismo lugar */
 .share-success {
+  font-size: 13px;
   position: absolute;
   inset: 0;  /* ocupa exactamente el mismo rectángulo */
 
