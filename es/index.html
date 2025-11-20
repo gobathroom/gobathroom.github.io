@@ -115,16 +115,22 @@
   </button>
 
   <!-- Ventana flotante de compartir -->
-  <div class="share-panel" id="sharePanel" aria-hidden="true">
-    <div class="share-panel-header">Compartir</div>
+<div class="share-panel" id="sharePanel" aria-hidden="true">
+  <div class="share-panel-header">Compartir</div>
 
-    <div class="share-panel-body">
+  <div class="share-panel-body">
+    <div class="share-url-group">
+      <span class="share-url-icon">
+        <i class="fas fa-link"></i>
+      </span>
+
       <input
         type="text"
         id="shareUrl"
         class="share-url-input"
         readonly
       />
+
       <button
         type="button"
         class="share-copy-btn"
@@ -133,8 +139,13 @@
         Copiar
       </button>
     </div>
+
+    <div class="share-success" id="shareSuccess">
+      ✔ ¡Copiado correctamente!
+    </div>
   </div>
 </div>
+
 
 
   <!-- Modo oscuro -->
