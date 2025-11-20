@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ===========================
-// 2.MODO OSCURO / CLARO
+// 2. MODO OSCURO / CLARO
 // ===========================
 const themeToggleBtn = document.querySelector('#themeToggle');
 
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ===========================
-  // 3.2 Copiar + animación "copiado correctamente"
+  // 3.2 Copiar + animación
   // ===========================
   if (copyBtn && shareUrlInput && shareUrlWrapper && shareSuccess) {
     copyBtn.addEventListener('click', () => {
@@ -141,41 +141,49 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ======================================================
-  // 🔥 3.3 BOTONES SOCIALES (FB, X, WhatsApp)
+  // 3.3 BOTONES SOCIALES (FB, X, WhatsApp)
   // ======================================================
 
   const btnFb = document.getElementById('shareFb');
   const btnX  = document.getElementById('shareX');
   const btnWa = document.getElementById('shareWa');
 
-  const currentUrl = encodeURIComponent(window.location.href);
+  const rawUrl     = window.location.href;
+  const currentUrl = encodeURIComponent(rawUrl);
 
-  // Facebook
+  // Mensajes según idioma
+  const textX  = encodeURIComponent(t('share.msgX'));
+  const textWa = encodeURIComponent(`${t('share.msgWa')} ${rawUrl}`);
+
+  // Facebook → solo URL (FB no permite texto pre-rellenado)
   if (btnFb) {
     btnFb.addEventListener('click', () => {
       window.open(
         `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`,
-        '_blank'
+        '_blank',
+        'noopener,noreferrer'
       );
     });
   }
 
-  // X (Twitter)
+  // X (Twitter) → texto + URL
   if (btnX) {
     btnX.addEventListener('click', () => {
       window.open(
-        `https://twitter.com/intent/tweet?url=${currentUrl}`,
-        '_blank'
+        `https://twitter.com/intent/tweet?text=${textX}&url=${currentUrl}`,
+        '_blank',
+        'noopener,noreferrer'
       );
     });
   }
 
-  // WhatsApp
+  // WhatsApp → mensaje completo (texto + URL en un solo parámetro)
   if (btnWa) {
     btnWa.addEventListener('click', () => {
       window.open(
-        `https://api.whatsapp.com/send?text=${currentUrl}`,
-        '_blank'
+        `https://api.whatsapp.com/send?text=${textWa}`,
+        '_blank',
+        'noopener,noreferrer'
       );
     });
   }
