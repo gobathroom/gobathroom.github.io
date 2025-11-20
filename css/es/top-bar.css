@@ -568,9 +568,9 @@
   border-radius: 14px;
   padding: 10px 12px;
 
-  /* Elevación (usando las mismas variables que definimos antes) */
+  /* Elevación (usando las mismas variables globales) */
   /* En light: solo sombra; en dark: solo borde */
-  border: var(--panel-elev-border);
+  border: 1px solid var(--panel-elev-border);
   box-shadow: var(--panel-elev-shadow);
 
   display: block;
@@ -683,12 +683,18 @@
   text-decoration: underline;
 }
 
-/* Lista de notificaciones */
+/* Lista de notificaciones
+   → sin scroll por defecto, solo columna normal */
 .notif-list {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  max-height: 420px;  /* límite vertical aprox. similar a FB */
+}
+
+/* Cuando activemos el modo “scroll” desde JS
+   (después de pulsar "Ver notificaciones anteriores") */
+.notif-list.is-scrollable {
+  max-height: 420px;      /* límite vertical aprox. similar a FB */
   overflow-y: auto;
   padding-right: 4px;
 }
@@ -737,9 +743,6 @@
   margin-top: 6px;
 }
 
-/* Si quieres ocultar el dot cuando está leída, simplemente no pongas la clase is-unread,
-   o añade una regla extra si te hace falta. */
-
 /* Para ocultar items al aplicar el límite inicial de 6 */
 .notif-item.is-hidden {
   display: none;
@@ -750,6 +753,11 @@
   margin-top: 6px;
   padding-top: 4px;
   border-top: 1px solid var(--border);
+}
+
+/* Permite ocultar el footer cuando no hace falta el botón */
+.notif-footer.is-hidden {
+  display: none;
 }
 
 .notif-more-btn {
@@ -769,6 +777,7 @@
 .notif-more-btn:hover {
   background: var(--hover);
 }
+
 
 
 
