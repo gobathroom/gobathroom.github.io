@@ -9,7 +9,7 @@ const t = I18N.t;
 
 
 // ===========================
-// 1.Refresh
+// 1. Refresh brand link según idioma
 // ===========================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (brand) {
     const path = window.location.pathname;
 
-    // Detecta idioma automáticamente por la ruta
     if (path.startsWith('/es')) {
       brand.href = '/es';
     } else {
@@ -42,25 +41,19 @@ function applyThemeUI(dark) {
   const icon = themeToggleBtn.querySelector('i');
 
   if (dark) {
-    // activar tema oscuro
     document.body.classList.add('dark');
 
-    // icono sol
     icon.classList.remove('fa-moon');
     icon.classList.add('fa-sun');
 
-    // tooltip + accesibilidad (usando i18n)
     const label = t('theme.lightLabel');
     themeToggleBtn.setAttribute('aria-label', label);
     themeToggleBtn.dataset.label = label;
 
-    // recordar preferencia
     localStorage.setItem('gb-theme', 'dark');
   } else {
-    // tema claro
     document.body.classList.remove('dark');
 
-    // icono luna
     icon.classList.remove('fa-sun');
     icon.classList.add('fa-moon');
 
@@ -72,7 +65,6 @@ function applyThemeUI(dark) {
   }
 }
 
-// Estado inicial: leer de localStorage o del sistema
 (() => {
   if (!themeToggleBtn) return;
 
@@ -84,7 +76,6 @@ function applyThemeUI(dark) {
   } else if (saved === 'light') {
     startDark = false;
   } else if (window.matchMedia) {
-    // si no hay preferencia guardada, usar preferencia del sistema
     startDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
@@ -98,10 +89,11 @@ function applyThemeUI(dark) {
 
 
 // ===========================
-// 3.0 Compartir
+// 3. TOPBAR: Compartir + Notificaciones
 // ===========================
 
 document.addEventListener('DOMContentLoaded', () => {
+  // ---- Compartir ----
   const shareUrlInput   = document.getElementById('shareUrl');
   const copyBtn         = document.getElementById('copyShareUrl');
   const shareBtn        = document.getElementById('shareBtn');
@@ -112,24 +104,37 @@ document.addEventListener('DOMContentLoaded', () => {
     ? shareUrlWrapper.querySelector('.share-success')
     : null;
 
+  // ---- Notificaciones ----
+  const notifBtn        = document.getElementById('notifBtn');
+  const notifWrapper    = notifBtn ? notifBtn.closest('.notif-wrapper') : null;
+  const notifPanel      = document.getElementById('notifPanel');
+
+  const notifTabAll     = document.getElementById('notifTabAll');
+  const notifTabUnread  = document.getElementById('notifTabUnread');
+  const notifList       = document.getElementById('notifList');
+  const notifFooter     = document.getElementById('notifFooter');
+
+  const allNotifItems   = notifList
+    ? Array.from(notifList.querySelectorAll('.notif-item'))
+    : [];
+
+  const MAX_VISIBLE = 6;
+
   // ===========================
-  // 3.1 Rellenar URL actual
+  // 3.1 Compartir: rellenar URL
   // ===========================
   if (shareUrlInput) {
     shareUrlInput.value = window.location.href;
   }
 
   // ===========================
-  // 3.2 Copiar + animación
+  // 3.2 Compartir: copiar + animación
   // ===========================
   if (copyBtn && shareUrlInput && shareUrlWrapper && shareSuccess) {
     copyBtn.addEventListener('click', () => {
       navigator.clipboard.writeText(shareUrlInput.value)
         .then(() => {
-          // Ocultar pill de URL y mostrar mensaje verde
           shareUrlWrapper.classList.add('copied');
-
-          // Volver al estado normal después de 1s
           setTimeout(() => {
             shareUrlWrapper.classList.remove('copied');
           }, 1000);
@@ -141,9 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ======================================================
-  // 3.3 BOTONES SOCIALES (FB, X, WhatsApp)
+  // 3.3 Compartir: botones sociales (FB, X, WhatsApp)
   // ======================================================
-
   const btnFb = document.getElementById('shareFb');
   const btnX  = document.getElementById('shareX');
   const btnWa = document.getElementById('shareWa');
@@ -151,11 +155,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const rawUrl     = window.location.href;
   const currentUrl = encodeURIComponent(rawUrl);
 
-  // Mensajes según idioma
   const textX  = encodeURIComponent(t('share.msgX'));
   const textWa = encodeURIComponent(`${t('share.msgWa')} ${rawUrl}`);
 
-  // Facebook → solo URL (FB no permite texto pre-rellenado)
+  // Facebook (solo URL)
   if (btnFb) {
     btnFb.addEventListener('click', () => {
       window.open(
@@ -166,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // X (Twitter) → texto + URL
+  // X (texto + URL)
   if (btnX) {
     btnX.addEventListener('click', () => {
       window.open(
@@ -177,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // WhatsApp → mensaje completo (texto + URL en un solo parámetro)
+  // WhatsApp (mensaje completo)
   if (btnWa) {
     btnWa.addEventListener('click', () => {
       window.open(
@@ -188,52 +191,161 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===========================
-  // 3.4 Abrir / cerrar panel
-  // ===========================
+  // ======================================================
+  // 3.4 Notificaciones: límite inicial de 6 + "ver anteriores"
+  // ======================================================
+  function applyInitialNotifLimit() {
+    if (!allNotifItems.length) return;
+
+    let hiddenCount = 0;
+
+    allNotifItems.forEach((item, index) => {
+      if (index >= MAX_VISIBLE) {
+        item.classList.add('is-hidden');
+        hiddenCount++;
+      }
+    });
+
+    if (notifFooter) {
+      notifFooter.style.display = hiddenCount > 0 ? 'block' : 'none';
+    }
+  }
+
+  function loadMoreNotifications() {
+    if (!allNotifItems.length) return;
+
+    const hidden = allNotifItems.filter(item => item.classList.contains('is-hidden'));
+    hidden.slice(0, MAX_VISIBLE).forEach(item => {
+      item.classList.remove('is-hidden');
+    });
+
+    const stillHidden = allNotifItems.some(item => item.classList.contains('is-hidden'));
+    if (notifFooter && !stillHidden) {
+      notifFooter.style.display = 'none';
+    }
+  }
+
+  if (notifFooter) {
+    const moreBtn = notifFooter.querySelector('.notif-more-btn');
+    if (moreBtn) {
+      moreBtn.addEventListener('click', () => {
+        loadMoreNotifications();
+      });
+    }
+  }
+
+  applyInitialNotifLimit();
+
+  // ======================================================
+  // 3.5 Notificaciones: filtro Todas / No leídas
+  // ======================================================
+  function setNotifFilter(mode) {
+    if (!allNotifItems.length) return;
+
+    allNotifItems.forEach(item => {
+      const isUnread = item.classList.contains('is-unread');
+
+      if (mode === 'unread') {
+        item.style.display = isUnread ? 'flex' : 'none';
+      } else {
+        // modo 'all'
+        item.style.display = item.classList.contains('is-hidden') ? 'none' : 'flex';
+      }
+    });
+  }
+
+  if (notifTabAll && notifTabUnread) {
+    notifTabAll.addEventListener('click', () => {
+      notifTabAll.classList.add('is-active');
+      notifTabUnread.classList.remove('is-active');
+      // Mostrar hasta el límite inicial, respetando is-hidden
+      allNotifItems.forEach(item => {
+        item.style.display = item.classList.contains('is-hidden') ? 'none' : 'flex';
+      });
+    });
+
+    notifTabUnread.addEventListener('click', () => {
+      notifTabUnread.classList.add('is-active');
+      notifTabAll.classList.remove('is-active');
+      setNotifFilter('unread');
+    });
+  }
+
+  // ======================================================
+  // 3.6 Abrir / cerrar paneles (solo uno abierto)
+  // ======================================================
+  function closeShare() {
+    if (!shareWrapper) return;
+    shareWrapper.classList.remove('is-open');
+    if (shareBtn) shareBtn.setAttribute('aria-expanded', 'false');
+    if (sharePanel) sharePanel.setAttribute('aria-hidden', 'true');
+  }
+
+  function openShare() {
+    if (!shareWrapper) return;
+    closeNotif();
+    shareWrapper.classList.add('is-open');
+    if (shareBtn) shareBtn.setAttribute('aria-expanded', 'true');
+    if (sharePanel) sharePanel.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeNotif() {
+    if (!notifWrapper) return;
+    notifWrapper.classList.remove('is-open');
+    if (notifBtn) notifBtn.setAttribute('aria-expanded', 'false');
+    if (notifPanel) notifPanel.setAttribute('aria-hidden', 'true');
+  }
+
+  function openNotif() {
+    if (!notifWrapper) return;
+    closeShare();
+    notifWrapper.classList.add('is-open');
+    if (notifBtn) notifBtn.setAttribute('aria-expanded', 'true');
+    if (notifPanel) notifPanel.setAttribute('aria-hidden', 'false');
+  }
+
+  // Botón compartir
   if (shareBtn && shareWrapper && sharePanel) {
-
-    function openShare() {
-      shareWrapper.classList.add('is-open');
-      shareBtn.setAttribute('aria-expanded', 'true');
-      sharePanel.setAttribute('aria-hidden', 'false');
-    }
-
-    function closeShare() {
-      shareWrapper.classList.remove('is-open');
-      shareBtn.setAttribute('aria-expanded', 'false');
-      sharePanel.setAttribute('aria-hidden', 'true');
-    }
-
-    function toggleShare() {
+    shareBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       if (shareWrapper.classList.contains('is-open')) {
         closeShare();
       } else {
         openShare();
       }
-    }
+    });
+  }
 
-    // Click en el icono → abre/cierra
-    shareBtn.addEventListener('click', (e) => {
+  // Botón notificaciones
+  if (notifBtn && notifWrapper && notifPanel) {
+    notifBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      toggleShare();
-    });
-
-    // Click fuera → cierra
-    document.addEventListener('click', (e) => {
-      if (
-        shareWrapper.classList.contains('is-open') &&
-        !shareWrapper.contains(e.target)
-      ) {
-        closeShare();
-      }
-    });
-
-    // Tecla Escape → cierra
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && shareWrapper.classList.contains('is-open')) {
-        closeShare();
+      if (notifWrapper.classList.contains('is-open')) {
+        closeNotif();
+      } else {
+        openNotif();
       }
     });
   }
+
+  // Click fuera → cierra todo
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+
+    const insideShare = shareWrapper && shareWrapper.contains(target);
+    const insideNotif = notifWrapper && notifWrapper.contains(target);
+
+    if (!insideShare && !insideNotif) {
+      closeShare();
+      closeNotif();
+    }
+  });
+
+  // Escape → cierra todo
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeShare();
+      closeNotif();
+    }
+  });
 });
