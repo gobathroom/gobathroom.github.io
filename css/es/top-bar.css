@@ -448,7 +448,7 @@
 
   background: rgba(16,185,129,.12);        /* verde suave */
   color: var(--text);
-  border: 1px rgba(16,185,129,.35);
+  border-color: 1px rgba(16,185,129,.35);
 
   opacity: 0;
   pointer-events: none;
