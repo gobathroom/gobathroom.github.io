@@ -94,17 +94,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const shareUrlInput = document.getElementById('shareUrl');
   const copyBtn       = document.getElementById('copyShareUrl');
   const shareBtn      = document.getElementById('shareBtn');
+  const shareWrapper  = shareBtn ? shareBtn.closest('.share-wrapper') : null;
+  const sharePanel    = document.getElementById('sharePanel');
 
+  // 1) Rellenar URL actual
   if (shareUrlInput) {
-    // URL actual de la página
     shareUrlInput.value = window.location.href;
   }
 
+  // 2) Botón Copy
   if (copyBtn && shareUrlInput) {
     copyBtn.addEventListener('click', () => {
       navigator.clipboard.writeText(shareUrlInput.value)
         .then(() => {
-          // Pequeño feedback visual
           const originalText = copyBtn.textContent;
           copyBtn.textContent = 'Copied';
           setTimeout(() => {
@@ -117,15 +119,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Opcional: marcar aria-expanded para accesibilidad
-  if (shareBtn) {
-    const wrapper = shareBtn.closest('.share-wrapper');
-    ['mouseenter', 'focus'].forEach(evt =>
-      wrapper.addEventListener(evt, () => shareBtn.setAttribute('aria-expanded', 'true'))
-    );
-    ['mouseleave', 'blur'].forEach(evt =>
-      wrapper.addEventListener(evt, () => shareBtn.setAttribute('aria-expanded', 'false'))
-    );
+  // 3) Abrir / cerrar panel por click, Esc, click fuera
+  if (shareBtn && shareWrapper && sharePanel) {
+
+    function openShare() {
+      shareWrapper.classList.add('is-open');
+      shareBtn.setAttribute('aria-expanded', 'true');
+      sharePanel.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeShare() {
+      shareWrapper.classList.remove('is-open');
+      shareBtn.setAttribute('aria-expanded', 'false');
+      sharePanel.setAttribute('aria-hidden', 'true');
+    }
+
+    function toggleShare() {
+      if (shareWrapper.classList.contains('is-open')) {
+        closeShare();
+      } else {
+        openShare();
+      }
+    }
+
+    // Click en el icono → abre/cierra
+    shareBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleShare();
+    });
+
+    // Click fuera → cierra
+    document.addEventListener('click', (e) => {
+      if (
+        shareWrapper.classList.contains('is-open') &&
+        !shareWrapper.contains(e.target)
+      ) {
+        closeShare();
+      }
+    });
+
+    // Tecla Escape → cierra
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && shareWrapper.classList.contains('is-open')) {
+        closeShare();
+      }
+    });
   }
 });
 
