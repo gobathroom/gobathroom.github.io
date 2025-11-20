@@ -108,11 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
       navigator.clipboard.writeText(shareUrlInput.value)
         .then(() => {
           // Mostrar mensaje verde
-          shareSuccess.classList.add('visible');
-          // Ocultarlo después de 2.5s
+          shareSuccess.classList.add('copied');
+          // Ocultarlo después de 1s
           setTimeout(() => {
-            shareSuccess.classList.remove('visible');
-          }, 2500);
+            shareSuccess.classList.remove('copied');
+          }, 1000);
         })
         .catch(err => {
           console.error('Error copiando URL:', err);
