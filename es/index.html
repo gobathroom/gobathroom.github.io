@@ -100,20 +100,42 @@
     <i class="fas fa-bell"></i>
   </button>
 
-  <!-- Compartir -->
-  <div class="share-wrapper">
-    <button
-      class="icon-btn share-btn"
-      id="shareBtn"
-      type="button"
-      aria-label="Compartir"
-      data-label="Share"
-      aria-haspopup="true"
-      aria-expanded="false"
-    >
-      <i class="fas fa-share-nodes"></i>
-    </button>
-  </div> <!-- 🔴 ESTE DIV FALTABA CERRARLO -->
+ <!-- Compartir -->
+<div class="share-wrapper">
+  <button
+    class="icon-btn share-btn"
+    id="shareBtn"
+    type="button"
+    aria-label="Compartir"
+    data-label="Share"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <i class="fas fa-share-nodes"></i>
+  </button>
+
+  <!-- Ventana flotante de compartir -->
+  <div class="share-panel" id="sharePanel" aria-hidden="true">
+    <div class="share-panel-header">Compartir</div>
+
+    <div class="share-panel-body">
+      <input
+        type="text"
+        id="shareUrl"
+        class="share-url-input"
+        readonly
+      />
+      <button
+        type="button"
+        class="share-copy-btn"
+        id="copyShareUrl"
+      >
+        Copy
+      </button>
+    </div>
+  </div>
+</div>
+
 
   <!-- Modo oscuro -->
   <button id="themeToggle" class="icon-btn" aria-label="Modo oscuro" data-label="Dark / Light">
