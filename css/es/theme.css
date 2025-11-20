@@ -34,6 +34,7 @@
 /* ⭐ ELEVACIÓN DARK: borde un poco más visible + sombra suave */
   --panel-elev-border: rgba(255,255,255,0.08);  /* como Facebook */
   --panel-elev-shadow: 0 10px 28px rgba(0,0,0,0.35); /* sombra más discreta */
+}
 
 
 
