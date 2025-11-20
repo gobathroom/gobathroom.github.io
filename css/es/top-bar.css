@@ -350,7 +350,8 @@
 
   background: var(--panel);
   border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  border: 1px solid var(--panel-elev-border);
+  box-shadow: var(--panel-elev-shadow);
   padding: 10px 12px;
 
   display: block;
