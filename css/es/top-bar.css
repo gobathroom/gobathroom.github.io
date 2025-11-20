@@ -317,6 +317,113 @@
   letter-spacing: 0.4px;  /* separa un poco las letras */
 }
 
+/* === Right1.3: el contenedor necesita ser relativo para alinear el popup al borde derecho === */
+.topbar .right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;  /* 🔴 importante para right:0 del panel */
+}
+
+/* Wrapper del botón de compartir */
+.share-wrapper {
+  position: relative; /* por si algún día quieres anclar al icono */
+  display: flex;
+  align-items: center;
+}
+
+/* Ventana flotante "Compartir" */
+.share-panel {
+  position: absolute;
+  top: calc(100% + 10px);  /* debajo de la barra */
+  right: 0;                /* alineado con el último icono (idioma) */
+
+  min-width: 260px;
+  max-width: 360px;
+
+  background: var(--panel);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  padding: 10px 12px;
+
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition:
+    opacity 0.18s ease-out,
+    transform 0.18s ease-out;
+  z-index: 1300;
+}
+
+/* Título "Compartir" */
+.share-panel-header {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+/* Fila con URL + botón copy */
+.share-panel-body {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+/* Input con la URL */
+.share-url-input {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--text);
+  font-size: 13px;
+  outline: none;
+}
+
+/* Botón Copy */
+.share-copy-btn {
+  padding: 0 12px;
+  border-radius: 10px;
+  border: none;
+  background: var(--brand);
+  color: var(--panel);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
+}
+
+.share-copy-btn:hover {
+  background: var(--brand-2, var(--brand));
+  transform: translateY(-1px);
+}
+
+/* === Mostrar panel al hacer hover sobre el botón de compartir (o su wrapper) === */
+.share-wrapper:hover .share-panel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* === Cambiar color del icono de compartir cuando el hover está activo === */
+.share-wrapper:hover .share-btn {
+  color: var(--brand);
+}
+
+/* === Ocultar el tooltip normal cuando el panel está visible === */
+.share-wrapper:hover .share-btn::before {
+  opacity: 0 !important;
+  transform: translateX(-50%) translateY(4px);
+  transition: none;
+}
+
+
 
 
 
