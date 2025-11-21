@@ -113,10 +113,10 @@
   </button>
 
   <div class="notif-panel" id="notifPanel" aria-hidden="true">
+    <!-- HEADER: título + tres puntos -->
     <div class="notif-header">
       <div class="notif-title">Notificaciones</div>
 
-      <!-- Botón tres puntos + popover -->
       <div class="notif-menu-wrapper">
         <button
           type="button"
@@ -153,13 +153,41 @@
       </div>
     </div>
 
-    <!-- Tabs Todas / No leídas (esto ya lo tenías) -->
-    <!-- ... -->
+    <!-- TABS: Todas / No leídas -->
+    <div class="notif-tabs">
+      <button
+        type="button"
+        class="notif-tab is-active"
+        id="notifTabAll"
+      >
+        Todas
+      </button>
 
-    <!-- Debajo de los tabs donde va la lista: -->
+      <button
+        type="button"
+        class="notif-tab"
+        id="notifTabUnread"
+      >
+        No leídas
+      </button>
+    </div>
+
+    <!-- META: mes / año + Ver todo -->
+    <div class="notif-meta">
+      <span class="notif-month">Noviembre 2025</span>
+      <button
+        type="button"
+        class="notif-see-all"
+        id="notifSeeAll"
+      >
+        Ver todo
+      </button>
+    </div>
+
+    <!-- CUERPO -->
     <div class="notif-body">
 
-      <!-- Estado vacío (No leídas) -->
+      <!-- Estado vacío (se mostrará cuando no haya items) -->
       <div class="notif-empty" id="notifEmpty">
         <div class="notif-empty-icon">
           <i class="fas fa-bell"></i>
@@ -168,13 +196,72 @@
         <p class="notif-empty-text">No tienes notificaciones</p>
       </div>
 
-      <!-- Lista de notificaciones -->
+      <!-- Lista de notificaciones (lo que tu JS usa) -->
       <div class="notif-list" id="notifList">
-        <!-- .notif-item ... -->
+        <!-- Ejemplos: reemplaza o añade más según necesites -->
+        <article class="notif-item is-unread">
+          <div class="notif-dot"></div>
+          <div class="notif-content">
+            <div class="notif-title-text">
+              <strong>Go Bathroom NYC</strong> se ha actualizado con nuevos baños accesibles.
+            </div>
+            <div class="notif-time">Hace 2 h</div>
+          </div>
+        </article>
+
+        <article class="notif-item is-unread">
+          <div class="notif-dot"></div>
+          <div class="notif-content">
+            <div class="notif-title-text">
+              Nueva guía para encontrar baños privados cerca de estaciones de metro en NYC.
+            </div>
+            <div class="notif-time">Hace 5 h</div>
+          </div>
+        </article>
+
+        <article class="notif-item is-unread">
+          <div class="notif-dot"></div>
+          <div class="notif-content">
+            <div class="notif-title-text">
+              Se añadió soporte para modo oscuro en Go Bathroom NYC.
+            </div>
+            <div class="notif-time">Ayer</div>
+          </div>
+        </article>
+
+        <article class="notif-item">
+          <div class="notif-dot"></div>
+          <div class="notif-content">
+            <div class="notif-title-text">
+              Nuevas categorías de baños accesibles para usuarios con movilidad reducida.
+            </div>
+            <div class="notif-time">Hace 3 días</div>
+          </div>
+        </article>
+
+        <article class="notif-item">
+          <div class="notif-dot"></div>
+          <div class="notif-content">
+            <div class="notif-title-text">
+              Recordatorio: revisa los filtros de búsqueda para encontrar baños gratuitos.
+            </div>
+            <div class="notif-time">Hace 5 días</div>
+          </div>
+        </article>
+
+        <article class="notif-item">
+          <div class="notif-dot"></div>
+          <div class="notif-content">
+            <div class="notif-title-text">
+              Se han actualizado los términos de uso de Go Bathroom NYC.
+            </div>
+            <div class="notif-time">Hace 1 semana</div>
+          </div>
+        </article>
       </div>
     </div>
 
-    <!-- Footer con "Ver notificaciones anteriores" -->
+    <!-- FOOTER: Ver notificaciones anteriores -->
     <div class="notif-footer" id="notifFooter">
       <button class="notif-more-btn" type="button">
         Ver notificaciones anteriores
@@ -182,6 +269,7 @@
     </div>
   </div>
 </div>
+
 
 
  <!-- Compartir -->
