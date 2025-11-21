@@ -118,6 +118,18 @@ document.addEventListener('DOMContentLoaded', () => {
     ? Array.from(notifList.querySelectorAll('.notif-item'))
     : [];
 
+
+
+    // --- Menú de tres puntos ---
+  const notifMenuBtn    = document.getElementById('notifMenuBtn');
+  const notifMenu       = document.getElementById('notifMenu');
+  const notifMarkAllBtn = document.getElementById('notifMarkAllRead');
+  const notifOpenPageBtn= document.getElementById('notifOpenPage');
+  const notifEmpty      = document.getElementById('notifEmpty');
+
+  let currentNotifFilter = 'all'; // 'all' o 'unread'
+
+
   const MAX_VISIBLE = 6;
   let scrollMode = false; // se activa cuando el usuario pulsa "ver anteriores"
 
@@ -307,25 +319,131 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (notifTabAll && notifTabUnread) {
+    if (notifTabAll && notifTabUnread) {
     notifTabAll.addEventListener('click', () => {
+      currentNotifFilter = 'all';
+
       notifTabAll.classList.add('is-active');
       notifTabUnread.classList.remove('is-active');
-      // Mostrar hasta el límite inicial, respetando is-hidden
+
       allNotifItems.forEach(item => {
         item.style.display = item.classList.contains('is-hidden') ? 'none' : 'flex';
       });
+
+      updateNotifEmptyState();
     });
 
     notifTabUnread.addEventListener('click', () => {
+      currentNotifFilter = 'unread';
+
       notifTabUnread.classList.add('is-active');
       notifTabAll.classList.remove('is-active');
+
       setNotifFilter('unread');
+      updateNotifEmptyState();
     });
   }
 
   // ======================================================
-  // 3.6 Abrir / cerrar paneles (solo uno abierto)
+  // 3.5.1 Menú tres puntos (opciones del panel)
+  // ======================================================
+
+  function openNotifMenu() {
+    if (!notifMenu) return;
+    notifMenu.classList.add('is-open');
+    if (notifMenuBtn) notifMenuBtn.setAttribute('aria-expanded', 'true');
+    notifMenu.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeNotifMenu() {
+    if (!notifMenu) return;
+    notifMenu.classList.remove('is-open');
+    if (notifMenuBtn) notifMenuBtn.setAttribute('aria-expanded', 'false');
+    notifMenu.setAttribute('aria-hidden', 'true');
+  }
+
+  if (notifMenuBtn && notifMenu) {
+    notifMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (notifMenu.classList.contains('is-open')) {
+        closeNotifMenu();
+      } else {
+        openNotifMenu();
+      }
+    });
+  }
+
+  // Acción: marcar todas como leídas
+  if (notifMarkAllBtn) {
+    notifMarkAllBtn.addEventListener('click', () => {
+      markAllNotificationsRead();
+      closeNotifMenu();
+    });
+  }
+
+  // Acción: abrir página de notificaciones (ajusta la URL a tu gusto)
+  if (notifOpenPageBtn) {
+    notifOpenPageBtn.addEventListener('click', () => {
+      const path = window.location.pathname;
+      const notifUrl = path.startsWith('/es')
+        ? '/es/notificaciones/'
+        : '/notifications/';
+
+      window.location.href = notifUrl;
+    });
+  }
+
+
+
+   // ======================================================
+  // 3.6 Actualiza el badge de la campana principal
+  // ======================================================
+  function updateNotifBadge() {
+    if (!notifBtn || !allNotifItems.length) return;
+    const hasUnread = allNotifItems.some(item =>
+      item.classList.contains('is-unread')
+    );
+    notifBtn.classList.toggle('has-unread', hasUnread);
+  }
+
+  // Muestra / oculta el estado vacío en la pestaña "No leídas"
+  function updateNotifEmptyState() {
+    if (!notifEmpty || !notifList) return;
+
+    const hasUnreadVisible = allNotifItems.some(item =>
+      item.classList.contains('is-unread') &&
+      item.style.display !== 'none'
+    );
+
+    const isUnreadTab = currentNotifFilter === 'unread';
+
+    if (isUnreadTab && !hasUnreadVisible) {
+      notifEmpty.style.display = 'flex';
+      notifList.style.display  = 'none';
+    } else {
+      notifEmpty.style.display = 'none';
+      notifList.style.display  = 'block';
+    }
+  }
+
+  // Marca todas las notificaciones como leídas
+  function markAllNotificationsRead() {
+    allNotifItems.forEach(item => {
+      item.classList.remove('is-unread');
+    });
+    updateNotifBadge();
+    updateNotifEmptyState();
+  }
+
+  // Llamada inicial
+  updateNotifBadge();
+
+
+  
+
+
+  // ======================================================
+  // 3.7 Abrir / cerrar paneles (solo uno abierto)
   // ======================================================
   function closeShare() {
     if (!shareWrapper) return;
@@ -391,6 +509,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!insideShare && !insideNotif) {
       closeShare();
       closeNotif();
+      closeNotifMenu();
     }
   });
 
@@ -399,6 +518,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') {
       closeShare();
       closeNotif();
+      closeNotifMenu();
     }
   });
 });
