@@ -11,7 +11,6 @@ const t = I18N.t;
 // ===========================
 // 1. Refresh brand link según idioma
 // ===========================
-
 document.addEventListener('DOMContentLoaded', () => {
   const brand = document.getElementById('brandLink');
 
@@ -41,19 +40,25 @@ function applyThemeUI(dark) {
   const icon = themeToggleBtn.querySelector('i');
 
   if (dark) {
+    // activar tema oscuro
     document.body.classList.add('dark');
 
+    // icono sol
     icon.classList.remove('fa-moon');
     icon.classList.add('fa-sun');
 
+    // tooltip + accesibilidad
     const label = t('theme.lightLabel');
     themeToggleBtn.setAttribute('aria-label', label);
     themeToggleBtn.dataset.label = label;
 
+    // recordar preferencia
     localStorage.setItem('gb-theme', 'dark');
   } else {
+    // tema claro
     document.body.classList.remove('dark');
 
+    // icono luna
     icon.classList.remove('fa-sun');
     icon.classList.add('fa-moon');
 
@@ -65,6 +70,7 @@ function applyThemeUI(dark) {
   }
 }
 
+// Estado inicial: leer de localStorage o del sistema
 (() => {
   if (!themeToggleBtn) return;
 
@@ -76,6 +82,7 @@ function applyThemeUI(dark) {
   } else if (saved === 'light') {
     startDark = false;
   } else if (window.matchMedia) {
+    // si no hay preferencia guardada, usar preferencia del sistema
     startDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
@@ -89,11 +96,10 @@ function applyThemeUI(dark) {
 
 
 // ===========================
-// 3. TOPBAR: Compartir + Notificaciones
+// 3. TOPBAR: Compartir
 // ===========================
-
 document.addEventListener('DOMContentLoaded', () => {
-  // ---- Compartir ----
+  // ---- Elementos principales de Compartir ----
   const shareUrlInput   = document.getElementById('shareUrl');
   const copyBtn         = document.getElementById('copyShareUrl');
   const shareBtn        = document.getElementById('shareBtn');
@@ -104,37 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
     ? shareUrlWrapper.querySelector('.share-success')
     : null;
 
-  // ---- Notificaciones ----
-  const notifBtn        = document.getElementById('notifBtn');
-  const notifWrapper    = notifBtn ? notifBtn.closest('.notif-wrapper') : null;
-  const notifPanel      = document.getElementById('notifPanel');
-
-  const notifTabAll     = document.getElementById('notifTabAll');
-  const notifTabUnread  = document.getElementById('notifTabUnread');
-  const notifList       = document.getElementById('notifList');
-  const notifFooter     = document.getElementById('notifFooter');
-
-  const allNotifItems   = notifList
-    ? Array.from(notifList.querySelectorAll('.notif-item'))
-    : [];
-
-
-
-    // --- Menú de tres puntos ---
-  const notifMenuBtn    = document.getElementById('notifMenuBtn');
-  const notifMenu       = document.getElementById('notifMenu');
-  const notifMarkAllBtn = document.getElementById('notifMarkAllRead');
-  const notifOpenPageBtn= document.getElementById('notifOpenPage');
-  const notifEmpty      = document.getElementById('notifEmpty');
-
-  let currentNotifFilter = 'all'; // 'all' o 'unread'
-
-
-  const MAX_VISIBLE = 6;
-  let scrollMode = false; // se activa cuando el usuario pulsa "ver anteriores"
-
   // ===========================
-  // 3.1 Compartir: rellenar URL
+  // 3.1 Compartir: rellenar URL actual
   // ===========================
   if (shareUrlInput) {
     shareUrlInput.value = window.location.href;
@@ -147,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     copyBtn.addEventListener('click', () => {
       navigator.clipboard.writeText(shareUrlInput.value)
         .then(() => {
+          // Animación de "copiado correctamente"
           shareUrlWrapper.classList.add('copied');
           setTimeout(() => {
             shareUrlWrapper.classList.remove('copied');
@@ -205,320 +183,52 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ======================================================
-  // 3.4 Notificaciones: límite inicial + "ver anteriores" + scroll por lotes
-  // ======================================================
-
-  // helper: revela hasta N notificaciones ocultas (las que tienen .is-hidden)
-  function revealNextBatch(batchSize) {
-    if (!allNotifItems.length) return;
-
-    const hidden = allNotifItems.filter(item =>
-      item.classList.contains('is-hidden')
-    );
-
-    hidden.slice(0, batchSize).forEach(item => {
-      item.classList.remove('is-hidden');
-      // si estabas usando display:none a mano, lo aseguramos:
-      item.style.display = 'flex';
-    });
-  }
-
-  // estado inicial: hasta 6 sin scroll, resto ocultas y se muestra footer si hace falta
-  function applyInitialNotifLimit() {
-    if (!allNotifItems.length || !notifList) return;
-
-    scrollMode = false;
-    notifList.classList.remove('is-scrollable');
-
-    let hiddenCount = 0;
-
-    allNotifItems.forEach((item, index) => {
-      if (index < MAX_VISIBLE) {
-        item.classList.remove('is-hidden');
-        item.style.display = 'flex';
-      } else {
-        item.classList.add('is-hidden');
-        item.style.display = 'none';
-        hiddenCount++;
-      }
-    });
-
-    if (notifFooter) {
-      notifFooter.style.display = hiddenCount > 0 ? 'block' : 'none';
-    }
-  }
-
-  // se llama cuando el usuario pulsa “ver notificaciones anteriores”
-  function loadMoreNotifications() {
-    if (!allNotifItems.length || !notifList) return;
-
-    // activamos modo scroll y altura máxima
-    notifList.classList.add('is-scrollable');
-    scrollMode = true;
-
-    // mostramos un lote extra
-    revealNextBatch(MAX_VISIBLE);
-
-    // si después de este lote ya no queda nada oculto, ocultamos el footer
-    const stillHidden = allNotifItems.some(item =>
-      item.classList.contains('is-hidden')
-    );
-    if (notifFooter) {
-      notifFooter.style.display = stillHidden ? 'none' : 'none';
-    }
-  }
-
-  // botón "Ver notificaciones anteriores"
-  if (notifFooter) {
-    const moreBtn = notifFooter.querySelector('.notif-more-btn');
-    if (moreBtn) {
-      moreBtn.addEventListener('click', () => {
-        loadMoreNotifications();
-      });
-    }
-  }
-
-  // inicializamos al cargar la página
-  applyInitialNotifLimit();
-
-  // scroll: cuando llegue al fondo, cargamos más en bloques de 6
-  if (notifList) {
-    notifList.addEventListener('scroll', () => {
-      if (!scrollMode) return;
-
-      const threshold = 40; // px antes del fondo
-      if (
-        notifList.scrollTop + notifList.clientHeight >=
-        notifList.scrollHeight - threshold
-      ) {
-        const beforeHidden = allNotifItems.filter(i => i.classList.contains('is-hidden')).length;
-        revealNextBatch(MAX_VISIBLE);
-        const afterHidden = allNotifItems.filter(i => i.classList.contains('is-hidden')).length;
-
-        // si ya no había más por mostrar, simplemente no hacemos nada más
-        if (afterHidden === beforeHidden) return;
-      }
-    });
-  }
-
-  // ======================================================
-  // 3.5 Notificaciones: filtro Todas / No leídas
-  // ======================================================
-  function setNotifFilter(mode) {
-    if (!allNotifItems.length) return;
-
-    allNotifItems.forEach(item => {
-      const isUnread = item.classList.contains('is-unread');
-
-      if (mode === 'unread') {
-        item.style.display = isUnread ? 'flex' : 'none';
-      } else {
-        // modo 'all'
-        item.style.display = item.classList.contains('is-hidden') ? 'none' : 'flex';
-      }
-    });
-  }
-
-    if (notifTabAll && notifTabUnread) {
-    notifTabAll.addEventListener('click', () => {
-      currentNotifFilter = 'all';
-
-      notifTabAll.classList.add('is-active');
-      notifTabUnread.classList.remove('is-active');
-
-      allNotifItems.forEach(item => {
-        item.style.display = item.classList.contains('is-hidden') ? 'none' : 'flex';
-      });
-
-      updateNotifEmptyState();
-    });
-
-    notifTabUnread.addEventListener('click', () => {
-      currentNotifFilter = 'unread';
-
-      notifTabUnread.classList.add('is-active');
-      notifTabAll.classList.remove('is-active');
-
-      setNotifFilter('unread');
-      updateNotifEmptyState();
-    });
-  }
-
-  // ======================================================
-  // 3.5.1 Menú tres puntos (opciones del panel)
-  // ======================================================
-
-  function openNotifMenu() {
-    if (!notifMenu) return;
-    notifMenu.classList.add('is-open');
-    if (notifMenuBtn) notifMenuBtn.setAttribute('aria-expanded', 'true');
-    notifMenu.setAttribute('aria-hidden', 'false');
-  }
-
-  function closeNotifMenu() {
-    if (!notifMenu) return;
-    notifMenu.classList.remove('is-open');
-    if (notifMenuBtn) notifMenuBtn.setAttribute('aria-expanded', 'false');
-    notifMenu.setAttribute('aria-hidden', 'true');
-  }
-
-  if (notifMenuBtn && notifMenu) {
-    notifMenuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (notifMenu.classList.contains('is-open')) {
-        closeNotifMenu();
-      } else {
-        openNotifMenu();
-      }
-    });
-  }
-
-  // Acción: marcar todas como leídas
-  if (notifMarkAllBtn) {
-    notifMarkAllBtn.addEventListener('click', () => {
-      markAllNotificationsRead();
-      closeNotifMenu();
-    });
-  }
-
-  // Acción: abrir página de notificaciones (ajusta la URL a tu gusto)
-  if (notifOpenPageBtn) {
-    notifOpenPageBtn.addEventListener('click', () => {
-      const path = window.location.pathname;
-      const notifUrl = path.startsWith('/es')
-        ? '/es/notificaciones/'
-        : '/notifications/';
-
-      window.location.href = notifUrl;
-    });
-  }
-
-
-
-   // ======================================================
-  // 3.6 Actualiza el badge de la campana principal
-  // ======================================================
-  function updateNotifBadge() {
-    if (!notifBtn || !allNotifItems.length) return;
-    const hasUnread = allNotifItems.some(item =>
-      item.classList.contains('is-unread')
-    );
-    notifBtn.classList.toggle('has-unread', hasUnread);
-  }
-
-  // Muestra / oculta el estado vacío en la pestaña "No leídas"
-  function updateNotifEmptyState() {
-    if (!notifEmpty || !notifList) return;
-
-    const hasUnreadVisible = allNotifItems.some(item =>
-      item.classList.contains('is-unread') &&
-      item.style.display !== 'none'
-    );
-
-    const isUnreadTab = currentNotifFilter === 'unread';
-
-    if (isUnreadTab && !hasUnreadVisible) {
-      notifEmpty.style.display = 'flex';
-      notifList.style.display  = 'none';
-    } else {
-      notifEmpty.style.display = 'none';
-      notifList.style.display  = 'block';
-    }
-  }
-
-  // Marca todas las notificaciones como leídas
-  function markAllNotificationsRead() {
-    allNotifItems.forEach(item => {
-      item.classList.remove('is-unread');
-    });
-    updateNotifBadge();
-    updateNotifEmptyState();
-  }
-
-  // Llamada inicial
-  updateNotifBadge();
-
-
-  
-
-
-  // ======================================================
-  // 3.7 Abrir / cerrar paneles (solo uno abierto)
+  // 3.4 Compartir: abrir / cerrar panel
   // ======================================================
   function closeShare() {
     if (!shareWrapper) return;
     shareWrapper.classList.remove('is-open');
-    if (shareBtn) shareBtn.setAttribute('aria-expanded', 'false');
+    if (shareBtn)   shareBtn.setAttribute('aria-expanded', 'false');
     if (sharePanel) sharePanel.setAttribute('aria-hidden', 'true');
   }
 
   function openShare() {
     if (!shareWrapper) return;
-    closeNotif();
     shareWrapper.classList.add('is-open');
-    if (shareBtn) shareBtn.setAttribute('aria-expanded', 'true');
+    if (shareBtn)   shareBtn.setAttribute('aria-expanded', 'true');
     if (sharePanel) sharePanel.setAttribute('aria-hidden', 'false');
   }
 
-  function closeNotif() {
-    if (!notifWrapper) return;
-    notifWrapper.classList.remove('is-open');
-    if (notifBtn) notifBtn.setAttribute('aria-expanded', 'false');
-    if (notifPanel) notifPanel.setAttribute('aria-hidden', 'true');
+  function toggleShare() {
+    if (!shareWrapper) return;
+    if (shareWrapper.classList.contains('is-open')) {
+      closeShare();
+    } else {
+      openShare();
+    }
   }
 
-  function openNotif() {
-    if (!notifWrapper) return;
-    closeShare();
-    notifWrapper.classList.add('is-open');
-    if (notifBtn) notifBtn.setAttribute('aria-expanded', 'true');
-    if (notifPanel) notifPanel.setAttribute('aria-hidden', 'false');
-  }
-
-  // Botón compartir
+  // Click en el icono de compartir → abre/cierra
   if (shareBtn && shareWrapper && sharePanel) {
     shareBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (shareWrapper.classList.contains('is-open')) {
-        closeShare();
-      } else {
-        openShare();
-      }
+      toggleShare();
     });
   }
 
-  // Botón notificaciones
-  if (notifBtn && notifWrapper && notifPanel) {
-    notifBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (notifWrapper.classList.contains('is-open')) {
-        closeNotif();
-      } else {
-        openNotif();
-      }
-    });
-  }
-
-  // Click fuera → cierra todo
+  // Click fuera → cierra solo el panel de compartir
   document.addEventListener('click', (e) => {
-    const target = e.target;
-
-    const insideShare = shareWrapper && shareWrapper.contains(target);
-    const insideNotif = notifWrapper && notifWrapper.contains(target);
-
-    if (!insideShare && !insideNotif) {
+    if (!shareWrapper) return;
+    const insideShare = shareWrapper.contains(e.target);
+    if (!insideShare) {
       closeShare();
-      closeNotif();
-      closeNotifMenu();
     }
   });
 
-  // Escape → cierra todo
+  // Escape → cierra el panel de compartir
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeShare();
-      closeNotif();
-      closeNotifMenu();
     }
   });
 });
