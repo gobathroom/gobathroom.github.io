@@ -128,7 +128,7 @@
   /* la línea queda justo debajo del fondo, dentro del topbar */
   bottom: -3px;          /* desplaza la línea 3px (su propio alto) hacia abajo */
   height: 3px;           /* grosor de la línea = margen que dejamos arriba/abajo */
-  border-radius: 14px;
+  border-radius: 7px;
   background: transparent;
   
 }
@@ -162,7 +162,7 @@
   bottom: -31px;               /* ajusta si lo quieres más arriba/abajo */
 
   padding: 4px 10px;
-  border-radius: 14px;
+  border-radius: 7px;
 
   font-size: 12px;
   white-space: nowrap;
@@ -250,7 +250,7 @@
 
   bottom: -37px;  /* debajo del topbar */
   padding: 4px 10px;
-  border-radius: 14px;
+  border-radius: 7px;
 
   font-size: 12px;
   white-space: nowrap;
@@ -288,7 +288,7 @@
 
   background: var(--hover);
   color: var(--text);
-  border-radius: 14px;     /* similar a FB, suave */
+  border-radius: 7px;     /* similar a FB, suave */
   text-decoration: none;
   cursor: pointer;
   font-size: 14px;
@@ -350,7 +350,7 @@
   max-width: 360px;
 
   background: var(--panel);
-  border-radius: 14px;
+  border-radius: 7px;
   border: 1px solid var(--panel-elev-border);
   box-shadow: var(--panel-elev-shadow);
   padding: 10px 12px;
@@ -391,7 +391,7 @@
   gap: 8px;
 
   padding: 6px 10px;
-  border-radius: 14px;
+  border-radius: 7px;
   border: 1px solid var(--border);
   background: transparent;
 }
@@ -419,7 +419,7 @@
 /* Botón Copy tipo pill */
 .share-copy-btn {
   border: none;
-  border-radius: 14px;
+  border-radius: 7px;
   padding: 4px 12px;
   background: transparent;
   color: var(--text);
@@ -449,7 +449,7 @@
   align-items: center;
   justify-content: center;
 
-  border-radius: 14px;
+  border-radius: 7px;
   padding: 6px 10px;
 
   background: rgba(16,185,129,.12);        /* verde suave */
@@ -515,7 +515,7 @@
   align-items: center;
   justify-content: center;
 
-  border-radius: 14px;
+  border-radius: 7px;
   border: 1px solid var(--border);
   background: transparent;
   color: var(--text);
