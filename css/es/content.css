@@ -14,8 +14,8 @@
   background: var(--panel);
   border-radius: var(--radius, 14px);
   padding: 20px 20px 18px;
-  box-shadow: var(--panel-surf-shadow, 0 10px 30px rgba(0,0,0,.18));
-  border: 1px solid var(--panel-surf-border, rgba(255,255,255,.06));
+  box-shadow: var(--panel-surf-shadow);
+  border: 1px solid var(--panel-surf-border);
   margin-bottom: 20px;
 }
 
