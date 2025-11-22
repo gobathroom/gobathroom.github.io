@@ -126,7 +126,7 @@
   right: 0;
 
   /* la línea queda justo debajo del fondo, dentro del topbar */
-  bottom: -3px;          /* desplaza la línea 3px (su propio alto) hacia abajo */
+  bottom: -5px;          /* desplaza la línea 3px (su propio alto) hacia abajo */
   height: 3px;           /* grosor de la línea = margen que dejamos arriba/abajo */
   border-radius: 10px;
   background: transparent;
@@ -159,7 +159,7 @@
   transform: translateX(-50%) translateY(4px);
 
   /* Colocado fuera del topbar, justo debajo */
-  bottom: -31px;               /* ajusta si lo quieres más arriba/abajo */
+  bottom: -36px;               /* ajusta si lo quieres más arriba/abajo */
 
   padding: 4px 10px;
   border-radius: 10px;
@@ -248,7 +248,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(4px);
 
-  bottom: -37px;  /* debajo del topbar */
+  bottom: -42px;  /* debajo del topbar */
   padding: 4px 10px;
   border-radius: 10px;
 
