@@ -159,7 +159,7 @@
   transform: translateX(-50%) translateY(4px);
 
   /* Colocado fuera del topbar, justo debajo */
-  bottom: -33px;               /* ajusta si lo quieres más arriba/abajo */
+  bottom: -32px;               /* ajusta si lo quieres más arriba/abajo */
 
   padding: 4px 10px;
   border-radius: 10px;
@@ -248,7 +248,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(4px);
 
-  bottom: -39px;  /* debajo del topbar */
+  bottom: -38px;  /* debajo del topbar */
   padding: 4px 10px;
   border-radius: 10px;
 
