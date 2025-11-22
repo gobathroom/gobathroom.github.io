@@ -30,10 +30,17 @@
   --active: rgba(255,255,255,0.08);
 
 
-/* ⭐ ELEVACIÓN DARK: borde un poco más visible + sombra suave */
-  --panel-elev-border: rgba(255,255,255,0.08);  /* como Facebook */
-  --panel-elev-shadow: none; /* sin sombra */
+/* 🌙 DARK THEME */
+:root[data-theme="dark"] {
+  /* Elevación (POPUPS / Notificaciones) */
+  --panel-elev-border: rgba(255,255,255,0.08);
+  --panel-elev-shadow: 0 8px 22px rgba(0,0,0,0.35); /* más visible pero suave */
+
+  /* Superficie (tarjetas del contenido) */
+  --panel-surf-border: rgba(255,255,255,0.05); /* borde súper sutil */
+  --panel-surf-shadow: none; /* tarjetas sin sombra, estilo FB dark */
 }
+
 
 
 
@@ -70,7 +77,14 @@
   --active: rgba(0,0,0,0.08);
 
 
-/* ⭐ ELEVACIÓN PARA POPUPS / PANELES */
-  --panel-elev-border: transparent; /* sin borde */
-  --panel-elev-shadow: 0 18px 45px rgba(0, 0, 0, .16); /* sombra visible */
+/* ☀️ LIGHT THEME */
+:root[data-theme="light"] {
+  /* POPUPS (ya tenías esto) */
+  --panel-elev-border: transparent;
+  --panel-elev-shadow: 0 18px 45px rgba(0,0,0,0.16);
+
+  /* Tarjetas del contenido (SURFACE) */
+  --panel-surf-border: rgba(0,0,0,0.06);  /* borde sutil */
+  --panel-surf-shadow: 0 1px 4px rgba(0,0,0,0.07); /* sombra mini tipo FB */
 }
+
