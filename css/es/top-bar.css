@@ -7,7 +7,7 @@
   top: 0;
   z-index: 1000;
 
-  height: var(--header-h, 56px);
+  height: var(--header-h, 60px);
   padding: 0 16px;
 
   display: flex;
@@ -91,7 +91,7 @@
 
   /* casi toda la altura del header, dejando un margen pequeño arriba/abajo */
   height: calc(var(--header-h, 56px) - 10px);  /* 3px arriba + 3px abajo */
-  padding: 0 50px;
+  padding: 0 40px;
 
   border-radius: 10px; /* rectángulo suave, no pastilla completa */
 
