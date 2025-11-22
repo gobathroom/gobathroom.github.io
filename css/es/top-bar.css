@@ -130,7 +130,7 @@
   height: 3px;           /* grosor de la línea = margen que dejamos arriba/abajo */
   border-radius: 14px;
   background: transparent;
-  z-index: 1300;
+  
 }
 
 /* Estado activo (sección actual) */
