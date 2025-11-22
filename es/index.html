@@ -194,11 +194,202 @@
 
   </header>
 
-  <!-- ============================= -->
-  <!--          MAIN CONTENT         -->
-  <!-- ============================= -->
-  <main class="content">
-    <h1>Bienvenido a Go Bathroom</h1>
-  </main>
-</body>
-</html>
+ <!-- ============================= -->
+<!--          MAIN CONTENT         -->
+<!-- ============================= -->
+<main class="content">
+
+  <!-- HERO / BIENVENIDA -->
+  <section class="home-hero">
+    <header class="home-hero-header">
+      <h1 class="home-title">Bienvenido a Go Bathroom NYC</h1>
+      <p class="home-subtitle">
+        Tu guía rápida para encontrar baños accesibles, gratuitos y para clientes
+        a través de NYC y Long Island.
+      </p>
+    </header>
+
+    <div class="home-hero-actions">
+      <!-- CTA principal (lleva al mapa, igual que el icono del topbar) -->
+      <a href="/es/maps" class="btn btn-primary">
+        <i class="fas fa-map-marked-alt"></i>
+        <span>Abrir mapa</span>
+      </a>
+
+      <!-- Acciones secundarias (en futuro puedes enlazarlas) -->
+      <div class="home-hero-secondary">
+        <button type="button" class="btn btn-ghost">
+          Sugerir baño
+        </button>
+        <button type="button" class="btn btn-ghost">
+          Reportar un problema
+        </button>
+        <button type="button" class="btn btn-ghost">
+          Donar
+        </button>
+      </div>
+    </div>
+
+    <p class="home-meta">
+      Ubicaciones verificadas · Actualizado regularmente
+    </p>
+  </section>
+
+  <!-- ACCESO A LOS BAÑOS -->
+  <section class="home-section">
+    <header class="home-section-header">
+      <h2 class="home-section-title">Acceso a los baños</h2>
+      <p class="home-section-subtitle">
+        Tipos de acceso según el color del pin que ves en el mapa.
+      </p>
+    </header>
+
+    <div class="access-grid">
+      <!-- Accesible -->
+      <article class="access-card">
+        <div class="access-icon access-icon--blue">
+          <i class="fas fa-toilet"></i>
+        </div>
+        <h3 class="access-title">Accesible</h3>
+        <p class="access-desc">
+          Baños dentro de negocios donde normalmente permiten el uso del baño
+          sin exigir compra, pero siguen siendo espacios privados.
+        </p>
+      </article>
+
+      <!-- Gratuito -->
+      <article class="access-card">
+        <div class="access-icon access-icon--green">
+          <i class="fas fa-toilet"></i>
+        </div>
+        <h3 class="access-title">Gratuito</h3>
+        <p class="access-desc">
+          Baños totalmente gratuitos y de acceso público.
+          Ejemplo: parques, bibliotecas, centros comunitarios.
+        </p>
+      </article>
+
+      <!-- Cliente -->
+      <article class="access-card">
+        <div class="access-icon access-icon--orange">
+          <i class="fas fa-toilet"></i>
+        </div>
+        <h3 class="access-title">Cliente</h3>
+        <p class="access-desc">
+          Baños dentro de restaurantes u otros negocios donde
+          se requiere consumir algo o mostrar un recibo para poder usar el baño.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- CARACTERÍSTICAS DEL BAÑO (EMOJI KEY) -->
+  <section class="home-section">
+    <header class="home-section-header">
+      <h2 class="home-section-title">Características del baño</h2>
+      <p class="home-section-subtitle">
+        Entiende de un vistazo qué ofrece cada baño usando los emojis del mapa.
+      </p>
+    </header>
+
+    <ul class="emoji-list">
+      <li class="emoji-item">
+        <span class="emoji">🚻</span>
+        <div class="emoji-text">
+          <span class="emoji-label">Múltiples cabinas o inodoros</span>
+          <span class="emoji-desc">Más de un baño disponible en la misma ubicación.</span>
+        </div>
+      </li>
+
+      <li class="emoji-item">
+        <span class="emoji">🚹🚺</span>
+        <div class="emoji-text">
+          <span class="emoji-label">Baños separados</span>
+          <span class="emoji-desc">Baños distintos para hombres y mujeres.</span>
+        </div>
+      </li>
+
+      <li class="emoji-item">
+        <span class="emoji">🚻🧍</span>
+        <div class="emoji-text">
+          <span class="emoji-label">Baño unisex individual</span>
+          <span class="emoji-desc">Cabina única para cualquier género.</span>
+        </div>
+      </li>
+
+      <li class="emoji-item">
+        <span class="emoji">♿</span>
+        <div class="emoji-text">
+          <span class="emoji-label">Accesible en silla de ruedas</span>
+          <span class="emoji-desc">Puerta y espacio interior adaptado.</span>
+        </div>
+      </li>
+
+      <li class="emoji-item">
+        <span class="emoji">🔢</span>
+        <div class="emoji-text">
+          <span class="emoji-label">Requiere PIN</span>
+          <span class="emoji-desc">Necesitas un código para abrir la puerta.</span>
+        </div>
+      </li>
+
+      <li class="emoji-item">
+        <span class="emoji">🔑</span>
+        <div class="emoji-text">
+          <span class="emoji-label">Requiere llave</span>
+          <span class="emoji-desc">Debes pedir llave al personal del lugar.</span>
+        </div>
+      </li>
+
+      <li class="emoji-item">
+        <span class="emoji">🧻</span>
+        <div class="emoji-text">
+          <span class="emoji-label">Papel no garantizado</span>
+          <span class="emoji-desc">Puede faltar papel higiénico: lleva el tuyo.</span>
+        </div>
+      </li>
+
+      <li class="emoji-item">
+        <span class="emoji">🚾</span>
+        <div class="emoji-text">
+          <span class="emoji-label">Baño portátil / temporal</span>
+          <span class="emoji-desc">Baño tipo portátil o instalación temporal.</span>
+        </div>
+      </li>
+
+      <li class="emoji-item">
+        <span class="emoji">🕒</span>
+        <div class="emoji-text">
+          <span class="emoji-label">Abierto 24/7</span>
+          <span class="emoji-desc">Disponible todo el día, todos los días.</span>
+        </div>
+      </li>
+
+      <li class="emoji-item">
+        <span class="emoji">✅</span>
+        <div class="emoji-text">
+          <span class="emoji-label">Baño limpio</span>
+          <span class="emoji-desc">Buena higiene en visitas recientes.</span>
+        </div>
+      </li>
+
+      <li class="emoji-item">
+        <span class="emoji">⚠️</span>
+        <div class="emoji-text">
+          <span class="emoji-label">Baño sucio</span>
+          <span class="emoji-desc">Reportes de mala higiene o mal olor.</span>
+        </div>
+      </li>
+
+      <li class="emoji-item">
+        <span class="emoji">👶</span>
+        <div class="emoji-text">
+          <span class="emoji-label">Cambiador para bebés</span>
+          <span class="emoji-desc">Cuenta con estación para cambiar pañales.</span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
