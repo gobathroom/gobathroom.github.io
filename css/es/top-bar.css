@@ -343,7 +343,7 @@
    =========================== */
 .share-panel {
   position: absolute;
-  top: calc(100% + 10px);  /* debajo de la barra */
+  top: 100%;  /* debajo de la barra */
   right: 0;                /* alineado con el último icono (idioma) */
 
   min-width: 260px;
@@ -370,7 +370,7 @@
   font-size: 14px;
   font-weight: 600;
   color: var(--text);
-  margin-bottom: 7px;
+  margin-bottom: 8px;
 }
 
 /* Body del panel */
