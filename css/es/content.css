@@ -1,0 +1,261 @@
+/* ===========================
+   HOME: LAYOUT GENERAL
+   =========================== */
+
+.content {
+  max-width: var(--content-max, 1120px);
+  margin: 24px auto 40px;
+  padding: 0 16px 40px;
+}
+
+/* Tarjeta base para secciones de la home */
+.home-hero,
+.home-section {
+  background: var(--panel);
+  border-radius: var(--radius, 14px);
+  padding: 20px 20px 18px;
+  box-shadow: var(--panel-elev-shadow, 0 10px 30px rgba(0,0,0,.18));
+  border: 1px solid var(--panel-elev-border, rgba(255,255,255,.06));
+  margin-bottom: 20px;
+}
+
+/* ===========================
+   HERO / BIENVENIDA
+   =========================== */
+
+.home-hero-header {
+  margin-bottom: 16px;
+}
+
+.home-title {
+  font-size: 28px;
+  line-height: 1.25;
+  color: var(--text-strong, #f5f7ff);
+  margin: 0 0 6px;
+}
+
+.home-subtitle {
+  margin: 0;
+  font-size: 15px;
+  color: var(--muted, #9fb0d0);
+}
+
+.home-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-top: 18px;
+}
+
+.home-hero-secondary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Botones reutilizables */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.btn-primary {
+  background: var(--brand, #00d1ff);
+  color: #021019;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text, #dbe5ff);
+  border-color: var(--border, rgba(255,255,255,.1));
+}
+
+.btn-ghost:hover {
+  background: var(--hover, rgba(255,255,255,.06));
+}
+
+.btn i {
+  font-size: 16px;
+}
+
+.home-meta {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted, #9fb0d0);
+}
+
+/* ===========================
+   SECCIONES GENERALES
+   =========================== */
+
+.home-section-header {
+  margin-bottom: 14px;
+}
+
+.home-section-title {
+  margin: 0 0 4px;
+  font-size: 18px;
+  color: var(--text-strong, #f5f7ff);
+}
+
+.home-section-subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted, #9fb0d0);
+}
+
+/* ===========================
+   ACCESO A LOS BAÑOS
+   =========================== */
+
+.access-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.access-card {
+  background: var(--panel-2, #1c2230);
+  border-radius: 12px;
+  padding: 14px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.access-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+/* Colores de los tres tipos de pin */
+.access-icon--blue {
+  background: #005bff;
+}
+
+.access-icon--green {
+  background: #00c853;
+}
+
+.access-icon--orange {
+  background: #ff7a00;
+}
+
+.access-icon i {
+  font-size: 20px;
+}
+
+.access-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text, #dbe5ff);
+}
+
+.access-desc {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted, #9fb0d0);
+}
+
+/* ===========================
+   EMOJI KEY / CARACTERÍSTICAS
+   =========================== */
+
+.emoji-list {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 10px 18px;
+}
+
+.emoji-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.emoji {
+  font-size: 20px;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.emoji-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.emoji-label {
+  font-size: 14px;
+  color: var(--text, #dbe5ff);
+  font-weight: 500;
+}
+
+.emoji-desc {
+  font-size: 13px;
+  color: var(--muted, #9fb0d0);
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+
+@media (max-width: 720px) {
+  .home-title {
+    font-size: 22px;
+  }
+
+  .home-hero {
+    padding: 16px 14px 16px;
+  }
+
+  .home-section {
+    padding: 16px 14px 16px;
+  }
+
+  .home-hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .home-hero-secondary {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    width: auto;
+  }
+}
