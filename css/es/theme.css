@@ -31,7 +31,6 @@
 
 
 /* 🌙 DARK THEME */
-:root[data-theme="dark"] {
   /* Elevación (POPUPS / Notificaciones) */
   --panel-elev-border: rgba(255,255,255,0.08);
   --panel-elev-shadow: 0 8px 22px rgba(0,0,0,0.35); /* más visible pero suave */
@@ -78,7 +77,6 @@
 
 
 /* ☀️ LIGHT THEME */
-:root[data-theme="light"] {
   /* POPUPS (ya tenías esto) */
   --panel-elev-border: transparent;
   --panel-elev-shadow: 0 18px 45px rgba(0,0,0,0.16);
