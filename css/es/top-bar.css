@@ -90,7 +90,7 @@
   gap: 6px;
 
   /* casi toda la altura del header, dejando un margen pequeño arriba/abajo */
-  height: calc(var(--header-h, 56px) - 6px);  /* 3px arriba + 3px abajo */
+  height: calc(var(--header-h, 56px) -6px);  /* 3px arriba + 3px abajo */
   padding: 0 50px;
 
   border-radius: 14px; /* rectángulo suave, no pastilla completa */
