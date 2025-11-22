@@ -126,7 +126,7 @@
   right: 0;
 
   /* la línea queda justo debajo del fondo, dentro del topbar */
-  bottom: -3px;          /* desplaza la línea 3px (su propio alto) hacia abajo */
+  bottom: 0px;          /* desplaza la línea 3px (su propio alto) hacia abajo */
   height: 3px;           /* grosor de la línea = margen que dejamos arriba/abajo */
   border-radius: 14px;
   background: transparent;
