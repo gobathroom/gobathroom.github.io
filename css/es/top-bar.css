@@ -91,7 +91,7 @@
 
   /* casi toda la altura del header, dejando un margen pequeño arriba/abajo */
   height: calc(var(--header-h, 60px) - 10px);  /* 3px arriba + 3px abajo */
-  padding: 0 50px;
+  padding: 0 56px;
 
   border-radius: 10px; /* rectángulo suave, no pastilla completa */
 
