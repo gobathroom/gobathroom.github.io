@@ -1,19 +1,24 @@
 // /js/notifast.js
 document.addEventListener('DOMContentLoaded', () => {
-  if (!window.NOTICES || !NOTICES.length) return;
+
+  // ✔ Comprobar que window.NOTICES existe y es válido
+  if (!Array.isArray(window.NOTICES) || !window.NOTICES.length) return;
+
+  // ✔ Guardar la data en una variable
+  const tipsData = window.NOTICES;
 
   // 👉 aquí decides qué mostrar en la barra:
   // 1) Solo algunos por id:
   const idsParaBarra = [1, 2, 4];
-  let tips = NOTICES
+  let tips = tipsData
     .filter(n => idsParaBarra.includes(n.id))
     .map(n => n.text);
 
   // 2) O todos los importantes:
-  // let tips = NOTICES.filter(n => n.important).map(n => n.text);
+  // let tips = tipsData.filter(n => n.important).map(n => n.text);
 
   // 3) O TODOS:
-  // let tips = NOTICES.map(n => n.text);
+  // let tips = tipsData.map(n => n.text);
 
   if (!tips.length) return;
 
@@ -66,4 +71,3 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTip();
   scheduleNext(DEFAULT_DELAY);
 });
-
