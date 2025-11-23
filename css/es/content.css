@@ -38,10 +38,14 @@
    1: NOTIFAST (BANNER SUPERIOR)
    =========================== */
 
-.notifbar {
+.notifbar-wrapper {
   max-width: var(--content-max, 1120px);
   margin: 12px auto 0;
-  padding: 10px 16px;
+  padding: 0 16px;            /* mismo padding lateral que .content */
+}
+
+.notifbar {
+  padding: 10px 14px;
 
   background: var(--panel);
   border-radius: 12px;
@@ -77,6 +81,7 @@
   color: var(--text-strong, #f5f7ff);
   margin-right: 4px;
 }
+
 
 /* ===========================
    2: HERO / BIENVENIDA
