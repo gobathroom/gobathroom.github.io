@@ -83,6 +83,67 @@
 }
 
 
+/* Que el texto se mantenga en UNA línea con "..." si es largo */
+.notifbar-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Controles (chevron izq/der) */
+.notifbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.notif-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  border: none;
+  padding: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  color: var(--muted, #9fb0d0);
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.notif-btn i {
+  font-size: 12px;
+}
+
+.notif-btn:hover {
+  background: var(--hover);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+.notif-btn:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* Si en algún momento queremos ocultar controles (ej: solo 1 tip) */
+.notifbar-controls.is-hidden {
+  display: none;
+}
+
+
+
 /* ===========================
    2: HERO / BIENVENIDA
    =========================== */
