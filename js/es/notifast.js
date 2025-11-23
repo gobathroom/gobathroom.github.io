@@ -33,10 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentIndex = 0;
   let timerId = null;
 
+  // --- Función para mostrar el texto ---
   function renderTip() {
     msgEl.textContent = tips[currentIndex];
   }
 
+  // --- Programar el siguiente cambio ---
   function scheduleNext(delay) {
     clearTimeout(timerId);
     timerId = setTimeout(() => {
@@ -44,22 +46,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }, delay);
   }
 
+  // --- Siguiente tip ---
   function goNext(fromUser) {
     currentIndex = (currentIndex + 1) % tips.length;
     renderTip();
     scheduleNext(fromUser ? MANUAL_DELAY : DEFAULT_DELAY);
   }
 
+  // --- Tip anterior ---
   function goPrev() {
     currentIndex = (currentIndex - 1 + tips.length) % tips.length;
     renderTip();
     scheduleNext(MANUAL_DELAY);
   }
 
+  // --- Ocultar controles si solo hay un tip ---
   if (tips.length <= 1 && controlsEl) {
     controlsEl.classList.add('is-hidden');
   }
 
+  // --- Botones ---
   if (nextBtn) {
     nextBtn.addEventListener('click', () => goNext(true));
   }
@@ -68,6 +74,47 @@ document.addEventListener('DOMContentLoaded', () => {
     prevBtn.addEventListener('click', goPrev);
   }
 
+  /*  
+  =====================================================
+     🟦 BLOQUE SWIPE (AQUÍ ES DONDE VA)
+  =====================================================
+  */
+  const swipeArea = document.querySelector('.notifbar');
+  const SWIPE_THRESHOLD = 40; // píxeles mínimos para swipe
+  let startX = null;
+  let isPointerDown = false;
+
+  if (swipeArea) {
+    swipeArea.addEventListener('pointerdown', (e) => {
+      isPointerDown = true;
+      startX = e.clientX;
+    });
+
+    swipeArea.addEventListener('pointerup', (e) => {
+      if (!isPointerDown || startX === null) return;
+
+      const dx = e.clientX - startX;
+
+      if (Math.abs(dx) > SWIPE_THRESHOLD) {
+        dx < 0 ? goNext(true) : goPrev();
+      }
+
+      isPointerDown = false;
+      startX = null;
+    });
+
+    swipeArea.addEventListener('pointerleave', () => {
+      isPointerDown = false;
+      startX = null;
+    });
+  }
+  /*  
+  =====================================================
+     🟦 FIN DEL BLOQUE SWIPE
+  =====================================================
+  */
+
+  // --- Iniciar ---
   renderTip();
   scheduleNext(DEFAULT_DELAY);
 });
