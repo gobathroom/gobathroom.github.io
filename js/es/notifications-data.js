@@ -1,5 +1,5 @@
 // notifications-data.js
-const NOTICES = [
+window.NOTICES = [
   {
     id: 1,
     text: 'Si recoges pedidos en un negocio, pregunta si puedes usar el baño; muchos lugares lo permiten si eres respetuoso.',
@@ -24,5 +24,4 @@ const NOTICES = [
     category: 'Cuidado',
     important: true
   }
-  // ...
 ];
