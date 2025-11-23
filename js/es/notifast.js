@@ -23,15 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const controlsEl  = document.querySelector('.notifbar-controls');
   const textWrapper = document.querySelector('.notifbar-text-inner');
 
-  // NUEVO → detectamos label e icono dentro del HTML
+  // NUEVO → detectamos label + icono + pastilla
   const labelEl = document.querySelector('.notifbar-text strong');
   const iconEl  = document.querySelector('.notifbar-pill i');
+  const pillEl  = document.querySelector('.notifbar-pill');
 
   let currentIndex = 0;
   let timerId = null;
 
   // ============================
-  // 🔵 ACTUALIZAR TEXTO + ICONO
+  // 🔵 ACTUALIZAR TEXTO + ICONO + COLOR
   // ============================
   function renderTip() {
     const current = tips[currentIndex];
@@ -51,6 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cambiar icono
     if (iconEl) {
       iconEl.className = 'fas ' + (isLaw ? 'fa-gavel' : 'fa-bolt');
+    }
+
+    // Cambiar color de la pastilla
+    if (pillEl) {
+      pillEl.classList.toggle('notifbar-pill--law', isLaw);
+      pillEl.classList.toggle('notifbar-pill--tip', !isLaw);
     }
   }
 
@@ -96,13 +103,13 @@ document.addEventListener('DOMContentLoaded', () => {
       updateIndexFn();
       renderTip();
 
+      textWrapper.addEventListener('animationend', handleInEnd);
       textWrapper.classList.add(inClass);
 
       function handleInEnd() {
         textWrapper.removeEventListener('animationend', handleInEnd);
         textWrapper.classList.remove(inClass);
       }
-      textWrapper.addEventListener('animationend', handleInEnd);
     }
 
     textWrapper.addEventListener('animationend', handleOutEnd);
