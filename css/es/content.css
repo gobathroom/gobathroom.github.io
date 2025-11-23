@@ -157,6 +157,63 @@
   text-decoration: none;
 }
 
+/* Contenedor interno para animar el texto */
+.notifbar-text-inner {
+  display: inline-block;
+}
+
+/* Estados de animación */
+.notif-slide-out-next {
+  animation: notifSlideOutNext 0.22s ease forwards;
+}
+.notif-slide-in-next {
+  animation: notifSlideInNext 0.22s ease forwards;
+}
+
+.notif-slide-out-prev {
+  animation: notifSlideOutPrev 0.22s ease forwards;
+}
+.notif-slide-in-prev {
+  animation: notifSlideInPrev 0.22s ease forwards;
+}
+
+/* Keyframes para siguiente (sale hacia la izq, entra desde la der) */
+@keyframes notifSlideOutNext {
+  to {
+    transform: translateX(-16px);
+    opacity: 0;
+  }
+}
+@keyframes notifSlideInNext {
+  from {
+    transform: translateX(16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Keyframes para anterior (sale hacia la der, entra desde la izq) */
+@keyframes notifSlideOutPrev {
+  to {
+    transform: translateX(16px);
+    opacity: 0;
+  }
+}
+@keyframes notifSlideInPrev {
+  from {
+    transform: translateX(-16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
 
 
 
