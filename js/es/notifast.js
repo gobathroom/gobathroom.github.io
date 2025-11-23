@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 👉 aquí decides qué mostrar en la barra:
   const idsParaBarra = [1, 2, 4];
-  let tips = tipsData
-    .filter(n => idsParaBarra.includes(n.id))
-    .map(n => n.text);
+
+  // ✔ Mantener objetos completos (NO .map(n => n.text))
+  let tips = tipsData.filter(n => idsParaBarra.includes(n.id));
 
   if (!tips.length) return;
 
@@ -23,31 +23,56 @@ document.addEventListener('DOMContentLoaded', () => {
   const controlsEl  = document.querySelector('.notifbar-controls');
   const textWrapper = document.querySelector('.notifbar-text-inner');
 
+  // NUEVO → detectamos label e icono dentro del HTML
+  const labelEl = document.querySelector('.notifbar-text strong');
+  const iconEl  = document.querySelector('.notifbar-pill i');
+
   let currentIndex = 0;
   let timerId = null;
 
+  // ============================
+  // 🔵 ACTUALIZAR TEXTO + ICONO
+  // ============================
   function renderTip() {
-    msgEl.textContent = tips[currentIndex];
+    const current = tips[currentIndex];
+    if (!current) return;
+
+    // Texto principal
+    msgEl.textContent = current.text;
+
+    // Tip o Ley
+    const isLaw = current.kind === 'law';
+
+    // Cambiar label
+    if (labelEl) {
+      labelEl.textContent = isLaw ? 'Ley rápida:' : 'Tip rápido:';
+    }
+
+    // Cambiar icono
+    if (iconEl) {
+      iconEl.className = 'fas ' + (isLaw ? 'fa-gavel' : 'fa-bolt');
+    }
   }
 
+  // Programar el siguiente cambio
   function scheduleNext(delay) {
     clearTimeout(timerId);
     timerId = setTimeout(() => {
-      goNext(false); // false = cambio automático
+      goNext(false); // false = automático
     }, delay);
   }
 
-  // 🔵 Función genérica para animar cambio
+  // ============================
+  // 🔵 ANIMACIÓN SLIDE
+  // ============================
   function animateChange(direction, updateIndexFn, fromUser) {
     if (!textWrapper) {
-      // Sin wrapper, cambiamos normal
       updateIndexFn();
       renderTip();
       scheduleNext(fromUser ? MANUAL_DELAY : DEFAULT_DELAY);
       return;
     }
 
-    // Elegir clases segun dirección
     const outClass = direction === 'next'
       ? 'notif-slide-out-next'
       : 'notif-slide-out-prev';
@@ -55,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ? 'notif-slide-in-next'
       : 'notif-slide-in-prev';
 
-    // Limpiar posibles clases previas
     textWrapper.classList.remove(
       'notif-slide-out-next',
       'notif-slide-in-next',
@@ -63,25 +87,21 @@ document.addEventListener('DOMContentLoaded', () => {
       'notif-slide-in-prev'
     );
 
-    // 1) animación de salida
     textWrapper.classList.add(outClass);
 
     function handleOutEnd() {
       textWrapper.removeEventListener('animationend', handleOutEnd);
       textWrapper.classList.remove(outClass);
 
-      // Actualizar índice + texto
       updateIndexFn();
       renderTip();
 
-      // 2) animación de entrada
       textWrapper.classList.add(inClass);
 
       function handleInEnd() {
         textWrapper.removeEventListener('animationend', handleInEnd);
         textWrapper.classList.remove(inClass);
       }
-
       textWrapper.addEventListener('animationend', handleInEnd);
     }
 
@@ -90,43 +110,34 @@ document.addEventListener('DOMContentLoaded', () => {
     scheduleNext(fromUser ? MANUAL_DELAY : DEFAULT_DELAY);
   }
 
-  // --- Siguiente tip ---
+  // Siguiente tip
   function goNext(fromUser) {
     animateChange(
       'next',
-      () => {
-        currentIndex = (currentIndex + 1) % tips.length;
-      },
+      () => { currentIndex = (currentIndex + 1) % tips.length; },
       fromUser
     );
   }
 
-  // --- Tip anterior ---
+  // Tip anterior
   function goPrev() {
     animateChange(
       'prev',
-      () => {
-        currentIndex = (currentIndex - 1 + tips.length) % tips.length;
-      },
-      true // lo tratamos como interacción del usuario
+      () => { currentIndex = (currentIndex - 1 + tips.length) % tips.length; },
+      true
     );
   }
 
-  // --- Ocultar controles si solo hay un tip ---
   if (tips.length <= 1 && controlsEl) {
     controlsEl.classList.add('is-hidden');
   }
 
-  // --- Botones ---
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => goNext(true));
-  }
+  if (nextBtn) nextBtn.addEventListener('click', () => goNext(true));
+  if (prevBtn) prevBtn.addEventListener('click', goPrev);
 
-  if (prevBtn) {
-    prevBtn.addEventListener('click', goPrev);
-  }
-
-  // --- Swipe (lo dejamos igual que ya tienes) ---
+  // ============================
+  // 🔵 SWIPE
+  // ============================
   const swipeArea = document.querySelector('.notifbar');
   const SWIPE_THRESHOLD = 40;
   let startX = null;
@@ -142,11 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isPointerDown || startX === null) return;
 
       const dx = e.clientX - startX;
-
       if (Math.abs(dx) > SWIPE_THRESHOLD) {
         dx < 0 ? goNext(true) : goPrev();
       }
-
       isPointerDown = false;
       startX = null;
     });
@@ -157,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Iniciar ---
+  // Iniciar
   renderTip();
   scheduleNext(DEFAULT_DELAY);
 });
