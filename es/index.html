@@ -218,107 +218,113 @@
   
 
  <!-- ============================= -->
-<!--          MAIN CONTENT         -->
+<!--          MAIN CONTENT        -->
 <!-- ============================= -->
+
+<!-- NOTIFAST: tip rápido bajo el topbar -->
+<div class="notifbar">
+  <div class="notifbar-pill">
+    <i class="fas fa-bolt"></i>
+  </div>
+  <div class="notifbar-text">
+    <strong>Tip rápido:</strong>
+    Si recoges pedidos en un negocio, pregunta si puedes usar el baño; muchos lugares lo permiten si eres respetuoso.
+  </div>
+</div>
+
 <main class="content">
+  <div class="home-layout">
+    <!-- COLUMNA CENTRAL -->
+    <div class="home-main">
 
-  <div class="home-main">
+      <!-- HERO / BIENVENIDA -->
+      <section class="home-hero">
+        <header class="home-hero-header">
+          <h1 class="home-title">Bienvenido a Go Bathroom NYC</h1>
+          <p class="home-subtitle">
+            Tu guía rápida para encontrar baños accesibles, gratuitos y para clientes
+            a través de NYC y Long Island.
+          </p>
+        </header>
 
-  <!-- HERO / BIENVENIDA -->
-  <section class="home-hero">
-    <header class="home-hero-header">
-      <h1 class="home-title">Bienvenido a Go Bathroom NYC</h1>
-      <p class="home-subtitle">
-        Tu guía rápida para encontrar baños accesibles, gratuitos y para clientes
-        a través de NYC y Long Island.
-      </p>
-    </header>
+        <div class="home-hero-actions">
+          <a href="/es/maps" class="btn btn-primary">
+            <i class="fas fa-map-marked-alt"></i>
+            <span>Abrir mapa</span>
+          </a>
 
-    <div class="home-hero-actions">
-      <!-- CTA principal (lleva al mapa, igual que el icono del topbar) -->
-      <a href="/es/maps" class="btn btn-primary">
-        <i class="fas fa-map-marked-alt"></i>
-        <span>Abrir mapa</span>
-      </a>
-
-      <!-- Acciones secundarias (en futuro puedes enlazarlas) -->
-      <div class="home-hero-secondary">
-        <button type="button" class="btn btn-ghost">
-          Sugerir baño
-        </button>
-        <button type="button" class="btn btn-ghost">
-          Reportar un problema
-        </button>
-        <button type="button" class="btn btn-ghost">
-          Donar
-        </button>
-      </div>
-    </div>
-
-    <p class="home-meta">
-      Ubicaciones verificadas · Actualizado regularmente
-    </p>
-  </section>
-
-  <!-- ACCESO A LOS BAÑOS -->
-  <section class="home-section">
-    <header class="home-section-header">
-      <h2 class="home-section-title">Acceso a los baños</h2>
-      <p class="home-section-subtitle">
-        Tipos de acceso según el color del pin que ves en el mapa.
-      </p>
-    </header>
-
-    <div class="access-grid">
-      <!-- Accesible -->
-      <article class="access-card">
-        <div class="access-icon access-icon--blue">
-          <i class="fas fa-toilet"></i>
+          <div class="home-hero-secondary">
+            <button type="button" class="btn btn-ghost">Sugerir baño</button>
+            <button type="button" class="btn btn-ghost">Reportar un problema</button>
+            <button type="button" class="btn btn-ghost">Donar</button>
+          </div>
         </div>
-        <h3 class="access-title">Accesible</h3>
-        <p class="access-desc">
-          Baños dentro de negocios donde normalmente permiten el uso del baño
-          sin exigir compra, pero siguen siendo espacios privados.
-        </p>
-      </article>
 
-      <!-- Gratuito -->
-      <article class="access-card">
-        <div class="access-icon access-icon--green">
-          <i class="fas fa-toilet"></i>
+        <p class="home-meta">
+          Ubicaciones verificadas · Actualizado regularmente
+        </p>
+      </section>
+
+      <!-- ACCESO A LOS BAÑOS -->
+      <section class="home-section">
+        <header class="home-section-header">
+          <h2 class="home-section-title">Acceso a los baños</h2>
+          <p class="home-section-subtitle">
+            Tipos de acceso según el color del pin que ves en el mapa.
+          </p>
+        </header>
+
+        <div class="access-grid">
+          <!-- Accesible -->
+          <article class="access-card">
+            <div class="access-icon access-icon--blue">
+              <i class="fas fa-toilet"></i>
+            </div>
+            <h3 class="access-title">Accesible</h3>
+            <p class="access-desc">
+              Baños dentro de negocios donde normalmente permiten el uso del baño
+              sin exigir compra, pero siguen siendo espacios privados.
+            </p>
+          </article>
+
+          <!-- Gratuito -->
+          <article class="access-card">
+            <div class="access-icon access-icon--green">
+              <i class="fas fa-toilet"></i>
+            </div>
+            <h3 class="access-title">Gratuito</h3>
+            <p class="access-desc">
+              Baños totalmente gratuitos y de acceso público.
+              Ejemplo: parques, bibliotecas, centros comunitarios.
+            </p>
+          </article>
+
+          <!-- Cliente -->
+          <article class="access-card">
+            <div class="access-icon access-icon--orange">
+              <i class="fas fa-toilet"></i>
+            </div>
+            <h3 class="access-title">Cliente</h3>
+            <p class="access-desc">
+              Baños dentro de restaurantes u otros negocios donde
+              se requiere consumir algo o mostrar un recibo para poder usar el baño.
+            </p>
+          </article>
         </div>
-        <h3 class="access-title">Gratuito</h3>
-        <p class="access-desc">
-          Baños totalmente gratuitos y de acceso público.
-          Ejemplo: parques, bibliotecas, centros comunitarios.
-        </p>
-      </article>
+      </section>
 
-      <!-- Cliente -->
-      <article class="access-card">
-        <div class="access-icon access-icon--orange">
-          <i class="fas fa-toilet"></i>
-        </div>
-        <h3 class="access-title">Cliente</h3>
-        <p class="access-desc">
-          Baños dentro de restaurantes u otros negocios donde
-          se requiere consumir algo o mostrar un recibo para poder usar el baño.
-        </p>
-      </article>
-    </div>
-  </section>
+      <!-- CARACTERÍSTICAS DEL BAÑO (EMOJI KEY) -->
+      <section class="home-section">
+        <header class="home-section-header">
+          <h2 class="home-section-title">Características del baño</h2>
+          <p class="home-section-subtitle">
+            Entiende de un vistazo qué ofrece cada baño usando los emojis del mapa.
+          </p>
+        </header>
 
-  <!-- CARACTERÍSTICAS DEL BAÑO (EMOJI KEY) -->
-  <section class="home-section">
-    <header class="home-section-header">
-      <h2 class="home-section-title">Características del baño</h2>
-      <p class="home-section-subtitle">
-        Entiende de un vistazo qué ofrece cada baño usando los emojis del mapa.
-      </p>
-    </header>
-
-    <ul class="emoji-list">
-      <li class="emoji-item">
+        <ul class="emoji-list">
+          <!-- … TU LISTA ACTUAL DE EMOJIS SIN CAMBIOS … -->
+          <li class="emoji-item">
         <span class="emoji">🚻</span>
         <div class="emoji-text">
           <span class="emoji-label">Múltiples cabinas o inodoros</span>
@@ -413,46 +419,46 @@
           <span class="emoji-desc">Cuenta con estación para cambiar pañales.</span>
         </div>
       </li>
-    </ul>
-  </section>
-</div> <!-- /home-main -->
-    
-      <!-- DASHBOARD DERECHO -->
-      <aside class="home-aside" aria-label="Impacto de Go Bathroom NYC">
-        <section class="impact-card">
-          <header class="impact-header">
-            <h2 class="impact-title">Impacto de Go Bathroom NYC</h2>
-            <p class="impact-subtitle">
-              Estimado según el uso del mapa y visitas recientes.
-            </p>
-          </header>
+        </ul>
+      </section>
+    </div>
 
-          <div class="impact-metrics">
-            <div class="impact-metric">
-              <div class="impact-metric-label">
-                <span class="impact-emoji">🚽</span>
-                <span>Baños registrados</span>
-              </div>
-              <span class="impact-metric-value">245</span>
-            </div>
+    <!-- COLUMNA DERECHA: DASHBOARD -->
+    <aside class="home-aside" aria-label="Impacto de Go Bathroom NYC">
+      <section class="impact-card">
+        <header class="impact-header">
+          <h2 class="impact-title">Impacto de Go Bathroom NYC</h2>
+          <p class="impact-subtitle">
+            Estimado según el uso del mapa y visitas recientes.
+          </p>
+        </header>
 
-            <div class="impact-metric">
-              <div class="impact-metric-label">
-                <span class="impact-emoji">👤</span>
-                <span>Personas ayudadas</span>
-              </div>
-              <span class="impact-metric-value">1,820</span>
+        <div class="impact-metrics">
+          <div class="impact-metric">
+            <div class="impact-metric-label">
+              <span class="impact-emoji">🚽</span>
+              <span>Baños registrados</span>
             </div>
+            <div class="impact-metric-value">245</div>
           </div>
 
-          <p class="impact-footnote">
-            *Datos actualizados manualmente cada semana.
-          </p>
-        </section>
-      </aside>
-    </div> <!-- /home-layout -->
-  
+          <div class="impact-metric">
+            <div class="impact-metric-label">
+              <span class="impact-emoji">🧍‍♂️</span>
+              <span>Personas ayudadas</span>
+            </div>
+            <div class="impact-metric-value">1,820</div>
+          </div>
+        </div>
+
+        <p class="impact-footnote">
+          *Datos actualizados manualmente cada semana.
+        </p>
+      </section>
+    </aside>
+  </div>
 </main>
+
 
 </body>
 </html>
