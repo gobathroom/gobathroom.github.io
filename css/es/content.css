@@ -1,57 +1,84 @@
-/* ===========================
-   0: HOME: LAYOUT GENERAL
-   =========================== */
+/* =========================================================
+   0: HOME — LAYOUT GENERAL
+   ========================================================= */
 
 .content {
   max-width: var(--content-max, 1120px);
-  margin: 24px auto 40px;
-  padding: 0 16px 40px;
+  margin: var(--space-4, 24px) auto var(--space-6, 40px);
+  padding: 0 var(--space-3, 16px) var(--space-6, 40px);
 }
 
-/* Tarjeta base para secciones de la home */
-.home-hero,
-.home-section {
+/* Contenedor base para tarjetas del contenido */
+.home-card {
   background: var(--panel);
   border-radius: var(--radius, 14px);
-  padding: 20px 20px 18px;
-  box-shadow: var(--panel-surf-shadow);
+  padding: var(--space-4, 20px);
   border: 1px solid var(--panel-surf-border);
-  margin-bottom: 20px;
+  box-shadow: var(--panel-surf-shadow);
+  margin-bottom: var(--space-4, 20px);
 }
 
-/* ===========================
-   1:NOTIFAST (BANNER SUPERIOR)
-   =========================== */
+/* Hero y sections reutilizan home-card */
+.home-hero,
+.home-section,
+.impact-card {
+  composes: home-card;
+}
+
+
+/* =========================================================
+   0.1 — LAYOUT CON ASIDE (DASHBOARD)
+   ========================================================= */
+
+.home-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4, 24px);
+}
+
+.home-main {
+  flex: 1 1 auto;
+}
+
+.home-aside {
+  width: 300px;
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   1 — NOTIFAST (BANNER SUPERIOR)
+   ========================================================= */
 
 .notifbar {
   max-width: var(--content-max, 1120px);
-  margin: 12px auto 0;
-  padding: 10px 14px;
+  margin: var(--space-3, 12px) auto 0;
+  padding: var(--space-2, 10px) var(--space-3, 14px);
 
   background: var(--panel);
-  border-radius: 12px;
+  border-radius: var(--radius-sm, 12px);
   border: 1px solid var(--panel-surf-border);
   box-shadow: var(--panel-surf-shadow);
 
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-2, 10px);
 
   font-size: 13px;
-  color: var(--muted, #9fb0d0);
+  color: var(--muted);
 }
 
 .notifbar-pill {
   width: 28px;
   height: 28px;
   border-radius: 999px;
-  display: inline-flex;
+
+  display: flex;
   align-items: center;
   justify-content: center;
 
-  background: rgba(0, 209, 255, 0.12);
-  color: var(--brand, #00d1ff);
-  flex-shrink: 0;
+  background: rgba(0, 209, 255, .12);
+  color: var(--brand);
 }
 
 .notifbar-pill i {
@@ -59,272 +86,158 @@
 }
 
 .notifbar-text strong {
-  color: var(--text-strong, #f5f7ff);
-  margin-right: 4px;
+  color: var(--text-strong);
 }
 
 
-
-
-/* ===========================
-   2: HERO / BIENVENIDA
-   =========================== */
+/* =========================================================
+   2 — HERO / BIENVENIDA
+   ========================================================= */
 
 .home-hero-header {
-  margin-bottom: 16px;
+  margin-bottom: var(--space-3, 16px);
 }
 
 .home-title {
   font-size: 28px;
   line-height: 1.25;
-  color: var(--text-strong, #f5f7ff);
-  margin: 0 0 6px;
+  color: var(--text-strong);
+  margin-bottom: 6px;
 }
 
 .home-subtitle {
-  margin: 0;
   font-size: 15px;
-  color: var(--muted, #9fb0d0);
+  color: var(--muted);
 }
 
 .home-hero-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px 14px;
-  margin-top: 18px;
+  gap: var(--space-3, 14px);
+  margin-top: var(--space-3, 18px);
 }
 
 .home-hero-secondary {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--space-2, 8px);
 }
 
-/* Botones reutilizables */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 8px 16px;
-  border-radius: 999px;
-  font-size: 14px;
-  border: 1px solid transparent;
-  cursor: pointer;
-  text-decoration: none;
-  white-space: nowrap;
-  transition:
-    background 0.15s ease,
-    color 0.15s ease,
-    border-color 0.15s ease,
-    transform 0.1s ease;
-}
 
-.btn-primary {
-  background: var(--brand, #00d1ff);
-  color: #021019;
-  font-weight: 600;
-}
-
-.btn-primary:hover {
-  transform: translateY(-1px);
-}
-
-.btn-ghost {
-  background: transparent;
-  color: var(--text, #dbe5ff);
-  border-color: var(--border, rgba(255,255,255,.1));
-}
-
-.btn-ghost:hover {
-  background: var(--hover, rgba(255,255,255,.06));
-}
-
-.btn i {
-  font-size: 16px;
-}
-
-.home-meta {
-  margin-top: 10px;
-  font-size: 12px;
-  color: var(--muted, #9fb0d0);
-}
-
-/* ===========================
-   2.1: SECCIONES GENERALES
-   =========================== */
-
-.home-section-header {
-  margin-bottom: 14px;
-}
-
-.home-section-title {
-  margin: 0 0 4px;
-  font-size: 18px;
-  color: var(--text-strong, #f5f7ff);
-}
-
-.home-section-subtitle {
-  margin: 0;
-  font-size: 14px;
-  color: var(--muted, #9fb0d0);
-}
-
-/* ===========================
-   3: ACCESO A LOS BAÑOS
-   =========================== */
+/* =========================================================
+   3 — ACCESO A BAÑOS
+   ========================================================= */
 
 .access-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-  margin-top: 10px;
+  gap: var(--space-3, 12px);
+  margin-top: var(--space-2, 10px);
 }
 
 .access-card {
-  background: var(--panel-2, #1c2230);
-  border-radius: 12px;
-  padding: 14px 14px 16px;
+  background: var(--panel-2);
+  border-radius: var(--radius-sm, 12px);
+  padding: var(--space-3, 14px);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-2, 8px);
 }
 
 .access-icon {
   width: 40px;
   height: 40px;
   border-radius: 999px;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
-  margin-bottom: 4px;
 }
 
-/* Colores de los tres tipos de pin */
-.access-icon--blue {
-  background: #005bff;
-}
-
-.access-icon--green {
-  background: #00c853;
-}
-
-.access-icon--orange {
-  background: #ff7a00;
-}
-
-.access-icon i {
-  font-size: 20px;
-}
+/* Iconos de tipo */
+.access-icon--blue  { background: #005bff; }
+.access-icon--green { background: #00c853; }
+.access-icon--orange { background: #ff7a00; }
 
 .access-title {
-  margin: 0;
   font-size: 15px;
   font-weight: 600;
-  color: var(--text, #dbe5ff);
+  color: var(--text);
 }
 
 .access-desc {
-  margin: 0;
   font-size: 13px;
   line-height: 1.45;
-  color: var(--muted, #9fb0d0);
+  color: var(--muted);
 }
 
-/* ===========================
-   4: EMOJI KEY / CARACTERÍSTICAS
-   =========================== */
+
+/* =========================================================
+   4 — EMOJI KEY
+   ========================================================= */
 
 .emoji-list {
-  list-style: none;
-  margin: 6px 0 0;
-  padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 10px 18px;
+  gap: var(--space-3, 18px);
 }
 
 .emoji-item {
   display: flex;
-  align-items: flex-start;
-  gap: 10px;
+  gap: var(--space-2, 10px);
 }
 
 .emoji {
   font-size: 20px;
-  line-height: 1;
-  margin-top: 2px;
-}
-
-.emoji-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
 }
 
 .emoji-label {
   font-size: 14px;
-  color: var(--text, #dbe5ff);
   font-weight: 500;
+  color: var(--text);
 }
 
 .emoji-desc {
   font-size: 13px;
-  color: var(--muted, #9fb0d0);
+  color: var(--muted);
 }
 
 
-/* ===========================
-   5: DASHBOARD: IMPACTO
-   =========================== */
-
-.impact-card {
-  background: var(--panel);
-  border-radius: var(--radius, 14px);
-  padding: 16px 16px 14px;
-  border: 1px solid var(--panel-surf-border);
-  box-shadow: var(--panel-surf-shadow);
-}
-
-.impact-header {
-  margin-bottom: 10px;
-}
+/* =========================================================
+   5 — DASHBOARD IMPACTO
+   ========================================================= */
 
 .impact-title {
-  margin: 0 0 4px;
   font-size: 15px;
   font-weight: 600;
-  color: var(--text-strong, #f5f7ff);
+  color: var(--text-strong);
 }
 
 .impact-subtitle {
-  margin: 0;
   font-size: 12px;
-  color: var(--muted, #9fb0d0);
+  color: var(--muted);
 }
 
 .impact-metrics {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 10px;
+  gap: var(--space-2, 10px);
+  margin-top: var(--space-2, 10px);
 }
 
 .impact-metric {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  align-items: center;
 }
 
 .impact-metric-label {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-1, 6px);
   font-size: 13px;
-  color: var(--text, #dbe5ff);
+  color: var(--text);
 }
 
 .impact-emoji {
@@ -334,74 +247,37 @@
 .impact-metric-value {
   font-size: 22px;
   font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--text-strong, #f5f7ff);
+  color: var(--text-strong);
 }
 
 .impact-footnote {
-  margin: 8px 0 0;
+  margin-top: var(--space-1, 8px);
   font-size: 11px;
-  color: var(--muted, #9fb0d0);
+  color: var(--muted);
 }
 
 
-
-/* ===========================
+/* =========================================================
    RESPONSIVE
-   =========================== */
+   ========================================================= */
 
 @media (max-width: 720px) {
+
+  .home-layout {
+    flex-direction: column;
+    gap: var(--space-3, 16px);
+  }
+
+  .home-aside {
+    width: 100%;
+  }
+
   .home-title {
     font-size: 22px;
   }
 
-  .home-hero {
-    padding: 16px 14px 16px;
-  }
-
+  .home-hero,
   .home-section {
-    padding: 16px 14px 16px;
+    padding: var(--space-3, 14px);
   }
-
-  .home-hero-actions {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .home-hero-secondary {
-    width: 100%;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    width: auto;
-  }
-
-
-   
-
-
-     .home-layout {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .home-aside {
-    flex: 0 0 auto;
-    width: 100%;
-  }
-
-  .impact-card {
-    padding: 14px 14px 12px;
-  }
-
-  .impact-metric-value {
-    font-size: 20px;
-  }
-
-  .notifbar {
-    margin: 10px 8px 0;
-    padding: 9px 10px;
-  }
-
 }
