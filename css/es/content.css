@@ -1,39 +1,29 @@
-/* =========================================================
-   0: HOME — LAYOUT GENERAL
-   ========================================================= */
+/* ===========================
+   0: HOME: LAYOUT GENERAL
+   =========================== */
 
 .content {
   max-width: var(--content-max, 1120px);
-  margin: var(--space-4, 24px) auto var(--space-6, 40px);
-  padding: 0 var(--space-3, 16px) var(--space-6, 40px);
+  margin: 24px auto 40px;
+  padding: 0 16px 40px;
 }
 
-/* Contenedor base para tarjetas del contenido */
-.home-card {
+/* Tarjeta base para secciones de la home */
+.home-hero,
+.home-section {
   background: var(--panel);
   border-radius: var(--radius, 14px);
-  padding: var(--space-4, 20px);
-  border: 1px solid var(--panel-surf-border);
+  padding: 20px 20px 18px;
   box-shadow: var(--panel-surf-shadow);
-  margin-bottom: var(--space-4, 20px);
+  border: 1px solid var(--panel-surf-border);
+  margin-bottom: 20px;
 }
 
-/* Hero y sections reutilizan home-card */
-.home-hero,
-.home-section,
-.impact-card {
-  composes: home-card;
-}
-
-
-/* =========================================================
-   0.1 — LAYOUT CON ASIDE (DASHBOARD)
-   ========================================================= */
-
+/* Layout de 2 columnas: contenido + dashboard */
 .home-layout {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-4, 24px);
+  gap: 20px;
 }
 
 .home-main {
@@ -41,44 +31,42 @@
 }
 
 .home-aside {
-  width: 300px;
-  flex-shrink: 0;
+  flex: 0 0 280px;   /* ancho fijo aproximado para el panel derecho */
 }
 
-
-/* =========================================================
-   1 — NOTIFAST (BANNER SUPERIOR)
-   ========================================================= */
+/* ===========================
+   1: NOTIFAST (BANNER SUPERIOR)
+   =========================== */
 
 .notifbar {
   max-width: var(--content-max, 1120px);
-  margin: var(--space-3, 12px) auto 0;
-  padding: var(--space-2, 10px) var(--space-3, 14px);
+  margin: 12px auto 0;
+  padding: 10px 14px;
 
   background: var(--panel);
-  border-radius: var(--radius-sm, 12px);
+  border-radius: 12px;
   border: 1px solid var(--panel-surf-border);
   box-shadow: var(--panel-surf-shadow);
 
   display: flex;
   align-items: center;
-  gap: var(--space-2, 10px);
+  gap: 10px;
 
   font-size: 13px;
-  color: var(--muted);
+  color: var(--muted, #9fb0d0);
 }
 
 .notifbar-pill {
   width: 28px;
   height: 28px;
   border-radius: 999px;
-
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  background: rgba(0, 209, 255, .12);
-  color: var(--brand);
+  background: rgba(0, 209, 255, 0.12);
+  color: var(--brand, #00d1ff);
+  flex-shrink: 0;
 }
 
 .notifbar-pill i {
@@ -86,158 +74,268 @@
 }
 
 .notifbar-text strong {
-  color: var(--text-strong);
+  color: var(--text-strong, #f5f7ff);
+  margin-right: 4px;
 }
 
-
-/* =========================================================
-   2 — HERO / BIENVENIDA
-   ========================================================= */
+/* ===========================
+   2: HERO / BIENVENIDA
+   =========================== */
 
 .home-hero-header {
-  margin-bottom: var(--space-3, 16px);
+  margin-bottom: 16px;
 }
 
 .home-title {
   font-size: 28px;
   line-height: 1.25;
-  color: var(--text-strong);
-  margin-bottom: 6px;
+  color: var(--text-strong, #f5f7ff);
+  margin: 0 0 6px;
 }
 
 .home-subtitle {
+  margin: 0;
   font-size: 15px;
-  color: var(--muted);
+  color: var(--muted, #9fb0d0);
 }
 
 .home-hero-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-3, 14px);
-  margin-top: var(--space-3, 18px);
+  gap: 10px 14px;
+  margin-top: 18px;
 }
 
 .home-hero-secondary {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2, 8px);
+  gap: 8px;
 }
 
+/* Botones reutilizables */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.1s ease;
+}
 
-/* =========================================================
-   3 — ACCESO A BAÑOS
-   ========================================================= */
+.btn-primary {
+  background: var(--brand, #00d1ff);
+  color: #021019;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text, #dbe5ff);
+  border-color: var(--border, rgba(255,255,255,.1));
+}
+
+.btn-ghost:hover {
+  background: var(--hover, rgba(255,255,255,.06));
+}
+
+.btn i {
+  font-size: 16px;
+}
+
+.home-meta {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted, #9fb0d0);
+}
+
+/* ===========================
+   2.1: SECCIONES GENERALES
+   =========================== */
+
+.home-section-header {
+  margin-bottom: 14px;
+}
+
+.home-section-title {
+  margin: 0 0 4px;
+  font-size: 18px;
+  color: var(--text-strong, #f5f7ff);
+}
+
+.home-section-subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted, #9fb0d0);
+}
+
+/* ===========================
+   3: ACCESO A LOS BAÑOS
+   =========================== */
 
 .access-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--space-3, 12px);
-  margin-top: var(--space-2, 10px);
+  gap: 12px;
+  margin-top: 10px;
 }
 
 .access-card {
-  background: var(--panel-2);
-  border-radius: var(--radius-sm, 12px);
-  padding: var(--space-3, 14px);
+  background: var(--panel-2, #1c2230);
+  border-radius: 12px;
+  padding: 14px 14px 16px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2, 8px);
+  gap: 8px;
 }
 
 .access-icon {
   width: 40px;
   height: 40px;
   border-radius: 999px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   color: #fff;
+  margin-bottom: 4px;
 }
 
-/* Iconos de tipo */
-.access-icon--blue  { background: #005bff; }
-.access-icon--green { background: #00c853; }
-.access-icon--orange { background: #ff7a00; }
+/* Colores de los tres tipos de pin */
+.access-icon--blue {
+  background: #005bff;
+}
+
+.access-icon--green {
+  background: #00c853;
+}
+
+.access-icon--orange {
+  background: #ff7a00;
+}
+
+.access-icon i {
+  font-size: 20px;
+}
 
 .access-title {
+  margin: 0;
   font-size: 15px;
   font-weight: 600;
-  color: var(--text);
+  color: var(--text, #dbe5ff);
 }
 
 .access-desc {
+  margin: 0;
   font-size: 13px;
   line-height: 1.45;
-  color: var(--muted);
+  color: var(--muted, #9fb0d0);
 }
 
-
-/* =========================================================
-   4 — EMOJI KEY
-   ========================================================= */
+/* ===========================
+   4: EMOJI KEY / CARACTERÍSTICAS
+   =========================== */
 
 .emoji-list {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: var(--space-3, 18px);
+  gap: 10px 18px;
 }
 
 .emoji-item {
   display: flex;
-  gap: var(--space-2, 10px);
+  align-items: flex-start;
+  gap: 10px;
 }
 
 .emoji {
   font-size: 20px;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.emoji-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .emoji-label {
   font-size: 14px;
+  color: var(--text, #dbe5ff);
   font-weight: 500;
-  color: var(--text);
 }
 
 .emoji-desc {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--muted, #9fb0d0);
 }
 
+/* ===========================
+   5: DASHBOARD: IMPACTO
+   =========================== */
 
-/* =========================================================
-   5 — DASHBOARD IMPACTO
-   ========================================================= */
+.impact-card {
+  background: var(--panel);
+  border-radius: var(--radius, 14px);
+  padding: 16px 16px 14px;
+  border: 1px solid var(--panel-surf-border);
+  box-shadow: var(--panel-surf-shadow);
+}
+
+.impact-header {
+  margin-bottom: 10px;
+}
 
 .impact-title {
+  margin: 0 0 4px;
   font-size: 15px;
   font-weight: 600;
-  color: var(--text-strong);
+  color: var(--text-strong, #f5f7ff);
 }
 
 .impact-subtitle {
+  margin: 0;
   font-size: 12px;
-  color: var(--muted);
+  color: var(--muted, #9fb0d0);
 }
 
 .impact-metrics {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2, 10px);
-  margin-top: var(--space-2, 10px);
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .impact-metric {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .impact-metric-label {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-1, 6px);
+  gap: 6px;
   font-size: 13px;
-  color: var(--text);
+  color: var(--text, #dbe5ff);
 }
 
 .impact-emoji {
@@ -247,37 +345,67 @@
 .impact-metric-value {
   font-size: 22px;
   font-weight: 700;
-  color: var(--text-strong);
+  letter-spacing: 0.02em;
+  color: var(--text-strong, #f5f7ff);
 }
 
 .impact-footnote {
-  margin-top: var(--space-1, 8px);
+  margin: 8px 0 0;
   font-size: 11px;
-  color: var(--muted);
+  color: var(--muted, #9fb0d0);
 }
 
-
-/* =========================================================
+/* ===========================
    RESPONSIVE
-   ========================================================= */
+   =========================== */
 
 @media (max-width: 720px) {
-
-  .home-layout {
-    flex-direction: column;
-    gap: var(--space-3, 16px);
-  }
-
-  .home-aside {
-    width: 100%;
-  }
-
   .home-title {
     font-size: 22px;
   }
 
-  .home-hero,
+  .home-hero {
+    padding: 16px 14px 16px;
+  }
+
   .home-section {
-    padding: var(--space-3, 14px);
+    padding: 16px 14px 16px;
+  }
+
+  .home-hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .home-hero-secondary {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    width: auto;
+  }
+
+  .home-layout {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .home-aside {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .impact-card {
+    padding: 14px 14px 12px;
+  }
+
+  .impact-metric-value {
+    font-size: 20px;
+  }
+
+  .notifbar {
+    margin: 10px 8px 0;
+    padding: 9px 10px;
   }
 }
