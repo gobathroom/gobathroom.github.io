@@ -79,117 +79,52 @@
 
 
 /* =========================================================
-   CENTER1.0: MAIN NAV
+   CENTER1.0: MAIN NAV (versión links de texto)
    ========================================================= */
 
 .main-nav {
   display: flex;
   align-items: center;
-  gap: var(--space-2, 8px);
+  gap: 18px;
 }
 
-/* Cada opción del menú */
+/* Link del menú (Información / Donar) */
 .main-nav .nav-item {
-  position: relative;
-
   display: inline-flex;
-  flex-direction: row;
   align-items: center;
-  gap: 6px;
 
-  /* casi toda la altura del header, dejando un margen pequeño arriba/abajo */
-  height: calc(var(--header-h, 64px) - 10px);
-  padding: 0 48px;
-
-  border-radius: var(--radius-sm, 10px);
+  padding: 0 4px;
+  height: auto;
 
   font-size: 14px;
+  font-weight: 500;
   text-decoration: none;
 
-  color: var(--text);
-  opacity: 1;
+  color: var(--muted, #9fb0d0);
+  background: transparent;
+  border-radius: 999px;
 
   transition:
-    background 0.15s ease,
     color 0.15s ease,
-    transform 0.1s ease;
+    background 0.15s ease;
 }
 
+/* No usamos iconos dentro del nav ahora, pero por si acaso: */
 .main-nav .nav-item i {
-  font-size: 24px;
+  font-size: 16px;
 }
 
-/* Hover SOLO en los que NO están activos */
-.main-nav .nav-item:not(.is-active):hover {
+/* Hover */
+.main-nav .nav-item:hover {
+  color: var(--text);
   background: var(--hover);
-  transform: translateY(-1px);
 }
 
-/* Línea inferior estilo Facebook */
-.main-nav .nav-item::after {
-  content: "";
-  position: absolute;
-
-  left: 0;
-  right: 0;
-
-  /* la línea queda justo debajo del fondo, dentro del topbar */
-  bottom: -5px;
-  height: 3px;
-  border-radius: 10px;
-  background: transparent;
-}
-
-/* Estado activo (sección actual) */
+/* Estado “activo” (si lo usas en alguna página) */
 .main-nav .nav-item.is-active {
   color: var(--brand);
 }
 
-.main-nav .nav-item.is-active i {
-  color: var(--brand);
-}
-
-.main-nav .nav-item.is-active::after {
-  background: var(--brand);  /* la línea turquesa */
-}
-
-
-/* =========================================================
-   CENTER1.1: TOOLTIP PARA NAV-ITEMS
-   ========================================================= */
-
-.main-nav .nav-item::before {
-  content: attr(data-label);   /* texto desde data-label */
-
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%) translateY(4px);
-
-  bottom: -32px;
-
-  padding: 4px 10px;
-  border-radius: 10px;
-
-  font-size: 12px;
-  white-space: nowrap;
-
-  background: var(--text);
-  color: var(--panel);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-
-  opacity: 0;
-  pointer-events: none;
-  z-index: 1200;
-
-  transition:
-    opacity 0.18s ease-out 0.18s,
-    transform 0.18s ease-out 0.18s;
-}
-
-.main-nav .nav-item:hover::before {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
 
 
 /* =========================================================
@@ -319,215 +254,6 @@
 
 
 /* =========================================================
-   RIGHT1.3: SHARE WRAPPER + PANEL "COMPARTIR"
-   ========================================================= */
-
-/* Wrapper del botón de compartir */
-.share-wrapper {
-  position: static;
-  display: flex;
-  align-items: center;
-}
-
-/* Ventana flotante "Compartir" */
-.share-panel {
-  position: absolute;
-  top: calc(100% + 7px);
-  right: 0;  /* alineado con el último icono (idioma) */
-
-  min-width: 260px;
-  max-width: 360px;
-
-  background: var(--panel);
-  border-radius: var(--radius-sm, 10px);
-  border: 1px solid var(--panel-elev-border);
-  box-shadow: var(--panel-elev-shadow);
-  padding: 10px 12px;
-
-  display: block;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(4px);
-  transition:
-    opacity 0.18s ease-out,
-    transform 0.18s ease-out;
-  z-index: 1300;
-}
-
-/* Título "Compartir" */
-.share-panel-header {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 8px;
-}
-
-/* Body del panel */
-.share-panel-body {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Contenedor que superpone URL y mensaje de éxito */
-.share-url-wrapper {
-  position: relative;
-}
-
-/* Rectángulo que agrupa icono + URL + botón Copy */
-.share-url-group {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 6px 10px;
-  border-radius: var(--radius-sm, 10px);
-  border: 1px solid var(--border);
-  background: transparent;
-}
-
-/* Icono de link a la izquierda */
-.share-url-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  color: var(--muted);
-}
-
-/* Input con la URL (sin bordes, ocupa todo el espacio) */
-.share-url-input {
-  flex: 1;
-  min-width: 0;
-  border: none;
-  background: transparent;
-  color: var(--text);
-  font-size: 13px;
-  outline: none;
-}
-
-/* Botón Copy tipo pill */
-.share-copy-btn {
-  border: none;
-  border-radius: var(--radius-sm, 10px);
-  padding: 4px 12px;
-  background: transparent;
-  color: var(--text);
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  white-space: nowrap;
-  transition:
-    background 0.15s ease,
-    transform 0.1s ease,
-    color 0.15s ease;
-}
-
-/* Hover del botón Copy */
-.share-copy-btn:hover {
-  background: var(--hover);
-  transform: translateY(-1px);
-}
-
-/* Mensaje “copiado correctamente” superpuesto en el mismo lugar */
-.share-success {
-  font-size: 13px;
-  position: absolute;
-  inset: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: var(--radius-sm, 10px);
-  padding: 6px 10px;
-
-  background: rgba(16,185,129,.12);
-  color: var(--text);
-  border: 1px solid rgba(16,185,129,.35);
-
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(2px);
-  transition:
-    opacity 0.15s ease-out,
-    transform 0.15s ease-out;
-}
-
-/* Cuando el wrapper está en estado “copiado” */
-.share-url-wrapper.copied .share-url-group {
-  opacity: 0;
-  transform: scale(0.98);
-}
-
-.share-url-wrapper.copied .share-success {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Panel visible SOLO cuando el wrapper tiene .is-open */
-.share-wrapper.is-open .share-panel {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
-/* Icono de compartir activo */
-.share-wrapper.is-open .share-btn {
-  color: var(--brand);
-}
-
-/* Mientras está abierto, ocultar el tooltip del botón */
-.share-wrapper.is-open .share-btn::before {
-  opacity: 0 !important;
-  transform: translateX(-50%) translateY(4px);
-  transition: none;
-}
-
-
-/* =========================================================
-   RIGHT1.4: BOTONES SOCIALES (FB / X / WhatsApp)
-   ========================================================= */
-
-.share-social {
-  margin-top: 12px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-/* Botones rectangulares */
-.social-btn {
-  height: 36px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: var(--radius-sm, 10px);
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text);
-  font-size: 16px;
-  cursor: pointer;
-
-  transition:
-    background 0.15s ease,
-    transform 0.1s ease,
-    border-color 0.15s ease;
-}
-
-.social-btn:hover {
-  background: var(--hover);
-  transform: translateY(-1px);
-  border-color: var(--brand);
-}
-
-.social-btn i {
-  pointer-events: none;
-}
-
-
-/* =========================================================
    RESPONSIVE
    ========================================================= */
 
@@ -536,9 +262,8 @@
     padding: 0 8px;
   }
 
-  /* De momento, el centro se puede ocultar en mobile.
-     Cuando hagamos la topbar mobile, lo cambiamos. */
   .topbar .center {
-    display: none;
+    justify-content: flex-start;
   }
 }
+
