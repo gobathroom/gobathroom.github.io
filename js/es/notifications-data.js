@@ -1,27 +1,30 @@
-// notifications-data.js
 window.NOTICES = [
   {
     id: 1,
     text: 'Si recoges pedidos en un negocio, pregunta si puedes usar el baño; muchos lugares lo permiten si eres respetuoso.',
     category: 'Acceso',
+    kind: 'law',         // 🔹 Ley / regla
     important: true
   },
   {
     id: 2,
-    text: 'Respeta los baños solo para clientes: si vas a usarlo, consume algo pequeño o pregunta con anticipación.',
-    category: 'Respeto',
+    text: 'En zonas concurridas mantén una velocidad máxima recomendada de 15 mph con tu e-bike.',
+    category: 'Seguridad',
+    kind: 'law',         // 🔹 Ley / regla
     important: true
   },
   {
     id: 3,
-    text: 'En zonas concurridas mantén una velocidad máxima recomendada de 15 mph con tu e-bike.',
-    category: 'Seguridad',
-    important: false
+    text: 'Cuida los baños gratuitos: deja el espacio limpio para que otros también puedan usarlo.',
+    category: 'Cuidado',
+    kind: 'tip',         // 🟡 Consejo
+    important: true
   },
   {
     id: 4,
-    text: 'Cuida los baños gratuitos: deja el espacio limpio para que otros también puedan usarlo.',
-    category: 'Cuidado',
-    important: true
+    text: 'Evita bloquear la entrada de otros clientes cuando aseguras tu bici o esperas el pedido.',
+    category: 'Respeto',
+    kind: 'tip',
+    important: false
   }
 ];
