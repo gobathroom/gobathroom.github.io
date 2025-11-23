@@ -4,41 +4,32 @@ document.addEventListener('DOMContentLoaded', () => {
   // ✔ Comprobar que window.NOTICES existe y es válido
   if (!Array.isArray(window.NOTICES) || !window.NOTICES.length) return;
 
-  // ✔ Guardar la data en una variable
   const tipsData = window.NOTICES;
 
   // 👉 aquí decides qué mostrar en la barra:
-  // 1) Solo algunos por id:
   const idsParaBarra = [1, 2, 4];
   let tips = tipsData
     .filter(n => idsParaBarra.includes(n.id))
     .map(n => n.text);
-
-  // 2) O todos los importantes:
-  // let tips = tipsData.filter(n => n.important).map(n => n.text);
-
-  // 3) O TODOS:
-  // let tips = tipsData.map(n => n.text);
 
   if (!tips.length) return;
 
   const DEFAULT_DELAY = 8000;  // 8s
   const MANUAL_DELAY  = 15000; // 15s
 
-  const msgEl      = document.getElementById('notifMessage');
-  const prevBtn    = document.getElementById('notifPrev');
-  const nextBtn    = document.getElementById('notifNext');
-  const controlsEl = document.querySelector('.notifbar-controls');
+  const msgEl       = document.getElementById('notifMessage');
+  const prevBtn     = document.getElementById('notifPrev');
+  const nextBtn     = document.getElementById('notifNext');
+  const controlsEl  = document.querySelector('.notifbar-controls');
+  const textWrapper = document.querySelector('.notifbar-text-inner');
 
   let currentIndex = 0;
   let timerId = null;
 
-  // --- Función para mostrar el texto ---
   function renderTip() {
     msgEl.textContent = tips[currentIndex];
   }
 
-  // --- Programar el siguiente cambio ---
   function scheduleNext(delay) {
     clearTimeout(timerId);
     timerId = setTimeout(() => {
@@ -46,18 +37,79 @@ document.addEventListener('DOMContentLoaded', () => {
     }, delay);
   }
 
+  // 🔵 Función genérica para animar cambio
+  function animateChange(direction, updateIndexFn, fromUser) {
+    if (!textWrapper) {
+      // Sin wrapper, cambiamos normal
+      updateIndexFn();
+      renderTip();
+      scheduleNext(fromUser ? MANUAL_DELAY : DEFAULT_DELAY);
+      return;
+    }
+
+    // Elegir clases segun dirección
+    const outClass = direction === 'next'
+      ? 'notif-slide-out-next'
+      : 'notif-slide-out-prev';
+    const inClass = direction === 'next'
+      ? 'notif-slide-in-next'
+      : 'notif-slide-in-prev';
+
+    // Limpiar posibles clases previas
+    textWrapper.classList.remove(
+      'notif-slide-out-next',
+      'notif-slide-in-next',
+      'notif-slide-out-prev',
+      'notif-slide-in-prev'
+    );
+
+    // 1) animación de salida
+    textWrapper.classList.add(outClass);
+
+    function handleOutEnd() {
+      textWrapper.removeEventListener('animationend', handleOutEnd);
+      textWrapper.classList.remove(outClass);
+
+      // Actualizar índice + texto
+      updateIndexFn();
+      renderTip();
+
+      // 2) animación de entrada
+      textWrapper.classList.add(inClass);
+
+      function handleInEnd() {
+        textWrapper.removeEventListener('animationend', handleInEnd);
+        textWrapper.classList.remove(inClass);
+      }
+
+      textWrapper.addEventListener('animationend', handleInEnd);
+    }
+
+    textWrapper.addEventListener('animationend', handleOutEnd);
+
+    scheduleNext(fromUser ? MANUAL_DELAY : DEFAULT_DELAY);
+  }
+
   // --- Siguiente tip ---
   function goNext(fromUser) {
-    currentIndex = (currentIndex + 1) % tips.length;
-    renderTip();
-    scheduleNext(fromUser ? MANUAL_DELAY : DEFAULT_DELAY);
+    animateChange(
+      'next',
+      () => {
+        currentIndex = (currentIndex + 1) % tips.length;
+      },
+      fromUser
+    );
   }
 
   // --- Tip anterior ---
   function goPrev() {
-    currentIndex = (currentIndex - 1 + tips.length) % tips.length;
-    renderTip();
-    scheduleNext(MANUAL_DELAY);
+    animateChange(
+      'prev',
+      () => {
+        currentIndex = (currentIndex - 1 + tips.length) % tips.length;
+      },
+      true // lo tratamos como interacción del usuario
+    );
   }
 
   // --- Ocultar controles si solo hay un tip ---
@@ -74,13 +126,9 @@ document.addEventListener('DOMContentLoaded', () => {
     prevBtn.addEventListener('click', goPrev);
   }
 
-  /*  
-  =====================================================
-     🟦 BLOQUE SWIPE (AQUÍ ES DONDE VA)
-  =====================================================
-  */
+  // --- Swipe (lo dejamos igual que ya tienes) ---
   const swipeArea = document.querySelector('.notifbar');
-  const SWIPE_THRESHOLD = 40; // píxeles mínimos para swipe
+  const SWIPE_THRESHOLD = 40;
   let startX = null;
   let isPointerDown = false;
 
@@ -108,11 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
       startX = null;
     });
   }
-  /*  
-  =====================================================
-     🟦 FIN DEL BLOQUE SWIPE
-  =====================================================
-  */
 
   // --- Iniciar ---
   renderTip();
