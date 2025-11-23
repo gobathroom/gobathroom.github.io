@@ -1,5 +1,5 @@
 /* ===========================
-   HOME: LAYOUT GENERAL
+   0: HOME: LAYOUT GENERAL
    =========================== */
 
 .content {
@@ -20,7 +20,54 @@
 }
 
 /* ===========================
-   HERO / BIENVENIDA
+   1:NOTIFAST (BANNER SUPERIOR)
+   =========================== */
+
+.notifbar {
+  max-width: var(--content-max, 1120px);
+  margin: 12px auto 0;
+  padding: 10px 14px;
+
+  background: var(--panel);
+  border-radius: 12px;
+  border: 1px solid var(--panel-surf-border);
+  box-shadow: var(--panel-surf-shadow);
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 13px;
+  color: var(--muted, #9fb0d0);
+}
+
+.notifbar-pill {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 209, 255, 0.12);
+  color: var(--brand, #00d1ff);
+  flex-shrink: 0;
+}
+
+.notifbar-pill i {
+  font-size: 14px;
+}
+
+.notifbar-text strong {
+  color: var(--text-strong, #f5f7ff);
+  margin-right: 4px;
+}
+
+
+
+
+/* ===========================
+   2: HERO / BIENVENIDA
    =========================== */
 
 .home-hero-header {
@@ -105,7 +152,7 @@
 }
 
 /* ===========================
-   SECCIONES GENERALES
+   2.1: SECCIONES GENERALES
    =========================== */
 
 .home-section-header {
@@ -125,7 +172,7 @@
 }
 
 /* ===========================
-   ACCESO A LOS BAÑOS
+   3: ACCESO A LOS BAÑOS
    =========================== */
 
 .access-grid {
@@ -187,7 +234,7 @@
 }
 
 /* ===========================
-   EMOJI KEY / CARACTERÍSTICAS
+   4: EMOJI KEY / CARACTERÍSTICAS
    =========================== */
 
 .emoji-list {
@@ -228,6 +275,77 @@
   color: var(--muted, #9fb0d0);
 }
 
+
+/* ===========================
+   5: DASHBOARD: IMPACTO
+   =========================== */
+
+.impact-card {
+  background: var(--panel);
+  border-radius: var(--radius, 14px);
+  padding: 16px 16px 14px;
+  border: 1px solid var(--panel-surf-border);
+  box-shadow: var(--panel-surf-shadow);
+}
+
+.impact-header {
+  margin-bottom: 10px;
+}
+
+.impact-title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-strong, #f5f7ff);
+}
+
+.impact-subtitle {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted, #9fb0d0);
+}
+
+.impact-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.impact-metric {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.impact-metric-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text, #dbe5ff);
+}
+
+.impact-emoji {
+  font-size: 16px;
+}
+
+.impact-metric-value {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text-strong, #f5f7ff);
+}
+
+.impact-footnote {
+  margin: 8px 0 0;
+  font-size: 11px;
+  color: var(--muted, #9fb0d0);
+}
+
+
+
 /* ===========================
    RESPONSIVE
    =========================== */
@@ -258,4 +376,32 @@
   .btn {
     width: auto;
   }
+
+
+   
+
+
+     .home-layout {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .home-aside {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .impact-card {
+    padding: 14px 14px 12px;
+  }
+
+  .impact-metric-value {
+    font-size: 20px;
+  }
+
+  .notifbar {
+    margin: 10px 8px 0;
+    padding: 9px 10px;
+  }
+
 }
