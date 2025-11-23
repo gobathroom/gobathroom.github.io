@@ -67,11 +67,26 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 
+  /* Color ahora lo definimos por tipo (tip / law) */
+  background: transparent;
+  color: var(--text);
+}
+
+/* TIP RÁPIDO (turquesa) */
+.notifbar-pill--tip {
   background: rgba(0, 209, 255, 0.12);
   color: var(--brand, #00d1ff);
-  flex-shrink: 0;
 }
+
+/* LEY RÁPIDA (amarillo/ámbar) */
+.notifbar-pill--law {
+  background: rgba(250, 204, 21, 0.22); /* #facc15 con transparencia */
+  color: #facc15;
+}
+
+
 
 .notifbar-pill i {
   font-size: 14px;
