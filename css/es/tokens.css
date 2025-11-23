@@ -1,0 +1,58 @@
+/* =========================================================
+   GLOBAL DESIGN TOKENS — Layout, Spacing & Structure
+   (Independiente de colores y temas)
+   ========================================================= */
+
+/* Variables globales */
+:root {
+
+  /* -----------------------------------
+     HEADER / TOPBAR
+     ----------------------------------- */
+  --header-h: 64px;    /* altura del topbar (desktop & mobile) */
+  --topbar-padding-x: 16px; /* espacio horizontal general */
+
+  /* -----------------------------------
+     CONTENIDO / ANCHOS MÁXIMOS
+     ----------------------------------- */
+  --content-max: 1120px;  /* ancho máximo del contenido central */
+  --content-gap: 24px;    /* separación entre tarjetas/secciones */
+
+  /* -----------------------------------
+     RADIOS
+     ----------------------------------- */
+  --radius-sm: 8px;
+  --radius: 14px;         /* usado por paneles, tarjetas principales */
+  --radius-lg: 20px;
+
+  /* -----------------------------------
+     ESPACIADOS GLOBALES
+     ----------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 28px;
+
+  /* -----------------------------------
+     TIPOGRAFÍA / TAMAÑOS BASE
+     ----------------------------------- */
+  --font-size-sm: 13px;
+  --font-size-base: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 20px;
+  --font-size-hero: 28px;
+
+  /* -----------------------------------
+     ESTRUCTURA DE COLUMNAS (si algún día usas sidebar)
+     ----------------------------------- */
+  --sidebar-w: 320px;
+
+  /* -----------------------------------
+     SOMBRAS BASE (neutras, sin color)
+     ----------------------------------- */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+  --shadow-md: 0 4px 8px rgba(0,0,0,0.12);
+  --shadow-lg: 0 10px 18px rgba(0,0,0,0.16);
+}
