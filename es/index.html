@@ -45,158 +45,55 @@
 
 <body>
   <!-- ============================= -->
-  <!--          TOP BAR             -->
-  <!-- ============================= -->
-  <header class="topbar">
-    <div class="left">
-      <!-- Logo -->
-      <a class="brand" id="brandLink">
-        <img src="/assets/svg/logo.svg" alt="Go Bathroom Logo">
-        <span class="logo">Go Bathroom</span>
-      </a>
-    </div>
-
-    <div class="center">
-      <nav class="main-nav" aria-label="Navegación principal">
-        <a href="/es"
-           class="nav-item is-active"
-           data-label="Inicio"
-           aria-label="Inicio">
-          <i class="fa-solid fa-house"></i>
-        </a>
-
-        <a href="/es/maps"
-           class="nav-item"
-           data-label="Mapa"
-           aria-label="Mapa">
-          <i class="fa-solid fa-map-location-dot"></i>
-        </a>
-
-        <a href="https://TU_LINK_GOOGLE_FORM_SUGGEST"
-           class="nav-item"
-           target="_blank"
-           rel="noopener"
-           data-label="Sugerir"
-           aria-label="Sugerir">
-          <i class="fa-solid fa-lightbulb"></i>
-        </a>
-
-        <a href="https://TU_LINK_GOOGLE_FORM_REPORT"
-           class="nav-item"
-           target="_blank"
-           rel="noopener"
-           data-label="Reportar"
-           aria-label="Reportar">
-          <i class="fa-solid fa-flag"></i>
-        </a>
-
-        <a href="https://TU_LINK_PAYPAL_DONATE"
-           class="nav-item"
-           target="_blank"
-           rel="noopener"
-           data-label="Donar"
-           aria-label="Donar">
-          <i class="fa-solid fa-hand-holding-heart"></i>
-        </a>
-      </nav>
-    </div>
-
-    <div class="right">
-      
-  <!-- Notificaciones (solo icono + tooltip) -->
-<button
-  class="icon-btn"
-  id="notifBtn"
-  type="button"
-  aria-label="Notificaciones"
-  data-label="Notificaciones"
->
-  <i class="fas fa-bell"></i>
-</button>
-
- <!-- Compartir -->
-<div class="share-wrapper">
-  <button
-    class="icon-btn share-btn"
-    id="shareBtn"
-    type="button"
-    aria-label="Compartir"
-    data-label="Compartir"
-    aria-haspopup="true"
-    aria-expanded="false"
-  >
-    <i class="fas fa-share-nodes"></i>
-  </button>
-
-  <!-- Ventana flotante de compartir -->
-<div class="share-panel" id="sharePanel" aria-hidden="true">
-  <div class="share-panel-header">Compartir</div>
-
-  <div class="share-panel-body">
-    <div class="share-url-wrapper" id="shareUrlWrapper">
-      <div class="share-url-group">
-        <span class="share-url-icon">
-          <i class="fas fa-link"></i>
-        </span>
-
-        <input
-          type="text"
-          id="shareUrl"
-          class="share-url-input"
-          readonly
-        />
-
-        <button
-          type="button"
-          class="share-copy-btn"
-          id="copyShareUrl"
-        >
-          Copiar
-        </button>
-      </div>
-
-      <div class="share-success">
-        ✔ ¡Copiado correctamente!
-        </div>
-      </div>
-    
-    <!-- 🔥 BOTONES SOCIALES (PEGAR AQUÍ) -->
-    <div class="share-social">
-      <button class="social-btn" id="shareFb" aria-label="Compartir en Facebook">
-        <i class="fab fa-facebook-f"></i>
-      </button>
-
-      <button class="social-btn" id="shareX" aria-label="Compartir en X">
-        <i class="fab fa-x-twitter"></i>
-      </button>
-
-      <button class="social-btn" id="shareWa" aria-label="Compartir en WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-      </button>
-    </div>
-    <!-- FIN BOTONES SOCIALES -->
-
-
-    </div>
+<!--          TOP BAR             -->
+<!-- ============================= -->
+<header class="topbar">
+  <div class="left">
+    <!-- Logo -->
+    <a class="brand" id="brandLink" href="/">
+      <img src="/assets/svg/logo.svg" alt="Go Bathroom Logo">
+      <span class="logo">Go Bathroom</span>
+    </a>
   </div>
-</div>
 
+  <div class="center">
+    <nav class="main-nav" aria-label="Navegación principal">
+      
+      <!-- Hace scroll a la sección de acceso y características -->
+      <a href="#info-acceso" class="nav-item top-link">
+        Información
+      </a>
 
+      <!-- Página o enlace externo de donaciones -->
+      <a href="https://TU_LINK_PAYPAL_DONATE"
+         target="_blank"
+         rel="noopener"
+         class="nav-item top-link">
+        Donar
+      </a>
 
+    </nav>
+  </div>
 
-  <!-- Modo oscuro -->
-  <button id="themeToggle" class="icon-btn" aria-label="Modo oscuro" data-label="Dark / Light">
-    <i class="fas fa-moon"></i>
-  </button>
+  <div class="right">
 
-  <!-- Idioma -->
-  <a href="/en" class="lang-btn" aria-label="Change language">
-    <i class="fas fa-globe"></i>
-    <span class="lang-text">English</span>
-  </a>
-</div>
+    <!-- Modo oscuro -->
+    <button id="themeToggle"
+            class="icon-btn"
+            aria-label="Cambiar tema"
+            data-label="Tema">
+      <i class="fas fa-circle-half-stroke"></i>
+    </button>
 
-  </header>
+    <!-- Idioma -->
+    <a href="/en" class="lang-btn" aria-label="Change language">
+      <i class="fas fa-globe"></i>
+      <span class="lang-text">English</span>
+    </a>
+
+  </div>
+</header>
+
 
 
 
