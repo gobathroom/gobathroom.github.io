@@ -41,7 +41,7 @@
 .notifbar {
   max-width: var(--content-max, 1120px);
   margin: 12px auto 0;
-  padding: 10px 14px;
+  padding: 10px 16px;
 
   background: var(--panel);
   border-radius: 12px;
