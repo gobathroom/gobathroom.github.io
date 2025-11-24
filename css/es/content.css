@@ -541,7 +541,7 @@
   align-items: center;
   gap: 10px;
   font-size: 13px;
-  color: var(--text, #dbe5ff);
+  /*color: var(--text, #dbe5ff);*/
 }
 
 /* Círculo para icono */
