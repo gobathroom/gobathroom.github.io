@@ -353,60 +353,61 @@
 
 /* Tarjeta base */
 .access-card {
-  background: var(--panel-2, #1c2230);  /* gris neutro */
   border-radius: 12px;
-  padding: 14px 14px 16px;
+  padding: 16px 14px 18px;
 
   display: flex;
   flex-direction: column;
   gap: 8px;
 
-  text-align: center;   /* texto centrado */
-  border: 1px solid var(--border, rgba(255,255,255,.12));
+  text-align: center;
+
+  /* base neutra muy suave (para que el tinte de color se note) */
+  background: var(--panel-2, #f3f4f8);
+  border: 1px solid transparent;
+
+  /* animaciones suaves */
+  transition:
+    transform 0.15s ease-out,
+    box-shadow 0.15s ease-out,
+    border-color 0.15s ease-out,
+    background 0.15s ease-out;
 }
 
+/* Hover general de las tarjetas */
+.access-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+}
 
-/* Variaciones por tipo: solo color de borde + tinte muy suave */
+/* Variaciones por tipo: fondo pastel + borde de color fuerte */
 .access-card--blue {
-  border-color: rgba(53, 137, 202, 0.65);
-  background: linear-gradient(
-    to bottom,
-    rgba(53, 137, 202, 0.06),
-    var(--panel-2, #1c2230)
-  );
+  background: rgba(53, 137, 202, 0.12);   /* pastel azul */
+  border-color: rgba(53, 137, 202, 0.8);
 }
 
 .access-card--green {
-  border-color: rgba(85, 206, 54, 0.65);
-  background: linear-gradient(
-    to bottom,
-    rgba(85, 206, 54, 0.06),
-    var(--panel-2, #1c2230)
-  );
+  background: rgba(85, 206, 54, 0.12);    /* pastel verde */
+  border-color: rgba(85, 206, 54, 0.8);
 }
 
 .access-card--orange {
-  border-color: rgba(242, 148, 22, 0.65);
-  background: linear-gradient(
-    to bottom,
-    rgba(242, 148, 22, 0.06),
-    var(--panel-2, #1c2230)
-  );
+  background: rgba(242, 148, 22, 0.14);   /* pastel naranja */
+  border-color: rgba(242, 148, 22, 0.85);
 }
-
-
 
 /* Contenedor del icono */
 .access-icon {
-  width: 80px;         /* tamaño recomendado */
+  width: 80px;
   height: 80px;
-  margin: 0 auto 8px;  /* centra completamente */
+  margin: 0 auto 8px;
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* La imagen SVG dentro */
+/* Imagen SVG dentro */
 .access-icon-img {
   width: 100%;
   height: 100%;
@@ -417,14 +418,14 @@
   margin: 0;
   font-size: 15px;
   font-weight: 600;
-  color: var(--text, #dbe5ff);
+  color: var(--text, #101320);
 }
 
 .access-desc {
   margin: 0;
   font-size: 13px;
   line-height: 1.45;
-  color: var(--muted, #9fb0d0);
+  color: var(--muted, #6f809d);
 }
 
 
