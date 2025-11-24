@@ -399,6 +399,14 @@
 }
 
 
+.access-card--blue,
+.access-card--green,
+.access-card--orange {
+  border-width: 1.6px; /* o 2px si quieres más impacto */
+}
+
+
+
 /* Contenedor del icono */
 .access-icon {
   width: 80px;
