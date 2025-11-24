@@ -148,6 +148,7 @@
 
   background: var(--hover);  /* fondo fijo gris suave */
   color: var(--text);
+  text-decoration: none;     /* 🔹 quita la raya del link */
 
   transition:
     background 0.15s ease,
@@ -169,6 +170,13 @@
   outline: 2px solid var(--brand);
   outline-offset: 2px;
 }
+
+.icon-btn:visited,
+.icon-btn:hover,
+.icon-btn:focus {
+  text-decoration: none;
+}
+
 
 
 /* =========================================================
