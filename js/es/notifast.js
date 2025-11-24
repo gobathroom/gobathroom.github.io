@@ -1,4 +1,4 @@
-// /js/notifast.js
+// /js/es/notifast.js
 document.addEventListener('DOMContentLoaded', () => {
 
   // ✔ Comprobar que window.NOTICES existe y es válido
@@ -6,16 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const tipsData = window.NOTICES;
 
-  // 👉 aquí decides qué mostrar en la barra:
-  const idsParaBarra = [1, 2, 4];
-
-  // ✔ Mantener objetos completos (NO .map(n => n.text))
+  // 👉 qué mostrar en la barra (ids que quieres usar)
+  const idsParaBarra = [1, 2, 3, 4];   // usa los que quieras
   let tips = tipsData.filter(n => idsParaBarra.includes(n.id));
 
   if (!tips.length) return;
 
-  const DEFAULT_DELAY = 8000;  // 8s
-  const MANUAL_DELAY  = 15000; // 15s
+  const DEFAULT_DELAY = 8000;  // 8s auto
+  const MANUAL_DELAY  = 15000; // 15s si el usuario toca
 
   const msgEl       = document.getElementById('notifMessage');
   const prevBtn     = document.getElementById('notifPrev');
@@ -23,49 +21,60 @@ document.addEventListener('DOMContentLoaded', () => {
   const controlsEl  = document.querySelector('.notifbar-controls');
   const textWrapper = document.querySelector('.notifbar-text-inner');
 
-  // NUEVO → detectamos label + icono + pastilla
-  const labelEl = document.querySelector('.notifbar-text strong');
-  const iconEl  = document.querySelector('.notifbar-pill i');
-  const pillEl  = document.querySelector('.notifbar-pill');
+  const labelEl     = document.querySelector('.notifbar-text strong');
+  const iconEl      = document.querySelector('.notifbar-pill i');
+  const pillEl      = document.querySelector('.notifbar-pill');
+  const moreLinkEl  = document.getElementById('notifMore');
 
   let currentIndex = 0;
   let timerId = null;
 
   // ============================
-  // 🔵 ACTUALIZAR TEXTO + ICONO + COLOR
+  // 🔵 ACTUALIZAR TEXTO + ICONO
   // ============================
   function renderTip() {
     const current = tips[currentIndex];
     if (!current) return;
 
-    // Texto principal
-    msgEl.textContent = current.text;
-
-    // Tip o Ley
     const isLaw = current.kind === 'law';
 
-    // Cambiar label
+    // Texto principal
+    if (msgEl) {
+      msgEl.textContent = current.text;
+    }
+
+    // Label (Tip rápido / Ley rápida)
     if (labelEl) {
       labelEl.textContent = isLaw ? 'Ley rápida:' : 'Tip rápido:';
     }
 
-    // Cambiar icono
+    // Icono (martillo / rayo)
     if (iconEl) {
       iconEl.className = 'fas ' + (isLaw ? 'fa-gavel' : 'fa-bolt');
     }
 
-    // Cambiar color de la pastilla
+    // Pastilla (color según tipo)
     if (pillEl) {
       pillEl.classList.toggle('notifbar-pill--law', isLaw);
       pillEl.classList.toggle('notifbar-pill--tip', !isLaw);
     }
+
+    // 🔵 Leer más SOLO para leyes con URL
+    if (moreLinkEl) {
+      if (isLaw && current.moreUrl) {
+        moreLinkEl.style.display = 'inline';
+        moreLinkEl.href = current.moreUrl;
+      } else {
+        moreLinkEl.style.display = 'none';
+        moreLinkEl.removeAttribute('href');
+      }
+    }
   }
 
-  // Programar el siguiente cambio
   function scheduleNext(delay) {
     clearTimeout(timerId);
     timerId = setTimeout(() => {
-      goNext(false); // false = automático
+      goNext(false); // auto
     }, delay);
   }
 
@@ -103,13 +112,13 @@ document.addEventListener('DOMContentLoaded', () => {
       updateIndexFn();
       renderTip();
 
-      textWrapper.addEventListener('animationend', handleInEnd);
       textWrapper.classList.add(inClass);
 
       function handleInEnd() {
         textWrapper.removeEventListener('animationend', handleInEnd);
         textWrapper.classList.remove(inClass);
       }
+      textWrapper.addEventListener('animationend', handleInEnd);
     }
 
     textWrapper.addEventListener('animationend', handleOutEnd);
@@ -117,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
     scheduleNext(fromUser ? MANUAL_DELAY : DEFAULT_DELAY);
   }
 
-  // Siguiente tip
   function goNext(fromUser) {
     animateChange(
       'next',
@@ -126,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
-  // Tip anterior
   function goPrev() {
     animateChange(
       'prev',
@@ -135,6 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
+  // Ocultar controles si solo hay un tip
   if (tips.length <= 1 && controlsEl) {
     controlsEl.classList.add('is-hidden');
   }
@@ -143,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (prevBtn) prevBtn.addEventListener('click', goPrev);
 
   // ============================
-  // 🔵 SWIPE
+  // 🔵 SWIPE (desktop + mobile)
   // ============================
   const swipeArea = document.querySelector('.notifbar');
   const SWIPE_THRESHOLD = 40;
