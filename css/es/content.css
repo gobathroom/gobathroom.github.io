@@ -382,19 +382,22 @@
 
 /* Variaciones por tipo: fondo pastel + borde de color fuerte */
 .access-card--blue {
-  background: rgba(53, 137, 202, 0.12);   /* pastel azul */
-  border-color: rgba(53, 137, 202, 0.8);
+  background: rgba(53, 137, 202, 0.05);   /* pastel MUY suave */
+  border-color: rgba(53, 137, 202, 0.75);
 }
+
 
 .access-card--green {
-  background: rgba(85, 206, 54, 0.12);    /* pastel verde */
-  border-color: rgba(85, 206, 54, 0.8);
+  background: rgba(85, 206, 54, 0.05);
+  border-color: rgba(85, 206, 54, 0.75);
 }
 
+
 .access-card--orange {
-  background: rgba(242, 148, 22, 0.14);   /* pastel naranja */
-  border-color: rgba(242, 148, 22, 0.85);
+  background: rgba(242, 148, 22, 0.06);
+  border-color: rgba(242, 148, 22, 0.8);
 }
+
 
 /* Contenedor del icono */
 .access-icon {
