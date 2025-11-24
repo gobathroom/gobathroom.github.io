@@ -553,20 +553,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: rgba(0, 209, 255, 0.10);
-  border: 1px solid transparent;
 }
 
 /* Variantes por tipo */
-.impact-icon--blue {
-  background: rgba(0, 209, 255, 0.12);
-  border-color: rgba(0, 209, 255, 0.7);
-}
-
+.impact-icon--blue,
 .impact-icon--green {
-  background: rgba(34, 197, 94, 0.12);
-  border-color: rgba(34, 197, 94, 0.7);
+  background: rgba(0, 209, 255, 0.12);
+  color: var(--brand, #00d1ff);
 }
 
 /* Imagen SVG dentro del círculo */
