@@ -519,30 +519,63 @@
   color: var(--muted, #9fb0d0);
 }
 
+/* Contenedor de las métricas */
 .impact-metrics {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 14px;
+  margin-top: 12px;
 }
 
+/* Cada métrica: todo centrado, estilo “tarjetita” vertical */
 .impact-metric {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  text-align: center;
+  gap: 6px;
+
+  padding: 10px 8px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.5); /* tenue, sobre el panel */
 }
 
-.impact-metric-label {
-  display: inline-flex;
+/* Icono dentro de círculo suave (como NotiFast pero más grande) */
+.impact-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+
+  display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+
+  background: rgba(0, 209, 255, 0.08);  /* valor por defecto, se sobrescribe en variantes */
+  border: 1px solid transparent;
+}
+
+/* Variantes por tipo */
+.impact-icon--blue {
+  background: rgba(0, 209, 255, 0.10);
+  border-color: rgba(0, 209, 255, 0.7);
+}
+
+.impact-icon--green {
+  background: rgba(34, 197, 94, 0.10);
+  border-color: rgba(34, 197, 94, 0.7);
+}
+
+/* Imagen SVG dentro del círculo */
+.impact-icon-img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* Texto de la métrica */
+.impact-metric-label {
   font-size: 13px;
   color: var(--text, #dbe5ff);
-}
-
-.impact-emoji {
-  font-size: 16px;
 }
 
 .impact-metric-value {
@@ -553,10 +586,11 @@
 }
 
 .impact-footnote {
-  margin: 8px 0 0;
+  margin: 10px 0 0;
   font-size: 11px;
   color: var(--muted, #9fb0d0);
 }
+
 
 /* ===========================
    RESPONSIVE
