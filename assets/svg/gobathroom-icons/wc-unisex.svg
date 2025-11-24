@@ -1,20 +1,13 @@
-<!-- wc-unisex-icon.svg -->
-<svg viewBox="0 0 127.22 127.22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<svg width="127.22mm" height="127.22mm" version="1.1" viewBox="0 0 127.22 127.22" xmlns="http://www.w3.org/2000/svg">
   <g transform="translate(382.41 -269.8)">
     <g transform="matrix(1.0455 0 0 1.0455 13.679 -14.232)">
-      <!-- Línea central (solo trazo) -->
-      <path
-        d="m-318.8 306.52c0.10654 0 0.19094 0.14789 0.19094 0.33177v52.747c0 0.18382-0.0863 0.33177-0.19094 0.33177-0.10589 0-0.19094-0.14791-0.19094-0.33177v-52.747c0-0.18381 0.0863-0.33177 0.19094-0.33177z"
-        fill="none"
-        stroke="#fff"
-        stroke-width="4.7603"
-      />
-      <!-- Persona izquierda -->
+      <path d="m-318.8 306.52c0.10654 0 0.19094 0.14789 0.19094 0.33177v52.747c0 0.18382-0.0863 0.33177-0.19094 0.33177-0.10589 0-0.19094-0.14791-0.19094-0.33177v-52.747c0-0.18381 0.0863-0.33177 0.19094-0.33177z" fill="none" stroke="#fff" stroke-width="4.7603"/>
       <g transform="matrix(1.6809 0 0 1.6809 225.64 -245.4)" fill="#fff">
-        <circle cx="-337.51" cy="333.95" r="6.7352"/>
-        <rect x="-342.37" y="342.93" width="8.7932" height="18.335" ry="3.9273"/>
+        <g fill="#fff">
+          <circle cx="-337.51" cy="333.95" r="6.7352"/>
+          <rect x="-342.37" y="342.93" width="8.7932" height="18.335" ry="3.9273"/>
+        </g>
       </g>
-      <!-- Persona derecha -->
       <g transform="matrix(1.6809 0 0 1.6809 207.29 -244.41)" fill="#fff">
         <rect x="-304.25" y="342.34" width="8.7932" height="18.335" ry="3.9273"/>
         <circle cx="-299.39" cy="333.36" r="6.7352"/>
