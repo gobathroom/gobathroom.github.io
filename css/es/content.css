@@ -382,19 +382,19 @@
 
 /* Variaciones por tipo: fondo pastel + borde de color fuerte */
 .access-card--blue {
-  background: rgba(53, 137, 202, 0.05);   /* pastel MUY suave */
+  background: rgba(53, 137, 202, 0.01);   /* pastel MUY suave */
   border-color: rgba(53, 137, 202, 0.75);
 }
 
 
 .access-card--green {
-  background: rgba(85, 206, 54, 0.05);
+  background: rgba(85, 206, 54, 0.01);
   border-color: rgba(85, 206, 54, 0.75);
 }
 
 
 .access-card--orange {
-  background: rgba(242, 148, 22, 0.06);
+  background: rgba(242, 148, 22, 0.01);
   border-color: rgba(242, 148, 22, 0.8);
 }
 
