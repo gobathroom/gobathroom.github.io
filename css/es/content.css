@@ -446,56 +446,48 @@
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 10px 16px;
-  margin-top: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  column-gap: 40px;   /* separación entre columnas */
+  row-gap: 18px;      /* separación entre filas */
+  margin-top: 14px;
 }
 
+/* Cada característica (icono + texto) */
 .feature-item {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-
-  padding: 10px 12px;
-  border-radius: 10px;
-
-  background: rgba(255, 255, 255, 0.015); /* toque muy suave */
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding-block: 4px;   /* un poco de aire arriba/abajo */
 }
 
+/* Emoji / icono */
 .feature-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 999px;
-  flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 18px;
-  background: var(--panel, #161b22);
+  font-size: 26px;
+  line-height: 1;
+  margin-top: 3px;      /* baja un poco el icono para alinearlo al título */
 }
 
-.feature-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+/* Bloque de texto */
+.feature-body {
+  flex: 1;
 }
 
+/* Título de la característica */
 .feature-title {
   margin: 0;
   font-size: 14px;
   font-weight: 600;
-  color: var(--text, #dbe5ff);
+  color: var(--text, #1f2933);
 }
 
+/* Descripción corta */
 .feature-desc {
-  margin: 0;
+  margin: 2px 0 0;
   font-size: 13px;
-  line-height: 1.4;
-  color: var(--muted, #9fb0d0);
+  line-height: 1.45;
+  color: var(--muted, #6b7280);
 }
+
 
 
 /* ===========================
