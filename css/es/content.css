@@ -166,7 +166,7 @@
   text-decoration: underline;
   cursor: pointer;
   white-space: nowrap;
-  display: none; /* JS lo pondrá en inline cuando toque */
+  display: none;
 }
 
 .notifbar-more:hover {
