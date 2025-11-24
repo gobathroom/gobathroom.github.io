@@ -256,7 +256,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 10px 14px;
-  margin-top: 18px;
+  margin-top: 20px;
 }
 
 .home-hero-secondary {
@@ -285,14 +285,19 @@
     transform 0.1s ease;
 }
 
+/* Hacer que el botón principal destaque un poco más */
 .btn-primary {
   background: var(--brand, #00d1ff);
   color: #021019;
   font-weight: 600;
+  padding-inline: 20px;
+  box-shadow: 0 8px 18px rgba(0, 209, 255, 0.25);
 }
+
 
 .btn-primary:hover {
   transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0, 209, 255, 0.35);
 }
 
 .btn-ghost {
