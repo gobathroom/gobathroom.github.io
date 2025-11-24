@@ -571,8 +571,8 @@
 
 /* Imagen SVG dentro del círculo */
 .impact-icon-img {
-  width: 42px;
-  height: 42px;
+  width: 75%;
+  height: 75%;
   display: block;
 }
 
