@@ -601,8 +601,8 @@ body[data-theme="dark"] .impact-icon {
 
 .fab-map {
   position: fixed;
-  right: 20px;
-  bottom: 24px;
+  right: 28px;
+  bottom: 28px;
   z-index: 900;
 
   display: inline-flex;
