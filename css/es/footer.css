@@ -109,6 +109,47 @@
   color: var(--text, #dbe5ff);
 }
 
+/* Wrapper del botón de copiar + tooltip */
+.share-copy-wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Tooltip debajo del botón, flotando (no mueve el layout) */
+.share-tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, 6px);
+
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #111827;              /* similar al tooltip del topbar */
+  color: #e5e7eb;
+  font-size: 11px;
+  max-width: 260px;
+  word-break: break-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.45);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 10;
+}
+
+/* Tooltip visible */
+.share-tooltip.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 10px);
+}
+
+
 .share-pill i {
   font-size: 12px;
 }
