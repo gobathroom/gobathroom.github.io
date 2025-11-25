@@ -1,20 +1,24 @@
-// Función que ya tenías: decide qué URL compartir
+
+/* ===========================
+   FOOTER:
+   =========================== */
+// Decide qué URL compartir (home en páginas legales)
 function getShareUrl() {
   const url  = new URL(window.location.href);
   const path = url.pathname;
 
-  // 1) Detectar prefijo de idioma: /es/ , /en/ , /fr/, etc.
+  // 1) Detectar prefijo de idioma: /es/ , /en/ , etc.
   let langPrefix = '/';
   const match = path.match(/^\/([a-z]{2})\//i);
   if (match) {
     langPrefix = `/${match[1]}/`;  // ej: "/es/"
   }
 
-  // 2) Obtener el último segmento del path (el "slug")
-  const segments   = path.replace(/\/+$/, '').split('/');
+  // 2) Último segmento del path (slug)
+  const segments    = path.replace(/\/+$/, '').split('/');
   const lastSegment = segments[segments.length - 1] || '';
 
-  // 3) Slugs que NO queremos compartir tal cual (solo compartimos la home del idioma)
+  // 3) Slugs que comparten solo la home del idioma
   const legalSlugs = new Set([
     'privacidad',
     'terminos',
@@ -23,13 +27,13 @@ function getShareUrl() {
   ]);
 
   if (legalSlugs.has(lastSegment)) {
-    url.pathname = langPrefix === '/' ? '/' : langPrefix;
+    url.pathname = (langPrefix === '/') ? '/' : langPrefix;
     url.search   = '';
     url.hash     = '';
     return url.toString();
   }
 
-  // 4) En cualquier otra página, compartir la URL actual completa
+  // 4) En cualquier otra página, compartir la URL completa
   return url.toString();
 }
 
@@ -37,25 +41,23 @@ function getShareUrl() {
    FOOTER: TOGGLE COMPARTIR
    =========================== */
 
-(function setupFooterShare() {
-  const footer       = document.querySelector('.site-footer');
-  const footerLinks  = document.querySelector('.footer-links');
-  const toggleBtn    = document.getElementById('footerShareToggle');
-  const shareRow     = document.getElementById('footerShareRow');
-  const shareButtons = shareRow ? shareRow.querySelectorAll('.share-pill') : [];
+(function setupFooterShare(){
+  const footer    = document.querySelector('.site-footer');
+  const toggleBtn = document.getElementById('footerShareToggle');
+  const shareRow  = document.getElementById('footerShareRow');
 
-  if (!footer || !footerLinks || !toggleBtn || !shareRow) return;
+  if (!footer || !toggleBtn || !shareRow) return;
+
+  const shareButtons = shareRow.querySelectorAll('.share-pill');
 
   function openShare() {
     footer.classList.add('is-sharing');
-    footerLinks.classList.add('footer-links--sharing');
     toggleBtn.setAttribute('aria-expanded', 'true');
     shareRow.setAttribute('aria-hidden', 'false');
   }
 
   function closeShare() {
     footer.classList.remove('is-sharing');
-    footerLinks.classList.remove('footer-links--sharing');
     toggleBtn.setAttribute('aria-expanded', 'false');
     shareRow.setAttribute('aria-hidden', 'true');
   }
@@ -75,10 +77,9 @@ function getShareUrl() {
   });
 
   // 2) Click en botones de compartir
-  shareButtons.forEach((btn) => {
+  shareButtons.forEach(btn => {
     btn.addEventListener('click', async (e) => {
       e.stopPropagation();
-
       const type = btn.dataset.share;
       const url  = getShareUrl();
       const text = 'Encuentra baños accesibles y gratuitos con Go Bathroom.';
@@ -102,17 +103,22 @@ function getShareUrl() {
         window.open(shareUrl, '_blank', 'noopener');
       }
 
-      // cerrar después de compartir
+      // Después de usar cualquier botón, cerramos el panel
       closeShare();
     });
   });
 
-  // 3) Cerrar si se hace click fuera del footer/row
+  // 3) Cerrar si se hace click fuera del footer o de la fila de compartir
   document.addEventListener('click', (e) => {
     if (!footer.classList.contains('is-sharing')) return;
 
     const insideFooter = footer.contains(e.target);
-    if (!insideFooter) {
+    const insideRow    = shareRow.contains(e.target);
+    const isToggle     = toggleBtn.contains(e.target);
+
+    // Si el click NO es en el footer, o es en el footer pero fuera
+    // del toggle y de la fila de compartir → cerrar
+    if (!insideFooter || (!insideRow && !isToggle)) {
       closeShare();
     }
   });
@@ -124,5 +130,3 @@ function getShareUrl() {
     }
   });
 })();
-
-
