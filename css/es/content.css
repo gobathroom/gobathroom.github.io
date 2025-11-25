@@ -551,8 +551,8 @@
 
 /* SVG interno (tamaño del ícono) */
 .impact-icon-svg {
-  width: 24px;
-  height: 24px;
+  width: 50px;
+  height: 50px;
   display: block;
   color: var(--text);   /* 🔹 AQUÍ se pinta el icono con el color del tema */
 }
