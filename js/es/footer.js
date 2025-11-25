@@ -33,94 +33,97 @@ function getShareUrl() {
   return url.toString();
 }
 
-/* ===========================
-   FOOTER: TOGGLE COMPARTIR
-   =========================== */
+// ===========================
+// FOOTER: Toggle compartir (opción 2)
+// ===========================
+(function () {
+  const footer = document.querySelector('.site-footer');
+  const toggle = document.getElementById('footerShareToggle');
+  const shareRow = document.getElementById('footerShareRow');
 
-(function setupFooterShare(){
-  const footer        = document.querySelector('.site-footer');
-  const toggleBtn     = document.getElementById('footerShareToggle');
-  const shareRow      = document.getElementById('footerShareRow');
-  const shareButtons  = shareRow ? shareRow.querySelectorAll('.share-pill') : [];
+  if (!footer || !toggle || !shareRow) return;
 
-  if (!footer || !toggleBtn || !shareRow) return;
+  const shareButtons = shareRow.querySelectorAll('.share-pill');
 
   function openShare() {
-    footer.classList.add('is-sharing');
-    toggleBtn.setAttribute('aria-expanded', 'true');
+    footer.classList.add('share-open');
     shareRow.setAttribute('aria-hidden', 'false');
+    toggle.setAttribute('aria-expanded', 'true');
   }
 
   function closeShare() {
-    footer.classList.remove('is-sharing');
-    toggleBtn.setAttribute('aria-expanded', 'false');
+    footer.classList.remove('share-open');
     shareRow.setAttribute('aria-hidden', 'true');
+    toggle.setAttribute('aria-expanded', 'false');
   }
 
-  function toggleShare() {
-    if (footer.classList.contains('is-sharing')) {
+  toggle.addEventListener('click', () => {
+    const isOpen = footer.classList.contains('share-open');
+    if (isOpen) {
       closeShare();
     } else {
       openShare();
     }
-  }
-
-  // 1) Click en "Compartir"
-  toggleBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    toggleShare();
   });
 
-  // 2) Click en botones de compartir
-  shareButtons.forEach(btn => {
-    btn.addEventListener('click', async (e) => {
-      e.stopPropagation();
-      const type = btn.dataset.share;
-      const url  = getShareUrl();
-      const text = 'Encuentra baños accesibles y gratuitos con Go Bathroom.';
+  // Cerrar al hacer clic fuera del footer
+  document.addEventListener('click', (ev) => {
+    if (!footer.classList.contains('share-open')) return;
+    if (footer.contains(ev.target)) return;
+    closeShare();
+  });
 
-      if (type === 'copy') {
-        try {
-          await navigator.clipboard.writeText(url);
-          // pequeño feedback visual opcional
-          btn.classList.add('share-pill--ok');
-          setTimeout(() => btn.classList.remove('share-pill--ok'), 1200);
-        } catch (err) {
-          console.error('No se pudo copiar el enlace', err);
-        }
-      } else if (type === 'x') {
-        const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+  // Cerrar con ESC
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape') {
+      closeShare();
+    }
+  });
+
+  // Lógica de compartir según el botón
+  async function handleShare(kind) {
+    const urlToShare = getShareUrl();   // usa tu función existente
+    const shareTitle = 'Go Bathroom NYC';
+    const shareText  = 'Encuentra baños accesibles, gratuitos y para clientes en NYC.';
+
+    try {
+      if (kind === 'copy') {
+        await navigator.clipboard.writeText(urlToShare);
+
+        const label = shareRow.querySelector('[data-share="copy"] .share-pill-label');
+        const original = label ? label.textContent : '';
+        if (label) label.textContent = '¡Copiado!';
+        setTimeout(() => {
+          if (label) label.textContent = original || 'Copiar enlace';
+        }, 1500);
+      } else if (kind === 'facebook') {
+        const shareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' +
+          encodeURIComponent(urlToShare);
         window.open(shareUrl, '_blank', 'noopener');
-      } else if (type === 'facebook') {
-        const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+      } else if (kind === 'x') {
+        const text = shareText + ' ' + urlToShare;
+        const shareUrl = 'https://twitter.com/intent/tweet?text=' +
+          encodeURIComponent(text);
         window.open(shareUrl, '_blank', 'noopener');
-      } else if (type === 'whatsapp') {
-        const shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + ' ' + url)}`;
+      } else if (kind === 'whatsapp') {
+        const text = shareText + ' ' + urlToShare;
+        const shareUrl = 'https://wa.me/?text=' + encodeURIComponent(text);
         window.open(shareUrl, '_blank', 'noopener');
       }
-
-      // Después de usar cualquier botón, cerramos el panel
+    } catch (err) {
+      console.error('Error al compartir:', err);
+    } finally {
+      // Siempre cerramos el panel después de usar una opción
       closeShare();
+    }
+  }
+
+  shareButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const kind = btn.dataset.share;
+      if (!kind) return;
+      handleShare(kind);
     });
   });
-
-  // 3) Cerrar si se hace click fuera del footer-share-row y del botón
-  document.addEventListener('click', (e) => {
-    if (!footer.classList.contains('is-sharing')) return;
-
-    const insideFooter = footer.contains(e.target);
-    const insideRow    = shareRow.contains(e.target);
-    const isToggle     = toggleBtn.contains(e.target);
-
-    if (!insideFooter || (!insideRow && !isToggle)) {
-      closeShare();
-    }
-  });
-
-  // 4) Cerrar con Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && footer.classList.contains('is-sharing')) {
-      closeShare();
-    }
-  });
 })();
+
