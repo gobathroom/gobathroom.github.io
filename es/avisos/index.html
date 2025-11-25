@@ -1,1 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- META BÁSICOS -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/logo.svg">
+  <link rel="alternate icon" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="alternate icon" href="/assets/favicon-48.png" sizes="48x48">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180">
+  <meta name="theme-color" content="#0d1117" />
+
+  <!-- TÍTULO -->
+  <title>Go Bathroom NYC</title>
+
+  <!-- ICONOS EXTERNOS (FONT AWESOME) --> 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- CSS GLOBAL (TOKENS (layout) + THEME + BASE CSS) -->
+  <link rel="stylesheet" href="/css/es/tokens.css">
+  <link rel="stylesheet" href="/css/es/theme.css">
+  <link rel="stylesheet" href="/css/es/base.css">
+
+  <!-- CSS DE COMPONENTES -->
+  <link rel="stylesheet" href="/css/es/dialog.css">
+  <link rel="stylesheet" href="/css/es/top-bar.css">
+
+  <!-- CSS DE Content -->
+  <link rel="stylesheet" href="/css/es/content.css">
+
+  <!-- CSS DE Footer -->
+  <link rel="stylesheet" href="/css/es/footer.css">
+
+  <!-- MANIFEST PWA -->
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- REGISTRO DEL SERVICE WORKER (DEFER IMPORTANTE) -->
+  <script src="/js/es/sw-register.js" defer></script>
+
+   <!-- Diccionario de textos de UI -->
+   <script src="/js/es/i18n.js" defer></script>
+  
+  <!-- SCRIPTS DE COMPONENTES (DEFER PARA RENDIR MEJOR) -->
+  <script src="/js/es/base.js" defer></script>
+  <script src="/js/es/notifications-data.js"></script>
+  <script src="/js/es/notifast.js"></script>
+  <script src="/js/es/top-bar.js" defer></script>
+  <script src="/js/es/footer.js" defer></script>
+  
+</head>
+
+<body>
+  <!-- ============================= -->
+<!--          TOP BAR             -->
+<!-- ============================= -->
+<header class="topbar">
+  <div class="left">
+    <!-- Logo -->
+    <a class="brand" id="brandLink" href="/">
+      <img src="/assets/svg/logo.svg" alt="Go Bathroom Logo">
+      <span class="logo">Go Bathroom</span>
+    </a>
+  </div>
+
+  <div class="center">
+    <nav class="main-nav" aria-label="Navegación principal">
+      
+      <!-- Hace scroll a la sección de acceso y características -->
+      <a href="#info-acceso" class="nav-item top-link" data-nav="info">
+        Información
+      </a>
+
+      <!-- Página o enlace externo de donaciones -->
+      <a href="https://www.paypal.com/donate/?hosted_button_id=K773CAM5X3QBC"
+         target="_blank"
+         rel="noopener"
+         class="nav-item top-link">
+        Donar
+      </a>
+
+    </nav>
+  </div>
+
+  <div class="right">
+
+     <!-- Avisos -->
+    <a class="icon-btn" href="/es/avisos" id="openNotices" data-label="Avisos">
+  <i class="fas fa-gavel"></i>
+</a>
+
+
+    <!-- Modo oscuro -->
+    <button id="themeToggle"
+            class="icon-btn"
+            aria-label="Cambiar tema"
+            data-label="Tema">
+      <i class="fas fa-circle-half-stroke"></i>
+    </button>
+
+    <!-- Idioma -->
+    <a href="/en" class="lang-btn" aria-label="Change language">
+      <i class="fas fa-globe"></i>
+      <span class="lang-text">English</span>
+    </a>
+
+  </div>
+</header>
+
+
+
+
+  <!-- ============================= -->
+<!--          NOTIFAST            -->
+<!-- ============================= -->
+<div class="notifbar-wrapper">
+  <section class="notifbar" aria-label="Avisos rápidos para repartidores y visitantes">
+    
+    <div class="notifbar-pill">
+      <i class="fas fa-bolt"></i>
+    </div>
+
+    <!-- Texto del tip (1 sola línea) -->
+    <div class="notifbar-text">
+      <strong>Tip rápido:</strong>
+      <!-- Nuevo wrapper para poder animar el slide -->
+  <span class="notifbar-text-inner">
+      <span id="notifMessage">
+        Si recoges pedidos en un negocio, pregunta si puedes usar el baño;
+        muchos lugares lo permiten si eres respetuoso.
+      </span>
+    </span>
+    
+
+       <!-- Leer más (lleva a la página de avisos / info) -->
+      <a href="/es/avisos" id="notifMore" class="notifbar-more">
+        Leer más
+      </a>
+      
+    </div>
+
+    <!-- Controles de navegación -->
+    <div class="notifbar-controls" aria-hidden="false">
+      <button
+        type="button"
+        class="notif-btn"
+        id="notifPrev"
+        aria-label="Tip anterior"
+      >
+        <i class="fas fa-chevron-left"></i>
+      </button>
+
+      <button
+        type="button"
+        class="notif-btn"
+        id="notifNext"
+        aria-label="Tip siguiente"
+      >
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+  </section>
+</div>
+
+
+
+  
+
+ <!-- ============================= -->
+<!--          MAIN CONTENT        -->
+<!-- ============================= -->
+
+<main class="content">
+  <div class="home-layout">
+    <!-- COLUMNA CENTRAL -->
+    <div class="home-main">
+
+     <!-- HERO / BIENVENIDA -->
+<section class="home-hero">
+  <header class="home-hero-header">
+    <h1 class="home-title">Bienvenido a Go Bathroom NYC</h1>
+    <p class="home-subtitle">
+      Tu guía rápida para encontrar baños accesibles, gratuitos y para clientes
+      a través de NYC y Long Island.
+    </p>
+  </header>
+
+  <div class="home-hero-actions">
+    <!-- CTA principal: mapa -->
+    <a href="/es/maps" class="btn btn-primary">
+      <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+      <span>Abrir mapa</span>
+    </a>
+
+    <!-- Acciones secundarias -->
+    <div class="home-hero-secondary">
+      <a href="https://TU_LINK_GOOGLE_FORM_SUGGEST"
+         class="btn btn-ghost"
+         target="_blank"
+         rel="noopener"
+         aria-label="Sugerir un baño mediante formulario">
+        <i class="fas fa-lightbulb" aria-hidden="true"></i>
+        <span>Sugerir baño</span>
+      </a>
+
+      <a href="https://TU_LINK_GOOGLE_FORM_REPORT"
+         class="btn btn-ghost"
+         target="_blank"
+         rel="noopener"
+         aria-label="Reportar un problema con un baño">
+        <i class="fas fa-flag" aria-hidden="true"></i>
+        <span>Reportar un problema</span>
+      </a>
+
+      <a href="https://TU_LINK_PAYPAL_DONATE"
+         class="btn btn-ghost"
+         target="_blank"
+         rel="noopener"
+         aria-label="Donar para apoyar Go Bathroom NYC">
+        <i class="fas fa-hand-holding-heart" aria-hidden="true"></i>
+        <span>Donar</span>
+      </a>
+    </div>
+  </div>
+
+  <p class="home-meta">
+    Ubicaciones verificadas · Actualizado regularmente
+  </p>
+</section>
+
+
+<!-- ACCESO A LOS BAÑOS -->
+<section class="home-section info-target" id="info-acceso">
+  <header class="home-section-header">
+    <h2 class="home-section-title">Acceso a los baños</h2>
+    <p class="home-section-subtitle">
+      Tipos de acceso según el color del pin que ves en el mapa.
+    </p>
+  </header>
+
+  <div class="access-grid">
+    <!-- Accesible -->
+    <article class="access-card access-card--blue">
+      <div class="access-icon">
+        <img
+          src="/assets/svg/pins/access-accessible.svg"
+          alt="Baño accesible (pin azul)"
+          class="access-icon-img"
+        >
+      </div>
+      <h3 class="access-title">Accesible</h3>
+      <p class="access-desc">
+        Baños dentro de negocios donde normalmente permiten el uso del baño
+        sin exigir compra, pero siguen siendo espacios privados.
+      </p>
+    </article>
+
+    <!-- Gratuito -->
+    <article class="access-card access-card--green">
+      <div class="access-icon">
+        <img
+          src="/assets/svg/pins/access-free.svg"
+          alt="Baño gratuito (pin verde)"
+          class="access-icon-img"
+        >
+      </div>
+      <h3 class="access-title">Gratuito</h3>
+      <p class="access-desc">
+        Baños totalmente gratuitos y de acceso público.
+        Ejemplo: parques, bibliotecas, centros comunitarios.
+      </p>
+    </article>
+
+    <!-- Cliente -->
+    <article class="access-card access-card--orange">
+      <div class="access-icon">
+        <img
+          src="/assets/svg/pins/access-client.svg"
+          alt="Baño para clientes (pin naranja)"
+          class="access-icon-img"
+        >
+      </div>
+      <h3 class="access-title">Cliente</h3>
+      <p class="access-desc">
+        Baños dentro de restaurantes u otros negocios donde
+        se requiere consumir algo o mostrar un recibo para poder usar el baño.
+      </p>
+    </article>
+  </div>
+</section>
+
+      
+
+
+
+      <!-- CARACTERÍSTICAS DEL BAÑO -->
+<section class="home-section info-target" id="info-caracteristicas">
+  <header class="home-section-header">
+    <h2 class="home-section-title">Características del baño</h2>
+    <p class="home-section-subtitle">
+      Entiende de un vistazo qué ofrece cada baño usando los emojis del mapa.
+    </p>
+  </header>
+
+  <div class="features-grid">
+    <!-- 1: Múltiples cabinas -->
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">🚾</span>
+      <div class="feature-body">
+        <h3 class="feature-title">Múltiples cabinas o inodoros</h3>
+        <p class="feature-desc">
+          Más de un baño disponible en la misma ubicación.
+        </p>
+      </div>
+    </div>
+
+    <!-- 2: Baños separados -->
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">🚹 🚺</span>
+      <div class="feature-body">
+        <h3 class="feature-title">Baños separados</h3>
+        <p class="feature-desc">
+          Baños distintos para hombres y mujeres.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3: Unisex -->
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">🚻</span>
+      <div class="feature-body">
+        <h3 class="feature-title">Baño unisex individual</h3>
+        <p class="feature-desc">
+          Cabina única para cualquier género.
+        </p>
+      </div>
+    </div>
+
+    <!-- 4: Accesible silla de ruedas -->
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">♿</span>
+      <div class="feature-body">
+        <h3 class="feature-title">Accesible en silla de ruedas</h3>
+        <p class="feature-desc">
+          Puerta y espacio interior adaptado.
+        </p>
+      </div>
+    </div>
+
+    <!-- 5: PIN -->
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">🔢</span>
+      <div class="feature-body">
+        <h3 class="feature-title">Requiere PIN</h3>
+        <p class="feature-desc">
+          Necesitas un código para abrir la puerta.
+        </p>
+      </div>
+    </div>
+
+    <!-- 6: Llave -->
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">🔑</span>
+      <div class="feature-body">
+        <h3 class="feature-title">Requiere llave</h3>
+        <p class="feature-desc">
+          Debes pedir la llave al personal del lugar.
+        </p>
+      </div>
+    </div>
+
+    <!-- 7: Papel no garantizado -->
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">🧻</span>
+      <div class="feature-body">
+        <h3 class="feature-title">Papel no garantizado</h3>
+        <p class="feature-desc">
+          Puede faltar papel higiénico: lleva el tuyo.
+        </p>
+      </div>
+    </div>
+
+    <!-- 8: Portátil / temporal -->
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">🚽</span>
+      <div class="feature-body">
+        <h3 class="feature-title">Baño portátil / temporal</h3>
+        <p class="feature-desc">
+          Baño tipo portátil o instalación temporal.
+        </p>
+      </div>
+    </div>
+
+    <!-- 9: 24/7 -->
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">🕒</span>
+      <div class="feature-body">
+        <h3 class="feature-title">Abierto 24/7</h3>
+        <p class="feature-desc">
+          Disponible todo el día, todos los días.
+        </p>
+      </div>
+    </div>
+
+    <!-- 10: Limpio -->
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">✅</span>
+      <div class="feature-body">
+        <h3 class="feature-title">Baño limpio</h3>
+        <p class="feature-desc">
+          Buena higiene en visitas recientes.
+        </p>
+      </div>
+    </div>
+
+    <!-- 11: Sucio -->
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">⚠️</span>
+      <div class="feature-body">
+        <h3 class="feature-title">Baño sucio</h3>
+        <p class="feature-desc">
+          Reportes de mala higiene o mal olor.
+        </p>
+      </div>
+    </div>
+
+    <!-- 12: Cambiador bebés -->
+    <div class="feature-item">
+      <span class="feature-icon" aria-hidden="true">🚼</span>
+      <div class="feature-body">
+        <h3 class="feature-title">Cambiador para bebés</h3>
+        <p class="feature-desc">
+          Cuenta con estación para cambiar pañales.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+    </div>
+
+    <!-- COLUMNA DERECHA: DASHBOARD -->
+<aside class="home-aside" aria-label="Impacto de Go Bathroom NYC">
+  <section class="impact-card">
+    <header class="impact-header">
+      <h2 class="impact-title">Impacto de Go Bathroom NYC</h2>
+      <p class="impact-subtitle">
+        Estimado según el uso del mapa y visitas recientes.
+      </p>
+    </header>
+
+    <div class="impact-metrics">
+      <!-- Baños registrados -->
+      <div class="impact-metric">
+        <div class="impact-icon impact-icon--blue" aria-hidden="true">
+          <svg class="impact-icon-svg" viewBox="0 0 127.22 127.22">
+            <g transform="translate(241.72 -416.09)">
+              <g transform="matrix(1.7482 0 0 1.7482 129.86 165.98)" fill="currentColor">
+                <path d="m-169.59 189.74c-2.0793 0.82577-4.6109 1.0092-7.213 1.0092-2.1141-1.4e-4 -3.913-0.34488-5.9257-0.94879l2.0324 3.6174-0.13329 4.4933 10.041-0.0114-0.68988-4.3625z" stroke-width=".52889" />
+                <path d="m-165.33 185.81h-21.671a11.178 5.2044 0 0 0 10.835 3.9261 11.178 5.2044 0 0 0 10.837-3.9261z" />
+                <path transform="matrix(4.4787 0 0 4.4787 -523.46 -326.32)" d="m75.12 113.51c-0.23158 0-0.41801 0.16658-0.41801 0.37352 0 0.0844 0.03105 0.16199 0.08344 0.22439h5.5169c0.0524-0.0624 0.08344-0.14003 0.08344-0.22439 0-0.20694-0.18643-0.37352-0.41801-0.37352z" />
+                <path d="m-167.84 179.33h-16.64c0.70538 1.0134 1.8796 1.6743 3.2143 1.6743h10.212c1.3346 0 2.5089-0.66097 3.2143-1.6743z" stroke-width=".55858" />
+                <path d="m-182.59 166.68v-0.47759h1.0961v0.97867q-0.31474 0.21453-0.55745 0.29282-0.24114 0.0767-0.57311 0.0767-0.40869 0-0.66706-0.13936-0.2568-0.13937-0.3993-0.41496-0.14093-0.27559-0.14093-0.63261 0-0.37581 0.15502-0.65297 0.15503-0.27873 0.45411-0.42279 0.2333-0.11117 0.6279-0.11117 0.38051 0 0.56842 0.0689 0.18947 0.0689 0.31318 0.21453 0.12527 0.14406 0.18791 0.36641l-0.6843 0.12214q-0.0423-0.12997-0.14405-0.19886-0.10023-0.0689-0.25682-0.0689-0.2333 0-0.37267 0.16285-0.13779 0.16128-0.13779 0.51204 0 0.37268 0.13936 0.5324 0.14093 0.15971 0.39147 0.15971 0.11901 0 0.22705-0.0344t0.24741-0.11745v-0.21609zm1.4281-0.31474q0-0.56215 0.31317-0.87532 0.31318-0.31317 0.87219-0.31317 0.57311 0 0.88316 0.30847 0.31003 0.30691 0.31003 0.86123 0 0.40243-0.13623 0.6608-0.13467 0.25681-0.39147 0.40087-0.25523 0.14249-0.63731 0.14249-0.38834 0-0.64357-0.1237-0.25368-0.12371-0.41183-0.39147-0.15815-0.26777-0.15814-0.6702zm0.70934 3e-3q0 0.34762 0.1284 0.49951 0.12996 0.15189 0.35231 0.15189 0.22862 0 0.35389-0.14876t0.12527-0.53396q0-0.32414-0.13152-0.4729-0.12997-0.15032-0.3539-0.15032-0.21453 0-0.34449 0.15189t-0.12996 0.50265zm-4.6683-2.2297c-0.0408 0.22618-0.0615 0.46045-0.0615 0.69867v11.2c0 0.83215 0.25723 1.6023 0.69763 2.235h16.64c0.44039-0.63266 0.69814-1.4028 0.69814-2.235v-11.2c0-0.23827-0.0219-0.47245-0.062-0.69867z" display="none" stroke-width=".26724" />
+                <path d="m-185.12 164.14c-0.0408 0.22618-0.0615 0.46042-0.0615 0.69864v11.2c0 0.83215 0.25723 1.6023 0.69763 2.235h16.64c0.44039-0.63266 0.69815-1.4028 0.69815-2.235v-11.2c0-0.23827-0.0219-0.47242-0.062-0.69864zm2.2371 0.89553a0.97751 0.97751 0 0 1 0.9772 0.97775 0.97751 0.97751 0 0 1-0.9772 0.97717 0.97751 0.97751 0 0 1-0.97772-0.97717 0.97751 0.97751 0 0 1 0.97772-0.97775z" stroke-width=".55858" />
+                <path d="m-177.73 160.98c-0.38317 0-0.69141 0.30878-0.69141 0.69195 0 9e-3 2.4e-4 0.0178 5.6e-4 0.0266h-6.115c-0.38317 0-0.69196 0.30877-0.69196 0.69195 0 0.38317 0.30879 0.69141 0.69196 0.69141h16.744c0.38317 0 0.69196-0.30824 0.69196-0.69141 0-0.38318-0.30879-0.69195-0.69196-0.69195h-6.115c3.2e-4 -9e-3 5.6e-4 -0.0177 5.6e-4 -0.0266 0-0.38317-0.30824-0.69195-0.69141-0.69195z" />
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="impact-metric-label">Baños registrados</div>
+        <div class="impact-metric-value">245</div>
+      </div>
+
+      <!-- Personas ayudadas -->
+      <div class="impact-metric">
+        <div class="impact-icon impact-icon--green" aria-hidden="true">
+          <svg class="impact-icon-svg" viewBox="0 0 127.22 127.22">
+            <g transform="translate(382.41 -269.8)">
+              <g transform="matrix(1.0455 0 0 1.0455 13.679 -14.232)">
+                <path d="m-318.8 306.52c0.10654 0 0.19094 0.14789 0.19094 0.33177v52.747c0 0.18382-0.0863 0.33177-0.19094 0.33177-0.10589 0-0.19094-0.14791-0.19094-0.33177v-52.747c0-0.18381 0.0863-0.33177 0.19094-0.33177z"
+                      fill="none" stroke="currentColor" stroke-width="4.7603" />
+                <g transform="matrix(1.6809 0 0 1.6809 225.64 -245.4)" fill="currentColor">
+                  <g>
+                    <circle cx="-337.51" cy="333.95" r="6.7352" />
+                    <rect x="-342.37" y="342.93" width="8.7932" height="18.335" ry="3.9273" />
+                  </g>
+                </g>
+                <g transform="matrix(1.6809 0 0 1.6809 207.29 -244.41)" fill="currentColor">
+                  <rect x="-304.25" y="342.34" width="8.7932" height="18.335" ry="3.9273" />
+                  <circle cx="-299.39" cy="333.36" r="6.7352" />
+                  <circle cx="-305.92" cy="338.68" r="1.7198" />
+                  <circle cx="-292.83" cy="338.68" r="1.7198" />
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="impact-metric-label">Personas ayudadas</div>
+        <div class="impact-metric-value">1,820</div>
+      </div>
+    </div>
+
+    <p class="impact-footnote">
+      *Datos estimados y actualizados de forma regular.
+    </p>
+  </section>
+</aside>
+
+
+  </div>
+
+<!-- BOTÓN FLOTANTE: ABRIR MAPA -->
+  <a
+    href="https://www.google.com/maps" 
+    target="_blank"
+    rel="noopener"
+    class="fab-map"
+    aria-label="Abrir mapa de baños en Google Maps"
+  >
+    <span class="fab-map-icon" aria-hidden="true">
+      <i class="fas fa-map-marked-alt"></i>
+    </span>
+    <span class="fab-map-label">Abrir mapa</span>
+  </a>
+  
+</main>
+
+<!-- ============================= -->
+<!--          FOOTER               -->
+<!-- ============================= -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">Go Bathroom</div>
+      <p class="footer-tagline">Hecho con amor en NYC</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Enlaces legales y contacto">
+      <!-- Fila principal: enlaces -->
+      <div class="footer-links">
+        <a href="/es/privacidad" class="footer-link">Privacidad</a>
+        <span class="footer-separator">·</span>
+
+        <a href="/es/terminos" class="footer-link">Términos</a>
+        <span class="footer-separator">·</span>
+
+        <a href="https://forms.gle/..." target="_blank" rel="noopener" class="footer-link">
+          Contacto
+        </a>
+        <span class="footer-separator">·</span>
+
+        <!-- Botón Compartir (switch) -->
+        <button
+          type="button"
+          class="footer-link footer-share-toggle"
+          id="footerShareToggle"
+          aria-expanded="false"
+        >
+          Compartir
+        </button>
+      </div>
+
+      <!-- Fila secundaria: panel de compartir -->
+<div
+  class="footer-share-row"
+  id="footerShareRow"
+  aria-hidden="true"
+>
+  <span class="footer-share-label">Compartir:</span>
+
+  <!-- Botón Copiar + tooltip con URL -->
+  <div class="share-copy-wrapper">
+    <button type="button" class="share-pill" data-share="copy">
+      <i class="fas fa-link"></i>
+      <span class="share-pill-label">Copiar enlace</span>
+    </button>
+
+    <!-- Tooltip que muestra la URL a copiar -->
+    <div
+      class="share-tooltip"
+      id="shareCopyTooltip"
+      role="status"
+      aria-live="polite"
+    ></div>
+  </div>
+
+  <!-- Botones redes sociales -->
+  <button type="button" class="share-pill" data-share="facebook">
+    <i class="fab fa-facebook-f"></i>
+  </button>
+
+  <button type="button" class="share-pill" data-share="x">
+    <i class="fab fa-x-twitter"></i>
+  </button>
+
+  <button type="button" class="share-pill" data-share="whatsapp">
+    <i class="fab fa-whatsapp"></i>
+  </button>
+</div>
+
+    </nav>
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Go Bathroom</span>
+  </div>
+</footer>
+
+
+</body>
+</html>
 
