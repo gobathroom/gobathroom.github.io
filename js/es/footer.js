@@ -119,7 +119,7 @@ function getShareUrl() {
     copyBtn.addEventListener('blur', hideTip);
   }
 
-  // 2) Click en botones de compartir
+    // 2) Click en botones de compartir
   shareButtons.forEach(btn => {
     btn.addEventListener('click', async (e) => {
       e.stopPropagation();
@@ -127,12 +127,12 @@ function getShareUrl() {
       const url  = getShareUrl();
 
       // textos desde i18n
-      const baseText   = tShare('share.main');
-      const textX      = tShare('share.msgX')        || baseText;
-      const textWa     = tShare('share.msgWa')       || baseText;
-      const errorCopy  = tShare('share.errorCopy')   || 'Error copiando URL:';
-      const copyLabel  = tShare('share.copyLabel')   || 'Copiar enlace';
-      const copiedLabel= tShare('share.copiedLabel') || '✔ ¡Copiado!';
+      const baseText    = tShare('share.main');
+      const textX       = tShare('share.msgX')        || baseText;
+      const textWa      = tShare('share.msgWa')       || baseText;
+      const errorCopy   = tShare('share.errorCopy')   || 'Error copiando URL:';
+      const copyLabel   = tShare('share.copyLabel')   || 'Copiar enlace';
+      const copiedLabel = tShare('share.copiedLabel') || '✔ ¡Copiado!';
 
       if (type === 'copy') {
         const labelSpan = btn.querySelector('.share-pill-label');
@@ -151,12 +151,14 @@ function getShareUrl() {
             tooltip.classList.remove('is-visible');
           }
 
-          // Volver al estado normal tras 1.2s
+          // ⬇️ Ahora esperamos 1.2s, restauramos el texto y recién cerramos
           setTimeout(() => {
             btn.classList.remove('share-pill--ok');
             if (labelSpan) {
               labelSpan.textContent = copyLabel;
             }
+            // Ahora sí, cerramos el panel y vuelve el "Compartir" de arriba
+            closeShare();
           }, 1200);
         } catch (err) {
           console.error(errorCopy, err);
@@ -169,23 +171,24 @@ function getShareUrl() {
           encodeURIComponent(textX)
         }`;
         window.open(shareUrl, '_blank', 'noopener');
+        closeShare();
 
       } else if (type === 'facebook') {
         const shareUrl =
           `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
         window.open(shareUrl, '_blank', 'noopener');
+        closeShare();
 
       } else if (type === 'whatsapp') {
         const shareUrl = `https://api.whatsapp.com/send?text=${
           encodeURIComponent(textWa + ' ' + url)
         }`;
         window.open(shareUrl, '_blank', 'noopener');
+        closeShare();
       }
-
-      // Después de usar cualquier botón, cerramos el panel
-      closeShare();
     });
   });
+
 
   // 3) Cerrar si se hace click fuera del footer
   document.addEventListener('click', (e) => {
