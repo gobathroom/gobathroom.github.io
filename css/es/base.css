@@ -10,13 +10,19 @@
 /* ===========================
    2. TIPOGRAFÍA GLOBAL
    =========================== */
-html, body {
+html {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   line-height: 1.4;
-  background: var(--bg);   /* <-- usa los colores del theme.css */
-  color: var(--text);
 }
+
+/* El tema (bg/text) solo en el body */
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;  /* cuerpo siempre al menos toda la ventana */
+}
+
 
 
 /* ===========================
