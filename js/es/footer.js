@@ -1,3 +1,12 @@
+// ===========================
+// 0. Helper i18n (igual que en topbar)
+// ===========================
+const I18N = window.GB_I18N || {
+  t: (key) => key,
+  lang: 'en',
+};
+const t = I18N.t;
+
 
 /* ===========================
    FOOTER:
@@ -77,56 +86,47 @@ function getShareUrl() {
   });
 
   // 2) Click en botones de compartir
-  shareButtons.forEach(btn => {
-    btn.addEventListener('click', async (e) => {
-      e.stopPropagation();
-      const type = btn.dataset.share;
-      const url  = getShareUrl();
-      const text = 'Encuentra baños accesibles y gratuitos con Go Bathroom.';
+shareButtons.forEach(btn => {
+  btn.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    const type = btn.dataset.share;
+    const url  = getShareUrl();
 
-      if (type === 'copy') {
-        try {
-          await navigator.clipboard.writeText(url);
-          btn.classList.add('share-pill--ok');
-          setTimeout(() => btn.classList.remove('share-pill--ok'), 1200);
-        } catch (err) {
-          console.error('No se pudo copiar el enlace', err);
-        }
-      } else if (type === 'x') {
-        const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
-        window.open(shareUrl, '_blank', 'noopener');
-      } else if (type === 'facebook') {
-        const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-        window.open(shareUrl, '_blank', 'noopener');
-      } else if (type === 'whatsapp') {
-        const shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + ' ' + url)}`;
-        window.open(shareUrl, '_blank', 'noopener');
+    // 👇 textos desde i18n (misma idea que theme.* en el topbar)
+    const baseText  = t('share.main');          // texto genérico
+    const textX     = t('share.msgX')  || baseText;
+    const textWa    = t('share.msgWa') || baseText;
+    const errorCopy = t('share.errorCopy');
+
+    if (type === 'copy') {
+      try {
+        await navigator.clipboard.writeText(url);
+        btn.classList.add('share-pill--ok');
+        setTimeout(() => btn.classList.remove('share-pill--ok'), 1200);
+      } catch (err) {
+        console.error(errorCopy, err);
       }
 
-      // Después de usar cualquier botón, cerramos el panel
-      closeShare();
-    });
-  });
+    } else if (type === 'x') {
+      const shareUrl = `https://twitter.com/intent/tweet?url=${
+        encodeURIComponent(url)
+      }&text=${
+        encodeURIComponent(textX)
+      }`;
+      window.open(shareUrl, '_blank', 'noopener');
 
-  // 3) Cerrar si se hace click fuera del footer o de la fila de compartir
-  document.addEventListener('click', (e) => {
-    if (!footer.classList.contains('is-sharing')) return;
+    } else if (type === 'facebook') {
+      const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+      window.open(shareUrl, '_blank', 'noopener');
 
-    const insideFooter = footer.contains(e.target);
-    const insideRow    = shareRow.contains(e.target);
-    const isToggle     = toggleBtn.contains(e.target);
-
-    // Si el click NO es en el footer, o es en el footer pero fuera
-    // del toggle y de la fila de compartir → cerrar
-    if (!insideFooter || (!insideRow && !isToggle)) {
-      closeShare();
+    } else if (type === 'whatsapp') {
+      const shareUrl = `https://api.whatsapp.com/send?text=${
+        encodeURIComponent(textWa + ' ' + url)
+      }`;
+      window.open(shareUrl, '_blank', 'noopener');
     }
-  });
 
-  // 4) Cerrar con Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && footer.classList.contains('is-sharing')) {
-      closeShare();
-    }
+    // Después de usar cualquier botón, cerramos el panel
+    closeShare();
   });
-})();
+});
