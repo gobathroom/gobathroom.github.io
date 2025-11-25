@@ -610,7 +610,9 @@ body[data-theme="dark"] .impact-icon {
   gap: 8px;
 
   padding: 10px 18px;
+  border-radius: 999px;
 
+  background: var(--brand, #00d1ff);
   color: #041016;
   font-size: 14px;
   font-weight: 600;
