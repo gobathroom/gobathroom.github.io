@@ -57,17 +57,36 @@ function getShareUrl() {
   if (!footer || !toggleBtn || !shareRow) return;
 
   const shareButtons = shareRow.querySelectorAll('.share-pill');
+  const copyBtn      = shareRow.querySelector('.share-pill[data-share="copy"]');
+  const tooltip      = document.getElementById('shareCopyTooltip');
+
+  // Poner el texto inicial del botón "Copiar enlace" según el idioma
+  if (copyBtn) {
+    const labelSpan = copyBtn.querySelector('.share-pill-label');
+    if (labelSpan) {
+      labelSpan.textContent = tShare('share.copyLabel') || 'Copiar enlace';
+    }
+  }
 
   function openShare() {
     footer.classList.add('is-sharing');
     toggleBtn.setAttribute('aria-expanded', 'true');
     shareRow.setAttribute('aria-hidden', 'false');
+
+    // opcional: preparar el contenido del tooltip (pero no mostrarlo aún)
+    if (tooltip) {
+      tooltip.textContent = getShareUrl();
+    }
   }
 
   function closeShare() {
     footer.classList.remove('is-sharing');
     toggleBtn.setAttribute('aria-expanded', 'false');
     shareRow.setAttribute('aria-hidden', 'true');
+
+    if (tooltip) {
+      tooltip.classList.remove('is-visible');
+    }
   }
 
   function toggleShare() {
@@ -78,11 +97,27 @@ function getShareUrl() {
     }
   }
 
-  // 1) Click en "Compartir"
+  // 1) Click en "Compartir" (fila principal)
   toggleBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     toggleShare();
   });
+
+  // Tooltip: solo se muestra al pasar el mouse / foco por el botón "Copiar enlace"
+  if (copyBtn && tooltip) {
+    const showTip = () => {
+      tooltip.textContent = getShareUrl();  // por si la URL cambió
+      tooltip.classList.add('is-visible');
+    };
+    const hideTip = () => {
+      tooltip.classList.remove('is-visible');
+    };
+
+    copyBtn.addEventListener('mouseenter', showTip);
+    copyBtn.addEventListener('mouseleave', hideTip);
+    copyBtn.addEventListener('focus', showTip);
+    copyBtn.addEventListener('blur', hideTip);
+  }
 
   // 2) Click en botones de compartir
   shareButtons.forEach(btn => {
@@ -92,16 +127,37 @@ function getShareUrl() {
       const url  = getShareUrl();
 
       // textos desde i18n
-      const baseText  = tShare('share.main');
-      const textX     = tShare('share.msgX')  || baseText;
-      const textWa    = tShare('share.msgWa') || baseText;
-      const errorCopy = tShare('share.errorCopy');
+      const baseText   = tShare('share.main');
+      const textX      = tShare('share.msgX')        || baseText;
+      const textWa     = tShare('share.msgWa')       || baseText;
+      const errorCopy  = tShare('share.errorCopy')   || 'Error copiando URL:';
+      const copyLabel  = tShare('share.copyLabel')   || 'Copiar enlace';
+      const copiedLabel= tShare('share.copiedLabel') || '✔ ¡Copiado!';
 
       if (type === 'copy') {
+        const labelSpan = btn.querySelector('.share-pill-label');
+
         try {
           await navigator.clipboard.writeText(url);
+
+          // Estado visual de éxito: botón verde + texto "✔ ¡Copiado!"
           btn.classList.add('share-pill--ok');
-          setTimeout(() => btn.classList.remove('share-pill--ok'), 1200);
+          if (labelSpan) {
+            labelSpan.textContent = copiedLabel;
+          }
+
+          // Ocultar tooltip cuando se hace clic
+          if (tooltip) {
+            tooltip.classList.remove('is-visible');
+          }
+
+          // Volver al estado normal tras 1.2s
+          setTimeout(() => {
+            btn.classList.remove('share-pill--ok');
+            if (labelSpan) {
+              labelSpan.textContent = copyLabel;
+            }
+          }, 1200);
         } catch (err) {
           console.error(errorCopy, err);
         }
@@ -115,7 +171,8 @@ function getShareUrl() {
         window.open(shareUrl, '_blank', 'noopener');
 
       } else if (type === 'facebook') {
-        const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        const shareUrl =
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
         window.open(shareUrl, '_blank', 'noopener');
 
       } else if (type === 'whatsapp') {
