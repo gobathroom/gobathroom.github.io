@@ -595,6 +595,100 @@ body[data-theme="dark"] .impact-icon {
 }
 
 
+/* ===========================
+   6: FAB "ABRIR MAPA"
+   =========================== */
+
+.fab-map {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 900;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 18px;
+  border-radius: 999px;
+
+  background: var(--brand, #00d1ff);
+  color: #041016;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+  transition:
+    transform 0.18s ease-out,
+    box-shadow 0.18s ease-out,
+    background 0.18s ease-out,
+    color 0.18s ease-out;
+}
+
+/* Icono dentro del FAB */
+.fab-map-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(4, 16, 22, 0.08);
+}
+
+.fab-map-icon i {
+  font-size: 14px;
+}
+
+/* Hover / focus */
+.fab-map:hover,
+.fab-map:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.fab-map:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* Respeta usuarios con "reducir movimiento" */
+@media (prefers-reduced-motion: reduce) {
+  .fab-map {
+    transition: none;
+  }
+}
+
+/* ──────────────────────────
+   Responsive: solo icono en móvil
+   ────────────────────────── */
+
+@media (max-width: 768px) {
+  .fab-map {
+    padding: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 999px;
+    justify-content: center;
+  }
+
+  .fab-map-label {
+    display: none;          /* móvil: sin texto */
+  }
+
+  .fab-map-icon {
+    width: 30px;
+    height: 30px;
+    background: rgba(4, 16, 22, 0.10);
+  }
+
+  .fab-map-icon i {
+    font-size: 16px;
+  }
+}
 
 
 
