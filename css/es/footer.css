@@ -5,7 +5,7 @@
 .site-footer {
   margin-top: 40px;
   border-top: 1px solid var(--border, rgba(255, 255, 255, 0.12));
-  background: var(--bg);
+  background: var(--bg); /* mismo fondo que la página */
   color: var(--muted, #9fb0d0);
   font-size: 12px;
 }
@@ -30,13 +30,18 @@
   color: var(--muted, #9fb0d0);
 }
 
-/* Enlaces de la primera fila */
+/* NAV del footer */
+.footer-nav {
+  margin-top: 4px;
+}
+
+/* Fila principal: enlaces */
 .footer-links {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .footer-link {
@@ -55,27 +60,16 @@
 }
 
 .footer-separator {
-  opacity: 0.55;
+  opacity: 0.6;
 }
 
-/* Cuando el panel está abierto:
-   - ocultar el botón "Compartir"
-   - ocultar su punto "·" de la primera fila */
-.footer-links--sharing .footer-share-toggle,
-.footer-links--sharing .footer-separator--share {
-  display: none;
-}
-
-/* Segunda fila: compartir */
+/* Fila secundaria: panel de compartir */
 .footer-share-row {
-  display: none;
   margin-top: 8px;
-
-  display: none;
-  justify-content: center;
+  display: none;                 /* por defecto oculto */
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  flex-wrap: wrap;
 }
 
 .footer-share-label {
@@ -83,10 +77,13 @@
   color: var(--muted, #9fb0d0);
 }
 
-/* Cuando el footer está en modo "sharing",
-   mostramos la segunda fila */
+/* Cuando se está compartiendo */
 .site-footer.is-sharing .footer-share-row {
   display: inline-flex;
+}
+
+.site-footer.is-sharing #footerShareToggle {
+  display: none;                 /* ocultar "Compartir" de la fila principal */
 }
 
 /* Pastillas de compartir */
@@ -103,18 +100,18 @@
   color: var(--text, #dbe5ff);
 }
 
-.share-pill:hover {
-  background: rgba(148, 163, 184, 0.18);
-}
-
 .share-pill i {
   font-size: 12px;
 }
 
-/* pequeño feedback visual cuando se copia */
+.share-pill:hover {
+  border-color: var(--brand, #00d1ff);
+}
+
+/* Feedback cuando se copia */
 .share-pill--ok {
-  border-color: #22c55e;
-  background: rgba(34, 197, 94, 0.12);
+  border-color: #16a34a;
+  background: rgba(22, 163, 74, 0.12);
 }
 
 /* Banda inferior ligeramente más oscura */
