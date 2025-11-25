@@ -25,12 +25,6 @@
   color: var(--text-strong, #f5f7ff);
 }
 
-.footer-logo {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text-strong, #f5f7ff);
-}
-
 .site-footer .footer-tagline {
   margin: 0 0 10px;
   color: var(--muted, #9fb0d0);
@@ -43,14 +37,6 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-}
-
-.footer-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 16px;
-  align-items: center;
-  position: relative; /* importante para posicionar el panel */
 }
 
 .footer-links a,
@@ -89,99 +75,3 @@
 body[data-theme="dark"] .footer-bottom {
   background: rgba(255, 255, 255, 0.035);
 }
-
-/* Línea inferior y copyright */
-.footer-bottom {
-  max-width: var(--content-max, 1120px);
-  margin: 6px auto 0;
-  padding: 8px 16px 0;
-  border-top: 1px solid rgba(148, 163, 184, 0.35); /* un poco más marcada */
-  text-align: center;
-}
-
-.footer-copy {
-  font-size: 11px;
-  color: var(--muted, #9fb0d0);
-}
-
-/* ===========================
-   PANEL DE COMPARTIR (DESKTOP)
-   =========================== */
-
-.footer-share-toggle {
-  position: relative;
-}
-
-/* Panel flotante */
-.footer-share-panel {
-  position: absolute;
-  right: 0;
-  top: 120%;
-
-  display: none;              /* se activa con .is-open */
-  padding: 8px 10px;
-  border-radius: 12px;
-
-  background: var(--panel-2, #1c2230);
-  border: 1px solid var(--border, rgba(148, 163, 184, 0.5));
-  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
-
-  z-index: 2000;
-
-  display: flex;
-  gap: 8px;
-}
-
-/* Estado visible */
-.footer-share-panel.is-open {
-  display: flex;
-}
-
-/* Botones redondos de compartir */
-.share-pill {
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  border: none;
-  padding: 0;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  background: var(--hover, rgba(255,255,255,0.04));
-  color: var(--text, #dbe5ff);
-  cursor: pointer;
-
-  font-size: 16px;
-  transition:
-    background 0.15s ease,
-    transform 0.1s ease,
-    color 0.15s ease;
-}
-
-/* El primer pill (copiar enlace) tendrá texto + icono un poco más ancho */
-.share-pill[data-share="copy"] {
-  padding: 0 10px;
-  width: auto;
-  gap: 6px;
-  font-size: 13px;
-}
-
-.share-pill:hover {
-  background: var(--panel, #111827);
-  transform: translateY(-1px);
-}
-
-/* Etiqueta de “Copiar enlace” */
-.share-pill-label {
-  white-space: nowrap;
-  font-size: 12px;
-}
-
-/* Estado de éxito al copiar */
-.share-pill.is-copied {
-  background: rgba(34, 197, 94, 0.16);
-  color: #4ade80; /* verde */
-}
-
