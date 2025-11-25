@@ -488,16 +488,6 @@
   color: var(--muted, #6b7280);
 }
 
-/* ===========================
-   3.1, 4.1: Acceso y Caracteristica
-   =========================== */
-
-.info-highlight {
-  border: 2px solid var(--brand, #00d1ff) !important;
-  box-shadow: 0 0 0 3px rgba(0, 209, 255, 0.35);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
 
 
 
