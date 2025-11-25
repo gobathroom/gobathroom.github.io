@@ -79,8 +79,11 @@
 
 /* Cuando se está compartiendo */
 .site-footer.is-sharing .footer-share-row {
-  display: inline-flex;
+  display: flex;           /* ocupa toda la fila */
+  width: 100%;             /* asegura salto de línea */
+  margin-top: 10px;        /* separación */
 }
+
 
 .site-footer.is-sharing #footerShareToggle {
   display: none;                 /* ocultar "Compartir" de la fila principal */
