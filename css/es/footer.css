@@ -120,9 +120,9 @@
 /* Tooltip debajo del botón, flotando (no mueve el layout) */
 .share-tooltip {
   position: absolute;
-  top: 100%;
+  top: 100%;bottom: -4px;              /* controla la distancia del tooltip al botón */
   left: 50%;
-  transform: translate(-50%, -10px);
+  transform: translate(-50%);
 
   padding: 4px 10px;
   border-radius: 999px;
