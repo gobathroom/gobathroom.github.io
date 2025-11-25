@@ -89,6 +89,12 @@
   display: none;                 /* ocultar "Compartir" de la fila principal */
 }
 
+/* Ocultar el separador (·) que queda antes de "Compartir" cuando se abre el panel */
+.site-footer.is-sharing .footer-links .footer-separator:last-of-type {
+  display: none;
+}
+
+
 /* Pastillas de compartir */
 .share-pill {
   display: inline-flex;
