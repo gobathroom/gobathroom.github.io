@@ -93,7 +93,7 @@
   display: inline-flex;
   align-items: center;
 
-  padding: 0 26px;
+  padding: 0 24px;
   height: calc(var(--header-h) - 10px);
 
   font-size: 14px;
@@ -102,7 +102,7 @@
 
   color: var(--muted, #9fb0d0);
   background: transparent;
-  border-radius: 14px;
+  border-radius: 7px;
 
   transition:
     color 0.15s ease,
