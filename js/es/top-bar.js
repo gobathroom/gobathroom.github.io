@@ -7,7 +7,6 @@ const I18N = window.GB_I18N || {
 };
 const t = I18N.t;
 
-
 // ===========================
 // 1. info acceso-características
 // ===========================
@@ -38,8 +37,6 @@ const t = I18N.t;
   });
 
 })();
-
-
 
 
 
