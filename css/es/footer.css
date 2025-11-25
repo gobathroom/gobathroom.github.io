@@ -3,28 +3,26 @@
    =========================== */
 
 .site-footer {
-  border-top: 1px solid var(--border);
-  margin-top: 32px;
-  padding: 16px 16px 10px;
-  background: var(--panel); /* mismo panel que las tarjetas */
+  margin-top: 40px;
+  border-top: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  background: var(--bg); /* mismo fondo que la página */
+  color: var(--muted, #9fb0d0);
+  font-size: 12px;
 }
 
-.footer-inner {
+/* Bloque principal centrado */
+.site-footer .footer-inner {
   max-width: var(--content-max, 1120px);
   margin: 0 auto;
-  padding: 0 16px 8px;
-
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  padding: 16px 16px 20px;
+  text-align: center;
 }
 
-.footer-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+.site-footer .footer-brand {
+  margin: 0 0 2px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-strong, #f5f7ff);
 }
 
 .footer-logo {
@@ -33,9 +31,18 @@
   color: var(--text-strong, #f5f7ff);
 }
 
-.footer-tagline {
-  font-size: 12px;
+.site-footer .footer-tagline {
+  margin: 0 0 10px;
   color: var(--muted, #9fb0d0);
+}
+
+/* Enlaces del footer */
+.footer-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .footer-nav {
@@ -46,20 +53,41 @@
   position: relative; /* importante para posicionar el panel */
 }
 
-.footer-link {
-  font-size: 13px;
-  color: var(--muted, #9fb0d0);
-  text-decoration: none;
+.footer-links a,
+.footer-links .footer-link {
+  font: inherit;
+  border: 0;
   background: none;
-  border: none;
   padding: 0;
   cursor: pointer;
 
-  transition: color 0.15s ease;
+  color: var(--muted, #9fb0d0);
+  text-decoration: none;
 }
 
-.footer-link:hover {
+.footer-links a:hover,
+.footer-links .footer-link:hover {
   color: var(--text, #dbe5ff);
+  text-decoration: underline;
+}
+
+.footer-separator {
+  opacity: 0.5;
+}
+
+/* Banda inferior ligeramente más oscura */
+.footer-bottom {
+  text-align: center;
+  padding: 8px 16px 10px;
+  font-size: 11px;
+  color: var(--muted, #9fb0d0);
+
+  background: rgba(0, 0, 0, 0.035); /* light */
+}
+
+/* Ajuste para modo oscuro */
+body[data-theme="dark"] .footer-bottom {
+  background: rgba(255, 255, 255, 0.035);
 }
 
 /* Línea inferior y copyright */
