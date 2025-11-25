@@ -9,7 +9,69 @@ const t = I18N.t;
 
 
 // ===========================
-// 1. Refresh brand link según idioma
+// 1. info acceso-caracterisiticas
+// ===========================
+(function setupInfoScroll() {
+  const infoLink = document.querySelector('.nav-item[data-nav="info"]');
+  const accessSection = document.getElementById('info-acceso');
+  const featureSection = document.getElementById('info-caracteristicas');
+
+  if (!infoLink || !accessSection || !featureSection) return;
+
+  // Leer altura del header desde la variable CSS
+  const rootStyles = getComputedStyle(document.documentElement);
+  const headerVar = rootStyles.getPropertyValue('--header-h').trim();
+  const headerH = headerVar ? parseInt(headerVar, 10) : 64; // fallback
+
+  function addHighlight() {
+    accessSection.classList.add('info-highlight');
+    featureSection.classList.add('info-highlight');
+  }
+
+  function removeHighlight() {
+    accessSection.classList.remove('info-highlight');
+    featureSection.classList.remove('info-highlight');
+  }
+
+  function scrollToInfo() {
+    const rect = accessSection.getBoundingClientRect();
+    const targetY = window.scrollY + rect.top - (headerH + 10);
+
+    window.scrollTo({
+      top: targetY,
+      behavior: 'smooth',
+    });
+
+    // activar highlight
+    addHighlight();
+
+    // quitar highlight al primer scroll del usuario
+    let scrollListener;
+    scrollListener = () => {
+      removeHighlight();
+      window.removeEventListener('scroll', scrollListener);
+    };
+    window.addEventListener('scroll', scrollListener);
+
+    // también quitarlo por tiempo, por si no se mueve
+    setTimeout(() => {
+      removeHighlight();
+      window.removeEventListener('scroll', scrollListener);
+    }, 6000);
+  }
+
+  infoLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    scrollToInfo();
+  });
+
+})();
+
+
+
+
+// ===========================
+// 2. Refresh brand link según idioma
 // ===========================
 document.addEventListener('DOMContentLoaded', () => {
   const brand = document.getElementById('brandLink');
@@ -27,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ===========================
-// 2. MODO OSCURO / CLARO
+// 3. MODO OSCURO / CLARO
 // ===========================
 const themeToggleBtn = document.querySelector('#themeToggle');
 
