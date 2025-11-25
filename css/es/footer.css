@@ -1,160 +1,79 @@
+
 /* ===========================
    1: FOOTER
    =========================== */
 
-/* ===== FOOTER BASE (ya tendrás algo parecido, ajusta si hace falta) ===== */
-
 .site-footer {
-  border-top: 1px solid var(--border);
-  margin-top: 32px;
-  padding: 16px 16px 10px;
-  background: var(--panel); /* mismo panel que las tarjetas */
+  margin-top: 40px;
+  border-top: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  background: var(--bg); /* mismo fondo que la página */
+  color: var(--muted, #9fb0d0);
+  font-size: 12px;
 }
 
-.footer-inner {
+/* Bloque principal centrado */
+.site-footer .footer-inner {
   max-width: var(--content-max, 1120px);
   margin: 0 auto;
-  padding: 0 16px 8px;
-
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.footer-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.footer-logo {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text-strong, #f5f7ff);
-}
-
-.footer-tagline {
-  font-size: 12px;
-  color: var(--muted, #9fb0d0);
-}
-
-.footer-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 16px;
-  align-items: center;
-  position: relative; /* importante para posicionar el panel */
-}
-
-.footer-link {
-  font-size: 13px;
-  color: var(--muted, #9fb0d0);
-  text-decoration: none;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-
-  transition: color 0.15s ease;
-}
-
-.footer-link:hover {
-  color: var(--text, #dbe5ff);
-}
-
-/* Línea inferior y copyright */
-.footer-bottom {
-  max-width: var(--content-max, 1120px);
-  margin: 6px auto 0;
-  padding: 8px 16px 0;
-  border-top: 1px solid rgba(148, 163, 184, 0.35); /* un poco más marcada */
+  padding: 16px 16px 20px;
   text-align: center;
 }
 
-.footer-copy {
-  font-size: 11px;
+.site-footer .footer-brand {
+  margin: 0 0 2px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-strong, #f5f7ff);
+}
+
+.site-footer .footer-tagline {
+  margin: 0 0 10px;
   color: var(--muted, #9fb0d0);
 }
 
-/* ===========================
-   PANEL DE COMPARTIR (DESKTOP)
-   =========================== */
-
-.footer-share-toggle {
-  position: relative;
-}
-
-/* Panel flotante */
-.footer-share-panel {
-  position: absolute;
-  right: 0;
-  top: 120%;
-
-  display: none;              /* se activa con .is-open */
-  padding: 8px 10px;
-  border-radius: 12px;
-
-  background: var(--panel-2, #1c2230);
-  border: 1px solid var(--border, rgba(148, 163, 184, 0.5));
-  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
-
-  z-index: 2000;
-
-  display: flex;
-  gap: 8px;
-}
-
-/* Estado visible */
-.footer-share-panel.is-open {
-  display: flex;
-}
-
-/* Botones redondos de compartir */
-.share-pill {
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  border: none;
-  padding: 0;
-
+/* Enlaces del footer */
+.footer-links {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  gap: 6px;
+}
 
-  background: var(--hover, rgba(255,255,255,0.04));
-  color: var(--text, #dbe5ff);
+.footer-links a,
+.footer-links .footer-link {
+  font: inherit;
+  border: 0;
+  background: none;
+  padding: 0;
   cursor: pointer;
 
-  font-size: 16px;
-  transition:
-    background 0.15s ease,
-    transform 0.1s ease,
-    color 0.15s ease;
+  color: var(--muted, #9fb0d0);
+  text-decoration: none;
 }
 
-/* El primer pill (copiar enlace) tendrá texto + icono un poco más ancho */
-.share-pill[data-share="copy"] {
-  padding: 0 10px;
-  width: auto;
-  gap: 6px;
-  font-size: 13px;
+.footer-links a:hover,
+.footer-links .footer-link:hover {
+  color: var(--text, #dbe5ff);
+  text-decoration: underline;
 }
 
-.share-pill:hover {
-  background: var(--panel, #111827);
-  transform: translateY(-1px);
+.footer-separator {
+  opacity: 0.5;
 }
 
-/* Etiqueta de “Copiar enlace” */
-.share-pill-label {
-  white-space: nowrap;
-  font-size: 12px;
+/* Banda inferior ligeramente más oscura */
+.footer-bottom {
+  text-align: center;
+  padding: 8px 16px 10px;
+  font-size: 11px;
+  color: var(--muted, #9fb0d0);
+
+  background: rgba(0, 0, 0, 0.035); /* light */
 }
 
-/* Estado de éxito al copiar */
-.share-pill.is-copied {
-  background: rgba(34, 197, 94, 0.16);
-  color: #4ade80; /* verde */
+/* Ajuste para modo oscuro */
+body[data-theme="dark"] .footer-bottom {
+  background: rgba(255, 255, 255, 0.035);
 }
+
