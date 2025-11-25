@@ -30,7 +30,7 @@
   color: var(--muted, #9fb0d0);
 }
 
-/* Enlaces “Privacidad · Términos · Contacto · Compartir” */
+/* Enlaces de la primera fila */
 .footer-links {
   display: inline-flex;
   flex-wrap: wrap;
@@ -55,55 +55,66 @@
 }
 
 .footer-separator {
-  opacity: 0.5;
-  color: var(--muted, #9fb0d0);
+  opacity: 0.55;
 }
 
-/* Fila de compartir (opción 2) */
+/* Cuando el panel está abierto:
+   - ocultar el botón "Compartir"
+   - ocultar su punto "·" de la primera fila */
+.footer-links--sharing .footer-share-toggle,
+.footer-links--sharing .footer-separator--share {
+  display: none;
+}
+
+/* Segunda fila: compartir */
 .footer-share-row {
-  display: none;              /* por defecto oculta */
+  display: none;
   margin-top: 8px;
-  gap: 8px;
-  align-items: center;
+
+  display: none;
   justify-content: center;
+  align-items: center;
+  gap: 8px;
   flex-wrap: wrap;
-  font-size: 11px;
+}
+
+.footer-share-label {
+  font-size: 12px;
   color: var(--muted, #9fb0d0);
 }
 
-/* Cuando el footer está en modo “share abierto” */
-.site-footer.share-open .footer-share-row {
+/* Cuando el footer está en modo "sharing",
+   mostramos la segunda fila */
+.site-footer.is-sharing .footer-share-row {
   display: inline-flex;
-}
-
-/* Resalta el texto Compartir cuando está abierto */
-.site-footer.share-open .footer-share-toggle {
-  color: var(--text, #dbe5ff);
-  font-weight: 500;
 }
 
 /* Pastillas de compartir */
 .share-pill {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   padding: 4px 10px;
   border-radius: 999px;
-
-  border: 1px solid rgba(148, 163, 184, 0.45);
-  background: rgba(15, 23, 42, 0.03);
-  color: var(--text, #dbe5ff);
-
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(148, 163, 184, 0.08);
   font-size: 11px;
   cursor: pointer;
+  color: var(--text, #dbe5ff);
+}
+
+.share-pill:hover {
+  background: rgba(148, 163, 184, 0.18);
 }
 
 .share-pill i {
   font-size: 12px;
 }
 
-.share-pill:hover {
-  background: rgba(148, 163, 184, 0.12);
+/* pequeño feedback visual cuando se copia */
+.share-pill--ok {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
 }
 
 /* Banda inferior ligeramente más oscura */
