@@ -120,13 +120,13 @@
 /* Tooltip debajo del botón, flotando (no mueve el layout) */
 .share-tooltip {
   position: absolute;
-  top: 100%;bottom: -4px;              /* controla la distancia del tooltip al botón */
+  top: calc(100% + 4px);   /* ⬅️ distancia desde el borde INFERIOR del botón */
   left: 50%;
-  transform: translate(-50%);
+  transform: translateX(-50%);
 
   padding: 4px 10px;
   border-radius: 999px;
-  background: #111827;              /* similar al tooltip del topbar */
+  background: #111827;
   color: #e5e7eb;
   font-size: 11px;
   max-width: 260px;
@@ -143,11 +143,10 @@
   z-index: 10;
 }
 
-/* Tooltip visible */
 .share-tooltip.is-visible {
   opacity: 1;
-  transform: translate(-50%, 10px);
 }
+
 
 
 .share-pill i {
