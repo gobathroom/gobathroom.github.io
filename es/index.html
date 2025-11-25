@@ -526,7 +526,7 @@
 </main>
 
  <!-- ============================= -->
-<!--          FOOTER              -->
+<!--          FOOTER               -->
 <!-- ============================= -->
 <footer class="site-footer">
   <div class="footer-inner">
@@ -535,61 +535,64 @@
       <p class="footer-tagline">Hecho con amor en NYC</p>
     </div>
 
-    <!-- Fila de enlaces -->
-    <nav class="footer-links" aria-label="Enlaces legales y contacto">
-      <a href="/es/privacidad" class="footer-link">Privacidad</a>
-      <span class="footer-separator">·</span>
+    <nav class="footer-nav" aria-label="Enlaces legales y contacto">
+      <!-- Fila principal: enlaces -->
+      <div class="footer-links">
+        <a href="/es/privacidad" class="footer-link">Privacidad</a>
+        <span class="footer-separator">·</span>
 
-      <a href="/es/terminos" class="footer-link">Términos</a>
-      <span class="footer-separator">·</span>
+        <a href="/es/terminos" class="footer-link">Términos</a>
+        <span class="footer-separator">·</span>
 
-      <a href="https://forms.gle/..." target="_blank" rel="noopener" class="footer-link">
-        Contacto
-      </a>
-      <span class="footer-separator footer-separator--share">·</span>
+        <a href="https://forms.gle/..." target="_blank" rel="noopener" class="footer-link">
+          Contacto
+        </a>
+        <span class="footer-separator">·</span>
 
-      <!-- Botón que abre/cierra la fila de compartir -->
-      <button
-        type="button"
-        class="footer-link footer-share-toggle"
-        id="footerShareToggle"
-        aria-expanded="false"
+        <!-- Botón Compartir (switch) -->
+        <button
+          type="button"
+          class="footer-link footer-share-toggle"
+          id="footerShareToggle"
+          aria-expanded="false"
+        >
+          Compartir
+        </button>
+      </div>
+
+      <!-- Fila secundaria: panel de compartir -->
+      <div
+        class="footer-share-row"
+        id="footerShareRow"
+        aria-hidden="true"
       >
-        Compartir
-      </button>
+        <span class="footer-share-label">Compartir:</span>
+
+        <button type="button" class="share-pill" data-share="copy">
+          <i class="fas fa-link"></i>
+          <span class="share-pill-label">Copiar enlace</span>
+        </button>
+
+        <button type="button" class="share-pill" data-share="facebook">
+          <i class="fab fa-facebook-f"></i>
+        </button>
+
+        <button type="button" class="share-pill" data-share="x">
+          <i class="fab fa-x-twitter"></i>
+        </button>
+
+        <button type="button" class="share-pill" data-share="whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </button>
+      </div>
     </nav>
-
-    <!-- Fila de compartir (segunda línea, solo cuando está abierta) -->
-    <div
-      class="footer-share-row"
-      id="footerShareRow"
-      aria-hidden="true"
-    >
-      <span class="footer-share-label">Compartir:</span>
-
-      <button type="button" class="share-pill" data-share="copy">
-        <i class="fas fa-link"></i>
-        <span class="share-pill-label">Copiar enlace</span>
-      </button>
-
-      <button type="button" class="share-pill" data-share="facebook">
-        <i class="fab fa-facebook-f"></i>
-      </button>
-
-      <button type="button" class="share-pill" data-share="x">
-        <i class="fab fa-x-twitter"></i>
-      </button>
-
-      <button type="button" class="share-pill" data-share="whatsapp">
-        <i class="fab fa-whatsapp"></i>
-      </button>
-    </div>
   </div>
 
   <div class="footer-bottom">
     <span class="footer-copy">© 2025 Go Bathroom</span>
   </div>
 </footer>
+
 
 
 
