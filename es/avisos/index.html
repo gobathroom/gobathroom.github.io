@@ -50,7 +50,7 @@
   
 </head>
 
-<body>
+<body class="page-avisos">
   <!-- ============================= -->
 <!--          TOP BAR             -->
 <!-- ============================= -->
@@ -64,23 +64,23 @@
   </div>
 
   <div class="center">
-    <nav class="main-nav" aria-label="Navegación principal">
-      
-      <!-- Hace scroll a la sección de acceso y características -->
-      <a href="#info-acceso" class="nav-item top-link" data-nav="info">
-        Información
-      </a>
-
-      <!-- Página o enlace externo de donaciones -->
-      <a href="https://www.paypal.com/donate/?hosted_button_id=K773CAM5X3QBC"
-         target="_blank"
-         rel="noopener"
-         class="nav-item top-link">
-        Donar
-      </a>
-
-    </nav>
-  </div>
+  <!-- Buscador de avisos -->
+  <form class="notice-search" role="search" aria-label="Buscar avisos">
+    <label class="visually-hidden" for="noticeSearchInput">
+      Buscar avisos
+    </label>
+    <div class="notice-search-field">
+      <i class="fas fa-search" aria-hidden="true"></i>
+      <input
+        id="noticeSearchInput"
+        type="search"
+        name="q"
+        placeholder="Buscar avisos por palabra clave…"
+        autocomplete="off"
+      >
+    </div>
+  </form>
+</div>
 
   <div class="right">
 
