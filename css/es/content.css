@@ -535,19 +535,37 @@
   column-gap: 10px;
 }
 
-/* Círculo del icono */
+/* ===== 5: DASHBOARD IMPACTO (ajuste light/dark) ===== */
+
+/* Base: por si algún día no hay data-theme */
 .impact-icon {
   width: 42px;
   height: 42px;
   border-radius: 999px;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  background: rgba(0, 209, 255, 0.13); /* turquesa suave */
-  border: 1px solid rgba(0, 209, 255, 0.75);
+  /* fallback genérico */
+  background: rgba(56, 189, 248, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.55);
+  color: #020617; /* icono oscuro por defecto */
 }
+
+/* LIGHT MODE: fondo más clarito, icono oscuro */
+body[data-theme="light"] .impact-icon {
+  background: rgba(56, 189, 248, 0.18);  /* turquesa suave */
+  border-color: rgba(56, 189, 248, 0.60);
+  color: #020617;                        /* icono casi negro */
+}
+
+/* DARK MODE: fondo más oscuro, icono claro */
+body[data-theme="dark"] .impact-icon {
+  background: rgba(15, 23, 42, 0.95);    /* casi el panel dark */
+  border-color: rgba(56, 189, 248, 0.65);
+  color: #f9fafb;                        /* icono casi blanco */
+}
+/* ===== 5: DASHBOARD IMPACTO (ajuste light/dark) ===== */
 
 /* SVG interno (tamaño del ícono) */
 .impact-icon-svg {
