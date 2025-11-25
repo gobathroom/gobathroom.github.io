@@ -73,7 +73,7 @@ function getShareUrl() {
     toggleBtn.setAttribute('aria-expanded', 'true');
     shareRow.setAttribute('aria-hidden', 'false');
 
-    // opcional: preparar el contenido del tooltip (pero no mostrarlo aún)
+    // preparar el contenido del tooltip (pero no mostrarlo aún)
     if (tooltip) {
       tooltip.textContent = getShareUrl();
     }
@@ -119,7 +119,7 @@ function getShareUrl() {
     copyBtn.addEventListener('blur', hideTip);
   }
 
-    // 2) Click en botones de compartir
+  // 2) Click en botones de compartir
   shareButtons.forEach(btn => {
     btn.addEventListener('click', async (e) => {
       e.stopPropagation();
@@ -136,30 +136,49 @@ function getShareUrl() {
 
       if (type === 'copy') {
         const labelSpan = btn.querySelector('.share-pill-label');
+        const icon      = btn.querySelector('i');  // el icono de link
 
         try {
           await navigator.clipboard.writeText(url);
 
-          // Estado visual de éxito: botón verde + texto "✔ ¡Copiado!"
-          btn.classList.add('share-pill--ok');
-          if (labelSpan) {
-            labelSpan.textContent = copiedLabel;
-          }
-
-          // Ocultar tooltip cuando se hace clic
+          // Ocultar tooltip al hacer clic
           if (tooltip) {
             tooltip.classList.remove('is-visible');
           }
 
-          // ⬇️ Ahora esperamos 1.2s, restauramos el texto y recién cerramos
+          // Estilo de éxito
+          btn.classList.add('share-pill--ok');
+
+          // Ocultar icono y texto originales
+          if (icon)      icon.style.display = 'none';
+          if (labelSpan) labelSpan.style.display = 'none';
+
+          // Crear span temporal con "✔ ¡Copiado!"
+          const copiedSpan = document.createElement('span');
+          copiedSpan.className = 'share-pill-copied';
+          copiedSpan.textContent = copiedLabel;
+          btn.appendChild(copiedSpan);
+
+          // Revertir después de 1.2 s y cerrar el panel
           setTimeout(() => {
             btn.classList.remove('share-pill--ok');
+
+            // Quitar el mensaje temporal
+            copiedSpan.remove();
+
+            // Mostrar de nuevo icono y texto normal
+            if (icon) {
+              icon.style.display = 'inline-block';
+            }
             if (labelSpan) {
+              labelSpan.style.display = 'inline';
               labelSpan.textContent = copyLabel;
             }
-            // Ahora sí, cerramos el panel y vuelve el "Compartir" de arriba
+
+            // Ahora sí, cerrar el panel de compartir
             closeShare();
           }, 1200);
+
         } catch (err) {
           console.error(errorCopy, err);
         }
@@ -188,7 +207,6 @@ function getShareUrl() {
       }
     });
   });
-
 
   // 3) Cerrar si se hace click fuera del footer
   document.addEventListener('click', (e) => {
