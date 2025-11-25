@@ -1,0 +1,55 @@
+/* ===========================
+   1: FOOTER
+   =========================== */
+
+.site-footer {
+  border-top: 1px solid var(--border);   /* línea separadora arriba */
+  margin-top: 24px;
+  padding: 18px 0 28px;                  /* espacio arriba y abajo */
+  background: var(--bg);                 /* mismo fondo global */
+}
+
+.site-footer-inner {
+  max-width: var(--content-max, 1120px);
+  margin: 0 auto;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.footer-brand {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-strong, #f5f7ff);
+  margin-bottom: 4px;
+}
+
+.footer-meta {
+  font-size: 12px;
+  color: var(--muted, #9fb0d0);
+  margin: 0;
+}
+
+.footer-meta + .footer-meta {
+  margin-top: 2px;
+}
+
+.footer-links {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted, #9fb0d0);
+}
+
+.footer-links a {
+  color: var(--muted, #9fb0d0);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--text, #dbe5ff);
+  text-decoration: underline;
+}
+
+.footer-separator {
+  margin: 0 6px;
+  color: var(--muted, #9fb0d0);
+}
