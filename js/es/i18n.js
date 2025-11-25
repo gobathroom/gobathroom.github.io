@@ -24,6 +24,10 @@
   // Mensajes para errores en consola
   errorCopy: 'Error copying URL:',
 
+        // NUEVOS: textos del botón
+      copyLabel: 'Copy link',
+      copiedLabel: '✔ Copied!',
+
   // Mensajes para compartir en redes
   msgX:
     '🚻 Find accessible, free and private bathrooms in NYC.\n' +
@@ -45,6 +49,10 @@
 
   // Mensajes para errores en consola
   errorCopy: 'Error copiando URL:',
+
+        // NUEVOS: textos del botón
+      copyLabel: 'Copiar enlace',
+      copiedLabel: '✔ ¡Copiado!',
 
   // Mensaje para X (Twitter)
   msgX:
