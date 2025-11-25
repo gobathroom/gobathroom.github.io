@@ -1,13 +1,13 @@
 // ===========================
 // 0. Helper i18n (usa el mismo GB_I18N que el topbar)
 // ===========================
-const t = (window.GB_I18N && window.GB_I18N.t)
+const tShare = (window.GB_I18N && window.GB_I18N.t)
   ? window.GB_I18N.t
   : (key) => key;
 
 
 /* ===========================
-   FOOTER:
+   FOOTER: Opciones
    =========================== */
 // Decide qué URL compartir (home en páginas legales)
 function getShareUrl() {
@@ -44,11 +44,12 @@ function getShareUrl() {
   return url.toString();
 }
 
+
 /* ===========================
    FOOTER: TOGGLE COMPARTIR
    =========================== */
 
-(function setupFooterShare(){
+(function setupFooterShare() {
   const footer    = document.querySelector('.site-footer');
   const toggleBtn = document.getElementById('footerShareToggle');
   const shareRow  = document.getElementById('footerShareRow');
@@ -91,10 +92,10 @@ function getShareUrl() {
       const url  = getShareUrl();
 
       // textos desde i18n
-      const baseText  = t('share.main');
-      const textX     = t('share.msgX')  || baseText;
-      const textWa    = t('share.msgWa') || baseText;
-      const errorCopy = t('share.errorCopy');
+      const baseText  = tShare('share.main');
+      const textX     = tShare('share.msgX')  || baseText;
+      const textWa    = tShare('share.msgWa') || baseText;
+      const errorCopy = tShare('share.errorCopy');
 
       if (type === 'copy') {
         try {
@@ -129,7 +130,7 @@ function getShareUrl() {
     });
   });
 
-  // 3) Cerrar si se hace click fuera del footer o de la fila de compartir
+  // 3) Cerrar si se hace click fuera del footer
   document.addEventListener('click', (e) => {
     if (!footer.classList.contains('is-sharing')) return;
 
