@@ -5,7 +5,7 @@
 .site-footer {
   margin-top: 40px;
   border-top: 1px solid var(--border, rgba(255, 255, 255, 0.12));
-  background: var(--bg); /* mismo fondo que la página */
+  background: var(--bg);
   color: var(--muted, #9fb0d0);
   font-size: 12px;
 }
@@ -25,16 +25,12 @@
   color: var(--text-strong, #f5f7ff);
 }
 
-.site-footer .footer-logo {
-  font-weight: 600;
-}
-
 .site-footer .footer-tagline {
   margin: 0 0 10px;
   color: var(--muted, #9fb0d0);
 }
 
-/* Fila de enlaces */
+/* Enlaces “Privacidad · Términos · Contacto · Compartir” */
 .footer-links {
   display: inline-flex;
   flex-wrap: wrap;
@@ -49,7 +45,6 @@
   background: none;
   padding: 0;
   cursor: pointer;
-
   color: var(--muted, #9fb0d0);
   text-decoration: none;
 }
@@ -60,48 +55,47 @@
 }
 
 .footer-separator {
-  opacity: 0.6;
+  opacity: 0.5;
+  color: var(--muted, #9fb0d0);
 }
 
-/* Fila que aparece al abrir "Compartir" */
+/* Fila de compartir (opción 2) */
 .footer-share-row {
+  display: none;              /* por defecto oculta */
   margin-top: 8px;
-  display: none;                /* por defecto oculto */
+  gap: 8px;
   align-items: center;
   justify-content: center;
-  gap: 8px;
   flex-wrap: wrap;
+  font-size: 11px;
+  color: var(--muted, #9fb0d0);
 }
 
-/* Cuando el footer está en modo "sharing" */
-.site-footer.is-sharing .footer-share-row {
+/* Cuando el footer está en modo “share abierto” */
+.site-footer.share-open .footer-share-row {
   display: inline-flex;
 }
 
-/* En modo sharing ocultamos el enlace "Compartir"
-   de la fila de links principal */
-.site-footer.is-sharing .footer-share-toggle {
-  display: none;
-}
-
-.footer-share-label {
-  font-size: 12px;
-  color: var(--muted, #9fb0d0);
+/* Resalta el texto Compartir cuando está abierto */
+.site-footer.share-open .footer-share-toggle {
+  color: var(--text, #dbe5ff);
+  font-weight: 500;
 }
 
 /* Pastillas de compartir */
 .share-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   padding: 4px 10px;
   border-radius: 999px;
 
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  background: transparent;
-  cursor: pointer;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  background: rgba(15, 23, 42, 0.03);
+  color: var(--text, #dbe5ff);
+
   font-size: 11px;
-  color: var(--muted, #9fb0d0);
+  cursor: pointer;
 }
 
 .share-pill i {
@@ -109,12 +103,7 @@
 }
 
 .share-pill:hover {
-  border-color: var(--brand, #00d1ff);
-  color: var(--text, #dbe5ff);
-}
-
-.share-pill-label {
-  white-space: nowrap;
+  background: rgba(148, 163, 184, 0.12);
 }
 
 /* Banda inferior ligeramente más oscura */
@@ -123,7 +112,6 @@
   padding: 8px 16px 10px;
   font-size: 11px;
   color: var(--muted, #9fb0d0);
-
   background: rgba(0, 0, 0, 0.035); /* light */
 }
 
