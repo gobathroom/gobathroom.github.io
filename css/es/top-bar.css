@@ -93,7 +93,7 @@
   display: inline-flex;
   align-items: center;
 
-  padding: 0 4px;
+  padding: 0 26px;
   height: calc(var(--header-h) - 10px);
 
   font-size: 14px;
