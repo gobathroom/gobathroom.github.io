@@ -288,13 +288,13 @@
    ========================================================= */
 
 /* Estado activo del icono de Avisos cuando estás en /es/avisos/ */
-.page-notices #openNotices {
+.page-avisos #openNotices {
   background: rgba(250, 204, 21, 0.22); /* círculo suave dorado */
   color:  #e6b800;                        /* icono dorado */
 }
 
 /* Opcional: que mantenga el color incluso al pasar el mouse */
-.page-notices #openNotices:hover {
+.page-avisos #openNotices:hover {
   background: rgba(250, 204, 21, 0.22);
   color:  #e6b800;
 }
