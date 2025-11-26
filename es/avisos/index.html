@@ -69,18 +69,38 @@
     <label class="visually-hidden" for="noticeSearchInput">
       Buscar avisos
     </label>
+
     <div class="notice-search-field">
-      <i class="fas fa-search" aria-hidden="true"></i>
+      <!-- Botón lupa -->
+      <button
+        type="submit"
+        class="notice-search-icon"
+        aria-label="Buscar avisos"
+      >
+        <i class="fas fa-search" aria-hidden="true"></i>
+      </button>
+
+      <!-- Input -->
       <input
         id="noticeSearchInput"
         type="search"
         name="q"
-        placeholder="Buscar avisos por palabra clave…"
+        placeholder="Busca avisos por palabra clave…"
         autocomplete="off"
       >
+
+      <!-- Botón X (limpiar) -->
+      <button
+        type="button"
+        class="notice-clear-btn"
+        aria-label="Borrar búsqueda"
+      >
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
     </div>
   </form>
 </div>
+
 
   <div class="right">
 
