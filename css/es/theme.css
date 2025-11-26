@@ -40,7 +40,7 @@
   --panel-surf-shadow: none; /* tarjetas sin sombra, estilo FB dark */
 
  /* Franja gris (tecer color) */
-  --g-stripe: #111827; /* gray color unico*/
+  --g-stripe: rgba(0, 0, 0, 0.035); /* gray color unico*/
 }
 
 
