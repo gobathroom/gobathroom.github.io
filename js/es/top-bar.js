@@ -128,3 +128,66 @@ function applyThemeUI(dark) {
 
 
 
+
+//____________________________________________________________________________________________________________//
+//                                                /ES/AVISOS/                                                 //
+//____________________________________________________________________________________________________________//
+
+
+// ===========================
+// 2. Buscador
+// ===========================
+
+
+(function setupNoticeSearch() {
+  const form   = document.querySelector('.page-avisos .notice-search');
+  if (!form) return;
+
+  const field   = form.querySelector('.notice-search-field');
+  const input   = form.querySelector('#noticeSearchInput');
+  const clearBtn= form.querySelector('.notice-clear-btn');
+  const iconBtn = form.querySelector('.notice-search-icon');
+
+  if (!field || !input) return;
+
+  function updateState() {
+    if (input.value.trim()) {
+      field.classList.add('has-text');
+    } else {
+      field.classList.remove('has-text');
+    }
+  }
+
+  // Mostrar / ocultar X según haya texto
+  input.addEventListener('input', updateState);
+
+  // Botón X: limpia y vuelve a enfocar
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      input.value = '';
+      updateState();
+      input.focus();
+    });
+  }
+
+  // Lupa: por ahora solo evita recarga y enfoca (luego aquí pondremos el filtro real)
+  if (iconBtn) {
+    iconBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Aquí en el futuro: lógica de búsqueda / filtrado
+      input.focus();
+    });
+  }
+
+  // Evitar que el form recargue la página (hasta que tengas backend / filtro)
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Aquí ira tu lógica real de búsqueda
+    // const query = input.value.trim();
+  });
+
+  // Estado inicial
+  updateState();
+})();
+
+
