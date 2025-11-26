@@ -311,6 +311,7 @@
   justify-content: center;
 }
 
+/* Contenedor pill */
 .page-avisos .notice-search-field {
   position: relative;
   display: flex;
@@ -320,19 +321,35 @@
   border: 1px solid var(--border, #d1d5db);
   border-radius: 999px;
 
-  padding: 0 14px 0 38px; /* espacio para icono */
+  padding: 0 40px;          /* espacio derecha para la X */
+  padding-left: 42px;       /* espacio izquierda para la lupa */
   height: 40px;
-  width: 310px; /* ajustable */
-  
+  width: 460px;             /* 50% más ancho aprox */
+
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Icono */
-.page-avisos .notice-search-field i {
+/* Botón lupa (izquierda) */
+.page-avisos .notice-search-icon {
   position: absolute;
-  left: 12px;
-  font-size: 15px;
+  left: 10px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 26px;
+  height: 26px;
+
+  border: none;
+  background: transparent;
   color: var(--muted, #9fb0d0);
+  cursor: pointer;
+  padding: 0;
+}
+
+.page-avisos .notice-search-icon i {
+  font-size: 14px;
 }
 
 /* Input */
@@ -351,9 +368,49 @@
   color: var(--muted, #9fb0d0);
 }
 
+/* Botón X (derecha) */
+.page-avisos .notice-clear-btn {
+  position: absolute;
+  right: 10px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted, #9fb0d0);
+  cursor: pointer;
+  padding: 0;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.page-avisos .notice-clear-btn i {
+  font-size: 13px;
+}
+
+/* Al pasar el mouse por la X */
+.page-avisos .notice-clear-btn:hover {
+  background: rgba(148, 163, 184, 0.15);
+  color: var(--text, #1f2937);
+}
+
 /* Focus dentro del pill */
 .page-avisos .notice-search-field:focus-within {
   border-color: var(--brand, #00d1ff);
   box-shadow: 0 0 0 3px rgba(0, 209, 255, 0.25);
+}
+
+/* Mostrar X solo cuando hay texto */
+.page-avisos .notice-search-field.has-text .notice-clear-btn {
+  opacity: 1;
+  pointer-events: auto;
 }
 
