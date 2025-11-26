@@ -317,7 +317,7 @@
   display: flex;
   align-items: center;
 
-  background: var(--muted, #9fb0d0);
+  background: rgba(0, 0, 0, 0.035); /* light */
   border: 1px solid var(--border, #d1d5db);
   border-radius: 999px;
 
