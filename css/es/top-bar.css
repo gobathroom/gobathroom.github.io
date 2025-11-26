@@ -284,7 +284,7 @@
 /*____________________________________________________________________________________________________________*/
 
 /* =========================================================
-   Right A.1: Martillo
+   Right A.1: Avisos Martillo
    ========================================================= */
 
 /* Estado activo del icono de Avisos cuando estás en /es/avisos/ */
@@ -297,5 +297,63 @@
 .page-avisos #openNotices:hover {
   background: rgba(250, 204, 21, 0.22);
   color:  #e6b800;
+}
+
+
+
+/* =========================================================
+   /es/avisos – Buscador estilo Pill Pro
+   ========================================================= */
+
+.page-avisos .notice-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-avisos .notice-search-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  background: #ffffff;
+  border: 1px solid var(--border, #d1d5db);
+  border-radius: 999px;
+
+  padding: 0 14px 0 38px; /* espacio para icono */
+  height: 40px;
+  width: 310px; /* ajustable */
+  
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Icono */
+.page-avisos .notice-search-field i {
+  position: absolute;
+  left: 12px;
+  font-size: 15px;
+  color: var(--muted, #9fb0d0);
+}
+
+/* Input */
+.page-avisos .notice-search-field input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+
+  font-size: 14px;
+  color: var(--text, #1f2937);
+}
+
+/* Placeholder */
+.page-avisos .notice-search-field input::placeholder {
+  color: var(--muted, #9fb0d0);
+}
+
+/* Focus dentro del pill */
+.page-avisos .notice-search-field:focus-within {
+  border-color: var(--brand, #00d1ff);
+  box-shadow: 0 0 0 3px rgba(0, 209, 255, 0.25);
 }
 
