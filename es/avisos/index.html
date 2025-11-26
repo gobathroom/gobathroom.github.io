@@ -175,271 +175,117 @@
 <!-- ============================= -->
 
 <main class="content">
-  <div class="home-layout">
-    <!-- COLUMNA CENTRAL -->
-    <div class="home-main">
-
-     <!-- HERO / BIENVENIDA -->
-<section class="home-hero">
-  <header class="home-hero-header">
-    <h1 class="home-title">Bienvenido a Go Bathroom NYC</h1>
-    <p class="home-subtitle">
-      Tu guía rápida para encontrar baños accesibles, gratuitos y para clientes
-      a través de NYC y Long Island.
-    </p>
-  </header>
-
-  <div class="home-hero-actions">
-    <!-- CTA principal: mapa -->
-    <a href="/es/maps" class="btn btn-primary">
-      <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
-      <span>Abrir mapa</span>
-    </a>
-
-    <!-- Acciones secundarias -->
-    <div class="home-hero-secondary">
-      <a href="https://TU_LINK_GOOGLE_FORM_SUGGEST"
-         class="btn btn-ghost"
-         target="_blank"
-         rel="noopener"
-         aria-label="Sugerir un baño mediante formulario">
-        <i class="fas fa-lightbulb" aria-hidden="true"></i>
-        <span>Sugerir baño</span>
-      </a>
-
-      <a href="https://TU_LINK_GOOGLE_FORM_REPORT"
-         class="btn btn-ghost"
-         target="_blank"
-         rel="noopener"
-         aria-label="Reportar un problema con un baño">
-        <i class="fas fa-flag" aria-hidden="true"></i>
-        <span>Reportar un problema</span>
-      </a>
-
-      <a href="https://TU_LINK_PAYPAL_DONATE"
-         class="btn btn-ghost"
-         target="_blank"
-         rel="noopener"
-         aria-label="Donar para apoyar Go Bathroom NYC">
-        <i class="fas fa-hand-holding-heart" aria-hidden="true"></i>
-        <span>Donar</span>
-      </a>
-    </div>
-  </div>
-
-  <p class="home-meta">
-    Ubicaciones verificadas · Actualizado regularmente
-  </p>
-</section>
-
-
-<!-- ACCESO A LOS BAÑOS -->
-<section class="home-section info-target" id="info-acceso">
-  <header class="home-section-header">
-    <h2 class="home-section-title">Acceso a los baños</h2>
-    <p class="home-section-subtitle">
-      Tipos de acceso según el color del pin que ves en el mapa.
-    </p>
-  </header>
-
-  <div class="access-grid">
-    <!-- Accesible -->
-    <article class="access-card access-card--blue">
-      <div class="access-icon">
-        <img
-          src="/assets/svg/pins/access-accessible.svg"
-          alt="Baño accesible (pin azul)"
-          class="access-icon-img"
-        >
-      </div>
-      <h3 class="access-title">Accesible</h3>
-      <p class="access-desc">
-        Baños dentro de negocios donde normalmente permiten el uso del baño
-        sin exigir compra, pero siguen siendo espacios privados.
+  <section class="notices-section">
+    <header class="notices-header">
+      <h1 class="notices-title">Avisos importantes para repartidores y visitantes</h1>
+      <p class="notices-subtitle">
+        Leyes, normas y recordatorios oficiales relacionados con el uso de baños públicos
+        y de negocios en NYC.
       </p>
-    </article>
+    </header>
 
-    <!-- Gratuito -->
-    <article class="access-card access-card--green">
-      <div class="access-icon">
-        <img
-          src="/assets/svg/pins/access-free.svg"
-          alt="Baño gratuito (pin verde)"
-          class="access-icon-img"
+    <!-- GRID DE TARJETAS -->
+    <div class="notices-grid">
+
+      <!-- Aviso 1 -->
+      <article class="notice-card">
+        <div class="notice-badge notice-badge--law">
+          <i class="fas fa-scale-balanced" aria-hidden="true"></i>
+          <span>Ley / Norma</span>
+        </div>
+
+        <h2 class="notice-title">
+          Derecho a usar el baño en ciertos negocios
+        </h2>
+
+        <p class="notice-meta">
+          NYC – Información oficial sobre requisitos para ofrecer acceso a baños.
+        </p>
+
+        <p class="notice-desc">
+          Algunos negocios deben permitir el uso de sus baños al público
+          bajo condiciones específicas. Revisa los detalles antes de asumir
+          que el acceso está prohibido.
+        </p>
+
+        <a
+          href="https://TU_LINK_OFICIAL_1"
+          class="notice-link"
+          target="_blank"
+          rel="noopener"
         >
-      </div>
-      <h3 class="access-title">Gratuito</h3>
-      <p class="access-desc">
-        Baños totalmente gratuitos y de acceso público.
-        Ejemplo: parques, bibliotecas, centros comunitarios.
-      </p>
-    </article>
+          Ver aviso oficial
+          <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+        </a>
+      </article>
 
-    <!-- Cliente -->
-    <article class="access-card access-card--orange">
-      <div class="access-icon">
-        <img
-          src="/assets/svg/pins/access-client.svg"
-          alt="Baño para clientes (pin naranja)"
-          class="access-icon-img"
+      <!-- Aviso 2 -->
+      <article class="notice-card">
+        <div class="notice-badge notice-badge--health">
+          <i class="fas fa-hand-sparkles" aria-hidden="true"></i>
+          <span>Salud / Higiene</span>
+        </div>
+
+        <h2 class="notice-title">
+          Recomendaciones de higiene en baños públicos
+        </h2>
+
+        <p class="notice-meta">
+          NYC Health – Guía de uso responsable de baños compartidos.
+        </p>
+
+        <p class="notice-desc">
+          Consejos básicos para lavarse las manos, usar papel y mantener
+          el espacio limpio para la siguiente persona, especialmente en
+          baños gratuitos o muy concurridos.
+        </p>
+
+        <a
+          href="https://TU_LINK_OFICIAL_2"
+          class="notice-link"
+          target="_blank"
+          rel="noopener"
         >
-      </div>
-      <h3 class="access-title">Cliente</h3>
-      <p class="access-desc">
-        Baños dentro de restaurantes u otros negocios donde
-        se requiere consumir algo o mostrar un recibo para poder usar el baño.
-      </p>
-    </article>
-  </div>
-</section>
+          Leer guía completa
+          <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+        </a>
+      </article>
 
-      
+      <!-- Aviso 3 -->
+      <article class="notice-card">
+        <div class="notice-badge notice-badge--tip">
+          <i class="fas fa-lightbulb" aria-hidden="true"></i>
+          <span>Recomendación</span>
+        </div>
 
+        <h2 class="notice-title">
+          Uso respetuoso de baños gratuitos
+        </h2>
 
-
-      <!-- CARACTERÍSTICAS DEL BAÑO -->
-<section class="home-section info-target" id="info-caracteristicas">
-  <header class="home-section-header">
-    <h2 class="home-section-title">Características del baño</h2>
-    <p class="home-section-subtitle">
-      Entiende de un vistazo qué ofrece cada baño usando los emojis del mapa.
-    </p>
-  </header>
-
-  <div class="features-grid">
-    <!-- 1: Múltiples cabinas -->
-    <div class="feature-item">
-      <span class="feature-icon" aria-hidden="true">🚾</span>
-      <div class="feature-body">
-        <h3 class="feature-title">Múltiples cabinas o inodoros</h3>
-        <p class="feature-desc">
-          Más de un baño disponible en la misma ubicación.
+        <p class="notice-meta">
+          Consejos de Go Bathroom NYC para repartidores y público en general.
         </p>
-      </div>
-    </div>
 
-    <!-- 2: Baños separados -->
-    <div class="feature-item">
-      <span class="feature-icon" aria-hidden="true">🚹 🚺</span>
-      <div class="feature-body">
-        <h3 class="feature-title">Baños separados</h3>
-        <p class="feature-desc">
-          Baños distintos para hombres y mujeres.
+        <p class="notice-desc">
+          Si un baño es gratuito, dejarlo limpio y en buen estado ayuda
+          a que la ciudad mantenga estos espacios abiertos para todos.
         </p>
-      </div>
-    </div>
 
-    <!-- 3: Unisex -->
-    <div class="feature-item">
-      <span class="feature-icon" aria-hidden="true">🚻</span>
-      <div class="feature-body">
-        <h3 class="feature-title">Baño unisex individual</h3>
-        <p class="feature-desc">
-          Cabina única para cualquier género.
-        </p>
-      </div>
-    </div>
+        <a
+          href="https://TU_LINK_INTERNO_O_BLOG"
+          class="notice-link"
+          target="_blank"
+          rel="noopener"
+        >
+          Ver recomendaciones
+          <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+        </a>
+      </article>
 
-    <!-- 4: Accesible silla de ruedas -->
-    <div class="feature-item">
-      <span class="feature-icon" aria-hidden="true">♿</span>
-      <div class="feature-body">
-        <h3 class="feature-title">Accesible en silla de ruedas</h3>
-        <p class="feature-desc">
-          Puerta y espacio interior adaptado.
-        </p>
-      </div>
-    </div>
+      <!-- Aquí podrás seguir añadiendo más <article class="notice-card"> ... -->
 
-    <!-- 5: PIN -->
-    <div class="feature-item">
-      <span class="feature-icon" aria-hidden="true">🔢</span>
-      <div class="feature-body">
-        <h3 class="feature-title">Requiere PIN</h3>
-        <p class="feature-desc">
-          Necesitas un código para abrir la puerta.
-        </p>
-      </div>
     </div>
-
-    <!-- 6: Llave -->
-    <div class="feature-item">
-      <span class="feature-icon" aria-hidden="true">🔑</span>
-      <div class="feature-body">
-        <h3 class="feature-title">Requiere llave</h3>
-        <p class="feature-desc">
-          Debes pedir la llave al personal del lugar.
-        </p>
-      </div>
-    </div>
-
-    <!-- 7: Papel no garantizado -->
-    <div class="feature-item">
-      <span class="feature-icon" aria-hidden="true">🧻</span>
-      <div class="feature-body">
-        <h3 class="feature-title">Papel no garantizado</h3>
-        <p class="feature-desc">
-          Puede faltar papel higiénico: lleva el tuyo.
-        </p>
-      </div>
-    </div>
-
-    <!-- 8: Portátil / temporal -->
-    <div class="feature-item">
-      <span class="feature-icon" aria-hidden="true">🚽</span>
-      <div class="feature-body">
-        <h3 class="feature-title">Baño portátil / temporal</h3>
-        <p class="feature-desc">
-          Baño tipo portátil o instalación temporal.
-        </p>
-      </div>
-    </div>
-
-    <!-- 9: 24/7 -->
-    <div class="feature-item">
-      <span class="feature-icon" aria-hidden="true">🕒</span>
-      <div class="feature-body">
-        <h3 class="feature-title">Abierto 24/7</h3>
-        <p class="feature-desc">
-          Disponible todo el día, todos los días.
-        </p>
-      </div>
-    </div>
-
-    <!-- 10: Limpio -->
-    <div class="feature-item">
-      <span class="feature-icon" aria-hidden="true">✅</span>
-      <div class="feature-body">
-        <h3 class="feature-title">Baño limpio</h3>
-        <p class="feature-desc">
-          Buena higiene en visitas recientes.
-        </p>
-      </div>
-    </div>
-
-    <!-- 11: Sucio -->
-    <div class="feature-item">
-      <span class="feature-icon" aria-hidden="true">⚠️</span>
-      <div class="feature-body">
-        <h3 class="feature-title">Baño sucio</h3>
-        <p class="feature-desc">
-          Reportes de mala higiene o mal olor.
-        </p>
-      </div>
-    </div>
-
-    <!-- 12: Cambiador bebés -->
-    <div class="feature-item">
-      <span class="feature-icon" aria-hidden="true">🚼</span>
-      <div class="feature-body">
-        <h3 class="feature-title">Cambiador para bebés</h3>
-        <p class="feature-desc">
-          Cuenta con estación para cambiar pañales.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
     </div>
 
   
