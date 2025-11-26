@@ -170,10 +170,6 @@
   padding: 8px 16px 10px;
   font-size: 11px;
   color: var(--muted, #9fb0d0);
-  background: rgba(0, 0, 0, 0.035); /* light */
+  background: var(--g-stripe);
 }
 
-/* Ajuste para modo oscuro */
-body[data-theme="dark"] .footer-bottom {
-  background: rgba(255, 255, 255, 0.035);
-}
