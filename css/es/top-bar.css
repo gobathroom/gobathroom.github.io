@@ -402,11 +402,6 @@
   color: var(--text, #1f2937);
 }
 
-/* Focus dentro del pill */
-.page-avisos .notice-search-field:focus-within {
-  border-color: var(--brand, #00d1ff);
-  box-shadow: 0 0 0 3px rgba(0, 209, 255, 0.25);
-}
 
 /* Mostrar X solo cuando hay texto */
 .page-avisos .notice-search-field.has-text .notice-clear-btn {
