@@ -27,7 +27,16 @@
     cards.forEach(card => {
       const text = card.textContent.toLowerCase();
 
-      if (!query || text.includes(query)) {
+      // 🔹 leer los tags del atributo data-tags (si existe)
+      const tags = (card.dataset.tags || '').toLowerCase();
+
+      // 🔹 coincidencia en texto visible O en tags
+      const hasMatch =
+        !query ||            // si no hay query, siempre muestra
+        text.includes(query) ||
+        tags.includes(query);
+
+      if (hasMatch) {
         card.style.display = '';   // visible
         matches++;
       } else {
