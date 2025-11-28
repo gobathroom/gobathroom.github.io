@@ -762,4 +762,139 @@ body[data-theme="dark"] .impact-icon {
   border-radius: 2px;
 }
 
+/* ===========================
+    /ES/AVISOS – LISTA DE TARJETAS
+   =========================== */
+/*______________________________________________________________________________
+ 
+
+/* Contenedor general */
+.page-avisos .notices-section {
+  max-width: var(--content-max, 1120px);
+  margin: 0 auto;
+  padding-top: 24px;
+}
+
+/* Título + subtítulo */
+.page-avisos .notices-header {
+  margin-bottom: 20px;
+}
+
+.page-avisos .notices-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text, #dbe5ff);
+  margin-bottom: 6px;
+}
+
+.page-avisos .notices-subtitle {
+  font-size: 13px;
+  color: var(--muted, #9fb0d0);
+}
+
+/* GRID de tarjetas (para desktop se ve 3 columnas si hay espacio) */
+.page-avisos .notices-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Si en algún momento quieres 2 columnas, puedes bajar este ancho en CSS */
+@media (max-width: 1100px) {
+  .page-avisos .notices-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .page-avisos .notices-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tarjeta individual */
+.page-avisos .notice-card {
+  background: var(--panel, #161b22);
+  border-radius: 16px;
+  border: 1px solid var(--border, rgba(148, 163, 184, 0.4));
+  padding: 14px 16px 13px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.22);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Badge arriba */
+.page-avisos .notice-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #111827;
+}
+
+/* Variantes de badge */
+.page-avisos .notice-badge--law {
+  background: #fef3c7;
+}
+
+.page-avisos .notice-badge--health {
+  background: #d1fae5;
+}
+
+.page-avisos .notice-badge--tip {
+  background: #e0f2fe;
+}
+
+.page-avisos .notice-badge i {
+  font-size: 12px;
+}
+
+/* Título de aviso */
+.page-avisos .notice-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text, #dbe5ff);
+  margin-top: 4px;
+}
+
+/* Meta y descripción */
+.page-avisos .notice-meta {
+  font-size: 12px;
+  color: var(--muted, #9fb0d0);
+}
+
+.page-avisos .notice-desc {
+  font-size: 13px;
+  color: var(--text, #e5e7eb);
+}
+
+/* Link al aviso oficial */
+.page-avisos .notice-link {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--brand, #00d1ff);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.page-avisos .notice-link i {
+  font-size: 11px;
+}
+
+.page-avisos .notice-link:hover {
+  text-decoration: underline;
+}
+
+/* Estado “sin resultados” */
+.page-avisos .notice-empty {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--muted, #9fb0d0);
+}
 
