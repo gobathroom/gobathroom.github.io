@@ -52,7 +52,10 @@
   /* -----------------------------------
      SOMBRAS BASE (neutras, sin color)
      ----------------------------------- */
+   /*.home-section*/
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+   /*.notice-card*/
   --shadow-md: 0 4px 8px rgba(0,0,0,0.12);
+   /*elevar hover*/
   --shadow-lg: 0 10px 18px rgba(0,0,0,0.16);
 }
