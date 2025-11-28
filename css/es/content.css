@@ -754,3 +754,12 @@ body[data-theme="dark"] .impact-icon {
 /*____________________________________________________________________________________________________________*/
 
 
+/* Texto resaltado dentro de avisos */
+.page-avisos .notice-highlight {
+  background: #facc15;          /* amarillo suave */
+  color: #111827;               /* texto oscuro para contraste */
+  padding: 0 1px;
+  border-radius: 2px;
+}
+
+
