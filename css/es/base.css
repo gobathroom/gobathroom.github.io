@@ -1,64 +1,78 @@
-/* ===========================
-   1. RESET BÁSICO
-   =========================== */
+/* ==================================================================================
+   1) RESET BÁSICO
+   ================================================================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ===========================
-   2. TIPOGRAFÍA GLOBAL
-   =========================== */
+
+/* ==================================================================================
+   2) TIPOGRAFÍA GLOBAL
+   ================================================================================== */
 html {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   line-height: 1.4;
+
+  /* Necesario para sticky footer */
+  height: 100%;
 }
 
-/* El tema (bg/text) solo en el body */
 body {
   background: var(--bg);
   color: var(--text);
-  min-height: 100vh;  /* cuerpo siempre al menos toda la ventana */
+
+  /* Sticky footer layout */
+  min-height: 100vh;
+  height: 100%;             /* empareja el html */
+  display: flex;            /* convierte body en layout vertical */
+  flex-direction: column;   /* de arriba hacia abajo */
 }
 
 
-
-/* ===========================
-   3. SISTEMA TIPOGRÁFICO GLOBAL
-   =========================== */
-
-/* Texto normal */
+/* ==================================================================================
+   3) SISTEMA TIPOGRÁFICO GLOBAL
+   ================================================================================== */
 .text {
-  font-weight: 400; /* Regular (default) */
+  font-weight: 400; /* Regular */
 }
 
-/* Títulos de UI / labels importantes */
 .title {
   font-weight: 600; /* SemiBold */
 }
 
-/* Marca / logo */
 .logo {
   font-weight: 800; /* ExtraBold */
 }
 
 
-/* ===========================
-   4. TITULOS + TEXTOS
-   =========================== */
+/* ==================================================================================
+   4) TÍTULOS + ELEMENTOS DE TEXTO
+   ================================================================================== */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 600; /* SemiBold */
+  font-weight: 600;
 }
 
-a, p, span, label, button, li {
-  font-weight: 400; /* Regular */
+a,
+p,
+span,
+label,
+button,
+li {
+  font-weight: 400;
 }
 
-/* ===========================
-   5. LAYOUT GLOBAL
-   =========================== */
+
+/* ==================================================================================
+   5) LAYOUT GLOBAL
+   ================================================================================== */
+
+/* El main ahora es un "flex item" que expande el espacio disponible */
 main.content {
   padding: 16px;
+  flex: 1 0 auto;    /* empuja al footer abajo si hay poco contenido */
 }
+
+/* (el footer solo necesita "flex-shrink: 0;" que va en footer.css) */
