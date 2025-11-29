@@ -765,7 +765,6 @@ body[data-theme="dark"] .impact-icon {
 /* ===========================
     /ES/AVISOS – LISTA DE TARJETAS
    =========================== */
-/*______________________________________________________________________________
  
 
 /* Contenedor general */
@@ -898,4 +897,44 @@ body[data-theme="dark"] .impact-icon {
   font-size: 13px;
   color: var(--muted, #9fb0d0);
 }
+
+
+
+/* ===========================
+    /ES/AVISOS – /* Icono grande (superior derecha) */
+   =========================== */
+
+/* Icono grande (superior derecha) */
+.notice-card--has-icon {
+  position: relative;
+  overflow: hidden;
+}
+
+.notice-icon {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 82px;
+  height: 82px;
+  background: rgba(0, 209, 255, 0.12); /* tono brand suave */
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand);
+  pointer-events: none;
+}
+
+.notice-icon-svg {
+  width: 42px;
+  height: 42px;
+  opacity: 0.9;
+}
+
+/* Contenido corre a la izquierda del icono */
+.notice-card .notice-content {
+  position: relative;
+  z-index: 2;
+}
+
 
