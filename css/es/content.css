@@ -833,21 +833,22 @@ body[data-theme="dark"] .impact-icon {
   border-radius: 999px;
   font-size: 11px;
   font-weight: 500;
-  color: #111827;
+  color: var(--badge-pill-text, #111827);
 }
 
 /* Variantes de badge */
 .page-avisos .notice-badge--law {
-  background: #fef3c7;
+  background: var(--badge-law-bg);
 }
 
 .page-avisos .notice-badge--health {
-  background: #d1fae5;
+  background: var(--badge-health-bg);
 }
 
 .page-avisos .notice-badge--tip {
-  background: #e0f2fe;
+  background: var(--badge-tip-bg);
 }
+
 
 .page-avisos .notice-badge i {
   font-size: 12px;
