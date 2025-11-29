@@ -1,7 +1,7 @@
 window.NOTICES = [
   {
     id: 1,
-    text: 'Si recoges pedidos en un negocio, pregunta si puedes usar el baño; muchos lugares lo permiten si eres respetuoso.',
+    text: 'Tienes derecho a usar el baño del negocio cuando recoges un pedido, según la ley de NYC.',
     category: 'Acceso',
     kind: 'law',          // 🔹 Ley
     important: true,
@@ -9,7 +9,7 @@ window.NOTICES = [
   },
   {
     id: 2,
-    text: 'En zonas concurridas mantén una velocidad máxima recomendada de 15 mph con tu e-bike.',
+    text: 'La nueva ley de NYC establece un límite de 15 mph (24 km/h) para e-bikes y otros vehículos de micromovilidad.',
     category: 'Seguridad',
     kind: 'law',          // 🔹 Ley
     important: true,
