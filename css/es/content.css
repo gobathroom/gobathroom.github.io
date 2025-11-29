@@ -793,9 +793,13 @@ body[data-theme="dark"] .impact-icon {
 /* GRID de tarjetas */
 .page-avisos .notices-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* mismo ancho */
   gap: 16px;
+
+  /* ⬇️ IMPORTANTE: las tarjetas NO se estiran a la altura de la más alta */
+  align-items: flex-start;
 }
+
 
 @media (max-width: 1100px) {
   .page-avisos .notices-grid {
