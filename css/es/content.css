@@ -763,9 +763,8 @@ body[data-theme="dark"] .impact-icon {
 }
 
 /* ===========================
-    /ES/AVISOS – LISTA DE TARJETAS
+   /ES/AVISOS – LISTA DE TARJETAS
    =========================== */
- 
 
 /* Contenedor general */
 .page-avisos .notices-section {
@@ -791,14 +790,13 @@ body[data-theme="dark"] .impact-icon {
   color: var(--muted, #9fb0d0);
 }
 
-/* GRID de tarjetas (para desktop se ve 3 columnas si hay espacio) */
+/* GRID de tarjetas */
 .page-avisos .notices-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 
-/* Si en algún momento quieres 2 columnas, puedes bajar este ancho en CSS */
 @media (max-width: 1100px) {
   .page-avisos .notices-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -817,10 +815,14 @@ body[data-theme="dark"] .impact-icon {
   border-radius: 16px;
   border: 1px solid var(--border, rgba(148, 163, 184, 0.4));
   padding: 14px 16px 13px;
-  box-shadow: var(--shadow-md);   /* ⬅️ SOMBRA DEL SISTEMA */
+  box-shadow: var(--shadow-md);   /* sombra del sistema */
+
   display: flex;
   flex-direction: column;
   gap: 6px;
+
+  position: relative;  /* ⬅️ para anclar el icono */
+  overflow: hidden;    /* ⬅️ por si el icono se sale un poco */
 }
 
 /* Badge arriba */
@@ -847,7 +849,6 @@ body[data-theme="dark"] .impact-icon {
 .page-avisos .notice-badge--tip {
   background: var(--badge-tip-bg);
 }
-
 
 .page-avisos .notice-badge i {
   font-size: 12px;
@@ -898,43 +899,44 @@ body[data-theme="dark"] .impact-icon {
   color: var(--muted, #9fb0d0);
 }
 
-
-
 /* ===========================
-    /ES/AVISOS – /* Icono grande (superior derecha) */
+   /ES/AVISOS – ICONO GRANDE
    =========================== */
 
-/* Icono grande (superior derecha) */
-.notice-card--has-icon {
+/* Marcador de que esta tarjeta tiene icono */
+.page-avisos .notice-card--has-icon {
   position: relative;
   overflow: hidden;
 }
 
-.notice-icon {
+/* Icono grande (superior derecha, dentro de la tarjeta) */
+.page-avisos .notice-icon {
   position: absolute;
-  top: -10px;
-  right: -10px;
-  width: 82px;
-  height: 82px;
-  background: rgba(0, 209, 255, 0.12); /* tono brand suave */
+  top: 8px;
+  right: 8px;
+  width: 68px;
+  height: 68px;
+
+  background: rgba(0, 209, 255, 0.10); /* tono brand suave */
   border-radius: 16px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   color: var(--brand);
   pointer-events: none;
+  z-index: 1;
 }
 
-.notice-icon-svg {
-  width: 42px;
-  height: 42px;
+.page-avisos .notice-icon-svg {
+  width: 36px;
+  height: 36px;
   opacity: 0.9;
 }
 
-/* Contenido corre a la izquierda del icono */
-.notice-card .notice-content {
+/* Contenido por encima del icono */
+.page-avisos .notice-card .notice-content {
   position: relative;
   z-index: 2;
 }
-
-
