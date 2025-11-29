@@ -105,6 +105,13 @@
 
   /* Franja gris (tercer color, por ejemplo footer-bottom) */
   --g-stripe: rgba(0, 0, 0, 0.035);
+
+     /* BADGES DE AVISOS */
+  --badge-law-bg:   #fef3c7; /* Ley / Norma */
+  --badge-health-bg:#d1fae5; /* Salud / Higiene */
+  --badge-tip-bg:   #e0f2fe; /* Recomendación */
+  --badge-pill-text:#111827; /* texto oscuro sobre badge claro */
+
 }
 
 /* =========================================================
@@ -150,4 +157,12 @@
 
   /* Franja gris (tercer color) — puedes usar otro si quieres */
   --g-stripe: rgba(0, 0, 0, 0.035);
+
+
+     /* BADGES DE AVISOS */
+  --badge-law-bg:   #fef3c7; /* Ley / Norma */
+  --badge-health-bg:#d1fae5; /* Salud / Higiene */
+  --badge-tip-bg:   #e0f2fe; /* Recomendación */
+  --badge-pill-text:#111827; /* texto oscuro sobre badge claro */
+
 }
