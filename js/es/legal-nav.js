@@ -1,86 +1,85 @@
 // /js/es/legal-nav.js
 document.addEventListener('DOMContentLoaded', () => {
-  const sections = document.querySelectorAll('.legal-section[id]');
+  const sections = Array.from(document.querySelectorAll('.legal-section[id]'));
   const links = Array.from(document.querySelectorAll('.legal-sub-link'));
+
   if (!sections.length || !links.length) return;
 
-  // Map id -> link
-  const linkById = new Map();
+  // Mapa id -> link
+  const idToLink = new Map();
   links.forEach(link => {
-    const hash = link.getAttribute('href');
-    if (hash && hash.startsWith('#')) {
-      linkById.set(hash.slice(1), link);
+    const href = link.getAttribute('href') || '';
+    if (href.startsWith('#')) {
+      idToLink.set(href.slice(1), link);
     }
   });
 
-  // IDs visibles detectados por IntersectionObserver
-  let visibleIdsRaw = new Set();
-
-  // ACTUALIZA LAS CLASES DE LOS LINKS
-  function applyHighlight() {
-    const scrollY = window.scrollY;
-    const viewport = window.innerHeight;
-    const pageHeight = document.documentElement.scrollHeight;
-
-    const atTop = scrollY === 0;
-    const atBottom = scrollY + viewport >= pageHeight - 2;
-
-    // Si estamos arriba del todo → limpiar todo
-    if (atTop) {
-      links.forEach(l => l.classList.remove('is-current'));
-      return;
-    }
-
-    let visibleList = Array.from(visibleIdsRaw);
-
-    // REGLA 1 → Si NO estás al fondo: activar SOLO UNO
-    if (!atBottom) {
-      if (visibleList.length > 0) {
-        visibleList = [visibleList[0]]; // tomamos el primero que entra en ventana
-      }
-    }
-    // REGLA 2 → Si estás al fondo: permitir varios (tal como los encontró el observer)
-
-    // Pintar
+  const setActive = (activeIds) => {
     links.forEach(link => {
-      const id = link.getAttribute('href').slice(1);
-      if (visibleList.includes(id)) {
-        link.classList.add('is-current');
-      } else {
-        link.classList.remove('is-current');
-      }
+      const href = link.getAttribute('href') || '';
+      const id = href.startsWith('#') ? href.slice(1) : '';
+      link.classList.toggle('is-current', activeIds.has(id));
     });
-  }
+  };
 
-  // OBSERVER → detecta qué secciones entran a la franja central
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        const id = entry.target.id;
-        if (!id) return;
+  const computeActive = () => {
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const docHeight = document.documentElement.scrollHeight;
+    const scrollY = window.scrollY || window.pageYOffset;
+    const atBottom = scrollY + vh >= docHeight - 2; // casi fondo
 
-        if (entry.isIntersecting) {
-          visibleIdsRaw.add(id);
-        } else {
-          visibleIdsRaw.delete(id);
+    // Calculamos qué parte de cada sección es visible
+    const candidates = sections.map(sec => {
+      const rect = sec.getBoundingClientRect();
+      const visible = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+      const ratio = rect.height > 0 ? Math.max(0, visible) / rect.height : 0;
+      return { id: sec.id, ratio };
+    });
+
+    const activeIds = new Set();
+
+    if (!atBottom) {
+      // SOLO UNA sección activa: la más visible, pero que tenga al menos ~3/4
+      let best = null;
+      for (const c of candidates) {
+        if (c.ratio < 0.25) continue;       // descartamos casi invisibles
+        if (!best || c.ratio > best.ratio) {
+          best = c;
+        }
+      }
+      if (best && best.ratio >= 0.75) {
+        activeIds.add(best.id);
+      } else if (best && best.ratio > 0) {
+        // fallback por si ninguna llega a 0.75 (pantallas muy bajas, etc.)
+        activeIds.add(best.id);
+      }
+    } else {
+      // EN EL FONDO: puede haber varias secciones si se ven al menos 3/4
+      candidates.forEach(c => {
+        if (c.ratio >= 0.75) {
+          activeIds.add(c.id);
         }
       });
 
-      applyHighlight();
-    },
-    {
-      root: null,
-      rootMargin: "-30% 0px -30% 0px", // franja del 40% central de la pantalla
-      threshold: 0.1
+      // Si por alguna razón ninguna llega a 0.75, marcamos la más visible
+      if (!activeIds.size) {
+        const best = candidates.reduce((a, b) => (b.ratio > a.ratio ? b : a));
+        if (best.ratio > 0) activeIds.add(best.id);
+      }
     }
-  );
 
-  sections.forEach(sec => observer.observe(sec));
+    setActive(activeIds);
+  };
 
-  // CLICK → scroll suave + eliminar hash de la URL
+  // Listener de scroll y resize
+  window.addEventListener('scroll', computeActive, { passive: true });
+  window.addEventListener('resize', computeActive);
+  computeActive(); // estado inicial
+
+  // Scroll suave al hacer clic en el índice y limpiamos el hash
   links.forEach(link => {
-    link.addEventListener('click', e => {
-      const href = link.getAttribute('href');
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href') || '';
       if (!href.startsWith('#')) return;
 
       e.preventDefault();
@@ -88,30 +87,42 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = document.getElementById(id);
       if (!target) return;
 
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+      const rect = target.getBoundingClientRect();
+      const offset = 96; // altura aprox. del topbar
+      const targetTop = rect.top + window.scrollY - offset;
+
+      window.scrollTo({
+        top: targetTop,
+        behavior: 'smooth'
       });
 
-      // Borrar hash de la URL luego del scroll
-      if (window.history?.replaceState) {
-        const clean = window.location.pathname + window.location.search;
-        window.history.replaceState(null, "", clean);
+      if (window.history && window.history.replaceState) {
+        const cleanUrl = window.location.pathname + window.location.search;
+        window.history.replaceState(null, '', cleanUrl);
       }
+
+      // Forzamos recalcular después del scroll suave
+      setTimeout(computeActive, 400);
     });
   });
 
-  // Si entran con URL tipo /privacidad#sec-4 → respetar pero limpiar hash
-  if (location.hash.startsWith('#sec-')) {
+  // Si entra con /privacidad#sec-x, respetamos ancla pero limpiamos hash
+  if (location.hash && location.hash.startsWith('#sec-')) {
     const id = location.hash.slice(1);
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "auto", block: "start" });
+    const target = document.getElementById(id);
+    if (target) {
+      const rect = target.getBoundingClientRect();
+      const offset = 96;
+      const targetTop = rect.top + window.scrollY - offset;
 
-      if (window.history?.replaceState) {
-        const clean = window.location.pathname + window.location.search;
-        window.history.replaceState(null, "", clean);
+      window.scrollTo({ top: targetTop, behavior: 'auto' });
+
+      if (window.history && window.history.replaceState) {
+        const cleanUrl = window.location.pathname + window.location.search;
+        window.history.replaceState(null, '', cleanUrl);
       }
+
+      computeActive();
     }
   }
 });
