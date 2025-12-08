@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- META BÁSICOS -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/logo.svg">
+  <link rel="alternate icon" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="alternate icon" href="/assets/favicon-48.png" sizes="48x48">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180">
+  <meta name="theme-color" content="#0d1117" />
+
+  <!-- TÍTULO -->
+  <title>Go Bathroom NYC</title>
+
+  <!-- ICONOS EXTERNOS (FONT AWESOME) --> 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- CSS GLOBAL (TOKENS (layout) + THEME + BASE CSS) -->
+  <link rel="stylesheet" href="/css/es/tokens.css">
+  <link rel="stylesheet" href="/css/es/base.css">
+
+  <!-- CSS DE COMPONENTES -->
+  <link rel="stylesheet" href="/css/es/dialog.css">
+  <link rel="stylesheet" href="/css/es/top-bar.css">
+
+  <!-- CSS DE Content -->
+  <link rel="stylesheet" href="/css/es/content.css">
+
+  <!-- CSS DE Footer -->
+  <link rel="stylesheet" href="/css/es/footer.css">
+
+  <!-- MANIFEST PWA -->
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- REGISTRO DEL SERVICE WORKER (DEFER IMPORTANTE) -->
+  <script src="/js/es/sw-register.js" defer></script>
+
+   <!-- Diccionario de textos de UI -->
+   <script src="/js/es/i18n.js" defer></script>
+  
+  <!-- SCRIPTS DE COMPONENTES (DEFER PARA RENDIR MEJOR) -->
+  <script src="/js/es/base.js" defer></script>
+  <script src="/js/es/notifications-data.js"></script>
+  <script src="/js/es/notifast.js"></script>
+  <script src="/js/es/top-bar.js" defer></script>
+  <script src="/js/es/content.js" defer></script>
+  <script src="/js/es/footer.js" defer></script>
+  
+</head>
+
+<body class="page-avisos">
+  <!-- ============================= -->
+<!--          TOP BAR             -->
+<!-- ============================= -->
+<header class="topbar">
+  <div class="left">
+    <!-- Logo -->
+    <a class="brand" id="brandLink" href="/">
+      <img src="/assets/svg/logo.svg" alt="Go Bathroom Logo">
+      <span class="logo">Go Bathroom</span>
+    </a>
+  </div>
+
+
+  <div class="center">
+  <!-- Buscador de avisos -->
+  <form class="notice-search" role="search" aria-label="Buscar avisos">
+    <label class="visually-hidden" for="noticeSearchInput">
+    </label>
+
+    <div class="notice-search-field">
+      <!-- Botón lupa -->
+      <button
+        type="submit"
+        class="notice-search-icon"
+        aria-label="Buscar avisos"
+      >
+        <i class="fas fa-search" aria-hidden="true"></i>
+      </button>
+
+      <!-- Input -->
+      <input
+        id="noticeSearchInput"
+        type="search"
+        name="q"
+        placeholder="Busca avisos por palabra clave…"
+        autocomplete="off"
+      >
+
+      <!-- Botón X (limpiar) -->
+      <button
+        type="button"
+        class="notice-clear-btn"
+        aria-label="Borrar búsqueda"
+      >
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+  </form>
+</div>
+
+
+
+  <div class="right">
+
+
+    <!-- 🔵 Abrir mapa (Google Maps) -->
+  <a class="icon-btn"
+     href="https://rebrand.ly/open-map"
+     target="_blank"
+     rel="noopener"
+     data-label="Mapa">
+    <i class="fas fa-map-marked-alt"></i>
+  </a>
+
+  <!-- 📝 Sugerir baño (Google Forms) -->
+  <a class="icon-btn"
+     href="https://forms.gle/oVjnNqzavacu8osk6"
+     target="_blank"
+     rel="noopener"
+     data-label="Sugerir baño">
+    <i class="fas fa-lightbulb"></i>
+  </a>
+
+  <!-- ⚠️ Reportar problema (Google Forms) -->
+  <a class="icon-btn"
+     href="https://forms.gle/RKrdJqEcsdPvna8o8"
+     target="_blank"
+     rel="noopener"
+     data-label="Reportar problema">
+    <i class="fas fa-flag"></i>
+  </a>
+
+  <!-- 💖 Donar (PayPal) -->
+  <a class="icon-btn"
+     href="https://www.paypal.com/donate/?hosted_button_id=K773CAM5X3QBC"
+     target="_blank"
+     rel="noopener"
+     data-label="Donar">
+    <i class="fas fa-hand-holding-heart"></i>
+  </a>
+    
+     <!-- Avisos -->
+    <a class="icon-btn" href="/es/avisos" id="openNotices" data-label="Avisos">
+  <i class="fas fa-gavel"></i>
+</a>
+
+
+    <!-- Modo oscuro -->
+    <button id="themeToggle"
+            class="icon-btn"
+            aria-label="Cambiar tema"
+            data-label="Tema">
+      <i class="fas fa-circle-half-stroke"></i>
+    </button>
+
+    <!-- Idioma -->
+    <a href="/en" class="lang-btn" aria-label="Change language">
+      <i class="fas fa-globe"></i>
+      <span class="lang-text">English</span>
+    </a>
+
+  </div>
+</header>
+
+
+
+
+
+
+ <!-- ============================= -->
+<!--          MAIN CONTENT        -->
+<!-- ============================= -->
+
+<main class="content">
+  <section class="notices-section">
+    <header class="notices-header">
+      <h1 class="notices-title">Avisos oficiales para repartidores y público en NYC</h1>
+      <p class="notices-subtitle">
+        Leyes y normativas vigentes publicadas por el gobierno de la ciudad,
+        relacionadas con el uso de baños y la movilidad urbana.
+      </p>
+    </header>
+
+    <!-- GRID DE TARJETAS -->
+    <div class="notices-grid">
+
+      <!-- Aviso 1 -->
+<article class="notice-card"
+  data-tags="ley,norma,nyc,repartidores,baños,restaurantes,acceso,delivery">
+
+  <!-- Badge arriba -->
+  <div class="notice-badge notice-badge--law">
+    <i class="fas fa-scale-balanced" aria-hidden="true"></i>
+    <span>Ley / Norma</span>
+  </div>
+
+  <h2 class="notice-title">
+    Acceso al baño al recoger pedidos (NYC)
+  </h2>
+
+  <p class="notice-meta">
+    NYC – Norma oficial sobre acceso a baños para repartidores de comida.
+  </p>
+
+  <p class="notice-desc">
+    Si eres repartidor de Uber Eats, DoorDash, Grubhub u otra app,
+    puedes tener acceso al baño del restaurante 
+    <strong>cuando estés recogiendo el pedido</strong>.
+    El negocio debe permitirlo, salvo que el área del baño sea insegura
+    o esté totalmente restringida al público.
+  </p>
+
+  <a
+    href="https://home4.nyc.gov/site/dca/workers/workersrights/delivery-worker-rights-spanish.page"
+    class="notice-link"
+    target="_blank"
+    rel="noopener"
+  >
+    Ver norma oficial
+    <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+  </a>
+
+</article>
+
+
+      <!-- Aviso 2 -->
+<article class="notice-card"
+  data-tags="ley,norma,nyc,bicicletas eléctricas,e-bikes,límite de velocidad,15 mph,24 km/h,seguridad vial">
+
+  <div class="notice-badge notice-badge--law">
+    <i class="fas fa-scale-balanced" aria-hidden="true"></i>
+    <span>Ley / Norma</span>
+  </div>
+
+  <h2 class="notice-title">
+    Nuevo límite de 24 km/h para e-bikes en NYC
+  </h2>
+
+  <p class="notice-meta">
+    NYC – Anuncio oficial del alcalde sobre el límite de 15 mph (24&nbsp;km/h)
+    para bicicletas eléctricas y otros vehículos de micromovilidad.
+  </p>
+
+  <p class="notice-desc">
+    Desde el <strong>24 de octubre de 2025</strong>, las bicicletas eléctricas,
+    scooters eléctricos y bicicletas comerciales de pedaleo asistido tienen
+    un límite máximo de <strong>15 mph (24&nbsp;km/h)</strong> en toda la ciudad.
+    La ciudad prioriza la <strong>educación antes que las multas</strong>, con
+    señalización y avisos para que los ciclistas se adapten a esta nueva norma
+    de seguridad vial.
+  </p>
+
+  <a
+    href="https://www.nyc.gov/es/mayors-office/news/2025/10/mayor-adams-encourages-e-bike-users-to-slow-down-as-new-15-mph-e"
+    class="notice-link"
+    target="_blank"
+    rel="noopener"
+  >
+    Ver norma oficial
+    <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+  </a>
+</article>
+
+
+      <!-- Aviso 3
+      <article class="notice-card"
+         data-tags="recomendación,consejos,gratuito,baños gratis,repartidores">
+        <div class="notice-badge notice-badge--tip">
+          <i class="fas fa-lightbulb" aria-hidden="true"></i>
+          <span>Recomendación</span>
+        </div>
+
+        <h2 class="notice-title">
+          Uso respetuoso de baños gratuitos
+        </h2>
+
+        <p class="notice-meta">
+          Consejos de Go Bathroom NYC para repartidores y público en general.
+        </p>
+
+        <p class="notice-desc">
+          Si un baño es gratuito, dejarlo limpio y en buen estado ayuda
+          a que la ciudad mantenga estos espacios abiertos para todos.
+        </p>
+
+        <a
+          href="https://TU_LINK_INTERNO_O_BLOG"
+          class="notice-link"
+          target="_blank"
+          rel="noopener"
+        >
+          Ver recomendaciones
+          <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+        </a>
+      </article>
+
+      <!-- Aquí podrás seguir añadiendo más <article class="notice-card"> ... -->
+
+    <!-- A3</div>-->
+
+<!-- MENSAJE DE VACÍO (se muestra solo cuando no hay resultados) -->
+    <p class="notice-empty" id="noticeEmpty" hidden>
+  No se encontraron avisos con esa búsqueda.
+</p>
+
+  </section>
+    </div>
+
+  
+
+<!-- BOTÓN FLOTANTE: ABRIR MAPA -->
+  <a
+    href="https://rebrand.ly/open-map" 
+    target="_blank"
+    rel="noopener"
+    class="fab-map"
+    aria-label="Abrir mapa de baños en Google Maps"
+  >
+    <span class="fab-map-icon" aria-hidden="true">
+      <i class="fas fa-map-marked-alt"></i>
+    </span>
+    <span class="fab-map-label">Abrir mapa</span>
+  </a>
+  
+</main>
+
+<!-- ============================= -->
+<!--          FOOTER               -->
+<!-- ============================= -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">Go Bathroom</div>
+      <p class="footer-tagline">Hecho con amor en NYC</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Enlaces legales y contacto">
+      <!-- Fila principal: enlaces -->
+      <div class="footer-links">
+        <a href="/es/privacidad" class="footer-link">Privacidad</a>
+        <span class="footer-separator">·</span>
+
+        <a href="/es/terminos" class="footer-link">Términos</a>
+        <span class="footer-separator">·</span>
+
+        <a href="https://forms.gle/..." target="_blank" rel="noopener" class="footer-link">
+          Contacto
+        </a>
+        <span class="footer-separator">·</span>
+
+        <!-- Botón Compartir (switch) -->
+        <button
+          type="button"
+          class="footer-link footer-share-toggle"
+          id="footerShareToggle"
+          aria-expanded="false"
+        >
+          Compartir
+        </button>
+      </div>
+
+      <!-- Fila secundaria: panel de compartir -->
+<div
+  class="footer-share-row"
+  id="footerShareRow"
+  aria-hidden="true"
+>
+  <span class="footer-share-label">Compartir:</span>
+
+  <!-- Botón Copiar + tooltip con URL -->
+  <div class="share-copy-wrapper">
+    <button type="button" class="share-pill" data-share="copy">
+      <i class="fas fa-link"></i>
+      <span class="share-pill-label">Copiar enlace</span>
+    </button>
+
+    <!-- Tooltip que muestra la URL a copiar -->
+    <div
+      class="share-tooltip"
+      id="shareCopyTooltip"
+      role="status"
+      aria-live="polite"
+    ></div>
+  </div>
+
+  <!-- Botones redes sociales -->
+  <button type="button" class="share-pill" data-share="facebook">
+    <i class="fab fa-facebook-f"></i>
+  </button>
+
+  <button type="button" class="share-pill" data-share="x">
+    <i class="fab fa-x-twitter"></i>
+  </button>
+
+  <button type="button" class="share-pill" data-share="whatsapp">
+    <i class="fab fa-whatsapp"></i>
+  </button>
+</div>
+
+    </nav>
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Go Bathroom</span>
+  </div>
+</footer>
+
+
+</body>
+</html>
