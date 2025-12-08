@@ -934,7 +934,7 @@ body[data-theme="dark"] .impact-icon {
 
 .legal-sidebar {
   position: sticky;
-  top: 96px; /* ajusta si cambias la altura del topbar */
+  top: 96px; /* altura aprox del topbar */
 }
 
 .legal-sidebar-title {
@@ -942,16 +942,16 @@ body[data-theme="dark"] .impact-icon {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--text-muted);
+  color: var(--muted);
   margin-bottom: 0.5rem;
 }
 
-/* Lista sin barra gris */
+/* columna tipo Freepik */
 .legal-sidebar-list {
   list-style: none;
   margin: 0;
-  padding: 0;
-  border-left: none; /* 🔹 sin línea gris */
+  padding: 0 0 0 1rem;
+  border-left: 2px solid var(--border);
 }
 
 .legal-sidebar-item {
@@ -961,29 +961,28 @@ body[data-theme="dark"] .impact-icon {
 /* Enlace principal (Privacidad / Términos / Avisos) */
 .legal-main-link {
   display: block;
-  padding: 0.25rem 0;
+  padding: 0.25rem 0 0.25rem 0.5rem;
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--muted);
   text-decoration: none;
   position: relative;
 }
 
-/* Estado activo del documento (Privacidad) */
+/* Estado activo: solo texto más fuerte + barrita de marca */
 .legal-main-link.is-active {
-  color: var(--accent, #00b3ff);
+  color: var(--text-strong);
 }
 
-/* Línea azul a la izquierda solo para el documento activo */
 .legal-main-link.is-active::before {
   content: "";
   position: absolute;
-  left: -0.75rem;
+  left: -0.55rem;
   top: 0.1rem;
   bottom: 0.1rem;
   width: 3px;
   border-radius: 999px;
-  background: var(--accent, #00b3ff);
+  background: var(--brand);
 }
 
 /* Sub-índice interno (1., 2., 3...) */
@@ -991,27 +990,26 @@ body[data-theme="dark"] .impact-icon {
   list-style: none;
   margin: 0.25rem 0 0.75rem;
   padding: 0 0 0 0.75rem;
-  border-left: none; /* 🔹 sin línea gris también aquí */
+  border-left: 1px solid var(--border);
 }
 
 .legal-sub-link {
   display: block;
   padding: 0.18rem 0 0.18rem 0.5rem;
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: var(--muted);
   text-decoration: none;
-  background: transparent;
 }
 
-/* Hover visual */
+/* hover: color de marca 2 (un poco más brillante) */
 .legal-sub-link:hover {
-  color: var(--accent-strong, #00b3ff);
+  color: var(--brand-2);
 }
 
-/* Estado "sección actual" que activará el JS */
+/* sección “actual” según scroll: solo color + peso, sin fondo */
 .legal-sub-link.is-current {
-  color: var(--accent-strong, #00b3ff);
-  font-weight: 400;
+  color: var(--brand);
+  font-weight: 600;
 }
 
 /* ===================== CONTENIDO PRINCIPAL ===================== */
@@ -1028,49 +1026,51 @@ body[data-theme="dark"] .impact-icon {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--text-muted);
+  color: var(--muted-2);
 }
 
 .legal-title {
   font-size: 1.6rem;
   margin: 0.25rem 0 0.5rem;
+  color: var(--text-strong);
 }
 
 .legal-subtitle {
   max-width: 40rem;
-  color: var(--text-muted);
+  color: var(--muted);
 }
 
 .legal-updated {
   margin-top: 0.5rem;
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: var(--muted-2);
 }
 
 /* Secciones numeradas 1,2,3... */
-.legal-section + .legal-section {
-  margin-top: 2rem;
+.legal-section {
+  scroll-margin-top: 96px; /* para que no lo tape el topbar */
 }
 
-/* 🔹 Muy importante: compensar el topbar al hacer click en anclas */
-.legal-section {
-  scroll-margin-top: 96px; /* igual que .legal-sidebar.top */
+.legal-section + .legal-section {
+  margin-top: 2rem;
 }
 
 .legal-block h2 {
   font-size: 1.1rem;
   margin-bottom: 0.4rem;
+  color: var(--text-strong);
 }
 
 .legal-block h3 {
   font-size: 0.98rem;
   margin: 1rem 0 0.2rem;
+  color: var(--text-strong);
 }
 
 /* Enlaces dentro del texto legal: sin subrayado por defecto */
 .legal-main a {
   text-decoration: none;
-  color: var(--accent, #00b3ff);
+  color: var(--brand);
 }
 
 .legal-main a:hover {
@@ -1092,9 +1092,6 @@ body[data-theme="dark"] .impact-icon {
   .legal-sidebar {
     position: static;
   }
-
-  .legal-section {
-    scroll-margin-top: 80px; /* un poco menos en móvil si el topbar es más pequeño */
-  }
 }
+
 
