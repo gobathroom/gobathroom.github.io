@@ -9,8 +9,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // 👉 qué mostrar en la barra (ids que quieres usar)
   const idsParaBarra = [1, 2, 3, 4];   // usa los que quieras
   let tips = tipsData.filter(n => idsParaBarra.includes(n.id));
-
   if (!tips.length) return;
+
+  // ============================
+  // 🌐 I18N PARA NOTIFAST
+  // ============================
+  const htmlLang = document.documentElement.lang || 'es';
+
+  // Intentar usar STRINGS[lang].notifast; si no existe, caer a 'es'
+  const notifastStrings =
+    (window.STRINGS &&
+      window.STRINGS[htmlLang] &&
+      window.STRINGS[htmlLang].notifast) ||
+    (window.STRINGS &&
+      window.STRINGS.es &&
+      window.STRINGS.es.notifast) ||
+    { lawLabel: '', tipLabel: '', moreLabel: '' };
 
   const DEFAULT_DELAY = 8000;  // 8s auto
   const MANUAL_DELAY  = 15000; // 15s si el usuario toca
@@ -43,9 +57,13 @@ document.addEventListener('DOMContentLoaded', () => {
       msgEl.textContent = current.text;
     }
 
-    // Label (Tip rápido / Ley rápida)
+    // Label (Tip rápido / Ley rápida) usando i18n
     if (labelEl) {
-      labelEl.textContent = isLaw ? 'Ley rápida:' : 'Tip rápido:';
+      const baseLabel = isLaw
+        ? notifastStrings.lawLabel
+        : notifastStrings.tipLabel;
+      // Añadimos ":" para mantener el estilo anterior
+      labelEl.textContent = baseLabel ? baseLabel + ':' : '';
     }
 
     // Icono (martillo / rayo)
@@ -64,6 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isLaw && current.moreUrl) {
         moreLinkEl.style.display = 'inline';
         moreLinkEl.href = current.moreUrl;
+
+        // Texto del link según idioma
+        if (notifastStrings.moreLabel) {
+          moreLinkEl.textContent = notifastStrings.moreLabel;
+        }
       } else {
         moreLinkEl.style.display = 'none';
         moreLinkEl.removeAttribute('href');
