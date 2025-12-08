@@ -934,26 +934,28 @@ body[data-theme="dark"] .impact-icon {
 
 .legal-sidebar {
   position: sticky;
-  top: 96px; /* altura aprox del topbar */
+  top: 96px; /* ajusta según la altura del topbar */
 }
 
+/* “CENTRO LEGAL” */
 .legal-sidebar-title {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--muted);
+  color: var(--muted);               /* gris suave */
   margin-bottom: 0.5rem;
 }
 
-/* columna tipo Freepik */
+/* Lista principal del sidebar */
 .legal-sidebar-list {
   list-style: none;
   margin: 0;
-  padding: 0 0 0 1rem;
-  border-left: 2px solid var(--border);
+  padding: 0;                        /* quitamos sangría extra */
+  border-left: none;                 /* 🔹 SIN línea gris general */
 }
 
+/* Cada item (Privacidad / Términos / Avisos) */
 .legal-sidebar-item {
   margin-bottom: 1rem;
 }
@@ -961,23 +963,29 @@ body[data-theme="dark"] .impact-icon {
 /* Enlace principal (Privacidad / Términos / Avisos) */
 .legal-main-link {
   display: block;
-  padding: 0.25rem 0 0.25rem 0.5rem;
+  padding: 0.25rem 0 0.25rem 0.75rem;
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--muted);
+  color: var(--text-strong);         /* más fuerte que el texto del contenido */
   text-decoration: none;
   position: relative;
 }
 
-/* Estado activo: solo texto más fuerte + barrita de marca */
-.legal-main-link.is-active {
-  color: var(--text-strong);
+/* Hover en secciones principales */
+.legal-main-link:hover {
+  color: var(--brand-2);
 }
 
+/* Estado activo: secciones principales en color de marca */
+.legal-main-link.is-active {
+  color: var(--brand);               /* 🔹 Privacidad / Términos / Avisos activos */
+}
+
+/* Barra azul tipo Freepik, sin línea gris atrás */
 .legal-main-link.is-active::before {
   content: "";
   position: absolute;
-  left: -0.55rem;
+  left: -0.4rem;
   top: 0.1rem;
   bottom: 0.1rem;
   width: 3px;
@@ -989,27 +997,24 @@ body[data-theme="dark"] .impact-icon {
 .legal-subnav {
   list-style: none;
   margin: 0.25rem 0 0.75rem;
-  padding: 0 0 0 0.75rem;
-  border-left: 1px solid var(--border);
+  padding: 0 0 0 1.1rem;             /* solo sangría, sin borde */
+  border-left: none;                 /* 🔹 quitamos la segunda línea gris */
 }
 
+/* Links de subsecciones */
 .legal-sub-link {
   display: block;
-  padding: 0.18rem 0 0.18rem 0.5rem;
+  padding: 0.18rem 0;
   font-size: 0.85rem;
-  color: var(--muted);
+  color: var(--muted);               /* más suave que los títulos del sidebar */
   text-decoration: none;
+  font-weight: 400;                  /* sin negrita */
 }
 
-/* hover: color de marca 2 (un poco más brillante) */
-.legal-sub-link:hover {
-  color: var(--brand-2);
-}
-
-/* sección “actual” según scroll: solo color + peso, sin fondo */
+/* Hover y estado “actual” (scroll / clic) usan brand-2, sin negrita */
+.legal-sub-link:hover,
 .legal-sub-link.is-current {
-  color: var(--brand);
-  font-weight: 600;
+  color: var(--brand-2);             /* 🔹 color de marca más intenso */
 }
 
 /* ===================== CONTENIDO PRINCIPAL ===================== */
@@ -1018,6 +1023,13 @@ body[data-theme="dark"] .impact-icon {
   max-width: 720px;
 }
 
+/* Todo el texto normal un poco más suave que el sidebar */
+.legal-main p,
+.legal-main li {
+  color: var(--text);                /* menos fuerte que sidebar */
+}
+
+/* Cabecera arriba del documento */
 .legal-header {
   margin-bottom: 2rem;
 }
@@ -1032,12 +1044,12 @@ body[data-theme="dark"] .impact-icon {
 .legal-title {
   font-size: 1.6rem;
   margin: 0.25rem 0 0.5rem;
-  color: var(--text-strong);
+  color: var(--text-strong);         /* similar fuerza que sidebar */
 }
 
 .legal-subtitle {
   max-width: 40rem;
-  color: var(--muted);
+  color: var(--muted);               /* un poco más suave */
 }
 
 .legal-updated {
@@ -1047,10 +1059,6 @@ body[data-theme="dark"] .impact-icon {
 }
 
 /* Secciones numeradas 1,2,3... */
-.legal-section {
-  scroll-margin-top: 96px; /* para que no lo tape el topbar */
-}
-
 .legal-section + .legal-section {
   margin-top: 2rem;
 }
@@ -1058,13 +1066,13 @@ body[data-theme="dark"] .impact-icon {
 .legal-block h2 {
   font-size: 1.1rem;
   margin-bottom: 0.4rem;
-  color: var(--text-strong);
+  color: var(--text-strong);         /* títulos de sección fuertes */
 }
 
 .legal-block h3 {
   font-size: 0.98rem;
   margin: 1rem 0 0.2rem;
-  color: var(--text-strong);
+  color: var(--text-strong);         /* subtítulos también fuertes */
 }
 
 /* Enlaces dentro del texto legal: sin subrayado por defecto */
