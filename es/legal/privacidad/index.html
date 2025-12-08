@@ -115,272 +115,295 @@
 
 
 
-  <!-- ============================= -->
-  <!--          MAIN CONTENT        -->
-  <!-- ============================= -->
-  <main class="content content--legal">
-    <div class="legal-layout">
+ <!-- ============================= -->
+<!--          MAIN CONTENT        -->
+<!-- ============================= -->
+<main class="content content--legal">
+  <div class="legal-layout">
 
-      <!-- ============================= -->
-      <!--          SIDEBAR             -->
-      <!-- ============================= -->
-      <aside class="legal-sidebar" aria-label="Navegación de documentos legales">
-        <h2 class="legal-sidebar-title">Centro legal</h2>
+    <!-- ============================= -->
+    <!--          SIDEBAR             -->
+    <!-- ============================= -->
+    <aside class="legal-sidebar" aria-label="Centro legal">
+      <p class="legal-sidebar-title">CENTRO LEGAL</p>
 
-        <nav class="legal-sidebar-nav">
-          <a href="/es/legal/privacidad" class="legal-sidebar-link is-active">
+      <ul class="legal-sidebar-list">
+        <!-- Página actual: PRIVACIDAD -->
+        <li class="legal-sidebar-item">
+          <a href="/es/legal/privacidad"
+             class="legal-main-link is-active">
             Privacidad
           </a>
-          <a href="/es/legal/terminos" class="legal-sidebar-link">
+
+          <!-- índice interno de la página -->
+          <ul class="legal-subnav">
+            <li><a href="#sec-1" class="legal-sub-link">1. ¿Qué cubre esta política?</a></li>
+            <li><a href="#sec-2" class="legal-sub-link">2. ¿Qué información recopilamos?</a></li>
+            <li><a href="#sec-3" class="legal-sub-link">3. ¿Cómo usamos tu información?</a></li>
+            <li><a href="#sec-4" class="legal-sub-link">4. Uso de Google Maps y otros servicios</a></li>
+            <li><a href="#sec-5" class="legal-sub-link">5. Conservación y seguridad</a></li>
+            <li><a href="#sec-6" class="legal-sub-link">6. Tus opciones y derechos</a></li>
+            <li><a href="#sec-7" class="legal-sub-link">7. ¿Cómo contactarnos?</a></li>
+          </ul>
+        </li>
+
+        <!-- Otras páginas legales -->
+        <li class="legal-sidebar-item">
+          <a href="/es/legal/terminos" class="legal-main-link">
             Términos de uso
           </a>
-          <a href="/es/avisos" class="legal-sidebar-link">
+        </li>
+
+        <li class="legal-sidebar-item">
+          <a href="/es/avisos" class="legal-main-link">
             Avisos oficiales
           </a>
-        </nav>
-      </aside>
+        </li>
+      </ul>
+    </aside>
 
-      <!-- ============================= -->
-      <!--        LEGAL MAIN CONTENT     -->
-      <!-- ============================= -->
-      <section class="legal-main" aria-labelledby="legal-privacy-title">
-        <header class="legal-header">
-          <p class="legal-kicker">Legal · Go Bathroom NYC</p>
+    <!-- ============================= -->
+    <!--        LEGAL MAIN CONTENT     -->
+    <!-- ============================= -->
+    <article class="legal-main" aria-labelledby="legal-privacy-title">
+      <header class="legal-header">
+        <p class="legal-kicker">Legal · Go Bathroom NYC</p>
 
-          <h1 id="legal-privacy-title" class="legal-title">
-            Política de privacidad
-          </h1>
+        <h1 id="legal-privacy-title" class="legal-title">
+          Política de privacidad
+        </h1>
 
-          <p class="legal-subtitle">
-            En esta página te explicamos qué información se recopila cuando usas
-            Go Bathroom NYC, cómo la utilizamos y qué opciones tienes para
-            controlar tus datos.
-          </p>
+        <p class="legal-subtitle">
+          En esta página te explicamos qué información se recopila cuando usas
+          Go Bathroom NYC, cómo la utilizamos y qué opciones tienes para
+          controlar tus datos.
+        </p>
 
-          <p class="legal-updated">
-            Última actualización:
-            <time datetime="2025-12-08">8 de diciembre de 2025</time>
-          </p>
-        </header>
+        <p class="legal-updated">
+          Última actualización:
+          <time datetime="2025-12-08">8 de diciembre de 2025</time>
+        </p>
+      </header>
 
-        <!-- 1. Alcance -->
-        <article class="legal-block" id="que-es-esta-politica">
-          <h2>1. ¿Qué cubre esta política?</h2>
-          <p>
-            Esta Política de privacidad aplica al sitio web
-            <strong>gobathroom.io</strong> y a sus versiones por idioma
-            (por ejemplo, <code>/en</code>, <code>/es</code>).
-            Go Bathroom NYC es una guía informativa para encontrar baños
-            accesibles y gratuitos en la ciudad. No ofrecemos cuentas de usuario
-            ni un sistema de inicio de sesión propio.
-          </p>
-          <p>
-            Algunas funciones del sitio utilizan servicios de terceros
-            (principalmente productos de Google), como se detalla más abajo.
-          </p>
-        </article>
+      <!-- 1. Alcance -->
+      <section class="legal-section legal-block" id="sec-1">
+        <h2>1. ¿Qué cubre esta política?</h2>
+        <p>
+          Esta Política de privacidad aplica al sitio web
+          <strong>gobathroom.io</strong> y a sus versiones por idioma
+          (por ejemplo, <code>/en</code>, <code>/es</code>).
+          Go Bathroom NYC es una guía informativa para encontrar baños
+          accesibles y gratuitos en la ciudad. No ofrecemos cuentas de usuario
+          ni un sistema de inicio de sesión propio.
+        </p>
+        <p>
+          Algunas funciones del sitio utilizan servicios de terceros
+          (principalmente productos de Google), como se detalla más abajo.
+        </p>
+      </section>
 
-        <!-- 2. Datos que recogemos -->
-        <article class="legal-block" id="datos-que-recogemos">
-          <h2>2. ¿Qué información recopilamos?</h2>
+      <!-- 2. Datos que recogemos -->
+      <section class="legal-section legal-block" id="sec-2">
+        <h2>2. ¿Qué información recopilamos?</h2>
 
-          <h3>2.1. Al navegar por el sitio</h3>
-          <p>
-            De forma directa, Go Bathroom NYC no solicita tu nombre, dirección
-            ni otra información personal solo por navegar en la página.
-          </p>
-          <p>
-            Como la mayoría de sitios web, el servidor puede registrar datos
-            técnicos básicos (por ejemplo, tipo de navegador, sistema operativo,
-            páginas visitadas y hora de acceso) para fines de seguridad
-            y estadísticas generales.
-          </p>
+        <h3>2.1. Al navegar por el sitio</h3>
+        <p>
+          De forma directa, Go Bathroom NYC no solicita tu nombre, dirección
+          ni otra información personal solo por navegar en la página.
+        </p>
+        <p>
+          Como la mayoría de sitios web, el servidor puede registrar datos
+          técnicos básicos (por ejemplo, tipo de navegador, sistema operativo,
+          páginas visitadas y hora de acceso) para fines de seguridad
+          y estadísticas generales.
+        </p>
 
-          <h3>2.2. Al sugerir o reportar un baño</h3>
-          <p>
-            Cuando utilizas los formularios de
-            <strong>Sugerir baño</strong> o
-            <strong>Reportar problema</strong>, te redirigimos a
-            <strong>Google Forms</strong>. En esos formularios podemos
-            solicitar:
-          </p>
-          <ul>
-            <li>Tu <strong>correo electrónico</strong>, para poder responder o pedir más detalles si es necesario.</li>
-            <li>Información sobre el baño (dirección aproximada, tipo de acceso, problema encontrado, etc.).</li>
-            <li>De forma opcional, <strong>texto adicional</strong> o
-                contenido multimedia (por ejemplo, fotos) como evidencia
-                de lo que reportas.</li>
-          </ul>
-          <p>
-            Estos datos se usan únicamente para revisar tu sugerencia o
-            reporte y mejorar la información del mapa.
-          </p>
-        </article>
+        <h3>2.2. Al sugerir o reportar un baño</h3>
+        <p>
+          Cuando utilizas los formularios de
+          <strong>Sugerir baño</strong> o
+          <strong>Reportar problema</strong>, te redirigimos a
+          <strong>Google Forms</strong>. En esos formularios podemos
+          solicitar:
+        </p>
+        <ul>
+          <li>Tu <strong>correo electrónico</strong>, para poder responder o pedir más detalles si es necesario.</li>
+          <li>Información sobre el baño (dirección aproximada, tipo de acceso, problema encontrado, etc.).</li>
+          <li>
+            De forma opcional, <strong>texto adicional</strong> o
+            contenido multimedia (por ejemplo, fotos) como evidencia
+            de lo que reportas.
+          </li>
+        </ul>
+        <p>
+          Estos datos se usan únicamente para revisar tu sugerencia o
+          reporte y mejorar la información del mapa.
+        </p>
+      </section>
 
-        <!-- 3. Cómo usamos los datos -->
-        <article class="legal-block" id="como-usamos-datos">
-          <h2>3. ¿Cómo usamos tu información?</h2>
-          <ul>
-            <li>
-              <strong>Revisar y verificar baños nuevos</strong> sugeridos por
-              repartidores, residentes y turistas.
-            </li>
-            <li>
-              <strong>Analizar reportes de problemas</strong> (baño cerrado,
-              sucio, inaccesible, etc.) para actualizar o retirar puntos del
-              mapa cuando corresponda.
-            </li>
-            <li>
-              <strong>Responder a tu correo</strong> si necesitamos pedir más
-              detalles sobre una ubicación o informarte sobre cambios
-              relacionados con tu reporte.
-            </li>
-          </ul>
-          <p>
-            No vendemos tu información personal ni la usamos para mostrar
-            publicidad personalizada.
-          </p>
-        </article>
+      <!-- 3. Cómo usamos los datos -->
+      <section class="legal-section legal-block" id="sec-3">
+        <h2>3. ¿Cómo usamos tu información?</h2>
+        <ul>
+          <li>
+            <strong>Revisar y verificar baños nuevos</strong> sugeridos por
+            repartidores, residentes y turistas.
+          </li>
+          <li>
+            <strong>Analizar reportes de problemas</strong> (baño cerrado,
+            sucio, inaccesible, etc.) para actualizar o retirar puntos del
+            mapa cuando corresponda.
+          </li>
+          <li>
+            <strong>Responder a tu correo</strong> si necesitamos pedir más
+            detalles sobre una ubicación o informarte sobre cambios
+            relacionados con tu reporte.
+          </li>
+        </ul>
+        <p>
+          No vendemos tu información personal ni la usamos para mostrar
+          publicidad personalizada.
+        </p>
+      </section>
 
-        <!-- 4. Servicios de Google -->
-        <article class="legal-block" id="servicios-terceros">
-          <h2>4. Uso de Google Maps y otros servicios de Google</h2>
+      <!-- 4. Servicios de Google -->
+      <section class="legal-section legal-block" id="sec-4">
+        <h2>4. Uso de Google Maps y otros servicios de Google</h2>
 
-          <h3>4.1. Google Maps</h3>
-          <p>
-            Para mostrar el mapa de baños utilizamos
-            <strong>Google Maps / Google My Maps</strong>. Aunque el mapa
-            se despliega dentro de Go Bathroom NYC o se abre en una pestaña
-            aparte, el servicio es operado por Google.
-          </p>
-          <p>
-            Go Bathroom NYC <strong>no está afiliado a Google</strong> ni
-            actúa en su nombre. Solo usamos sus herramientas para facilitar
-            la visualización del mapa.
-          </p>
-          <p>
-            Al interactuar con el mapa (por ejemplo, moverlo, hacer zoom o
-            abrirlo en Google Maps), Google puede recopilar datos de acuerdo
-            con sus propias políticas. Te recomendamos revisar:
-          </p>
-          <ul>
-            <li>
-              <a
-                href="https://policies.google.com/privacy?hl=es"
-                target="_blank"
-                rel="noopener"
-              >
-                Política de privacidad de Google
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://policies.google.com/terms?hl=es"
-                target="_blank"
-                rel="noopener"
-              >
-                Términos de servicio de Google
-              </a>
-            </li>
-          </ul>
+        <h3>4.1. Google Maps</h3>
+        <p>
+          Para mostrar el mapa de baños utilizamos
+          <strong>Google Maps / Google My Maps</strong>. Aunque el mapa
+          se despliega dentro de Go Bathroom NYC o se abre en una pestaña
+          aparte, el servicio es operado por Google.
+        </p>
+        <p>
+          Go Bathroom NYC <strong>no está afiliado a Google</strong> ni
+          actúa en su nombre. Solo usamos sus herramientas para facilitar
+          la visualización del mapa.
+        </p>
+        <p>
+          Al interactuar con el mapa (por ejemplo, moverlo, hacer zoom o
+          abrirlo en Google Maps), Google puede recopilar datos de acuerdo
+          con sus propias políticas. Te recomendamos revisar:
+        </p>
+        <ul>
+          <li>
+            <a
+              href="https://policies.google.com/privacy?hl=es"
+              target="_blank"
+              rel="noopener"
+            >
+              Política de privacidad de Google
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://policies.google.com/terms?hl=es"
+              target="_blank"
+              rel="noopener"
+            >
+              Términos de servicio de Google
+            </a>
+          </li>
+        </ul>
 
-          <h3>4.2. Google Forms</h3>
-          <p>
-            Los formularios de sugerir y reportar baños también son servicios
-            de Google. Toda la información que introduzcas en esos formularios
-            se almacena en Google y se rige por las condiciones y políticas
-            de Google además de esta política.
-          </p>
-          <p>
-            Al usar dichos formularios, aceptas los términos y condiciones
-            de Google aplicables a esos servicios.
-          </p>
-        </article>
+        <h3>4.2. Google Forms</h3>
+        <p>
+          Los formularios de sugerir y reportar baños también son servicios
+          de Google. Toda la información que introduzcas en esos formularios
+          se almacena en Google y se rige por las condiciones y políticas
+          de Google además de esta política.
+        </p>
+        <p>
+          Al usar dichos formularios, aceptas los términos y condiciones
+          de Google aplicables a esos servicios.
+        </p>
+      </section>
 
-        <!-- 5. Conservación y seguridad -->
-        <article class="legal-block" id="conservacion">
-          <h2>5. Conservación y seguridad de los datos</h2>
-          <p>
-            Conservamos los correos electrónicos y la información asociada a
-            sugerencias o reportes durante el tiempo razonablemente necesario
-            para:
-          </p>
-          <ul>
-            <li>Validar la información del baño o del reporte.</li>
-            <li>
-              Mantener un historial mínimo que nos permita entender cambios en
-              el mapa (por ejemplo, cuándo se volvió a marcar un baño como
-              disponible).
-            </li>
-          </ul>
-          <p>
-            Limitamos el acceso a estos datos únicamente a las personas que
-            administran Go Bathroom NYC y que los necesitan para revisar y
-            gestionar los puntos del mapa.
-          </p>
-        </article>
+      <!-- 5. Conservación y seguridad -->
+      <section class="legal-section legal-block" id="sec-5">
+        <h2>5. Conservación y seguridad de los datos</h2>
+        <p>
+          Conservamos los correos electrónicos y la información asociada a
+          sugerencias o reportes durante el tiempo razonablemente necesario
+          para:
+        </p>
+        <ul>
+          <li>Validar la información del baño o del reporte.</li>
+          <li>
+            Mantener un historial mínimo que nos permita entender cambios en
+            el mapa (por ejemplo, cuándo se volvió a marcar un baño como
+            disponible).
+          </li>
+        </ul>
+        <p>
+          Limitamos el acceso a estos datos únicamente a las personas que
+          administran Go Bathroom NYC y que los necesitan para revisar y
+          gestionar los puntos del mapa.
+        </p>
+      </section>
 
-        <!-- 6. Tus derechos -->
-        <article class="legal-block" id="tus-derechos">
-          <h2>6. Tus opciones y derechos</h2>
-          <p>
-            Dependiendo de las leyes de privacidad aplicables en tu región,
-            puedes tener derecho a:
-          </p>
-          <ul>
-            <li>Solicitar información sobre los datos que hemos recibido de ti.</li>
-            <li>Pedir la corrección de información inexacta.</li>
-            <li>
-              Solicitar la eliminación de tus datos de contacto asociados a
-              reportes o sugerencias, siempre que no exista una obligación
-              legal de conservarlos.
-            </li>
-          </ul>
-          <p>
-            Para ejercer estos derechos, puedes escribirnos usando los medios
-            de contacto indicados más abajo.
-          </p>
-        </article>
+      <!-- 6. Tus derechos -->
+      <section class="legal-section legal-block" id="sec-6">
+        <h2>6. Tus opciones y derechos</h2>
+        <p>
+          Dependiendo de las leyes de privacidad aplicables en tu región,
+          puedes tener derecho a:
+        </p>
+        <ul>
+          <li>Solicitar información sobre los datos que hemos recibido de ti.</li>
+          <li>Pedir la corrección de información inexacta.</li>
+          <li>
+            Solicitar la eliminación de tus datos de contacto asociados a
+            reportes o sugerencias, siempre que no exista una obligación
+            legal de conservarlos.
+          </li>
+        </ul>
+        <p>
+          Para ejercer estos derechos, puedes escribirnos usando los medios
+          de contacto indicados más abajo.
+        </p>
+      </section>
 
-        <!-- 7. Contacto -->
-        <article class="legal-block" id="contacto">
-          <h2>7. ¿Cómo contactarnos?</h2>
-          <p>
-            Si tienes dudas sobre esta Política de privacidad, sobre cómo se
-            utilizan tus datos o quieres ejercer tus derechos, puedes:
-          </p>
-          <ul>
-            <li>
-              Escribirnos a:
-              <a href="mailto:contact@gobathroom.io">
-                contact@gobathroom.io
-              </a>
-              <!-- Cambia este correo por el que vayas a usar realmente -->
-            </li>
-            <li>
-              O utilizar el formulario de contacto enlazado en el pie de
-              página del sitio.
-            </li>
-          </ul>
-        </article>
+      <!-- 7. Contacto -->
+      <section class="legal-section legal-block" id="sec-7">
+        <h2>7. ¿Cómo contactarnos?</h2>
+        <p>
+          Si tienes dudas sobre esta Política de privacidad, sobre cómo se
+          utilizan tus datos o quieres ejercer tus derechos, puedes:
+        </p>
+        <ul>
+          <li>
+            Escribirnos a:
+            <a href="mailto:contact@gobathroom.io">
+              contact@gobathroom.io
+            </a>
+          </li>
+          <li>
+            O utilizar el formulario de contacto enlazado en el pie de
+            página del sitio.
+          </li>
+        </ul>
+      </section>
 
-      </section><!-- /legal-main -->
-    </div><!-- /legal-layout -->
+    </article><!-- /legal-main -->
+  </div><!-- /legal-layout -->
 
-    <!-- BOTÓN FLOTANTE: ABRIR MAPA -->
-    <a
-      href="https://rebrand.ly/open-map"
-      target="_blank"
-      rel="noopener"
-      class="fab-map"
-      aria-label="Abrir mapa de baños en Google Maps"
-    >
-      <span class="fab-map-icon" aria-hidden="true">
-        <i class="fas fa-map-marked-alt"></i>
-      </span>
-      <span class="fab-map-label">Abrir mapa</span>
-    </a>
-  </main>
+  <!-- BOTÓN FLOTANTE: ABRIR MAPA -->
+  <a
+    href="https://rebrand.ly/open-map"
+    target="_blank"
+    rel="noopener"
+    class="fab-map"
+    aria-label="Abrir mapa de baños en Google Maps"
+  >
+    <span class="fab-map-icon" aria-hidden="true">
+      <i class="fas fa-map-marked-alt"></i>
+    </span>
+    <span class="fab-map-label">Abrir mapa</span>
+  </a>
+</main>
 
 
 <!-- ============================= -->
