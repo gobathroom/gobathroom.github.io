@@ -5,6 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!sections.length || !links.length) return;
 
+  // Desactivamos la restauración automática de scroll del navegador
+  if ('scrollRestoration' in window.history) {
+    window.history.scrollRestoration = 'manual';
+  }
+
+  // Si NO hay hash (#sec-x, etc.), siempre empezamos arriba al cargar / recargar
+  if (!location.hash) {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
   // Mapa id -> link
   const idToLink = new Map();
   links.forEach(link => {
