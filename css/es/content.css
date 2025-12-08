@@ -1000,19 +1000,16 @@ body[data-theme="dark"] .impact-icon {
   font-size: 0.85rem;
   color: var(--text-muted);
   text-decoration: none;
-  border-radius: 999px;
 }
 
 /* Hover visual */
 .legal-sub-link:hover {
   color: var(--accent-strong, #005f99);
-  background: var(--accent-soft, rgba(0,179,255,0.06));
 }
 
 /* Estado "sección actual" que activará el JS */
 .legal-sub-link.is-current {
   color: var(--accent-strong, #005f99);
-  background: var(--accent-soft, rgba(0,179,255,0.15));
   font-weight: 600;
 }
 
