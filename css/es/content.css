@@ -934,7 +934,7 @@ body[data-theme="dark"] .impact-icon {
 
 .legal-sidebar {
   position: sticky;
-  top: 96px; /* ajusta según la altura del topbar */
+  top: 96px; /* ajusta según la altura del topbar real */
 }
 
 .legal-sidebar-title {
@@ -949,8 +949,8 @@ body[data-theme="dark"] .impact-icon {
 .legal-sidebar-list {
   list-style: none;
   margin: 0;
-  padding: 0 0 0 1rem;
-  border-left: 2px solid var(--border-subtle, #e0e4ea); /* barra vertical gris */
+  padding: 0;          /* sin sangría extra */
+  border-left: none;   /* ❌ quitamos línea gris */
 }
 
 .legal-sidebar-item {
@@ -960,7 +960,7 @@ body[data-theme="dark"] .impact-icon {
 /* Enlace principal (Privacidad / Términos / Avisos) */
 .legal-main-link {
   display: block;
-  padding: 0.25rem 0 0.25rem 0.5rem;
+  padding: 0.25rem 0;
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-muted);
@@ -976,7 +976,7 @@ body[data-theme="dark"] .impact-icon {
 .legal-main-link.is-active::before {
   content: "";
   position: absolute;
-  left: -0.55rem;
+  left: -0.75rem;
   top: 0.1rem;
   bottom: 0.1rem;
   width: 3px;
@@ -988,20 +988,30 @@ body[data-theme="dark"] .impact-icon {
 .legal-subnav {
   list-style: none;
   margin: 0.25rem 0 0.75rem;
-  padding: 0 0 0 0.75rem;
-  border-left: 1px solid var(--border-subtle, #e0e4ea);
+  padding: 0 0 0 0.75rem;   /* pequeña sangría suavizada */
+  border-left: none;        /* ❌ sin línea gris interna */
 }
 
 .legal-sub-link {
   display: block;
-  padding: 0.18rem 0 0.18rem 0.5rem;
+  padding: 0.18rem 0;
   font-size: 0.85rem;
   color: var(--text-muted);
   text-decoration: none;
 }
 
+/* Hover de subsecciones */
 .legal-sub-link:hover {
   color: var(--accent, #00b3ff);
+}
+
+/* Sub-sección activa (pintada) */
+.legal-sub-link.is-current {
+  color: var(--accent-strong, #0079c8);
+  font-weight: 600;
+  background: var(--accent-soft, rgba(0, 179, 255, 0.08));
+  border-radius: 999px;
+  padding-inline: 0.5rem;
 }
 
 /* ===================== CONTENIDO PRINCIPAL ===================== */
@@ -1035,6 +1045,11 @@ body[data-theme="dark"] .impact-icon {
   margin-top: 0.5rem;
   font-size: 0.85rem;
   color: var(--text-muted);
+}
+
+/* Hace que el scroll con #sec-x respete el topbar y no tape el título */
+.legal-section {
+  scroll-margin-top: 96px;  /* mismo valor que .legal-sidebar.top */
 }
 
 /* Secciones numeradas 1,2,3... */
@@ -1077,4 +1092,9 @@ body[data-theme="dark"] .impact-icon {
   .legal-sidebar {
     position: static;
   }
+
+  .legal-section {
+    scroll-margin-top: 72px; /* en móvil el topbar suele ser más bajo */
+  }
 }
+
