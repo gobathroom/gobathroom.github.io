@@ -92,11 +92,15 @@ document.addEventListener('DOMContentLoaded', () => {
       pillEl.classList.toggle('notifbar-pill--tip', !isLaw);
     }
 
-    // 🔵 Leer más SOLO para leyes con URL
+    // 🔵 Leer más SOLO para leyes con URL (nueva pestaña + seguro)
     if (moreLinkEl) {
       if (isLaw && current.moreUrl) {
         moreLinkEl.style.display = 'inline';
         moreLinkEl.href = current.moreUrl;
+
+        // Abrir en nueva pestaña de forma segura
+        moreLinkEl.target = '_blank';
+        moreLinkEl.rel = 'noopener noreferrer';
 
         if (notifastStrings.moreLabel) {
           moreLinkEl.textContent = notifastStrings.moreLabel;
@@ -104,6 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         moreLinkEl.style.display = 'none';
         moreLinkEl.removeAttribute('href');
+        moreLinkEl.removeAttribute('target');
+        moreLinkEl.removeAttribute('rel');
       }
     }
   }
@@ -185,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (nextBtn) nextBtn.addEventListener('click', () => goNext(true));
-  if (prevBtn) nextBtn && prevBtn.addEventListener('click', goPrev);
+  if (prevBtn) prevBtn.addEventListener('click', goPrev);
 
   // ============================
   // 🔵 SWIPE (desktop + mobile)
