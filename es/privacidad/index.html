@@ -64,75 +64,19 @@
   </div>
 
 
+ <!-- CENTRO: NAVEGACIÓN PRINCIPAL -->
   <div class="center">
-  <!-- Buscador de avisos -->
-  <form class="notice-search" role="search" aria-label="Buscar avisos">
-    <label class="visually-hidden" for="noticeSearchInput">
-    </label>
-
-    <div class="notice-search-field">
-      <!-- Botón lupa -->
-      <button
-        type="submit"
-        class="notice-search-icon"
-        aria-label="Buscar avisos"
-      >
-        <i class="fas fa-search" aria-hidden="true"></i>
-      </button>
-
-      <!-- Input -->
-      <input
-        id="noticeSearchInput"
-        type="search"
-        name="q"
-        placeholder="Busca avisos por palabra clave…"
-        autocomplete="off"
-      >
-
-      <!-- Botón X (limpiar) -->
-      <button
-        type="button"
-        class="notice-clear-btn"
-        aria-label="Borrar búsqueda"
-      >
-        <i class="fas fa-times" aria-hidden="true"></i>
-      </button>
-    </div>
-  </form>
-</div>
-
+    <nav class="topnav" aria-label="Navegación principal">
+      <!-- En esta página (avisos) marcamos Avisos como activo -->
+      <a href="/es/" class="topnav-link">Guía rápida</a>
+      <a href="/es/avisos" class="topnav-link is-active">Avisos</a>
+      <a href="/es/privacidad" class="topnav-link">Privacidad</a>
+      <a href="/es/terminos" class="topnav-link">Términos</a>
+    </nav>
+  </div>
 
 
   <div class="right">
-
-
-    <!-- 🔵 Abrir mapa (Google Maps) -->
-  <a class="icon-btn"
-     href="https://rebrand.ly/open-map"
-     target="_blank"
-     rel="noopener"
-     data-label="Mapa">
-    <i class="fas fa-map-marked-alt"></i>
-  </a>
-
-  <!-- 📝 Sugerir baño (Google Forms) -->
-  <a class="icon-btn"
-     href="https://forms.gle/oVjnNqzavacu8osk6"
-     target="_blank"
-     rel="noopener"
-     data-label="Sugerir baño">
-    <i class="fas fa-lightbulb"></i>
-  </a>
-
-  <!-- ⚠️ Reportar problema (Google Forms) -->
-  <a class="icon-btn"
-     href="https://forms.gle/RKrdJqEcsdPvna8o8"
-     target="_blank"
-     rel="noopener"
-     data-label="Reportar problema">
-    <i class="fas fa-flag"></i>
-  </a>
-
   <!-- 💖 Donar (PayPal) -->
   <a class="icon-btn"
      href="https://www.paypal.com/donate/?hosted_button_id=K773CAM5X3QBC"
@@ -141,12 +85,6 @@
      data-label="Donar">
     <i class="fas fa-hand-holding-heart"></i>
   </a>
-    
-     <!-- Avisos -->
-    <a class="icon-btn" href="/es/avisos" id="openNotices" data-label="Avisos">
-  <i class="fas fa-gavel"></i>
-</a>
-
 
     <!-- Modo oscuro -->
     <button id="themeToggle"
