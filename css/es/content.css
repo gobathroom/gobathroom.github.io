@@ -915,47 +915,103 @@ body[data-theme="dark"] .impact-icon {
 /*                                                /ES/LEGAL/PRIVACIDAD                                        */
 /*____________________________________________________________________________________________________________*/
 
+/* Contenedor general de la página legal */
+.content--legal {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3rem 2rem 4rem;
+}
 
-/* Layout general legal */
+/* Layout con sidebar + contenido */
 .content--legal .legal-layout {
-  max-width: 1100px;
-  margin: 2.5rem auto 4rem;
   display: grid;
   grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
-  gap: 2rem;
+  gap: 3rem;
+  align-items: flex-start;
 }
 
-/* Sidebar */
+/* ===================== SIDEBAR ===================== */
+
+.legal-sidebar {
+  position: sticky;
+  top: 96px; /* ajusta según la altura del topbar */
+}
+
 .legal-sidebar-title {
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.14em;
   color: var(--text-muted);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
-.legal-sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+.legal-sidebar-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 1rem;
+  border-left: 2px solid var(--border-subtle, #e0e4ea); /* barra vertical gris */
 }
 
-.legal-sidebar-link {
-  padding: 0.35rem 0.5rem;
-  border-radius: 999px;
+.legal-sidebar-item {
+  margin-bottom: 1rem;
+}
+
+/* Enlace principal (Privacidad / Términos / Avisos) */
+.legal-main-link {
+  display: block;
+  padding: 0.25rem 0 0.25rem 0.5rem;
   font-size: 0.9rem;
+  font-weight: 600;
   color: var(--text-muted);
+  text-decoration: none;
+  position: relative;
 }
 
-.legal-sidebar-link.is-active {
-  background: var(--accent-soft);
-  color: var(--accent-strong);
+/* Estado activo: barra azul tipo Freepik */
+.legal-main-link.is-active {
+  color: var(--accent, #00b3ff);
 }
 
-/* Contenido principal */
+.legal-main-link.is-active::before {
+  content: "";
+  position: absolute;
+  left: -0.55rem;
+  top: 0.1rem;
+  bottom: 0.1rem;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--accent, #00b3ff);
+}
+
+/* Sub-índice interno (1., 2., 3...) */
+.legal-subnav {
+  list-style: none;
+  margin: 0.25rem 0 0.75rem;
+  padding: 0 0 0 0.75rem;
+  border-left: 1px solid var(--border-subtle, #e0e4ea);
+}
+
+.legal-sub-link {
+  display: block;
+  padding: 0.18rem 0 0.18rem 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.legal-sub-link:hover {
+  color: var(--accent, #00b3ff);
+}
+
+/* ===================== CONTENIDO PRINCIPAL ===================== */
+
+.legal-main {
+  max-width: 720px;
+}
+
 .legal-header {
-  margin-bottom: 1.75rem;
+  margin-bottom: 2rem;
 }
 
 .legal-kicker {
@@ -981,8 +1037,9 @@ body[data-theme="dark"] .impact-icon {
   color: var(--text-muted);
 }
 
-.legal-block {
-  margin-top: 1.75rem;
+/* Secciones numeradas 1,2,3... */
+.legal-section + .legal-section {
+  margin-top: 2rem;
 }
 
 .legal-block h2 {
@@ -995,9 +1052,29 @@ body[data-theme="dark"] .impact-icon {
   margin: 1rem 0 0.2rem;
 }
 
-/* Responsive: sidebar arriba en móvil */
+/* Enlaces dentro del texto legal: sin subrayado por defecto */
+.legal-main a {
+  text-decoration: none;
+  color: var(--accent, #00b3ff);
+}
+
+.legal-main a:hover {
+  text-decoration: underline;
+}
+
+/* ===================== RESPONSIVE ===================== */
+
 @media (max-width: 768px) {
+  .content--legal {
+    padding: 2rem 1.25rem 3rem;
+  }
+
   .content--legal .legal-layout {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .legal-sidebar {
+    position: static;
   }
 }
