@@ -1,30 +1,45 @@
-// /js/es/notifast.js
+// js/notifast.js
 document.addEventListener('DOMContentLoaded', () => {
+  // ============================
+  // 🌐 DETECTAR IDIOMA
+  // ============================
+  const htmlLangRaw = (document.documentElement.lang || 'es').toLowerCase();
+  const langBase = htmlLangRaw.split('-')[0]; // "es-ES" -> "es"
+  const lang = (langBase === 'en' || langBase === 'es') ? langBase : 'es';
 
-  // ✔ Comprobar que window.NOTICES existe y es válido
-  if (!Array.isArray(window.NOTICES) || !window.NOTICES.length) return;
+  // ============================
+  // 📚 OBTENER NOTICES POR IDIOMA
+  // ============================
+  const noticesByLang = window.NOTICES || {};
+  let tipsData = noticesByLang[lang];
 
-  const tipsData = window.NOTICES;
+  // Si no hay para ese idioma, caer a español
+  if (!Array.isArray(tipsData) || !tipsData.length) {
+    tipsData = noticesByLang['es'];
+  }
+  if (!Array.isArray(tipsData) || !tipsData.length) {
+    // No hay datos, salir
+    return;
+  }
 
   // 👉 qué mostrar en la barra (ids que quieres usar)
-  const idsParaBarra = [1, 2, 3, 4];   // usa los que quieras
+  const idsParaBarra = [1, 2, 3, 4];
   let tips = tipsData.filter(n => idsParaBarra.includes(n.id));
-  if (!tips.length) return;
+
+  // Si el filtro deja vacío, mostramos todos
+  if (!tips.length) {
+    tips = tipsData;
+  }
 
   // ============================
-  // 🌐 I18N PARA NOTIFAST
+  // 🌐 I18N PARA LABELS CORTOS
   // ============================
-  const htmlLang = document.documentElement.lang || 'es';
-
-  // Intentar usar STRINGS[lang].notifast; si no existe, caer a 'es'
-  const notifastStrings =
-    (window.STRINGS &&
-      window.STRINGS[htmlLang] &&
-      window.STRINGS[htmlLang].notifast) ||
-    (window.STRINGS &&
-      window.STRINGS.es &&
-      window.STRINGS.es.notifast) ||
-    { lawLabel: '', tipLabel: '', moreLabel: '' };
+  const hasI18n = window.GB_I18N && typeof window.GB_I18N.t === 'function';
+  const notifastStrings = {
+    lawLabel:  hasI18n ? window.GB_I18N.t('notifast.lawLabel')  : '',
+    tipLabel:  hasI18n ? window.GB_I18N.t('notifast.tipLabel')  : '',
+    moreLabel: hasI18n ? window.GB_I18N.t('notifast.moreLabel') : ''
+  };
 
   const DEFAULT_DELAY = 8000;  // 8s auto
   const MANUAL_DELAY  = 15000; // 15s si el usuario toca
@@ -57,12 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
       msgEl.textContent = current.text;
     }
 
-    // Label (Tip rápido / Ley rápida) usando i18n
+    // Label (Tip rápido / Ley rápida) con i18n
     if (labelEl) {
       const baseLabel = isLaw
         ? notifastStrings.lawLabel
         : notifastStrings.tipLabel;
-      // Añadimos ":" para mantener el estilo anterior
+
       labelEl.textContent = baseLabel ? baseLabel + ':' : '';
     }
 
@@ -83,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
         moreLinkEl.style.display = 'inline';
         moreLinkEl.href = current.moreUrl;
 
-        // Texto del link según idioma
         if (notifastStrings.moreLabel) {
           moreLinkEl.textContent = notifastStrings.moreLabel;
         }
@@ -171,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (nextBtn) nextBtn.addEventListener('click', () => goNext(true));
-  if (prevBtn) prevBtn.addEventListener('click', goPrev);
+  if (prevBtn) nextBtn && prevBtn.addEventListener('click', goPrev);
 
   // ============================
   // 🔵 SWIPE (desktop + mobile)
