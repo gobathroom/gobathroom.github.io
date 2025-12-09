@@ -197,14 +197,33 @@
 /*____________________________________________________________________________________________________________*/
 
 /*____________________________________________________________________________________________________________*/
-/*                                           /ES/LEGAL/PRIVACIDAD – COPY EMAIL                                */
+/*                                        /ES/LEGAL/PRIVACIDAD – COPY EMAIL                                  */
 /*____________________________________________________________________________________________________________*/
 
 document.addEventListener('DOMContentLoaded', () => {
   const buttons = Array.from(document.querySelectorAll('.email-copy-btn'));
   if (!buttons.length) return;
 
+  const hasI18n = window.GB_I18N && typeof window.GB_I18N.t === 'function';
+
+  const labelCopy = hasI18n
+    ? window.GB_I18N.t('contact.copyEmailLabel')
+    : 'Copy email address';
+
+  const msgCopied = hasI18n
+    ? window.GB_I18N.t('contact.copyEmailFeedbackCopied')
+    : '✔ Copied!';
+
+  const msgError = hasI18n
+    ? window.GB_I18N.t('contact.copyEmailFeedbackError')
+    : 'Could not copy email';
+
   buttons.forEach((btn) => {
+    // Si tenemos i18n, actualizamos el aria-label
+    if (labelCopy) {
+      btn.setAttribute('aria-label', labelCopy);
+    }
+
     btn.addEventListener('click', async () => {
       const email =
         btn.dataset.email ||
@@ -224,9 +243,11 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       try {
+        // API moderna
         if (navigator.clipboard?.writeText) {
           await navigator.clipboard.writeText(email);
         } else {
+          // Fallback clásico
           const tmp = document.createElement('textarea');
           tmp.value = email;
           tmp.style.position = 'fixed';
@@ -237,13 +258,16 @@ document.addEventListener('DOMContentLoaded', () => {
           document.body.removeChild(tmp);
         }
 
+        // Cambiamos icono a check
         if (iconEl) {
           iconEl.classList.remove('fa-copy');
           iconEl.classList.add('fa-check');
         }
         btn.classList.add('is-copied');
-        showFeedback('Copiado');
 
+        showFeedback(msgCopied);
+
+        // Volver al icono de copy después de un rato
         setTimeout(() => {
           btn.classList.remove('is-copied');
           if (iconEl) {
@@ -251,8 +275,9 @@ document.addEventListener('DOMContentLoaded', () => {
             iconEl.classList.add('fa-copy');
           }
         }, 1600);
-      } catch {
-        showFeedback('No se pudo copiar');
+      } catch (err) {
+        console.error('Error al copiar email:', err);
+        showFeedback(msgError);
       }
     });
   });
