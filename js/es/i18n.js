@@ -40,6 +40,12 @@
       tipLabel: 'Quick tip',
       moreLabel: 'See more',
     },
+
+    contact: {
+      copyEmailLabel: 'Copy email address',
+      copyEmailFeedbackCopied: '✔ Copied!',
+      copyEmailFeedbackError: 'Could not copy email',
+    },
   },
 
   es: {
@@ -71,6 +77,12 @@
       tipLabel: 'Tip rápido',
       moreLabel: 'Ver más',
     },
+
+    contact: {
+      copyEmailLabel: 'Copiar correo electrónico',
+      copyEmailFeedbackCopied: '✔ ¡Correo copiado!',
+      copyEmailFeedbackError: 'No se pudo copiar el correo',
+    },    
   },
 };
 
