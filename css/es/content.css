@@ -1088,19 +1088,21 @@ body[data-theme="dark"] .impact-icon {
 
 /* ===================== CORREO + BOTÓN COPIAR ===================== */
 
-.contact-email-wrapper {
-  display: inline-flex;
+/* Fila donde van: texto, correo, botón copiar y feedback */
+.legal-contact-row {
+  display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
-/* Link de correo: usa color de acento, sin subrayado por defecto */
-.contact-email-link {
+/* Link de correo: usa color de marca */
+.legal-email-link {
   color: var(--brand);
   text-decoration: none;
 }
 
-.contact-email-link:hover {
+.legal-email-link:hover {
   text-decoration: underline;
 }
 
@@ -1131,7 +1133,6 @@ body[data-theme="dark"] .impact-icon {
 
 /* Mensaje “Copiado” */
 .email-copy-feedback {
-  margin-left: 0.35rem;
   font-size: 0.8rem;
   color: var(--muted-2);
   opacity: 0;
@@ -1141,6 +1142,7 @@ body[data-theme="dark"] .impact-icon {
 .email-copy-feedback.is-visible {
   opacity: 1;
 }
+
 
 
 /* ===================== RESPONSIVE ===================== */
