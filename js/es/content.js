@@ -212,14 +212,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const msgCopied = hasI18n
     ? window.GB_I18N.t('contact.copyEmailFeedbackCopied')
-    : '✔ Copied!';
+    : 'Copied!';
 
   const msgError = hasI18n
     ? window.GB_I18N.t('contact.copyEmailFeedbackError')
     : 'Could not copy email';
 
   buttons.forEach((btn) => {
-    // Si tenemos i18n, actualizamos el aria-label
+    // aria-label (accesibilidad)
     if (labelCopy) {
       btn.setAttribute('aria-label', labelCopy);
     }
@@ -242,6 +242,15 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => feedbackEl.classList.remove('is-visible'), 2000);
       };
 
+      // Función para resetear al estado base (icono de copiar)
+      const resetIcon = () => {
+        btn.classList.remove('is-copied', 'is-error');
+        if (iconEl) {
+          iconEl.classList.remove('fa-check', 'fa-xmark');
+          iconEl.classList.add('fa-copy');
+        }
+      };
+
       try {
         // API moderna
         if (navigator.clipboard?.writeText) {
@@ -258,26 +267,33 @@ document.addEventListener('DOMContentLoaded', () => {
           document.body.removeChild(tmp);
         }
 
-        // Cambiamos icono a check
+        // ÉXITO: icono check + color success
         if (iconEl) {
-          iconEl.classList.remove('fa-copy');
+          iconEl.classList.remove('fa-copy', 'fa-xmark');
           iconEl.classList.add('fa-check');
         }
         btn.classList.add('is-copied');
+        btn.classList.remove('is-error');
 
         showFeedback(msgCopied);
 
-        // Volver al icono de copy después de un rato
-        setTimeout(() => {
-          btn.classList.remove('is-copied');
-          if (iconEl) {
-            iconEl.classList.remove('fa-check');
-            iconEl.classList.add('fa-copy');
-          }
-        }, 1600);
+        // Volver al icono base tras un rato
+        setTimeout(resetIcon, 1600);
       } catch (err) {
         console.error('Error al copiar email:', err);
+
+        // ERROR: icono X + color danger
+        if (iconEl) {
+          iconEl.classList.remove('fa-copy', 'fa-check');
+          iconEl.classList.add('fa-xmark');
+        }
+        btn.classList.add('is-error');
+        btn.classList.remove('is-copied');
+
         showFeedback(msgError);
+
+        // Volver al icono base tras un rato
+        setTimeout(resetIcon, 1600);
       }
     });
   });
