@@ -43,7 +43,7 @@
 
     contact: {
       copyEmailLabel: 'Copy email address',
-      copyEmailFeedbackCopied: '✔ Copied!',
+      copyEmailFeedbackCopied: 'Copied!',
       copyEmailFeedbackError: 'Could not copy email',
     },
   },
@@ -80,7 +80,7 @@
 
     contact: {
       copyEmailLabel: 'Copiar correo electrónico',
-      copyEmailFeedbackCopied: '✔ ¡Correo copiado!',
+      copyEmailFeedbackCopied: '¡Correo copiado!',
       copyEmailFeedbackError: 'No se pudo copiar el correo',
     },    
   },
