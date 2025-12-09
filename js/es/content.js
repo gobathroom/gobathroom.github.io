@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!feedbackEl) return;
         feedbackEl.textContent = msg;
         feedbackEl.classList.add('is-visible');
-        setTimeout(() => feedbackEl.classList.remove('is-visible'), 2000);
+        setTimeout(() => feedbackEl.classList.remove('is-visible'), 1600);
       };
 
       // Función para resetear al estado base (icono de copiar)
