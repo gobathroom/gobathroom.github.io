@@ -125,6 +125,51 @@
   color: var(--brand);
 }
 
+/* =========================================================
+   Center1.1: Tooltips para icon-btn
+   ========================================================= */
+
+/* Tooltips para los iconos del CENTER */
+.main-nav .nav-item::before {
+  content: attr(data-label);
+
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+
+  bottom: -32px;
+  padding: 4px 10px;
+  border-radius: 10px;
+
+  font-size: 12px;
+  white-space: nowrap;
+
+  background: var(--text);
+  color: var(--panel);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    opacity 0.18s ease-out 0.18s,
+    transform 0.18s ease-out 0.18s;
+
+  z-index: 1200;
+}
+
+/* Mostrar tooltip al hover */
+.main-nav .nav-item:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Necesario porque .nav-item no tenía posición relativa */
+.main-nav .nav-item {
+  position: relative;
+}
+
+
 
 
 /* =========================================================
