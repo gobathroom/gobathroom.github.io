@@ -187,3 +187,73 @@
   // Estado inicial: mostrar todo sin resaltado
   applyFilter('');
 })();
+
+
+
+/*____________________________________________________________________________________________________________*/
+/* ===========================================================================================================*/
+/*                                                /ES/LEGAL/                                                */
+/* ===========================================================================================================*/
+/*____________________________________________________________________________________________________________*/
+
+/*____________________________________________________________________________________________________________*/
+/*                                           /ES/LEGAL/PRIVACIDAD – COPY EMAIL                                */
+/*____________________________________________________________________________________________________________*/
+
+document.addEventListener('DOMContentLoaded', () => {
+  const buttons = Array.from(document.querySelectorAll('.email-copy-btn'));
+  if (!buttons.length) return;
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const email =
+        btn.dataset.email ||
+        (btn.previousElementSibling &&
+         btn.previousElementSibling.textContent.trim());
+
+      if (!email) return;
+
+      const feedbackEl = btn.parentElement.querySelector('.email-copy-feedback');
+      const iconEl = btn.querySelector('i');
+
+      const showFeedback = (msg) => {
+        if (!feedbackEl) return;
+        feedbackEl.textContent = msg;
+        feedbackEl.classList.add('is-visible');
+        setTimeout(() => feedbackEl.classList.remove('is-visible'), 2000);
+      };
+
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(email);
+        } else {
+          const tmp = document.createElement('textarea');
+          tmp.value = email;
+          tmp.style.position = 'fixed';
+          tmp.style.left = '-9999px';
+          document.body.appendChild(tmp);
+          tmp.select();
+          document.execCommand('copy');
+          document.body.removeChild(tmp);
+        }
+
+        if (iconEl) {
+          iconEl.classList.remove('fa-copy');
+          iconEl.classList.add('fa-check');
+        }
+        btn.classList.add('is-copied');
+        showFeedback('Copiado');
+
+        setTimeout(() => {
+          btn.classList.remove('is-copied');
+          if (iconEl) {
+            iconEl.classList.remove('fa-check');
+            iconEl.classList.add('fa-copy');
+          }
+        }, 1600);
+      } catch {
+        showFeedback('No se pudo copiar');
+      }
+    });
+  });
+});
