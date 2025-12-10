@@ -395,19 +395,19 @@ button.icon-btn {
    ========================================================= */
 
 
-/* En /avisos reducimos el gap entre el logo y el buscador */
+/* Logo + buscador pegaditos en /avisos */
 .page-avisos .topbar .left {
-  gap: 6px;   /* mucho más compacto */
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-
+/* Contenedor pill DESKTOP */
 .page-avisos .notice-search {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
-/* Contenedor pill */
 .page-avisos .notice-search-field {
   position: relative;
   display: flex;
@@ -417,15 +417,19 @@ button.icon-btn {
   border: 1px solid var(--border, #d1d5db);
   border-radius: 999px;
 
-  padding: 0 40px;          /* espacio derecha para la X */
-  padding-left: 42px;       /* espacio izquierda para la lupa */
+  padding: 0 40px;      /* derecha para la X */
+  padding-left: 42px;   /* izquierda para la lupa */
   height: 40px;
-  width: clamp(260px, 28vw, 420px);
+  width: 212px;         /* 👉 máximo 212px */
 
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    width 0.2s ease,
+    transform 0.2s ease;
 }
 
-/* Botón lupa (izquierda) */
+/* Botón lupa (modo barra) */
 .page-avisos .notice-search-icon {
   position: absolute;
   left: 10px;
@@ -448,7 +452,7 @@ button.icon-btn {
   font-size: 14px;
 }
 
-/* Input */
+/* Input + X igual que ya tenías */
 .page-avisos .notice-search-field input {
   width: 100%;
   border: none;
@@ -459,12 +463,10 @@ button.icon-btn {
   color: var(--text, #1f2937);
 }
 
-/* Placeholder */
 .page-avisos .notice-search-field input::placeholder {
   color: var(--muted, #9fb0d0);
 }
 
-/* Botón X (derecha) */
 .page-avisos .notice-clear-btn {
   position: absolute;
   right: 10px;
@@ -492,12 +494,10 @@ button.icon-btn {
   font-size: 13px;
 }
 
-/* Al pasar el mouse por la X */
 .page-avisos .notice-clear-btn:hover {
   background: rgba(148, 163, 184, 0.15);
   color: var(--text, #1f2937);
 }
-
 
 /* Mostrar X solo cuando hay texto */
 .page-avisos .notice-search-field.has-text .notice-clear-btn {
