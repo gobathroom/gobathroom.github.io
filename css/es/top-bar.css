@@ -186,7 +186,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(4px);
 
-  bottom: -23px;              /* distancia respecto al icono del CENTER */
+  bottom: -26px;              /* distancia respecto al icono del CENTER */
   padding: 4px 10px;
   border-radius: 10px;
 
@@ -245,7 +245,7 @@
 }
 
 .icon-btn i {
-  font-size: 20px; /* más grande, tipo FB */
+  font-size: 2px; /* más grande, tipo FB */
 }
 
 /* Hover: se oscurece un poco (como FB) */
@@ -283,7 +283,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(4px);
 
-  bottom: -26px;              /* ⚙ ajusta si lo quieres un poco más arriba/abajo */
+  bottom: -3px;              /* ⚙ ajusta si lo quieres un poco más arriba/abajo */
   padding: 4px 10px;
   border-radius: 10px;
 
