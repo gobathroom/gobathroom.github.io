@@ -1,1 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- META BÁSICOS -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/assets/svg/logo.svg">
+  <link rel="alternate icon" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="alternate icon" href="/assets/favicon-48.png" sizes="48x48">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180">
+  <meta name="theme-color" content="#0d1117" />
 
+  <!-- TÍTULO -->
+  <title>Go Bathroom NYC</title>
+
+  <!-- ICONOS EXTERNOS (FONT AWESOME) --> 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- CSS GLOBAL (TOKENS (layout) + THEME + BASE CSS) -->
+  <link rel="stylesheet" href="/css/es/tokens.css">
+  <link rel="stylesheet" href="/css/es/base.css">
+
+  <!-- CSS DE COMPONENTES -->
+  <link rel="stylesheet" href="/css/es/dialog.css">
+  <link rel="stylesheet" href="/css/es/top-bar.css">
+
+  <!-- CSS DE Content -->
+  <link rel="stylesheet" href="/css/es/content.css">
+
+  <!-- CSS DE Footer -->
+  <link rel="stylesheet" href="/css/es/footer.css">
+
+  <!-- MANIFEST PWA -->
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- REGISTRO DEL SERVICE WORKER (DEFER IMPORTANTE) -->
+  <script src="/js/es/sw-register.js" defer></script>
+
+   <!-- Diccionario de textos de UI -->
+   <script src="/js/es/i18n.js" defer></script>
+  
+  <!-- SCRIPTS DE COMPONENTES (DEFER PARA RENDIR MEJOR) -->
+  <script src="/js/es/base.js" defer></script>
+  <script src="/js/es/notifications-data.js"></script>
+  <script src="/js/es/notifast.js"></script>
+  <script src="/js/es/top-bar.js" defer></script>
+  <script src="/js/es/content.js" defer></script>
+  <script src="/js/es/footer.js" defer></script>
+  <script src="/js/es/legal-nav.js" defer></script>
+
+  
+</head>
+
+<body class="page-privacidad">
+  <!-- ============================= -->
+<!--          TOP BAR             -->
+<!-- ============================= -->
+<header class="topbar">
+  <div class="left">
+    <!-- Logo -->
+    <a class="brand" id="brandLink" href="/">
+      <img src="/assets/svg/logo.svg" alt="Go Bathroom Logo">
+      <span class="logo">Go Bathroom</span>
+    </a>
+  </div>
+
+
+<!-- CENTRO: NAVEGACIÓN GLOBAL CON ICONOS + TOOLTIPS -->
+<div class="center">
+  <nav class="main-nav" aria-label="Navegación principal">
+
+    <a href="/es/" class="nav-item top-link" data-label="Inicio">
+      <i class="fas fa-home" aria-hidden="true"></i>
+    </a>
+
+    <a href="/es/#mapa" class="nav-item top-link" data-label="Mapa">
+      <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+    </a>
+
+    <a href="/es/#sugerir-bano" class="nav-item top-link" data-label="Sugerir baño">
+      <i class="fas fa-lightbulb" aria-hidden="true"></i>
+    </a>
+
+    <a href="/es/#reportar-bano" class="nav-item top-link" data-label="Reportar baño">
+      <i class="fas fa-flag" aria-hidden="true"></i>
+    </a>
+
+    <a href="/es/avisos" class="nav-item top-link" data-label="Avisos">
+      <i class="fas fa-gavel" aria-hidden="true"></i>
+    </a>
+
+  </nav>
+</div>
+
+
+
+  <div class="right">
+    <!-- Modo oscuro -->
+    <button id="themeToggle"
+            class="icon-btn"
+            aria-label="Cambiar tema"
+            data-label="Tema">
+      <i class="fas fa-circle-half-stroke"></i>
+    </button>
+
+    <!-- Idioma -->
+    <a href="/en" class="lang-btn" aria-label="Change language">
+      <i class="fas fa-globe"></i>
+      <span class="lang-text">English</span>
+    </a>
+
+  </div>
+</header>
+
+
+
+
+<!-- ============================= -->
+<!--          MAIN CONTENT        -->
+<!-- ============================= -->
+<main class="content content--legal">
+  <div class="legal-layout">
+
+    <!-- ============================= -->
+    <!--          SIDEBAR             -->
+    <!-- ============================= -->
+    <aside class="legal-sidebar" aria-label="Centro legal">
+      <p class="legal-sidebar-title">CENTRO LEGAL</p>
+
+      <ul class="legal-sidebar-list">
+        <!-- Página actual: PRIVACIDAD -->
+        <li class="legal-sidebar-item">
+          <a href="/es/legal/privacidad"
+             class="legal-main-link is-active">
+            Privacidad
+          </a>
+
+          <!-- índice interno de la página -->
+          <ul class="legal-subnav">
+            <li><a href="#sec-1" class="legal-sub-link is-current">1. ¿Qué cubre esta política?</a></li>
+            <li><a href="#sec-2" class="legal-sub-link">2. ¿Qué información recopilamos?</a></li>
+            <li><a href="#sec-3" class="legal-sub-link">3. ¿Cómo usamos tu información?</a></li>
+            <li><a href="#sec-4" class="legal-sub-link">4. Uso de Google Maps y otros servicios</a></li>
+            <li><a href="#sec-5" class="legal-sub-link">5. Conservación y seguridad</a></li>
+            <li><a href="#sec-6" class="legal-sub-link">6. Tus opciones y derechos</a></li>
+            <li><a href="#sec-7" class="legal-sub-link">7. ¿Cómo contactarnos?</a></li>
+          </ul>
+        </li>
+
+        <!-- Otras páginas legales -->
+        <li class="legal-sidebar-item">
+          <a href="/es/legal/terminos" class="legal-main-link">
+            Términos de uso
+          </a>
+        </li>
+
+        <li class="legal-sidebar-item">
+          <a href="/es/avisos" class="legal-main-link">
+            Avisos oficiales
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- ============================= -->
+    <!--        LEGAL MAIN CONTENT     -->
+    <!-- ============================= -->
+    <article class="legal-main" aria-labelledby="legal-privacy-title">
+      <header class="legal-header">
+        <p class="legal-kicker">Legal · Go Bathroom NYC</p>
+
+        <h1 id="legal-privacy-title" class="legal-title">
+          Política de privacidad
+        </h1>
+
+        <p class="legal-subtitle">
+          En esta página te explicamos qué información se recopila cuando usas
+          Go Bathroom NYC, cómo la utilizamos y qué opciones tienes para
+          controlar tus datos.
+        </p>
+
+        <p class="legal-updated">
+          Última actualización:
+          <time datetime="2025-12-08">8 de diciembre de 2025</time>
+        </p>
+      </header>
+
+      <!-- 1. Alcance -->
+      <section class="legal-section legal-block" id="sec-1">
+        <h2>1. ¿Qué cubre esta política?</h2>
+        <p>
+          Esta Política de privacidad aplica al sitio web
+          <strong>gobathroom.io</strong> y a sus versiones por idioma
+          (por ejemplo, <code>/en</code>, <code>/es</code>).
+          Go Bathroom NYC es una guía informativa para encontrar baños
+          accesibles y gratuitos en la ciudad. No ofrecemos cuentas de usuario
+          ni un sistema de inicio de sesión propio.
+        </p>
+        <p>
+          Algunas funciones del sitio utilizan servicios de terceros
+          (principalmente productos de Google), como se detalla más abajo.
+        </p>
+      </section>
+
+      <!-- 2. Datos que recogemos -->
+      <section class="legal-section legal-block" id="sec-2">
+        <h2>2. ¿Qué información recopilamos?</h2>
+
+        <h3>2.1. Al navegar por el sitio</h3>
+        <p>
+          De forma directa, Go Bathroom NYC no solicita tu nombre, dirección
+          ni otra información personal solo por navegar en la página.
+        </p>
+        <p>
+          Como la mayoría de sitios web, el servidor puede registrar datos
+          técnicos básicos (por ejemplo, tipo de navegador, sistema operativo,
+          páginas visitadas y hora de acceso) para fines de seguridad
+          y estadísticas generales.
+        </p>
+
+        <h3>2.2. Al sugerir o reportar un baño</h3>
+        <p>
+          Cuando utilizas los formularios de
+          <strong>Sugerir baño</strong> o
+          <strong>Reportar problema</strong>, te redirigimos a
+          <strong>Google Forms</strong>. En esos formularios podemos
+          solicitar:
+        </p>
+        <ul>
+          <li>Tu <strong>correo electrónico</strong>, para poder responder o pedir más detalles si es necesario.</li>
+          <li>Información sobre el baño (dirección aproximada, tipo de acceso, problema encontrado, etc.).</li>
+          <li>
+            De forma opcional, <strong>texto adicional</strong> o
+            contenido multimedia (por ejemplo, fotos) como evidencia
+            de lo que reportas.
+          </li>
+        </ul>
+        <p>
+          Estos datos se usan únicamente para revisar tu sugerencia o
+          reporte y mejorar la información del mapa.
+        </p>
+      </section>
+
+      <!-- 3. Cómo usamos los datos -->
+      <section class="legal-section legal-block" id="sec-3">
+        <h2>3. ¿Cómo usamos tu información?</h2>
+        <ul>
+          <li>
+            <strong>Revisar y verificar baños nuevos</strong> sugeridos por
+            repartidores, residentes y turistas.
+          </li>
+          <li>
+            <strong>Analizar reportes de problemas</strong> (baño cerrado,
+            sucio, inaccesible, etc.) para actualizar o retirar puntos del
+            mapa cuando corresponda.
+          </li>
+          <li>
+            <strong>Responder a tu correo</strong> si necesitamos pedir más
+            detalles sobre una ubicación o informarte sobre cambios
+            relacionados con tu reporte.
+          </li>
+        </ul>
+        <p>
+          No vendemos tu información personal ni la usamos para mostrar
+          publicidad personalizada.
+        </p>
+      </section>
+
+      <!-- 4. Servicios de Google -->
+      <section class="legal-section legal-block" id="sec-4">
+        <h2>4. Uso de Google Maps y otros servicios de Google</h2>
+
+        <h3>4.1. Google Maps</h3>
+        <p>
+          Para mostrar el mapa de baños utilizamos
+          <strong>Google Maps / Google My Maps</strong>. Aunque el mapa
+          se despliega dentro de Go Bathroom NYC o se abre en una pestaña
+          aparte, el servicio es operado por Google.
+        </p>
+        <p>
+          Go Bathroom NYC <strong>no está afiliado a Google</strong> ni
+          actúa en su nombre. Solo usamos sus herramientas para facilitar
+          la visualización del mapa.
+        </p>
+        <p>
+          Al interactuar con el mapa (por ejemplo, moverlo, hacer zoom o
+          abrirlo en Google Maps), Google puede recopilar datos de acuerdo
+          con sus propias políticas. Te recomendamos revisar:
+        </p>
+        <ul>
+          <li>
+            <a
+              href="https://policies.google.com/privacy?hl=es"
+              target="_blank"
+              rel="noopener"
+            >
+              Política de privacidad de Google
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://policies.google.com/terms?hl=es"
+              target="_blank"
+              rel="noopener"
+            >
+              Términos de servicio de Google
+            </a>
+          </li>
+        </ul>
+
+        <h3>4.2. Google Forms</h3>
+        <p>
+          Los formularios de sugerir y reportar baños también son servicios
+          de Google. Toda la información que introduzcas en esos formularios
+          se almacena en Google y se rige por las condiciones y políticas
+          de Google además de esta política.
+        </p>
+        <p>
+          Al usar dichos formularios, aceptas los términos y condiciones
+          de Google aplicables a esos servicios.
+        </p>
+      </section>
+
+      <!-- 5. Conservación y seguridad -->
+      <section class="legal-section legal-block" id="sec-5">
+        <h2>5. Conservación y seguridad de los datos</h2>
+        <p>
+          Conservamos los correos electrónicos y la información asociada a
+          sugerencias o reportes durante el tiempo razonablemente necesario
+          para:
+        </p>
+        <ul>
+          <li>Validar la información del baño o del reporte.</li>
+          <li>
+            Mantener un historial mínimo que nos permita entender cambios en
+            el mapa (por ejemplo, cuándo se volvió a marcar un baño como
+            disponible).
+          </li>
+        </ul>
+        <p>
+          Limitamos el acceso a estos datos únicamente a las personas que
+          administran Go Bathroom NYC y que los necesitan para revisar y
+          gestionar los puntos del mapa.
+        </p>
+      </section>
+
+      <!-- 6. Tus derechos -->
+      <section class="legal-section legal-block" id="sec-6">
+        <h2>6. Tus opciones y derechos</h2>
+        <p>
+          Dependiendo de las leyes de privacidad aplicables en tu región,
+          puedes tener derecho a:
+        </p>
+        <ul>
+          <li>Solicitar información sobre los datos que hemos recibido de ti.</li>
+          <li>Pedir la corrección de información inexacta.</li>
+          <li>
+            Solicitar la eliminación de tus datos de contacto asociados a
+            reportes o sugerencias, siempre que no exista una obligación
+            legal de conservarlos.
+          </li>
+        </ul>
+        <p>
+          Para ejercer estos derechos, puedes escribirnos usando los medios
+          de contacto indicados más abajo.
+        </p>
+      </section>
+
+    <!-- 7. Contacto -->
+<section class="legal-section legal-block" id="sec-7">
+  <h2>7. ¿Cómo contactarnos?</h2>
+  <p>
+    Si tienes dudas sobre esta Política de privacidad, sobre cómo se
+    utilizan tus datos o quieres ejercer tus derechos, puedes:
+  </p>
+  <ul>
+    <li class="legal-contact-row">
+      Escribirnos a:
+      <a href="mailto:contact@gobathroom.io" class="legal-email-link">
+        contact@gobathroom.io
+      </a>
+
+      <!-- Botón copia correo -->
+      <button
+        type="button"
+        class="email-copy-btn"
+        data-email="contact@gobathroom.io"
+        aria-label="Copiar correo electrónico"
+      >
+        <i class="fas fa-copy" aria-hidden="true"></i>
+      </button>
+
+      <!-- Mensaje pequeño de feedback -->
+      <span class="email-copy-feedback" aria-live="polite"></span>
+    </li>
+
+    <li>
+      O utilizar el formulario de contacto enlazado en el pie de
+      página del sitio.
+    </li>
+  </ul>
+</section>
+
+
+
+    </article><!-- /legal-main -->
+  </div><!-- /legal-layout -->
+
+  <!-- BOTÓN FLOTANTE: ABRIR MAPA -->
+  <a
+    href="https://rebrand.ly/open-map"
+    target="_blank"
+    rel="noopener"
+    class="fab-map"
+    aria-label="Abrir mapa de baños en Google Maps"
+  >
+    <span class="fab-map-icon" aria-hidden="true">
+      <i class="fas fa-map-marked-alt"></i>
+    </span>
+    <span class="fab-map-label">Abrir mapa</span>
+  </a>
+</main>
+
+
+
+<!-- ============================= -->
+<!--          FOOTER               -->
+<!-- ============================= -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">Go Bathroom</div>
+      <p class="footer-tagline">Hecho con amor en NYC</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Enlaces legales y contacto">
+      <!-- Fila principal: enlaces -->
+      <div class="footer-links">
+        <a href="/es/legal/privacidad" class="footer-link">Privacidad</a>
+        <span class="footer-separator">·</span>
+
+        <a href="/es/legal/terminos" class="footer-link">Términos de uso</a>
+        <span class="footer-separator">·</span>
+
+        <a href="https://forms.gle/..." target="_blank" rel="noopener" class="footer-link">
+          Contacto
+        </a>
+        <span class="footer-separator">·</span>
+
+        <!-- Botón Compartir (switch) -->
+        <button
+          type="button"
+          class="footer-link footer-share-toggle"
+          id="footerShareToggle"
+          aria-expanded="false"
+        >
+          Compartir
+        </button>
+      </div>
+
+      <!-- Fila secundaria: panel de compartir -->
+<div
+  class="footer-share-row"
+  id="footerShareRow"
+  aria-hidden="true"
+>
+  <span class="footer-share-label">Compartir:</span>
+
+  <!-- Botón Copiar + tooltip con URL -->
+  <div class="share-copy-wrapper">
+    <button type="button" class="share-pill" data-share="copy">
+      <i class="fas fa-link"></i>
+      <span class="share-pill-label">Copiar enlace</span>
+    </button>
+
+    <!-- Tooltip que muestra la URL a copiar -->
+    <div
+      class="share-tooltip"
+      id="shareCopyTooltip"
+      role="status"
+      aria-live="polite"
+    ></div>
+  </div>
+
+  <!-- Botones redes sociales -->
+  <button type="button" class="share-pill" data-share="facebook">
+    <i class="fab fa-facebook-f"></i>
+  </button>
+
+  <button type="button" class="share-pill" data-share="x">
+    <i class="fab fa-x-twitter"></i>
+  </button>
+
+  <button type="button" class="share-pill" data-share="whatsapp">
+    <i class="fab fa-whatsapp"></i>
+  </button>
+</div>
+
+    </nav>
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Go Bathroom</span>
+  </div>
+</footer>
+
+
+</body>
+</html>
