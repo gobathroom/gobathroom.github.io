@@ -397,7 +397,7 @@ button.icon-btn {
 
 /* En /avisos reducimos el gap entre el logo y el buscador */
 .page-avisos .topbar .left {
-  gap: 10px;   /* mucho más compacto */
+  gap: 6px;   /* mucho más compacto */
 }
 
 
