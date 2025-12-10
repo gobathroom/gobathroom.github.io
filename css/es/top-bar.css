@@ -133,13 +133,15 @@
   gap: 9px;
 }
 
-/* Link del menú (Información / Donar) */
 .main-nav .nav-item {
   display: inline-flex;
   align-items: center;
 
-  padding: 0 40px;
-  height: calc(var(--header-h) - 20px);
+  /* ancho de la pastilla (horizontal) */
+  padding: 0 32px;
+
+  /* 👇 altura fija de la pastilla, independiente del topbar */
+  height: 44px;             
 
   font-size: 14px;
   font-weight: 500;
@@ -153,6 +155,7 @@
     color 0.15s ease,
     background 0.15s ease;
 }
+
 
 /* No usamos iconos dentro del nav ahora, pero por si acaso: */
 .main-nav .nav-item i {
