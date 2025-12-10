@@ -137,16 +137,13 @@
   gap: 9px;
 }
 
+/* PASTILLA */
 .main-nav .nav-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;   /* centrado completo *
-
-  /* ancho de la pastilla (horizontal) */
-  padding: 0 32px;
-
-  /* 👇 altura fija de la pastilla, independiente del topbar */
-  height: 58px;             
+  display: grid;              /* 👈 más simple que flex para 1 icono */
+  place-items: center;        /* centra en X e Y */
+  
+  height: 58px;               /* alto fijo de la pastilla */
+  padding: 0 32px;            /* solo horizontal */
 
   font-size: 14px;
   font-weight: 500;
@@ -161,13 +158,12 @@
     background 0.15s ease;
 }
 
-
+/* ICONO DENTRO */
 .main-nav .nav-item i {
   font-size: 22px;
   line-height: 1;
-  position: relative;
-  top: -1px;   /* o -1px según veas mejor */
 }
+
 
 
 /* Hover */
