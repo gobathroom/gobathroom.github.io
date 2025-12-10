@@ -162,7 +162,7 @@
   font-size: 22px;
   line-height: 1;
   position: relative;
-  top: 1px;     /* prueba 1px o 2px, positivo = baja el icono */
+  top: -10px;     /* prueba 1px o 2px, positivo = baja el icono */
 }
 
 /* Hover */
