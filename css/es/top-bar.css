@@ -186,7 +186,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(4px);
 
-  bottom: -3px;              /* distancia respecto al icono del CENTER */
+  bottom: -10px;              /* distancia respecto al icono del CENTER */
   padding: 4px 10px;
   border-radius: 10px;
 
