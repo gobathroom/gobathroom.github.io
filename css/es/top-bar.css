@@ -127,9 +127,9 @@
 }
 
 
-/* =========================================================
-   CENTER1.0: MAIN NAV (versión links de texto)
-   ========================================================= */
+/* =========================================
+   CENTER: NAV CON ICONOS
+   ========================================= */
 
 .main-nav {
   display: flex;
@@ -137,38 +137,52 @@
   gap: 9px;
 }
 
+/* Cada icono (link) del center */
 .main-nav .nav-item {
+  position: relative;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  height: 58px;
-  padding: 0 24px;
+  height: 58px;          /* alto de la pastilla */
+  padding: 0 32px;       /* ancho de la pastilla */
 
-  border-radius: 12px;      /* fondo rectangular suave */
-  background: transparent;  /* invisible normalmente */
+  border-radius: 16px;   /* rectángulo redondeado */
+  background: transparent;
 
-  transition: background 0.15s ease;
+  color: var(--text);    /* color del icono */
+  text-decoration: none; /* sin línea */
+
+  line-height: 1;
+  transition:
+    background 0.15s ease,
+    transform 0.10s ease;
 }
 
-/* EL FONDO QUE QUIERES */
+/* Importante: seguir quitando la línea en todos los estados */
+.main-nav .nav-item:visited,
+.main-nav .nav-item:hover,
+.main-nav .nav-item:focus,
+.main-nav .nav-item:active {
+  text-decoration: none;
+  color: var(--text);
+}
+
+/* Fondo HOVER que quieres (parte del icono) */
 .main-nav .nav-item:hover {
-  background: var(--hover); /* ahora sí el fondo pertenece al icono */
+  background: var(--hover);
+  transform: translateY(-1px); /* opcional, efecto suave */
 }
 
-/* El icono NO debe moverse */
+/* Icono dentro del link */
 .main-nav .nav-item i {
   font-size: 22px;
   line-height: 1;
-  position: relative;
-  top: 0;    /* quitar top:-10px */
+  display: block;
+  /* 👇 Asegúrate de NO tener más reglas tipo "top: -10px" */
 }
 
-
-/* Estado “activo” (si lo usas en alguna página) */
-.main-nav .nav-item.is-active {
-  color: var(--brand);
-}
 
 
 /* =========================================================
