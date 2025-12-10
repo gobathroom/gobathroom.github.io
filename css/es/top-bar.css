@@ -23,35 +23,31 @@
 }
 
 
-/* Layout interno: izquierda / centro / derecha */
+/* layout común */
 .topbar .left,
 .topbar .center,
 .topbar .right {
   display: flex;
-  align-items: center;
+  align-items: center;          /* centra verticalmente el contenido */
   gap: var(--space-3, 12px);
 }
 
+/* izquierda: logo */
 .topbar .left {
   flex: 0 0 auto;
 }
 
+/* centro: nav */
 .topbar .center {
   flex: 1 1 auto;
-  justify-content: center;
+  justify-content: center;      /* centra horizontalmente el nav */
 }
 
-/* Right: contenedor general de iconos
-   (campana, compartir, tema, idioma) */
+/* derecha: iconos */
 .topbar .right {
   flex: 0 0 auto;
-  margin-left: auto;
-
-  display: flex;
-  align-items: center;
-  gap: var(--space-3, 12px);
-
-  position: relative; /* necesario para alinear la ventana de Compartir con right:0 */
+  margin-left: auto;            /* empuja todo a la derecha */
+  position: relative;
 }
 
 
