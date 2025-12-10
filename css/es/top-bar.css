@@ -145,7 +145,7 @@
   font-weight: 500;
   text-decoration: none;
 
-  color: var(--muted, #9fb0d0);
+  color: var(--text);
   background: transparent;
   border-radius: 12px;
 
@@ -161,7 +161,6 @@
 
 /* Hover */
 .main-nav .nav-item:hover {
-  color: var(--text);
   background: var(--hover);
 }
 
