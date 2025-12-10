@@ -211,6 +211,7 @@
 
 .main-nav .nav-item.is-active::after {
   background: var(--brand);  /* línea 3px color marca */
+  bottom: -3px;             /* 👈 bajamos la línea hasta el borde del topbar */
 }
 
 
