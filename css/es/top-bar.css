@@ -164,8 +164,11 @@
 
 .main-nav .nav-item i {
   font-size: 22px;
-  line-height: 1;            /* quita espacio extra de la fuente */
+  line-height: 1;
+  position: relative;
+  top: 1px;   /* o -1px según veas mejor */
 }
+
 
 /* Hover */
 .main-nav .nav-item:hover {
