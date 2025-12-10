@@ -137,38 +137,33 @@
   gap: 9px;
 }
 
-/* PASTILLA */
 .main-nav .nav-item {
-  display: grid;              /* 👈 más simple que flex para 1 icono */
-  place-items: center;        /* centra en X e Y */
-  
-  height: 58px;               /* alto fijo de la pastilla */
-  padding: 0 32px;            /* solo horizontal */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  font-size: 14px;
-  font-weight: 500;
-  text-decoration: none;
+  height: 58px;
+  padding: 0 24px;
 
-  color: var(--text);
-  background: transparent;
-  border-radius: 12px;
+  border-radius: 12px;      /* fondo rectangular suave */
+  background: transparent;  /* invisible normalmente */
 
-  transition:
-    color 0.15s ease,
-    background 0.15s ease;
+  transition: background 0.15s ease;
 }
 
+/* EL FONDO QUE QUIERES */
+.main-nav .nav-item:hover {
+  background: var(--hover); /* ahora sí el fondo pertenece al icono */
+}
+
+/* El icono NO debe moverse */
 .main-nav .nav-item i {
   font-size: 22px;
   line-height: 1;
   position: relative;
-  top: -10px;     /* prueba 1px o 2px, positivo = baja el icono */
+  top: 0;    /* quitar top:-10px */
 }
 
-/* Hover */
-.main-nav .nav-item:hover {
-  background: var(--hover);
-}
 
 /* Estado “activo” (si lo usas en alguna página) */
 .main-nav .nav-item.is-active {
