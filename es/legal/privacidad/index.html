@@ -66,37 +66,47 @@
   </div>
 
 
-<!-- CENTRO: MISMO ESTILO QUE LA PÁGINA PRINCIPAL -->
-  <div class="center">
-    <nav class="main-nav" aria-label="Navegación principal">
-      
-      <!-- Lleva al bloque de info en la página principal -->
-      <a href="/es/"
-         class="nav-item top-link">
-        Inicio
-      </a>
+<!-- CENTRO: NAVEGACIÓN GLOBAL CON ICONOS + TOOLTIPS -->
+<div class="center">
+  <nav class="main-nav" aria-label="Navegación principal">
 
-      <!-- Avisos: esta página → la marcamos activa -->
-      <a href="/es/avisos"
-         class="nav-item top-link">
-        Avisos
-      </a>
+    <a href="/es/" class="nav-item top-link is-active" data-label="Inicio">
+      <i class="fas fa-home" aria-hidden="true"></i>
+    </a>
 
-      <!-- Nuevas secciones de contenido -->
-      <a href="/es/legal/privacidad"
-         class="nav-item top-link is-active">
-        Privacidad
-      </a>
+    <a href="/es/#mapa" class="nav-item top-link" data-label="Mapa">
+      <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+    </a>
 
-      <a href="/es/legal/terminos"
-         class="nav-item top-link">
-        Términos
-      </a>
-    </nav>
-  </div>
+    <a href="/es/#sugerir-bano" class="nav-item top-link" data-label="Sugerir baño">
+      <i class="fas fa-lightbulb" aria-hidden="true"></i>
+    </a>
+
+    <a href="/es/#reportar-bano" class="nav-item top-link" data-label="Reportar baño">
+      <i class="fas fa-flag" aria-hidden="true"></i>
+    </a>
+
+    <a href="/es/avisos" class="nav-item top-link" data-label="Avisos">
+      <i class="fas fa-gavel" aria-hidden="true"></i>
+    </a>
+
+  </nav>
+</div>
+
 
 
   <div class="right">
+
+      <!-- 💖 Donar (PayPal) -->
+  <a class="icon-btn"
+     href="https://www.paypal.com/donate/?hosted_button_id=K773CAM5X3QBC"
+     target="_blank"
+     rel="noopener"
+     data-label="Donar">
+    <i class="fas fa-hand-holding-heart"></i>
+  </a>
+
+
     <!-- Modo oscuro -->
     <button id="themeToggle"
             class="icon-btn"
