@@ -388,27 +388,18 @@ button.icon-btn {
 /*                                                /ES/AVISOS/                                                 */
 /*____________________________________________________________________________________________________________*/
 
-/* =========================================================
-   Right A.1: Avisos Martillo
-   ========================================================= */
-
-/* Estado activo del icono de Avisos cuando estás en /es/avisos/ */
-.page-avisos #openNotices {
-  background: rgba(250, 204, 21, 0.22); /* círculo suave dorado */
-  color:  #e6b800;                        /* icono dorado */
-}
-
-/* Opcional: que mantenga el color incluso al pasar el mouse */
-.page-avisos #openNotices:hover {
-  background: rgba(250, 204, 21, 0.22);
-  color:  #e6b800;
-}
-
 
 
 /* =========================================================
-   /es/avisos – Buscador estilo Pill Pro
+   Left /es/avisos – Buscador estilo Pill Pro
    ========================================================= */
+
+
+/* En /avisos reducimos el gap entre el logo y el buscador */
+.page-avisos .topbar .left {
+  gap: 10px;   /* mucho más compacto */
+}
+
 
 .page-avisos .notice-search {
   display: flex;
@@ -429,7 +420,7 @@ button.icon-btn {
   padding: 0 40px;          /* espacio derecha para la X */
   padding-left: 42px;       /* espacio izquierda para la lupa */
   height: 40px;
-  width: 460px;             /* 50% más ancho aprox */
+  width: clamp(260px, 28vw, 420px);
 
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
