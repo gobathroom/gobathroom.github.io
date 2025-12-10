@@ -73,7 +73,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(4px);
 
-  bottom: -34px;              /* distancia respecto al botón */
+  bottom: -30px;              /* distancia respecto al botón */
   padding: 4px 10px;
   border-radius: 10px;
 
