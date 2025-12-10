@@ -158,13 +158,12 @@
     background 0.15s ease;
 }
 
-/* ICONO DENTRO */
 .main-nav .nav-item i {
   font-size: 22px;
   line-height: 1;
+  position: relative;
+  top: 1px;     /* prueba 1px o 2px, positivo = baja el icono */
 }
-
-
 
 /* Hover */
 .main-nav .nav-item:hover {
