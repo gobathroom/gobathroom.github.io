@@ -217,42 +217,48 @@
 
 
 /* =========================================================
-   RIGHT1.0: ICON BUTTONS ( Law / tema)
+   RIGHT1.0: ICON BUTTONS (Donar / Tema)
    ========================================================= */
 
-/* NORMALIZAR <a> Y <button> PARA QUE MIDAN EXACTAMENTE IGUAL */
-.icon-btn,
-.lang-btn,
-.icon-btn:link,
-.icon-btn:visited,
-.icon-btn:active,
-button.icon-btn {
-  box-sizing: border-box;
+.icon-btn {
+  position: relative;
 
+  /* 🔹 Normalización para que <a> y <button> sean iguales */
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   width: 40px;
   height: 40px;
-
   padding: 0;
   margin: 0;
-
   border: none;
-  outline: none;
+  line-height: 1;
 
-  line-height: 1;      /* evita espacio extra vertical */
-  font-size: 0;        /* evita que el navegador meta altura por texto */
+  /* 🔹 Estilo visual original */
+  border-radius: 999px;
+  cursor: pointer;
+  background: var(--hover);   /* círculo gris suave */
+  color: var(--text);
+  text-decoration: none;
+
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
 }
 
-/* restaurar tamaño del icono */
+/* Por si algún navegador da estilos raros al <button> */
+button.icon-btn {
+  appearance: none;
+}
+
+/* Tamaño del icono dentro */
 .icon-btn i {
   font-size: 18px;
+  line-height: 1;
 }
 
-
-/* Hover: se oscurece un poco (como FB) */
+/* Hover: círculo un poco más oscuro */
 .icon-btn:hover {
   background: var(--panel-2);
   transform: translateY(-1px);
@@ -269,6 +275,7 @@ button.icon-btn {
 .icon-btn:focus {
   text-decoration: none;
 }
+
 
 
 /* =========================================================
