@@ -52,51 +52,6 @@
 
 
 /* =========================================================
-   0.1:TOOLTIPS GENERALES – TOPBAR (center + right)
-   ========================================================= */
-
-/* Cualquier elemento de la topbar que tenga data-label
-   va a usar este tooltip (ej: .nav-item, .icon-btn, etc.) */
-.topbar [data-label] {
-  position: relative; /* necesario para posicionar el tooltip */
-}
-
-/* Tooltip base */
-.topbar [data-label]::before {
-  content: attr(data-label);
-
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%) translateY(4px);
-
-  bottom: -30px;              /* distancia respecto al botón */
-  padding: 4px 10px;
-  border-radius: 10px;
-
-  font-size: 12px;
-  white-space: nowrap;
-
-  background: var(--text);
-  color: var(--panel);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-
-  opacity: 0;
-  pointer-events: none;
-  z-index: 1200;
-
-  transition:
-    opacity 0.18s ease-out 0.18s,
-    transform 0.18s ease-out 0.18s;
-}
-
-/* Mostrar tooltip al pasar el mouse */
-.topbar [data-label]:hover::before {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-
-/* =========================================================
    LEFT1: LOGO / BRAND
    ========================================================= */
 
@@ -215,6 +170,50 @@
 }
 
 
+/* =========================================================
+   Center1.1:TOOLTIPS – CENTER (main-nav)
+   ========================================================= */
+
+.topbar .center .nav-item[data-label] {
+  position: relative;
+}
+
+/* Tooltip CENTER */
+.topbar .center .nav-item[data-label]::before {
+  content: attr(data-label);
+
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+
+  bottom: -32px;              /* distancia respecto al icono del CENTER */
+  padding: 4px 10px;
+  border-radius: 10px;
+
+  font-size: 12px;
+  white-space: nowrap;
+
+  background: var(--text);
+  color: var(--panel);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1200;
+
+  transition:
+    opacity 0.18s ease-out 0.18s,
+    transform 0.18s ease-out 0.18s;
+}
+
+/* Mostrar tooltip CENTER */
+.topbar .center .nav-item[data-label]:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+
+
 
 
 /* =========================================================
@@ -265,6 +264,49 @@
 .icon-btn:hover,
 .icon-btn:focus {
   text-decoration: none;
+}
+
+
+/* =========================================================
+   Right1.1:TOOLTIPS – RIGHT (icon-btn / lang-btn)
+   ========================================================= */
+
+.topbar .right [data-label] {
+  position: relative;
+}
+
+/* Tooltip RIGHT */
+.topbar .right [data-label]::before {
+  content: attr(data-label);
+
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+
+  bottom: -26px;              /* ⚙ ajusta si lo quieres un poco más arriba/abajo */
+  padding: 4px 10px;
+  border-radius: 10px;
+
+  font-size: 12px;
+  white-space: nowrap;
+
+  background: var(--text);
+  color: var(--panel);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1200;
+
+  transition:
+    opacity 0.18s ease-out 0.18s,
+    transform 0.18s ease-out 0.18s;
+}
+
+/* Mostrar tooltip RIGHT */
+.topbar .right [data-label]:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 
