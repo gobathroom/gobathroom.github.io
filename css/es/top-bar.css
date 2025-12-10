@@ -7,17 +7,21 @@
   top: 0;
   z-index: 1000;
 
-  height: var(--header-h, 64px);
+  /* En vez de height fijo, usa min-height y vuelve a declarar height para ganar la cascada */
+  min-height: var(--header-h, 64px);
+  height: var(--header-h, 64px); /* si hay otra regla, aquí gana esta */
+
   padding: 0 var(--topbar-padding-x, 16px);
 
   display: flex;
-  align-items: center;
+  align-items: center;       /* centra verticalmente el contenido */
   justify-content: space-between;
 
   background: var(--panel);
   color: var(--text);
   border-bottom: 1px solid var(--border);
 }
+
 
 /* Layout interno: izquierda / centro / derecha */
 .topbar .left,
