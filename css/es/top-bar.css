@@ -220,9 +220,14 @@
    RIGHT1.0: ICON BUTTONS ( Law / tema)
    ========================================================= */
 
-/* Botón circular con fondo SIEMPRE visible */
-.icon-btn {
-  position: relative;
+/* NORMALIZAR <a> Y <button> PARA QUE MIDAN EXACTAMENTE IGUAL */
+.icon-btn,
+.lang-btn,
+.icon-btn:link,
+.icon-btn:visited,
+.icon-btn:active,
+button.icon-btn {
+  box-sizing: border-box;
 
   display: inline-flex;
   align-items: center;
@@ -231,22 +236,21 @@
   width: 40px;
   height: 40px;
 
+  padding: 0;
+  margin: 0;
+
   border: none;
-  border-radius: 999px;
-  cursor: pointer;
+  outline: none;
 
-  background: var(--hover);  /* fondo fijo gris suave */
-  color: var(--text);
-  text-decoration: none;     /* 🔹 quita la raya del link */
-
-  transition:
-    background 0.15s ease,
-    transform 0.1s ease;
+  line-height: 1;      /* evita espacio extra vertical */
+  font-size: 0;        /* evita que el navegador meta altura por texto */
 }
 
+/* restaurar tamaño del icono */
 .icon-btn i {
-  font-size: 18px; /* más grande, tipo FB */
+  font-size: 18px;
 }
+
 
 /* Hover: se oscurece un poco (como FB) */
 .icon-btn:hover {
