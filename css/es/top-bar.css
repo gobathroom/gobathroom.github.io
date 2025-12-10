@@ -138,8 +138,9 @@
 }
 
 .main-nav .nav-item {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;   /* centrado completo *
 
   /* ancho de la pastilla (horizontal) */
   padding: 0 32px;
@@ -161,9 +162,9 @@
 }
 
 
-/* No usamos iconos dentro del nav ahora, pero por si acaso: */
 .main-nav .nav-item i {
-  font-size: 20px;
+  font-size: 22px;
+  line-height: 1;            /* quita espacio extra de la fuente */
 }
 
 /* Hover */
