@@ -127,13 +127,13 @@
    CENTER: NAV CON ICONOS
    ========================================= */
 
+/* NAV ICONOS CENTER */
 .main-nav {
   display: flex;
   align-items: center;
   gap: 9px;
 }
 
-/* Cada icono (link) del center */
 .main-nav .nav-item {
   position: relative;
 
@@ -141,43 +141,78 @@
   align-items: center;
   justify-content: center;
 
-  height: 58px;          /* alto de la pastilla */
-  padding: 0 32px;       /* ancho de la pastilla */
+  height: 58px;
+  padding: 0 32px;
 
-  border-radius: 16px;   /* rectángulo redondeado */
+  border-radius: 12px;
   background: transparent;
 
-  color: var(--text);    /* color del icono */
-  text-decoration: none; /* sin línea */
+  color: var(--text);          /* color normal del icono */
+  text-decoration: none;
 
   line-height: 1;
   transition:
     background 0.15s ease,
-    transform 0.10s ease;
+    color 0.15s ease;
 }
 
-/* Importante: seguir quitando la línea en todos los estados */
+/* Asegurarnos de que nunca aparezca subrayado */
 .main-nav .nav-item:visited,
 .main-nav .nav-item:hover,
 .main-nav .nav-item:focus,
 .main-nav .nav-item:active {
   text-decoration: none;
-  color: var(--text);
 }
 
-/* Fondo HOVER que quieres (parte del icono) */
-.main-nav .nav-item:hover {
-  background: var(--hover);
-  transform: translateY(-1px); /* opcional, efecto suave */
-}
-
-/* Icono dentro del link */
+/* Icono dentro */
 .main-nav .nav-item i {
   font-size: 22px;
   line-height: 1;
   display: block;
-  /* 👇 Asegúrate de NO tener más reglas tipo "top: -10px" */
 }
+
+/* ---------- LÍNEA INFERIOR (tipo Facebook) ---------- */
+
+.main-nav .nav-item::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+
+  width: 100%;               /* mismo ancho que la pastilla */
+  height: 3px;               /* grosor */
+  border-radius: 999px;
+
+  background: transparent;   /* por defecto no se ve */
+  transition: background 0.2s ease;
+}
+
+/* ---------- HOVER (solo cuando NO es la página actual) ---------- */
+
+.main-nav .nav-item:not(.is-active):hover {
+  background: var(--hover);  /* fondo gris */
+}
+
+/* Si quieres que el icono cambie un pelín en hover (opc): */
+/*
+.main-nav .nav-item:not(.is-active):hover {
+  background: var(--hover);
+  color: var(--text); 
+}
+*/
+
+/* ---------- ESTADO ACTIVO (página actual) ---------- */
+
+.main-nav .nav-item.is-active {
+  background: transparent;   /* sin fondo gris */
+  color: var(--brand);       /* icono en color marca */
+}
+
+.main-nav .nav-item.is-active::after {
+  background: var(--brand);  /* línea 3px color marca */
+}
+
 
 
 
