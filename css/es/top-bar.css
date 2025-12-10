@@ -294,7 +294,7 @@ button.icon-btn {
   left: 50%;
   transform: translateX(-50%) translateY(4px);
 
-  bottom: -40px;              /* ⚙ ajusta si lo quieres un poco más arriba/abajo */
+  bottom: -34px;              /* ⚙ ajusta si lo quieres un poco más arriba/abajo */
   padding: 4px 10px;
   border-radius: 10px;
 
