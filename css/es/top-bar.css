@@ -395,18 +395,25 @@ button.icon-btn {
    ========================================================= */
 
 
-/* Logo + buscador pegaditos en /avisos */
+/* En /avisos: la izquierda sirve como ancla para el buscador flotante */
 .page-avisos .topbar .left {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
-/* Contenedor pill DESKTOP */
+/* Sacamos el buscador del flujo y lo pegamos al logo */
 .page-avisos .notice-search {
+  position: absolute;
+  top: 50%;
+  left: 100%;          /* empieza justo donde termina el logo */
+  transform: translateY(-50%);
+  margin-left: 12px;   /* separación visual entre logo y barra */
+
   display: flex;
   align-items: center;
 }
+
 
 .page-avisos .notice-search-field {
   position: relative;
