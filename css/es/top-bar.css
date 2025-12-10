@@ -139,7 +139,7 @@
   align-items: center;
 
   padding: 0 40px;
-  height: calc(var(--header-h) - 10px);
+  height: calc(var(--header-h) - 20px);
 
   font-size: 14px;
   font-weight: 500;
