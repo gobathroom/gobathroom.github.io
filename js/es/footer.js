@@ -128,11 +128,11 @@ function getShareUrl() {
 
       // textos desde i18n
       const baseText    = tShare('share.main');
-      const textX       = tShare('share.msgX')        || baseText;
+      const textX       = tShare('share.msgX')   || baseText;
       const textWa      = tShare('share.msgWa')       || baseText;
-      const errorCopy   = tShare('share.errorCopy')   || 'Error copiando URL:';
-      const copyLabel   = tShare('share.copyLabel')   || 'Copiar enlace';
-      const copiedLabel = tShare('share.copiedLabel') || '✔ ¡Copiado!';
+      const errorCopy   = tShare('share.errorCopy')   || 'Could not copy email';
+      const copyLabel   = tShare('share.copyLabel')   || 'Copy email address';
+      const copiedLabel = tShare('share.copiedLabel') || 'Copied!';
 
       if (type === 'copy') {
         const labelSpan = btn.querySelector('.share-pill-label');
