@@ -357,69 +357,110 @@
     </div>
 
     <nav class="footer-nav" aria-label="Enlaces legales y contacto">
-      <!-- Fila principal: enlaces -->
-      <div class="footer-links">
-        <a href="/es/legal/privacidad" class="footer-link">Privacidad</a>
-        <span class="footer-separator">·</span>
+  <!-- Fila principal: enlaces -->
+  <div class="footer-links">
+    <a href="/es/legal/privacidad" class="footer-link">Privacidad</a>
+    <span class="footer-separator">·</span>
 
-        <a href="/es/legal/terminos de uso" class="footer-link">Términos de uso</a>
-        <span class="footer-separator">·</span>
+    <a href="/es/legal/terminos-de-uso" class="footer-link">Términos de uso</a>
+    <span class="footer-separator">·</span>
 
-        <a href="https://forms.gle/..." target="_blank" rel="noopener" class="footer-link">
-          Contacto
-        </a>
-        <span class="footer-separator">·</span>
-
-        <!-- Botón Compartir (switch) -->
-        <button
-          type="button"
-          class="footer-link footer-share-toggle"
-          id="footerShareToggle"
-          aria-expanded="false"
-        >
-          Compartir
-        </button>
-      </div>
-
-      <!-- Fila secundaria: panel de compartir -->
-<div
-  class="footer-share-row"
-  id="footerShareRow"
-  aria-hidden="true"
->
-  <span class="footer-share-label">Compartir:</span>
-
-  <!-- Botón Copiar + tooltip con URL -->
-  <div class="share-copy-wrapper">
-    <button type="button" class="share-pill" data-share="copy">
-      <i class="fas fa-link"></i>
-      <span class="share-pill-label">Copiar enlace</span>
+    <!-- Contacto (switch) -->
+    <button
+      type="button"
+      class="footer-link footer-contact-toggle"
+      id="footerContactToggle"
+      aria-expanded="false"
+    >
+      Contacto
     </button>
+    <span class="footer-separator">·</span>
 
-    <!-- Tooltip que muestra la URL a copiar -->
-    <div
-      class="share-tooltip"
-      id="shareCopyTooltip"
-      role="status"
-      aria-live="polite"
-    ></div>
+    <!-- Compartir (switch) -->
+    <button
+      type="button"
+      class="footer-link footer-share-toggle"
+      id="footerShareToggle"
+      aria-expanded="false"
+    >
+      Compartir
+    </button>
   </div>
 
-  <!-- Botones redes sociales -->
-  <button type="button" class="share-pill" data-share="facebook">
-    <i class="fab fa-facebook-f"></i>
-  </button>
+  <!-- Fila secundaria: panel de contacto -->
+  <div
+    class="footer-contact-row"
+    id="footerContactRow"
+    aria-hidden="true"
+  >
+    <span class="footer-contact-label">Contacto:</span>
 
-  <button type="button" class="share-pill" data-share="x">
-    <i class="fab fa-x-twitter"></i>
-  </button>
+    <div class="footer-contact-actions">
+      <a
+        href="mailto:contact@gobathroom.io"
+        class="footer-contact-email"
+      >
+        contact@gobathroom.io
+      </a>
 
-  <button type="button" class="share-pill" data-share="whatsapp">
-    <i class="fab fa-whatsapp"></i>
-  </button>
-</div>
+      <button
+        type="button"
+        class="footer-contact-copy"
+        data-email="contact@gobathroom.io"
+        aria-label="Copiar correo electrónico"
+      >
+        <i class="fas fa-copy" aria-hidden="true"></i>
+      </button>
 
-    </nav>
+      <span
+        class="footer-contact-feedback"
+        aria-live="polite"
+      ></span>
+
+      <!-- opcional:
+      <a href="https://forms.gle/..." target="_blank" rel="noopener" class="footer-contact-formlink">
+        Formulario
+      </a>
+      -->
+    </div>
+  </div>
+
+  <!-- Fila secundaria: panel de compartir -->
+  <div
+    class="footer-share-row"
+    id="footerShareRow"
+    aria-hidden="true"
+  >
+    <span class="footer-share-label">Compartir:</span>
+
+    <div class="share-copy-wrapper">
+      <button type="button" class="share-pill" data-share="copy">
+        <i class="fas fa-link"></i>
+        <span class="share-pill-label">Copiar enlace</span>
+      </button>
+
+      <div
+        class="share-tooltip"
+        id="shareCopyTooltip"
+        role="status"
+        aria-live="polite"
+      ></div>
+    </div>
+
+    <button type="button" class="share-pill" data-share="facebook">
+      <i class="fab fa-facebook-f"></i>
+    </button>
+
+    <button type="button" class="share-pill" data-share="x">
+      <i class="fab fa-x-twitter"></i>
+    </button>
+
+    <button type="button" class="share-pill" data-share="whatsapp">
+      <i class="fab fa-whatsapp"></i>
+    </button>
+  </div>
+</nav>
+
   </div>
 
   <div class="footer-bottom">
