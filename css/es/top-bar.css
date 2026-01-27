@@ -481,6 +481,29 @@ button.icon-btn {
 }
 
 
+/* Scroll */
+
+@media (max-width: 600px) {
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 9999;
+    transform: translate3d(0,0,0);
+    transition: transform .22s ease;
+    will-change: transform;
+  }
+
+  .topbar.gb-hide {
+    transform: translate3d(0,-110%,0);
+  }
+
+  /* El contenido con scroll debe dejar espacio para el topbar */
+  .content {
+    padding-top: var(--gb-topbar-h, 0px);
+  }
+}
+
+
 
 
 
