@@ -446,11 +446,34 @@ button.icon-btn {
   /* Underline: pegado al borde inferior REAL del topbar */
   .main-nav .nav-item::after {
     height: 3px;
-    bottom: 0;                    /* ✅ ahora sí pega al borde */
+    bottom: 0;
   }
 
   .main-nav .nav-item.is-active::after {
     bottom: 0;
+  }
+
+  /* =====================================================
+     NEW: RIGHT ICONS — sin fondo en mobile (estilo FB)
+     ===================================================== */
+
+  .topbar .right .icon-btn,
+  .topbar .right .lang-btn {
+    background: transparent;      /* ❌ quita círculo */
+    border-radius: 0;              /* ❌ evita pastilla */
+  }
+
+  /* Mantener área táctil correcta */
+  .topbar .right .icon-btn,
+  .topbar .right .lang-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Feedback sutil al tap (opcional pero recomendado) */
+  .topbar .right .icon-btn:active,
+  .topbar .right .lang-btn:active {
+    background: rgba(0, 0, 0, 0.06);
   }
 
   /* Tooltips en mobile: off */
@@ -464,6 +487,7 @@ button.icon-btn {
     display: none;
   }
 }
+
 
 
 
