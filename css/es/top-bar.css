@@ -368,24 +368,23 @@ button.icon-btn {
 
 /* =========================================================
    RESPONSIVE: TOPBAR / MOBILE (2 filas tipo Facebook)
-   + underline alineado al borde
+   + underline alineado al borde real del topbar
    + center sin fondos (menos saturado)
    ========================================================= */
 @media (max-width: 600px) {
   .topbar {
-    padding: 8px 10px;
+    /* ✅ Mantén padding arriba y laterales, PERO no abajo */
+    padding: 8px 10px 0;
 
     /* 2 filas: (left+right) arriba, center abajo */
     display: grid;
-    grid-template-columns: 1fr auto; /* left ocupa, right se ajusta */
-    grid-template-rows: auto auto;   /* 2 filas */
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 50px; /* ✅ fila 2 con altura fija */
     align-items: center;
     row-gap: 8px;
 
-    /* ya no aplica space-between de flex */
     justify-content: initial;
 
-    /* importante: altura flexible en mobile */
     height: auto;
     min-height: unset;
   }
@@ -399,26 +398,33 @@ button.icon-btn {
   .topbar .right {
     grid-column: 2;
     grid-row: 1;
-    margin-left: 0;          /* antes lo empujabas con auto */
+    margin-left: 0;
     justify-content: flex-end;
   }
 
   /* ---------- Fila de tabs (center) ---------- */
   .topbar .center {
-    grid-column: 1 / -1;     /* ocupa todo el ancho */
+    grid-column: 1 / -1;
     grid-row: 2;
 
-    /* Para que el underline "toque" el borde del topbar */
-    height: 50px;            /* 👈 ajusta: 48/50/52 según te guste */
-    align-items: stretch;    /* nav-items pueden ocupar alto completo */
-    justify-content: center; /* center real tipo tabbar */
+    /* ✅ hace que el nav use todo el alto de la fila */
+    height: 100%;
+    align-items: stretch;
+    justify-content: center;
+
+    /* ✅ cero margen/padding que pueda separar del borde */
+    padding: 0;
+    margin: 0;
   }
 
   /* NAV: fila de tabs */
   .main-nav {
     width: 100%;
     height: 100%;
-    justify-content: space-between; /* reparte los tabs */
+
+    display: flex;
+    align-items: stretch;          /* ✅ importante */
+    justify-content: space-between;
     gap: 6px;
   }
 
@@ -426,39 +432,39 @@ button.icon-btn {
   .main-nav .nav-item {
     flex: 1 1 0;
     height: 100%;
-    padding: 0;              /* clave para que no reviente */
-    border-radius: 0;        /* 👈 sin pastilla */
-    background: transparent; /* 👈 sin fondo */
+    padding: 0;
+
+    border-radius: 0;
+    background: transparent;
   }
 
-  /* Hover en mobile no aporta mucho; evitamos “parpadeos” */
+  /* Hover en mobile: neutral */
   .main-nav .nav-item:not(.is-active):hover {
     background: transparent;
   }
 
-  /* Underline: pegado al borde inferior del topbar */
+  /* Underline: pegado al borde inferior REAL del topbar */
   .main-nav .nav-item::after {
     height: 3px;
-    bottom: 0;               /* 👈 pegado al borde (sin negativos) */
+    bottom: 0;                    /* ✅ ahora sí pega al borde */
   }
 
-  /* Activo: se mantiene icono marca + línea marca */
   .main-nav .nav-item.is-active::after {
-    bottom: 0;               /* 👈 asegura alineación en activo también */
+    bottom: 0;
   }
 
-  /* Tooltips en mobile: mejor apagarlos (no hay hover real) */
+  /* Tooltips en mobile: off */
   .topbar .center .nav-item[data-label]::before,
   .topbar .right [data-label]::before {
     display: none;
   }
 
-  /* Opcional: si el botón de idioma (texto) estorba en mobile,
-     puedes ocultar solo el texto y dejar el icono */
+  /* Idioma: ocultar texto, dejar icono */
   .lang-btn .lang-text {
     display: none;
   }
 }
+
 
 
 
