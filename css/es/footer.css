@@ -171,6 +171,8 @@
 
 /* ===========================
    1.5: Contact UI (solo contacto)
+   IMPORTANTE: si estás reutilizando las clases de "legal",
+   aquí dejamos todo centrado y neutralizamos padding/list-style.
    =========================== */
 
 .footer-contact-label {
@@ -178,26 +180,39 @@
   color: var(--muted, #9fb0d0);
 }
 
+/* Contenedor de acciones del panel */
 .footer-contact-actions {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
 }
 
-/* Email como link */
-.footer-contact-email {
+/* REUTILIZADO (desde Legal): forzar que no se vaya a la izquierda */
+.site-footer #footerContactRow .legal-contact-row {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  /* neutraliza estilos de lista si vienen de tu página legal */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* REUTILIZADO (desde Legal): link email */
+.site-footer #footerContactRow .legal-email-link {
   color: var(--text, #dbe5ff);
   text-decoration: none;
   font-size: 12px;
 }
 
-.footer-contact-email:hover {
+.site-footer #footerContactRow .legal-email-link:hover {
   text-decoration: underline;
 }
 
-/* Botón copiar (parecido a una mini “pill”) */
-.footer-contact-copy {
+/* REUTILIZADO (desde Legal): botón copiar */
+.site-footer #footerContactRow .email-copy-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -213,17 +228,19 @@
   cursor: pointer;
 }
 
-.footer-contact-copy i { font-size: 12px; }
+.site-footer #footerContactRow .email-copy-btn i { font-size: 12px; }
 
-.footer-contact-copy:hover {
+.site-footer #footerContactRow .email-copy-btn:hover {
   border-color: var(--brand, #00d1ff);
 }
 
-/* Feedback (ej: “✔ Copiado”) */
-.footer-contact-feedback {
+/* REUTILIZADO (desde Legal): feedback */
+.site-footer #footerContactRow .email-copy-feedback {
   font-size: 11px;
   color: var(--muted, #9fb0d0);
-  min-width: 70px; /* evita que todo “salte” cuando aparece texto */
+
+  /* evita brincos, pero sin empujar visualmente el centro */
+  min-width: 0;
   text-align: left;
 }
 
