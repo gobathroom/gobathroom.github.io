@@ -480,6 +480,21 @@ button.icon-btn {
   .lang-btn .lang-text { display: none; }
 }
 
+@media (max-width: 600px) {
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    transition: transform 0.25s ease;
+    will-change: transform;
+  }
+
+  .topbar.is-hidden {
+    transform: translateY(-100%);
+  }
+}
+
 
 
 
