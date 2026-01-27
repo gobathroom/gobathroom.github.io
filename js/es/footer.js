@@ -30,7 +30,9 @@ function getShareUrl() {
     'privacidad',
     'terminos',
     'privacy',
-    'terms'
+    'terms',
+    'terminos-de-uso',
+    'terms-of-use'
   ]);
 
   if (legalSlugs.has(lastSegment)) {
@@ -46,30 +48,28 @@ function getShareUrl() {
 
 
 /* ===========================
-   FOOTER: TOGGLES + SHARE + CONTACT
+   FOOTER: SHARE + CONTACT TOGGLES
    =========================== */
 
-(function setupFooterShare() {
-  const footer    = document.querySelector('.site-footer');
-  const toggleBtn = document.getElementById('footerShareToggle');
-  const shareRow  = document.getElementById('footerShareRow');
-
-  // CONTACT
-  const contactBtn = document.getElementById('footerContactToggle');
-  const contactRow = document.getElementById('footerContactRow');
-
-  // Si no hay footer, no hay nada que hacer
+(function setupFooterPanels() {
+  const footer = document.querySelector('.site-footer');
   if (!footer) return;
 
-  // SHARE elements (pueden no existir en algunas páginas)
+  // SHARE
+  const shareToggle = document.getElementById('footerShareToggle');
+  const shareRow    = document.getElementById('footerShareRow');
+
+  // CONTACT
+  const contactToggle = document.getElementById('footerContactToggle');
+  const contactRow    = document.getElementById('footerContactRow');
+
+  // Si no existe share ni contacto, salir
+  if (!shareToggle && !contactToggle) return;
+
+  // ----- SHARE internals (mantiene tu lógica) -----
   const shareButtons = shareRow ? shareRow.querySelectorAll('.share-pill') : [];
   const copyBtn      = shareRow ? shareRow.querySelector('.share-pill[data-share="copy"]') : null;
   const tooltip      = document.getElementById('shareCopyTooltip');
-
-  // CONTACT elements (opcional: copiar email)
-  const contactCopyBtn = contactRow ? contactRow.querySelector('.footer-contact-copy') : null;
-  const contactEmailEl = contactRow ? contactRow.querySelector('.footer-contact-email') : null;
-  const contactFeedback = contactRow ? contactRow.querySelector('.footer-contact-feedback') : null;
 
   // Poner el texto inicial del botón "Copiar enlace" según el idioma
   if (copyBtn) {
@@ -79,113 +79,80 @@ function getShareUrl() {
     }
   }
 
-  /* ---------------------------
-     SHARE open/close
-     --------------------------- */
-  function openShare() {
-    if (!toggleBtn || !shareRow) return;
+  // ----- CONTACT internals (reusa tus clases legales) -----
+  const contactCopyBtn = contactRow ? contactRow.querySelector('.email-copy-btn') : null;
+  const contactFeedback = contactRow ? contactRow.querySelector('.email-copy-feedback') : null;
 
-    // ⬇️ NUEVO: si Contacto estaba abierto, cerrarlo
+  // Helpers: abrir/cerrar (solo 1 panel)
+  function closeShare() {
+    if (!shareToggle || !shareRow) return;
+    footer.classList.remove('is-sharing');
+    shareToggle.setAttribute('aria-expanded', 'false');
+    shareRow.setAttribute('aria-hidden', 'true');
+    if (tooltip) tooltip.classList.remove('is-visible');
+  }
+
+  function openShare() {
+    if (!shareToggle || !shareRow) return;
+    // cerrar contacto si está abierto
     closeContact();
 
     footer.classList.add('is-sharing');
-    toggleBtn.setAttribute('aria-expanded', 'true');
+    shareToggle.setAttribute('aria-expanded', 'true');
     shareRow.setAttribute('aria-hidden', 'false');
 
-    // preparar el contenido del tooltip (pero no mostrarlo aún)
-    if (tooltip) {
-      tooltip.textContent = getShareUrl();
-    }
-  }
-
-  function closeShare() {
-    if (!toggleBtn || !shareRow) return;
-
-    footer.classList.remove('is-sharing');
-    toggleBtn.setAttribute('aria-expanded', 'false');
-    shareRow.setAttribute('aria-hidden', 'true');
-
-    if (tooltip) {
-      tooltip.classList.remove('is-visible');
-    }
+    if (tooltip) tooltip.textContent = getShareUrl();
   }
 
   function toggleShare() {
-    if (!toggleBtn || !shareRow) return;
-
-    if (footer.classList.contains('is-sharing')) {
-      closeShare();
-    } else {
-      openShare();
-    }
-  }
-
-  /* ---------------------------
-     CONTACT open/close (nuevo)
-     --------------------------- */
-  function openContact() {
-    if (!contactBtn || !contactRow) return;
-
-    // Cerrar compartir si estaba abierto
-    closeShare();
-
-    footer.classList.add('is-contacting');
-    contactBtn.setAttribute('aria-expanded', 'true');
-    contactRow.setAttribute('aria-hidden', 'false');
+    if (footer.classList.contains('is-sharing')) closeShare();
+    else openShare();
   }
 
   function closeContact() {
-    if (!contactBtn || !contactRow) return;
-
+    if (!contactToggle || !contactRow) return;
     footer.classList.remove('is-contacting');
-    contactBtn.setAttribute('aria-expanded', 'false');
+    contactToggle.setAttribute('aria-expanded', 'false');
     contactRow.setAttribute('aria-hidden', 'true');
 
-    // limpiar feedback si existía
+    // limpiar feedback si quieres (opcional)
     if (contactFeedback) contactFeedback.textContent = '';
   }
 
-  function toggleContact() {
-    if (!contactBtn || !contactRow) return;
-
-    if (footer.classList.contains('is-contacting')) {
-      closeContact();
-    } else {
-      openContact();
-    }
-  }
-
-  function closeAllPanels() {
+  function openContact() {
+    if (!contactToggle || !contactRow) return;
+    // cerrar share si está abierto
     closeShare();
-    closeContact();
+
+    footer.classList.add('is-contacting');
+    contactToggle.setAttribute('aria-expanded', 'true');
+    contactRow.setAttribute('aria-hidden', 'false');
   }
 
-  /* ---------------------------
-     1) Click en "Compartir"
-     --------------------------- */
-  if (toggleBtn && shareRow) {
-    toggleBtn.addEventListener('click', (e) => {
+  function toggleContact() {
+    if (footer.classList.contains('is-contacting')) closeContact();
+    else openContact();
+  }
+
+  // Click en toggles
+  if (shareToggle) {
+    shareToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       toggleShare();
     });
   }
 
-  /* ---------------------------
-     1b) Click en "Contacto" (nuevo)
-     --------------------------- */
-  if (contactBtn && contactRow) {
-    contactBtn.addEventListener('click', (e) => {
+  if (contactToggle) {
+    contactToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       toggleContact();
     });
   }
 
-  /* ---------------------------
-     Tooltip Copy (share)
-     --------------------------- */
+  // Tooltip: mostrar solo hover/focus del botón copiar enlace
   if (copyBtn && tooltip) {
     const showTip = () => {
-      tooltip.textContent = getShareUrl(); // por si la URL cambió
+      tooltip.textContent = getShareUrl();
       tooltip.classList.add('is-visible');
     };
     const hideTip = () => {
@@ -198,9 +165,7 @@ function getShareUrl() {
     copyBtn.addEventListener('blur', hideTip);
   }
 
-  /* ---------------------------
-     2) Click en botones de compartir
-     --------------------------- */
+  // Botones de compartir
   if (shareButtons && shareButtons.length) {
     shareButtons.forEach(btn => {
       btn.addEventListener('click', async (e) => {
@@ -218,46 +183,32 @@ function getShareUrl() {
 
         if (type === 'copy') {
           const labelSpan = btn.querySelector('.share-pill-label');
-          const icon      = btn.querySelector('i');  // el icono de link
+          const icon      = btn.querySelector('i');
 
           try {
             await navigator.clipboard.writeText(url);
 
-            // Ocultar tooltip al hacer clic
-            if (tooltip) {
-              tooltip.classList.remove('is-visible');
-            }
+            if (tooltip) tooltip.classList.remove('is-visible');
 
-            // Estilo de éxito
             btn.classList.add('share-pill--ok');
-
-            // Ocultar icono y texto originales
             if (icon)      icon.style.display = 'none';
             if (labelSpan) labelSpan.style.display = 'none';
 
-            // Crear span temporal con "✔ ¡Copiado!"
             const copiedSpan = document.createElement('span');
             copiedSpan.className = 'share-pill-copied';
             copiedSpan.textContent = copiedLabel;
             btn.appendChild(copiedSpan);
 
-            // Revertir después de 1.2 s y cerrar el panel
             setTimeout(() => {
               btn.classList.remove('share-pill--ok');
-
-              // Quitar el mensaje temporal
               copiedSpan.remove();
 
-              // Mostrar de nuevo icono y texto normal
-              if (icon) {
-                icon.style.display = 'inline-block';
-              }
+              if (icon) icon.style.display = 'inline-block';
               if (labelSpan) {
                 labelSpan.style.display = 'inline';
                 labelSpan.textContent = copyLabel;
               }
 
-              // Ahora sí, cerrar el panel de compartir
               closeShare();
             }, 1200);
 
@@ -291,62 +242,43 @@ function getShareUrl() {
     });
   }
 
-  /* ---------------------------
-     2b) Copiar email (Contacto) - nuevo
-     --------------------------- */
+  // Copiar correo (reutiliza tu data-email)
   if (contactCopyBtn) {
     contactCopyBtn.addEventListener('click', async (e) => {
       e.stopPropagation();
-
-      const email =
-        contactCopyBtn.dataset.email ||
-        (contactEmailEl ? contactEmailEl.textContent.trim() : '');
-
-      if (!email) return;
-
-      // textos (puedes ponerlos en i18n luego si quieres)
-      const copiedLabel = tShare('contact.copied') || '✔ Copiado';
-      const errorCopy   = tShare('contact.errorCopy') || 'Error copiando correo:';
+      const email = contactCopyBtn.getAttribute('data-email') || 'contact@gobathroom.io';
 
       try {
         await navigator.clipboard.writeText(email);
-
         if (contactFeedback) {
-          contactFeedback.textContent = copiedLabel;
+          // si luego quieres i18n para esto, lo agregamos
+          contactFeedback.textContent = '✔ Copiado';
         }
-
-        // cerrar después de un momento (opcional, como share)
         setTimeout(() => {
           if (contactFeedback) contactFeedback.textContent = '';
           closeContact();
         }, 1200);
 
       } catch (err) {
-        console.error(errorCopy, err);
+        console.error('Error copiando email:', err);
       }
     });
   }
 
-  /* ---------------------------
-     3) Cerrar si se hace click fuera del footer
-     --------------------------- */
+  // Cerrar si se hace click fuera del footer
   document.addEventListener('click', (e) => {
-    const sharing    = footer.classList.contains('is-sharing');
-    const contacting = footer.classList.contains('is-contacting');
-    if (!sharing && !contacting) return;
-
     const insideFooter = footer.contains(e.target);
+
     if (!insideFooter) {
-      closeAllPanels();
+      if (footer.classList.contains('is-sharing')) closeShare();
+      if (footer.classList.contains('is-contacting')) closeContact();
     }
   });
 
-  /* ---------------------------
-     4) Cerrar con Escape
-     --------------------------- */
+  // Cerrar con Escape
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeAllPanels();
-    }
+    if (e.key !== 'Escape') return;
+    if (footer.classList.contains('is-sharing')) closeShare();
+    if (footer.classList.contains('is-contacting')) closeContact();
   });
 })();
