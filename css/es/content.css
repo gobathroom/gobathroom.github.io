@@ -815,6 +815,14 @@ body[data-theme="dark"] .impact-icon {
   }
 }
 
+.content{
+  height: 100vh;        /* o calc(100vh - algo) */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* iOS smooth */
+}
+
+
+
 
 
 /*____________________________________________________________________________________________________________*/
