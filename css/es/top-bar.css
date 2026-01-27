@@ -371,7 +371,7 @@ button.icon-btn {
    + underline alineado al borde real del topbar
    + center sin fondos (menos saturado)
    + right sin fondos (estilo FB)
-   + NEW: hide/show suave con clase .is-hidden (para JS)
+   + hide/show PROGRESIVO controlado por JS
    ========================================================= */
 @media (max-width: 600px) {
   .topbar {
@@ -381,29 +381,21 @@ button.icon-btn {
     /* 2 filas: (left+right) arriba, center abajo */
     display: grid;
     grid-template-columns: 1fr auto;
-    grid-template-rows: auto 50px; /* ✅ fila 2 con altura fija */
+    grid-template-rows: auto 50px; /* fila 2 fija */
     align-items: center;
     row-gap: 8px;
 
     justify-content: initial;
-
     height: auto;
     min-height: unset;
 
-    /* =========================================
-       NEW: animación hide/show tipo FB
-       (JS agrega/quita .is-hidden)
-       ========================================= */
+    /* =================================================
+       FB-style hide/show PROGRESIVO
+       JS modifica --tb-offset (0 a -H)
+       ================================================= */
     will-change: transform;
-    transition: transform 220ms ease, opacity 220ms ease;
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  /* NEW: estado oculto (JS lo activa) */
-  .topbar.is-hidden {
-    transform: translateY(-110%);
-    opacity: 0.98;
+    transform: translateY(var(--tb-offset, 0px));
+    transition: none; /* ❗ JS controla el movimiento */
   }
 
   /* Reubicar bloques */
@@ -424,12 +416,10 @@ button.icon-btn {
     grid-column: 1 / -1;
     grid-row: 2;
 
-    /* ✅ hace que el nav use todo el alto de la fila */
     height: 100%;
     align-items: stretch;
     justify-content: center;
 
-    /* ✅ cero margen/padding que pueda separar del borde */
     padding: 0;
     margin: 0;
   }
@@ -440,12 +430,12 @@ button.icon-btn {
     height: 100%;
 
     display: flex;
-    align-items: stretch;          /* ✅ importante */
+    align-items: stretch;
     justify-content: space-between;
     gap: 6px;
   }
 
-  /* Tabs: sin fondo/pastilla (estilo FB mobile) */
+  /* Tabs: sin fondo/pastilla */
   .main-nav .nav-item {
     flex: 1 1 0;
     height: 100%;
@@ -455,12 +445,12 @@ button.icon-btn {
     background: transparent;
   }
 
-  /* Hover en mobile: neutral */
+  /* Hover neutral */
   .main-nav .nav-item:not(.is-active):hover {
     background: transparent;
   }
 
-  /* Underline: pegado al borde inferior REAL del topbar */
+  /* Underline pegado al borde real */
   .main-nav .nav-item::after {
     height: 3px;
     bottom: 0;
@@ -471,10 +461,8 @@ button.icon-btn {
   }
 
   /* =====================================================
-     RIGHT ICONS — sin fondo en mobile (estilo FB)
+     RIGHT ICONS — sin fondo (estilo FB)
      ===================================================== */
-
-  /* Quita highlight azul/gris feo en mobile */
   .topbar .right .icon-btn,
   .topbar .right .lang-btn,
   .main-nav .nav-item {
@@ -483,45 +471,50 @@ button.icon-btn {
 
   .topbar .right .icon-btn,
   .topbar .right .lang-btn {
-    background: transparent; /* ❌ quita círculo/pastilla */
-    border-radius: 0;        /* ❌ evita forma de pill */
+    background: transparent;
+    border-radius: 0;
     border: none;
     box-shadow: none;
-  }
 
-  /* Mantener área táctil correcta (sin cambiar UX) */
-  .topbar .right .icon-btn,
-  .topbar .right .lang-btn {
     width: 40px;
     height: 40px;
   }
 
-  /* Ajuste específico del lang-btn: quita padding horizontal grande */
   .topbar .right .lang-btn {
-    padding: 0; /* en desktop tiene padding 0 14px */
+    padding: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
   }
 
-  /* Feedback sutil al tap (opcional pero recomendado) */
+  /* Feedback sutil al tap */
   .topbar .right .icon-btn:active,
   .topbar .right .lang-btn:active {
     background: rgba(0, 0, 0, 0.06);
-    border-radius: 10px; /* solo durante el tap, se ve natural */
+    border-radius: 10px;
   }
 
-  /* Tooltips en mobile: off */
+  /* Tooltips OFF */
   .topbar .center .nav-item[data-label]::before,
   .topbar .right [data-label]::before {
     display: none;
   }
 
-  /* Idioma: ocultar texto, dejar icono */
+  /* Idioma: solo icono */
   .lang-btn .lang-text {
     display: none;
   }
 }
+
+/* Respeta usuarios con "reducir movimiento" */
+@media (prefers-reduced-motion: reduce) {
+  @media (max-width: 600px) {
+    .topbar {
+      transform: translateY(0) !important;
+    }
+  }
+}
+
 
 
 
