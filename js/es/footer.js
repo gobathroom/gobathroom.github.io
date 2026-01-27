@@ -253,37 +253,52 @@ function getShareUrl() {
   }
 
   /* ---------------------------
-     3) CONTACT: Copiar correo + cerrar panel
-     --------------------------- */
-  if (contactCopyBtn) {
-    contactCopyBtn.addEventListener('click', async (e) => {
-      e.stopPropagation();
+   3) CONTACT: Copiar correo + cerrar panel (robusto)
+   --------------------------- */
+let contactCloseTimer = null;
 
-      const email =
-        (contactCopyBtn.dataset && contactCopyBtn.dataset.email)
-          ? contactCopyBtn.dataset.email
-          : (contactEmailLink ? contactEmailLink.textContent.trim() : '');
+if (contactCopyBtn) {
+  contactCopyBtn.addEventListener('click', async (e) => {
+    e.stopPropagation();
 
-      // Mensajes (si no tienes llaves, usa fallback)
-      const errorCopyEmail  = tShare('contact.errorCopy')  || 'Error copiando correo:';
-      const copiedEmailText = tShare('contact.copied')     || '¡Correo copiado!';
+    // Si por accidente hay otro listener global, esto ayuda a que no "rebote"
+    // (opcional, pero recomendado)
+    // e.preventDefault();
 
-      try {
-        await navigator.clipboard.writeText(email);
+    const email =
+      (contactCopyBtn.dataset && contactCopyBtn.dataset.email)
+        ? contactCopyBtn.dataset.email
+        : (contactEmailLink ? contactEmailLink.textContent.trim() : '');
 
-        if (contactFeedback) contactFeedback.textContent = copiedEmailText;
+    const errorCopyEmail  = tShare('contact.errorCopy') || 'Error copiando correo:';
+    const copiedEmailText = tShare('contact.copied')    || '¡Correo copiado!';
 
-        // 👇 MUY IMPORTANTE: cerrar el panel después de mostrar feedback
-        setTimeout(() => {
-          if (contactFeedback) contactFeedback.textContent = '';
-          closeContact();
-        }, 1200);
+    try {
+      await navigator.clipboard.writeText(email);
 
-      } catch (err) {
-        console.error(errorCopyEmail, err);
-      }
-    });
-  }
+      if (contactFeedback) contactFeedback.textContent = copiedEmailText;
+
+      // Evita que se acumulen timeouts si hacen click varias veces
+      if (contactCloseTimer) clearTimeout(contactCloseTimer);
+
+      contactCloseTimer = setTimeout(() => {
+        closeContact();
+
+        // Fallback extra por si algún CSS/JS externo dejó display forzado
+        if (contactRow) {
+          contactRow.style.display = 'none';
+          // y limpiamos para que al abrir de nuevo lo controle el CSS
+          setTimeout(() => contactRow.style.removeProperty('display'), 0);
+        }
+
+        contactCloseTimer = null;
+      }, 1200);
+
+    } catch (err) {
+      console.error(errorCopyEmail, err);
+    }
+  });
+}
 
   /* ---------------------------
      4) Cerrar si se hace click fuera del footer
