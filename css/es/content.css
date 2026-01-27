@@ -86,8 +86,6 @@
   color: #e6b800;
 }
 
-
-
 .notifbar-pill i {
   font-size: 14px;
 }
@@ -96,7 +94,6 @@
   color: var(--text-strong, #f5f7ff);
   margin-right: 4px;
 }
-
 
 /* Que el texto se mantenga en UNA línea con "..." si es largo */
 .notifbar-text {
@@ -229,7 +226,6 @@
   }
 }
 
-
 /* ===========================
    2: HERO / BIENVENIDA
    =========================== */
@@ -293,7 +289,6 @@
   padding-inline: 20px;
   box-shadow: 0 8px 18px rgba(0, 209, 255, 0.25);
 }
-
 
 .btn-primary:hover {
   transform: translateY(-1px);
@@ -386,26 +381,21 @@
   border-color: rgba(53, 137, 202, 0.75);
 }
 
-
 .access-card--green {
   background: none;
   border-color: rgba(85, 206, 54, 0.75);
 }
-
 
 .access-card--orange {
   background: none;
   border-color: rgba(242, 148, 22, 0.8);
 }
 
-
 .access-card--blue,
 .access-card--green,
 .access-card--orange {
   border-width: 1.6px; /* o 2px si quieres más impacto */
 }
-
-
 
 /* Contenedor del icono */
 .access-icon {
@@ -438,7 +428,6 @@
   line-height: 1.45;
   color: var(--muted, #6f809d);
 }
-
 
 /* ===========================
    4: CARACTERÍSTICAS DEL BAÑO
@@ -487,9 +476,6 @@
   line-height: 1.45;
   color: var(--muted, #6b7280);
 }
-
-
-
 
 /* ===========================
    5: DASHBOARD: IMPACTO
@@ -595,7 +581,6 @@ body[data-theme="dark"] .impact-icon {
   color: var(--muted, #9fb0d0);
 }
 
-
 /* ===========================
    6: FAB "ABRIR MAPA"
    =========================== */
@@ -689,11 +674,8 @@ body[data-theme="dark"] .impact-icon {
   }
 }
 
-
-
-
 /* ===========================
-   RESPONSIVE
+   RESPONSIVE (EXISTENTE)
    =========================== */
 
 @media (max-width: 720px) {
@@ -744,6 +726,92 @@ body[data-theme="dark"] .impact-icon {
   .notifbar {
     margin: 10px 8px 0;
     padding: 9px 10px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE (MOBILE) — FULL-WIDTH tipo Facebook (AL FINAL)
+   - elimina espacio lateral extra y overflow horizontal
+   - cards con “gutter” mínimo (como FB)
+   ========================================================= */
+@media (max-width: 600px) {
+
+  /* Evita scroll horizontal por cualquier desborde */
+  html, body {
+    overflow-x: hidden;
+  }
+
+  /* Contenedor principal: full width real */
+  .content {
+    max-width: 100%;
+    margin: 0;              /* ❌ fuera el 24px auto */
+    padding: 12px 0 28px;   /* ✅ sin padding lateral */
+  }
+
+  /* Banner wrapper: full width */
+  .notifbar-wrapper {
+    max-width: 100%;
+    margin: 10px 0 0;
+    padding: 0;
+  }
+
+  /* Banner: casi borde a borde, con “gutter” mínimo */
+  .notifbar {
+    margin: 0 10px;         /* ✅ gutter tipo FB */
+    border-radius: 14px;
+  }
+
+  /* Tarjetas: full width visual con gutter mínimo */
+  .home-hero,
+  .home-section {
+    margin: 0 10px 12px;    /* ✅ pegadas, pero con aire mínimo */
+    padding: 16px 14px 14px;
+    border-radius: 16px;
+  }
+
+  /* Layout de home: una columna (por si acaso) */
+  .home-layout {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .home-aside {
+    width: auto;
+    flex: 0 0 auto;
+  }
+
+  /* Grids: 1 columna para evitar desbordes */
+  .access-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: 14px;
+  }
+
+  /* Extra anti-overflow: permite que los hijos encogan */
+  .home-main,
+  .home-aside,
+  .home-hero,
+  .home-section,
+  .notifbar,
+  .access-card,
+  .feature-item {
+    min-width: 0;
+  }
+
+  /* Tipografía un poco más compacta */
+  .home-title {
+    font-size: 22px;
+  }
+
+  /* Acciones del hero: aseguran ancho completo */
+  .home-hero-actions,
+  .home-hero-secondary {
+    width: 100%;
   }
 }
 
