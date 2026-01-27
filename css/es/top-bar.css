@@ -480,20 +480,37 @@ button.icon-btn {
   .lang-btn .lang-text { display: none; }
 }
 
-@media (max-width: 600px) {
-  .topbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 
-    transition: transform 0.25s ease;
+
+/* Scroll */
+
+@media (max-width: 600px) {
+  :root {
+    --topbar-h: 0px; /* JS lo actualiza */
+  }
+
+  .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 1000;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.22s ease-out;
     will-change: transform;
   }
 
   .topbar.is-hidden {
-    transform: translateY(-100%);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  /* Empuja el contenido hacia abajo para que no quede tapado */
+  body {
+    padding-top: var(--topbar-h);
   }
 }
+
 
 
 
