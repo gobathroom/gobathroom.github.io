@@ -371,7 +371,6 @@ button.icon-btn {
    + underline alineado al borde real del topbar
    + center sin fondos (menos saturado)
    + right sin fondos (estilo FB)
-   + NEW: hide/show tipo FB (progresivo con scroll + snap)
    ========================================================= */
 @media (max-width: 600px) {
   .topbar {
@@ -387,18 +386,6 @@ button.icon-btn {
 
     height: auto;
     min-height: unset;
-
-    /* ✅ Movimiento tipo FB (JS actualiza --tb-offset) */
-    --tb-offset: 0px;
-    will-change: transform;
-    transform: translate3d(0, var(--tb-offset), 0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
-
-  /* ✅ Solo cuando “snappea” (al soltar), animamos */
-  .topbar.is-snapping {
-    transition: transform 140ms ease-out;
   }
 
   .topbar .left { grid-column: 1; grid-row: 1; }
@@ -493,12 +480,6 @@ button.icon-btn {
   .lang-btn .lang-text { display: none; }
 }
 
-/* Reduce motion */
-@media (prefers-reduced-motion: reduce) {
-  @media (max-width: 600px) {
-    .topbar.is-snapping { transition: none; }
-  }
-}
 
 
 
