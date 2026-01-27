@@ -1,18 +1,16 @@
 /* ===========================
-   1: FOOTER
+   1: FOOTER (Base)
    =========================== */
 
 .site-footer {
   margin-top: 40px;
   border-top: 1px solid var(--border, rgba(255, 255, 255, 0.12));
-  background: var(--bg); /* mismo fondo que la página */
+  background: var(--bg);
   color: var(--muted, #9fb0d0);
   font-size: 12px;
-
-  flex-shrink: 0; /* evita que el footer se comprima */
+  flex-shrink: 0;
 }
 
-/* Bloque principal centrado */
 .site-footer .footer-inner {
   max-width: var(--content-max, 1120px);
   margin: 0 auto;
@@ -32,12 +30,13 @@
   color: var(--muted, #9fb0d0);
 }
 
-/* NAV del footer */
-.footer-nav {
-  margin-top: 4px;
-}
 
-/* Fila principal: enlaces */
+/* ===========================
+   1.1: Footer links row
+   =========================== */
+
+.footer-nav { margin-top: 4px; }
+
 .footer-links {
   display: inline-flex;
   flex-wrap: wrap;
@@ -61,43 +60,56 @@
   text-decoration: underline;
 }
 
-.footer-separator {
-  opacity: 0.6;
-}
+.footer-separator { opacity: 0.6; }
 
-/* Fila secundaria: panel de compartir */
-.footer-share-row {
-  margin-top: 8px;
-  display: none;                 /* por defecto oculto */
+
+/* ===========================
+   1.2: Panels row (genérico)
+   =========================== */
+
+.footer-panel-row {
+  margin-top: 10px;
+  display: none;            /* oculto por defecto */
   align-items: center;
   justify-content: center;
   gap: 8px;
+  width: 100%;
 }
+
+
+/* ===========================
+   1.3: Estados (solo 1 panel visible)
+   =========================== */
+
+/* SHARE abierto */
+.site-footer.is-sharing #footerShareRow { display: flex; }
+.site-footer.is-sharing #footerShareToggle { display: none; }
+
+/* CONTACTO abierto */
+.site-footer.is-contacting #footerContactRow { display: flex; }
+.site-footer.is-contacting #footerContactToggle { display: none; }
+
+/* Evitar que se vean 2 paneles si por error se activan ambos */
+.site-footer.is-sharing #footerContactRow { display: none; }
+.site-footer.is-contacting #footerShareRow { display: none; }
+
+/* Ocultar el separador (·) que queda antes del toggle oculto
+   (esto funciona con tu HTML actual, pero es sensible al orden) */
+.site-footer.is-sharing .footer-links .footer-separator:last-of-type,
+.site-footer.is-contacting .footer-links .footer-separator:last-of-type {
+  display: none;
+}
+
+
+/* ===========================
+   1.4: Share UI (solo share)
+   =========================== */
 
 .footer-share-label {
   font-size: 12px;
   color: var(--muted, #9fb0d0);
 }
 
-/* Cuando se está compartiendo */
-.site-footer.is-sharing .footer-share-row {
-  display: flex;           /* ocupa toda la fila */
-  width: 100%;             /* asegura salto de línea */
-  margin-top: 10px;        /* separación */
-}
-
-
-.site-footer.is-sharing #footerShareToggle {
-  display: none;                 /* ocultar "Compartir" de la fila principal */
-}
-
-/* Ocultar el separador (·) que queda antes de "Compartir" cuando se abre el panel */
-.site-footer.is-sharing .footer-links .footer-separator:last-of-type {
-  display: none;
-}
-
-
-/* Pastillas de compartir */
 .share-pill {
   display: inline-flex;
   align-items: center;
@@ -111,7 +123,17 @@
   color: var(--text, #dbe5ff);
 }
 
-/* Wrapper del botón de copiar + tooltip */
+.share-pill i { font-size: 12px; }
+
+.share-pill:hover {
+  border-color: var(--brand, #00d1ff);
+}
+
+.share-pill--ok {
+  border-color: #16a34a;
+  background: rgba(22, 163, 74, 0.12);
+}
+
 .share-copy-wrapper {
   position: relative;
   display: inline-flex;
@@ -119,10 +141,9 @@
   align-items: center;
 }
 
-/* Tooltip debajo del botón, flotando (no mueve el layout) */
 .share-tooltip {
   position: absolute;
-  top: calc(100% + 1px);   /* ⬅️ distancia desde el borde INFERIOR del botón */
+  top: calc(100% + 1px);
   left: 50%;
   transform: translateX(-50%);
 
@@ -145,28 +166,72 @@
   z-index: 10;
 }
 
-.share-tooltip.is-visible {
-  opacity: 1;
+.share-tooltip.is-visible { opacity: 1; }
+
+
+/* ===========================
+   1.5: Contact UI (solo contacto)
+   =========================== */
+
+.footer-contact-label {
+  font-size: 12px;
+  color: var(--muted, #9fb0d0);
 }
 
+.footer-contact-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
 
-
-
-.share-pill i {
+/* Email como link */
+.footer-contact-email {
+  color: var(--text, #dbe5ff);
+  text-decoration: none;
   font-size: 12px;
 }
 
-.share-pill:hover {
+.footer-contact-email:hover {
+  text-decoration: underline;
+}
+
+/* Botón copiar (parecido a una mini “pill”) */
+.footer-contact-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(148, 163, 184, 0.08);
+
+  color: var(--text, #dbe5ff);
+  cursor: pointer;
+}
+
+.footer-contact-copy i { font-size: 12px; }
+
+.footer-contact-copy:hover {
   border-color: var(--brand, #00d1ff);
 }
 
-/* Feedback cuando se copia */
-.share-pill--ok {
-  border-color: #16a34a;
-  background: rgba(22, 163, 74, 0.12);
+/* Feedback (ej: “✔ Copiado”) */
+.footer-contact-feedback {
+  font-size: 11px;
+  color: var(--muted, #9fb0d0);
+  min-width: 70px; /* evita que todo “salte” cuando aparece texto */
+  text-align: left;
 }
 
-/* Banda inferior ligeramente más oscura */
+
+/* ===========================
+   1.9: Footer bottom
+   =========================== */
+
 .footer-bottom {
   text-align: center;
   padding: 8px 16px 10px;
@@ -174,4 +239,3 @@
   color: var(--muted, #9fb0d0);
   background: var(--g-stripe);
 }
-
