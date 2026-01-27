@@ -370,6 +370,7 @@ button.icon-btn {
    RESPONSIVE: TOPBAR / MOBILE (2 filas tipo Facebook)
    + underline alineado al borde real del topbar
    + center sin fondos (menos saturado)
+   + right sin fondos (estilo FB)
    ========================================================= */
 @media (max-width: 600px) {
   .topbar {
@@ -457,23 +458,41 @@ button.icon-btn {
      NEW: RIGHT ICONS — sin fondo en mobile (estilo FB)
      ===================================================== */
 
+  /* Quita highlight azul/gris feo en mobile */
   .topbar .right .icon-btn,
-  .topbar .right .lang-btn {
-    background: transparent;      /* ❌ quita círculo */
-    border-radius: 0;              /* ❌ evita pastilla */
+  .topbar .right .lang-btn,
+  .main-nav .nav-item {
+    -webkit-tap-highlight-color: transparent;
   }
 
-  /* Mantener área táctil correcta */
+  .topbar .right .icon-btn,
+  .topbar .right .lang-btn {
+    background: transparent; /* ❌ quita círculo/pastilla */
+    border-radius: 0;        /* ❌ evita forma de pill */
+    border: none;
+    box-shadow: none;
+  }
+
+  /* Mantener área táctil correcta (sin cambiar UX) */
   .topbar .right .icon-btn,
   .topbar .right .lang-btn {
     width: 40px;
     height: 40px;
   }
 
+  /* Ajuste específico del lang-btn: quita padding horizontal grande */
+  .topbar .right .lang-btn {
+    padding: 0; /* en desktop tiene padding 0 14px */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   /* Feedback sutil al tap (opcional pero recomendado) */
   .topbar .right .icon-btn:active,
   .topbar .right .lang-btn:active {
     background: rgba(0, 0, 0, 0.06);
+    border-radius: 10px; /* solo durante el tap, se ve natural */
   }
 
   /* Tooltips en mobile: off */
@@ -487,6 +506,7 @@ button.icon-btn {
     display: none;
   }
 }
+
 
 
 
