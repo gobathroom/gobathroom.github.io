@@ -368,6 +368,8 @@ button.icon-btn {
 
 /* =========================================================
    RESPONSIVE: TOPBAR / MOBILE (2 filas tipo Facebook)
+   + underline alineado al borde
+   + center sin fondos (menos saturado)
    ========================================================= */
 @media (max-width: 600px) {
   .topbar {
@@ -401,31 +403,48 @@ button.icon-btn {
     justify-content: flex-end;
   }
 
+  /* ---------- Fila de tabs (center) ---------- */
   .topbar .center {
     grid-column: 1 / -1;     /* ocupa todo el ancho */
     grid-row: 2;
+
+    /* Para que el underline "toque" el borde del topbar */
+    height: 50px;            /* 👈 ajusta: 48/50/52 según te guste */
+    align-items: stretch;    /* nav-items pueden ocupar alto completo */
     justify-content: center; /* center real tipo tabbar */
   }
 
-  /* NAV: que se sienta como “fila de tabs” */
+  /* NAV: fila de tabs */
   .main-nav {
     width: 100%;
+    height: 100%;
     justify-content: space-between; /* reparte los tabs */
     gap: 6px;
   }
 
-  /* Reduce el padding gigante del desktop */
+  /* Tabs: sin fondo/pastilla (estilo FB mobile) */
   .main-nav .nav-item {
     flex: 1 1 0;
-    height: 44px;
+    height: 100%;
     padding: 0;              /* clave para que no reviente */
-    border-radius: 10px;
+    border-radius: 0;        /* 👈 sin pastilla */
+    background: transparent; /* 👈 sin fondo */
   }
 
-  /* La línea activa que ya tienes: ajusta para mobile */
+  /* Hover en mobile no aporta mucho; evitamos “parpadeos” */
+  .main-nav .nav-item:not(.is-active):hover {
+    background: transparent;
+  }
+
+  /* Underline: pegado al borde inferior del topbar */
   .main-nav .nav-item::after {
     height: 3px;
-    bottom: -2px;            /* un poquito menos que desktop */
+    bottom: 0;               /* 👈 pegado al borde (sin negativos) */
+  }
+
+  /* Activo: se mantiene icono marca + línea marca */
+  .main-nav .nav-item.is-active::after {
+    bottom: 0;               /* 👈 asegura alineación en activo también */
   }
 
   /* Tooltips en mobile: mejor apagarlos (no hay hover real) */
@@ -440,6 +459,7 @@ button.icon-btn {
     display: none;
   }
 }
+
 
 
 
