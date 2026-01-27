@@ -174,17 +174,18 @@
   color: var(--muted, #9fb0d0);
 }
 
-/* Contenedor de acciones del panel */
+/* ✅ FIX REAL:
+   No debe ocupar 100% (eso lo separa del label).
+   Debe comportarse como acciones de "Compartir": inline-flex. */
 .footer-contact-actions {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
 }
 
 /* Fila de contacto centrada pero con flow de Legal */
 .site-footer #footerContactRow .legal-contact-row {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
