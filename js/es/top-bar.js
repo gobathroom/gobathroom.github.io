@@ -93,89 +93,99 @@ function applyThemeUI(dark) {
 })();
 
 // ===========================
-// 3. TOPBAR hide/show en scroll (solo mobile)
+// 3. TOPBAR hide/show PROGRESIVO (solo mobile)
+//   - Sin opacity
+//   - Si el scroll es lento: se mueve poco a poco (tipo FB)
 // ===========================
 (function setupTopbarAutoHideMobile() {
   const topbar = document.querySelector('.topbar');
   if (!topbar) return;
 
-  // Solo mobile
   const isMobile = () => window.matchMedia('(max-width: 600px)').matches;
+  const reduceMotion = () =>
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let lastY = window.scrollY || 0;
-  let ticking = false;
+  let offset = 0; // 0 ... -H
+  let H = 0;
 
-  // Ajustes finos (tipo FB)
-  const MIN_SCROLL = 12;     // ignora micro-movimientos
-  const SHOW_AT_TOP = 10;    // si estás casi arriba, siempre mostrar
-  const LOCK_AFTER_SHOW = 200; // ms: evita parpadeo luego de mostrar
+  const SHOW_AT_TOP = 10; // cerca del top: siempre visible
+  const SNAP_THRESHOLD = 0.35; // al soltar scroll, "snap" a abierto/cerrado
 
-  let lockedUntil = 0;       // tiempo hasta el cual no ocultamos (anti-parpadeo)
-
-  function showBar() {
-    topbar.classList.remove('is-hidden');
-    lockedUntil = Date.now() + LOCK_AFTER_SHOW;
+  function measure() {
+    // altura real del topbar (en mobile cambia)
+    H = topbar.getBoundingClientRect().height || 0;
+    // clamp por si cambió la altura
+    offset = Math.max(-H, Math.min(0, offset));
+    topbar.style.setProperty('--tb-offset', `${offset}px`);
   }
 
-  function hideBar() {
-    // si estamos “bloqueados”, no ocultar
-    if (Date.now() < lockedUntil) return;
-    topbar.classList.add('is-hidden');
+  function applyOffset(next) {
+    offset = Math.max(-H, Math.min(0, next));
+    topbar.style.setProperty('--tb-offset', `${offset}px`);
+  }
+
+  // Opcional: “snap” cuando paras de scrollear (muy FB)
+  let snapTimer = 0;
+  function scheduleSnap() {
+    clearTimeout(snapTimer);
+    snapTimer = setTimeout(() => {
+      if (!isMobile() || reduceMotion()) return;
+      if (H <= 0) return;
+
+      const hiddenRatio = Math.abs(offset) / H; // 0..1
+      if (hiddenRatio > SNAP_THRESHOLD) {
+        // más oculto que visible => cierra completo
+        applyOffset(-H);
+      } else {
+        // más visible => abre completo
+        applyOffset(0);
+      }
+    }, 120);
   }
 
   function onScroll() {
-    if (!isMobile()) {
-      // si sales de mobile, que quede normal
-      topbar.classList.remove('is-hidden');
+    if (!isMobile() || reduceMotion()) {
+      // Desktop o reduce motion => visible
+      topbar.style.setProperty('--tb-offset', `0px`);
       lastY = window.scrollY || 0;
       return;
     }
 
     const y = window.scrollY || 0;
 
-    // Siempre mostrar cerca del top
+    // Cerca del top siempre visible
     if (y <= SHOW_AT_TOP) {
-      showBar();
+      applyOffset(0);
       lastY = y;
       return;
     }
 
     const delta = y - lastY;
 
-    // Ignorar micro scroll
-    if (Math.abs(delta) < MIN_SCROLL) return;
-
-    // Scroll down => esconder
-    if (delta > 0) {
-      hideBar();
-    } else {
-      // Scroll up => mostrar
-      showBar();
-    }
+    // Scroll DOWN => esconder (offset baja hacia -H)
+    // Scroll UP   => mostrar (offset sube hacia 0)
+    // IMPORTANTE: delta positivo = down
+    applyOffset(offset - delta);
 
     lastY = y;
+    scheduleSnap();
   }
 
-  window.addEventListener(
-    'scroll',
-    () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          onScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    },
-    { passive: true }
-  );
+  // Init
+  measure();
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-  // Si cambia el tamaño (rotación / resize) recalcular
+  // Resize / rotación
   window.addEventListener('resize', () => {
-    if (!isMobile()) topbar.classList.remove('is-hidden');
+    measure();
     lastY = window.scrollY || 0;
   });
+
+  // Por si el contenido carga tarde (fuentes, etc.)
+  window.addEventListener('load', measure);
 })();
+
 
 
 
