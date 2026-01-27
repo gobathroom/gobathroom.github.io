@@ -252,18 +252,16 @@ function getShareUrl() {
     });
   }
 
-  /* ---------------------------
-   3) CONTACT: Copiar correo + cerrar panel (robusto)
+ /* ---------------------------
+   3) CONTACT: Copiar correo (mismo patrón que Legal) + cerrar panel
    --------------------------- */
-let contactCloseTimer = null;
+let contactCopyTimer = null;
 
 if (contactCopyBtn) {
   contactCopyBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
     e.stopPropagation();
-
-    // Si por accidente hay otro listener global, esto ayuda a que no "rebote"
-    // (opcional, pero recomendado)
-    // e.preventDefault();
+    e.stopImmediatePropagation();
 
     const email =
       (contactCopyBtn.dataset && contactCopyBtn.dataset.email)
@@ -276,29 +274,63 @@ if (contactCopyBtn) {
     try {
       await navigator.clipboard.writeText(email);
 
-      if (contactFeedback) contactFeedback.textContent = copiedEmailText;
+      // 1) Estado "copiado" en botón (como Legal)
+      contactCopyBtn.classList.remove('is-error');
+      contactCopyBtn.classList.add('is-copied');
 
-      // Evita que se acumulen timeouts si hacen click varias veces
-      if (contactCloseTimer) clearTimeout(contactCloseTimer);
+      // 2) Feedback visible (como Legal)
+      if (contactFeedback) {
+        contactFeedback.textContent = copiedEmailText;
+        contactFeedback.classList.add('is-visible');
+      }
 
-      contactCloseTimer = setTimeout(() => {
+      // 3) Evita múltiples timers si se hace click rápido
+      if (contactCopyTimer) clearTimeout(contactCopyTimer);
+
+      // 4) Reset + cerrar panel (desaparece la fila del footer)
+      contactCopyTimer = setTimeout(() => {
+        contactCopyBtn.classList.remove('is-copied');
+
+        if (contactFeedback) {
+          contactFeedback.classList.remove('is-visible');
+          contactFeedback.textContent = '';
+        }
+
         closeContact();
 
-        // Fallback extra por si algún CSS/JS externo dejó display forzado
+        // Fallback por si algún CSS/JS externo forzó display
         if (contactRow) {
           contactRow.style.display = 'none';
-          // y limpiamos para que al abrir de nuevo lo controle el CSS
           setTimeout(() => contactRow.style.removeProperty('display'), 0);
         }
 
-        contactCloseTimer = null;
+        contactCopyTimer = null;
       }, 1200);
 
     } catch (err) {
       console.error(errorCopyEmail, err);
+
+      contactCopyBtn.classList.remove('is-copied');
+      contactCopyBtn.classList.add('is-error');
+
+      if (contactFeedback) {
+        contactFeedback.textContent = errorCopyEmail;
+        contactFeedback.classList.add('is-visible');
+      }
+
+      if (contactCopyTimer) clearTimeout(contactCopyTimer);
+      contactCopyTimer = setTimeout(() => {
+        contactCopyBtn.classList.remove('is-error');
+        if (contactFeedback) {
+          contactFeedback.classList.remove('is-visible');
+          contactFeedback.textContent = '';
+        }
+        contactCopyTimer = null;
+      }, 1600);
     }
-  });
+  }, true); // capture=true ayuda si hay otros listeners
 }
+
 
   /* ---------------------------
      4) Cerrar si se hace click fuera del footer
