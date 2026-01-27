@@ -76,3 +76,52 @@ function applyThemeUI(dark) {
     applyThemeUI(!isDark());
   });
 })();
+
+// ===========================
+// 3. TOPBAR SCROLL (solo mobile)
+// ===========================
+(() => {
+  const mobileQuery = window.matchMedia('(max-width: 600px)');
+  const topbar = document.querySelector('.topbar');
+
+  if (!topbar) return;
+
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  function onScroll() {
+    if (!mobileQuery.matches) return;
+
+    const currentY = window.scrollY;
+    const diff = currentY - lastScrollY;
+
+    // Evita micro-scrolls
+    if (Math.abs(diff) < 6) return;
+
+    if (diff > 0 && currentY > 80) {
+      // Scroll DOWN → ocultar
+      topbar.classList.add('is-hidden');
+    } else {
+      // Scroll UP → mostrar
+      topbar.classList.remove('is-hidden');
+    }
+
+    lastScrollY = currentY;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // Reset automático si cambia a desktop
+  mobileQuery.addEventListener('change', () => {
+    topbar.classList.remove('is-hidden');
+  });
+})();
+
