@@ -367,18 +367,80 @@ button.icon-btn {
 
 
 /* =========================================================
-   RESPONSIVE: /es/
+   RESPONSIVE: TOPBAR / MOBILE (2 filas tipo Facebook)
    ========================================================= */
-
 @media (max-width: 600px) {
   .topbar {
-    padding: 0 8px;
+    padding: 8px 10px;
+
+    /* 2 filas: (left+right) arriba, center abajo */
+    display: grid;
+    grid-template-columns: 1fr auto; /* left ocupa, right se ajusta */
+    grid-template-rows: auto auto;   /* 2 filas */
+    align-items: center;
+    row-gap: 8px;
+
+    /* ya no aplica space-between de flex */
+    justify-content: initial;
+
+    /* importante: altura flexible en mobile */
+    height: auto;
+    min-height: unset;
+  }
+
+  /* Reubicar bloques */
+  .topbar .left {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .topbar .right {
+    grid-column: 2;
+    grid-row: 1;
+    margin-left: 0;          /* antes lo empujabas con auto */
+    justify-content: flex-end;
   }
 
   .topbar .center {
-    justify-content: flex-start;
+    grid-column: 1 / -1;     /* ocupa todo el ancho */
+    grid-row: 2;
+    justify-content: center; /* center real tipo tabbar */
+  }
+
+  /* NAV: que se sienta como “fila de tabs” */
+  .main-nav {
+    width: 100%;
+    justify-content: space-between; /* reparte los tabs */
+    gap: 6px;
+  }
+
+  /* Reduce el padding gigante del desktop */
+  .main-nav .nav-item {
+    flex: 1 1 0;
+    height: 44px;
+    padding: 0;              /* clave para que no reviente */
+    border-radius: 10px;
+  }
+
+  /* La línea activa que ya tienes: ajusta para mobile */
+  .main-nav .nav-item::after {
+    height: 3px;
+    bottom: -2px;            /* un poquito menos que desktop */
+  }
+
+  /* Tooltips en mobile: mejor apagarlos (no hay hover real) */
+  .topbar .center .nav-item[data-label]::before,
+  .topbar .right [data-label]::before {
+    display: none;
+  }
+
+  /* Opcional: si el botón de idioma (texto) estorba en mobile,
+     puedes ocultar solo el texto y dejar el icono */
+  .lang-btn .lang-text {
+    display: none;
   }
 }
+
 
 
 
