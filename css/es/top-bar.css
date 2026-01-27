@@ -371,38 +371,37 @@ button.icon-btn {
    + underline alineado al borde real del topbar
    + center sin fondos (menos saturado)
    + right sin fondos (estilo FB)
-   + hide/show PROGRESIVO controlado por JS
+   + hide/show rápido y estable (JS añade/quita .is-hidden)
    ========================================================= */
 @media (max-width: 600px) {
   .topbar {
-    /* ✅ Mantén padding arriba y laterales, PERO no abajo */
     padding: 8px 10px 0;
 
-    /* 2 filas: (left+right) arriba, center abajo */
     display: grid;
     grid-template-columns: 1fr auto;
-    grid-template-rows: auto 50px; /* fila 2 fija */
+    grid-template-rows: auto 50px;
     align-items: center;
     row-gap: 8px;
 
     justify-content: initial;
+
     height: auto;
     min-height: unset;
 
-    /* =================================================
-       FB-style hide/show PROGRESIVO
-       JS modifica --tb-offset (0 a -H)
-       ================================================= */
+    /* Hide/Show estable */
     will-change: transform;
-    transform: translateY(var(--tb-offset, 0px));
-    transition: none; /* ❗ JS controla el movimiento */
+    transform: translateY(0);
+    transition: transform 160ms ease-out; /* ✅ más rápido */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 
-  /* Reubicar bloques */
-  .topbar .left {
-    grid-column: 1;
-    grid-row: 1;
+  /* Oculto: se va completo hacia arriba */
+  .topbar.is-hidden {
+    transform: translateY(-100%);
   }
+
+  .topbar .left { grid-column: 1; grid-row: 1; }
 
   .topbar .right {
     grid-column: 2;
@@ -411,46 +410,38 @@ button.icon-btn {
     justify-content: flex-end;
   }
 
-  /* ---------- Fila de tabs (center) ---------- */
   .topbar .center {
     grid-column: 1 / -1;
     grid-row: 2;
-
     height: 100%;
     align-items: stretch;
     justify-content: center;
-
     padding: 0;
     margin: 0;
   }
 
-  /* NAV: fila de tabs */
   .main-nav {
     width: 100%;
     height: 100%;
-
     display: flex;
     align-items: stretch;
     justify-content: space-between;
     gap: 6px;
   }
 
-  /* Tabs: sin fondo/pastilla */
   .main-nav .nav-item {
     flex: 1 1 0;
     height: 100%;
     padding: 0;
-
     border-radius: 0;
     background: transparent;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  /* Hover neutral */
   .main-nav .nav-item:not(.is-active):hover {
     background: transparent;
   }
 
-  /* Underline pegado al borde real */
   .main-nav .nav-item::after {
     height: 3px;
     bottom: 0;
@@ -460,17 +451,11 @@ button.icon-btn {
     bottom: 0;
   }
 
-  /* =====================================================
-     RIGHT ICONS — sin fondo (estilo FB)
-     ===================================================== */
-  .topbar .right .icon-btn,
-  .topbar .right .lang-btn,
-  .main-nav .nav-item {
-    -webkit-tap-highlight-color: transparent;
-  }
-
+  /* RIGHT ICONS sin fondo */
   .topbar .right .icon-btn,
   .topbar .right .lang-btn {
+    -webkit-tap-highlight-color: transparent;
+
     background: transparent;
     border-radius: 0;
     border: none;
@@ -487,33 +472,28 @@ button.icon-btn {
     justify-content: center;
   }
 
-  /* Feedback sutil al tap */
   .topbar .right .icon-btn:active,
   .topbar .right .lang-btn:active {
     background: rgba(0, 0, 0, 0.06);
     border-radius: 10px;
   }
 
-  /* Tooltips OFF */
+  /* Tooltips OFF en mobile */
   .topbar .center .nav-item[data-label]::before,
   .topbar .right [data-label]::before {
     display: none;
   }
 
-  /* Idioma: solo icono */
-  .lang-btn .lang-text {
-    display: none;
+  .lang-btn .lang-text { display: none; }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  @media (max-width: 600px) {
+    .topbar { transition: none; }
   }
 }
 
-/* Respeta usuarios con "reducir movimiento" */
-@media (prefers-reduced-motion: reduce) {
-  @media (max-width: 600px) {
-    .topbar {
-      transform: translateY(0) !important;
-    }
-  }
-}
 
 
 
