@@ -80,87 +80,48 @@ function applyThemeUI(dark) {
 // ===========================
 // 3. TOPBAR SCROLL (solo mobile) - versión estable
 // ===========================
-(() => {
+document.addEventListener('DOMContentLoaded', () => {
   const mq = window.matchMedia('(max-width: 600px)');
   const topbar = document.querySelector('.topbar');
   if (!topbar) return;
 
-  let lastY = window.scrollY;
-  let acc = 0;              // acumulador para evitar parpadeo
-  const THRESH = 18;        // sensibilidad (más alto = menos cambios)
-  let enabled = false;
+  // Detectar si el scroll real NO es window (caso: contenedor con overflow)
+  // Si tienes un contenedor principal con scroll, cambia aquí el selector:
+  const scroller = document.scrollingElement || document.documentElement; // window scroll real
 
-  function setBodyOffset() {
-    // altura real del topbar (2 filas)
-    const h = topbar.getBoundingClientRect().height;
-    document.documentElement.style.setProperty('--topbar-h', `${h}px`);
-  }
-
-  function enable() {
-    enabled = true;
-    topbar.classList.remove('is-hidden');
-    setBodyOffset();
-  }
-
-  function disable() {
-    enabled = false;
-    topbar.classList.remove('is-hidden');
-    document.documentElement.style.setProperty('--topbar-h', `0px`);
-  }
+  let lastY = scroller.scrollTop || window.scrollY;
+  let acc = 0;
+  const THRESH = 18;
 
   function onScroll() {
-    if (!enabled) return;
+    if (!mq.matches) return;
 
-    const y = window.scrollY;
-
-    // Si estás arriba de todo, siempre visible
-    if (y <= 0) {
-      topbar.classList.remove('is-hidden');
-      lastY = y;
-      acc = 0;
-      return;
-    }
-
+    const y = scroller.scrollTop || window.scrollY;
     const dy = y - lastY;
     lastY = y;
 
-    // ignora micro scrolls
     if (Math.abs(dy) < 2) return;
 
-    // acumula movimiento para decidir
     acc += dy;
 
     if (acc > THRESH && y > 80) {
-      // bajando
       topbar.classList.add('is-hidden');
       acc = 0;
     } else if (acc < -THRESH) {
-      // subiendo
       topbar.classList.remove('is-hidden');
       acc = 0;
     }
   }
 
-  // listener suave
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // recalcular altura si cambia orientación o carga algo
-  window.addEventListener('resize', () => {
-    if (mq.matches) setBodyOffset();
-  }, { passive: true });
-
-  // activar/desactivar según viewport
+  // Reset cuando sales de mobile
   function sync() {
-    if (mq.matches) enable();
-    else disable();
+    topbar.classList.remove('is-hidden');
   }
-
-  // para Safari viejo, change puede no existir como addEventListener
   if (mq.addEventListener) mq.addEventListener('change', sync);
   else mq.addListener(sync);
+});
 
-  // inicia
-  sync();
-})();
 
 
