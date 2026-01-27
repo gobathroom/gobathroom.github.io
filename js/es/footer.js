@@ -253,82 +253,129 @@ function getShareUrl() {
   }
 
  /* ---------------------------
-   3) CONTACT: Copiar correo (mismo patrón que Legal) + cerrar panel
+   3) CONTACT: Copiar correo (IGUAL que Legal) + cerrar panel
    --------------------------- */
-let contactCopyTimer = null;
-
 if (contactCopyBtn) {
+  const hasI18n = window.GB_I18N && typeof window.GB_I18N.t === 'function';
+
+  const labelCopy = hasI18n
+    ? window.GB_I18N.t('contact.copyEmailLabel')
+    : 'Copy email address';
+
+  const msgCopied = hasI18n
+    ? window.GB_I18N.t('contact.copyEmailFeedbackCopied')
+    : 'Copied!';
+
+  const msgError = hasI18n
+    ? window.GB_I18N.t('contact.copyEmailFeedbackError')
+    : 'Could not copy email';
+
+  // aria-label (accesibilidad) igual que Legal
+  if (labelCopy) contactCopyBtn.setAttribute('aria-label', labelCopy);
+
+  let timerReset = null;
+  let timerClose = null;
+
   contactCopyBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     e.stopPropagation();
     e.stopImmediatePropagation();
 
     const email =
-      (contactCopyBtn.dataset && contactCopyBtn.dataset.email)
-        ? contactCopyBtn.dataset.email
-        : (contactEmailLink ? contactEmailLink.textContent.trim() : '');
+      contactCopyBtn.dataset.email ||
+      (contactEmailLink ? contactEmailLink.textContent.trim() : '');
 
-    const errorCopyEmail  = tShare('contact.errorCopy') || 'Error copiando correo:';
-    const copiedEmailText = tShare('contact.copied')    || '¡Correo copiado!';
+    if (!email) return;
+
+    const iconEl = contactCopyBtn.querySelector('i');
+
+    const showFeedback = (msg) => {
+      if (!contactFeedback) return;
+      contactFeedback.textContent = msg;
+      contactFeedback.classList.add('is-visible');
+    };
+
+    const hideFeedback = () => {
+      if (!contactFeedback) return;
+      contactFeedback.classList.remove('is-visible');
+      contactFeedback.textContent = '';
+    };
+
+    const resetIcon = () => {
+      contactCopyBtn.classList.remove('is-copied', 'is-error');
+      if (iconEl) {
+        iconEl.classList.remove('fa-check', 'fa-xmark');
+        iconEl.classList.add('fa-copy');
+      }
+      hideFeedback();
+    };
+
+    // limpia timers si hacen click rápido
+    if (timerReset) clearTimeout(timerReset);
+    if (timerClose) clearTimeout(timerClose);
 
     try {
-      await navigator.clipboard.writeText(email);
-
-      // 1) Estado "copiado" en botón (como Legal)
-      contactCopyBtn.classList.remove('is-error');
-      contactCopyBtn.classList.add('is-copied');
-
-      // 2) Feedback visible (como Legal)
-      if (contactFeedback) {
-        contactFeedback.textContent = copiedEmailText;
-        contactFeedback.classList.add('is-visible');
+      // Copiar (API moderna + fallback) igual que Legal
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(email);
+      } else {
+        const tmp = document.createElement('textarea');
+        tmp.value = email;
+        tmp.style.position = 'fixed';
+        tmp.style.left = '-9999px';
+        document.body.appendChild(tmp);
+        tmp.select();
+        document.execCommand('copy');
+        document.body.removeChild(tmp);
       }
 
-      // 3) Evita múltiples timers si se hace click rápido
-      if (contactCopyTimer) clearTimeout(contactCopyTimer);
+      // ÉXITO: icono check + color success
+      if (iconEl) {
+        iconEl.classList.remove('fa-copy', 'fa-xmark');
+        iconEl.classList.add('fa-check');
+      }
+      contactCopyBtn.classList.add('is-copied');
+      contactCopyBtn.classList.remove('is-error');
 
-      // 4) Reset + cerrar panel (desaparece la fila del footer)
-      contactCopyTimer = setTimeout(() => {
-        contactCopyBtn.classList.remove('is-copied');
+      showFeedback(msgCopied);
 
-        if (contactFeedback) {
-          contactFeedback.classList.remove('is-visible');
-          contactFeedback.textContent = '';
-        }
-
+      // Cerrar panel (tu requisito): después de que se vea el feedback un momento
+      timerClose = setTimeout(() => {
         closeContact();
 
-        // Fallback por si algún CSS/JS externo forzó display
+        // fallback por si algo forzó display
         if (contactRow) {
           contactRow.style.display = 'none';
           setTimeout(() => contactRow.style.removeProperty('display'), 0);
         }
-
-        contactCopyTimer = null;
       }, 1200);
 
+      // Reset visual (como Legal)
+      timerReset = setTimeout(() => {
+        resetIcon();
+        timerReset = null;
+      }, 1600);
+
     } catch (err) {
-      console.error(errorCopyEmail, err);
+      console.error('Error al copiar email:', err);
 
-      contactCopyBtn.classList.remove('is-copied');
-      contactCopyBtn.classList.add('is-error');
-
-      if (contactFeedback) {
-        contactFeedback.textContent = errorCopyEmail;
-        contactFeedback.classList.add('is-visible');
+      // ERROR: icono X + color danger
+      if (iconEl) {
+        iconEl.classList.remove('fa-copy', 'fa-check');
+        iconEl.classList.add('fa-xmark');
       }
+      contactCopyBtn.classList.add('is-error');
+      contactCopyBtn.classList.remove('is-copied');
 
-      if (contactCopyTimer) clearTimeout(contactCopyTimer);
-      contactCopyTimer = setTimeout(() => {
-        contactCopyBtn.classList.remove('is-error');
-        if (contactFeedback) {
-          contactFeedback.classList.remove('is-visible');
-          contactFeedback.textContent = '';
-        }
-        contactCopyTimer = null;
+      showFeedback(msgError);
+
+      // En error NO cierro panel (para que el usuario lo intente otra vez)
+      timerReset = setTimeout(() => {
+        resetIcon();
+        timerReset = null;
       }, 1600);
     }
-  }, true); // capture=true ayuda si hay otros listeners
+  }, true); // capture=true para evitar choques con otros listeners
 }
 
 
