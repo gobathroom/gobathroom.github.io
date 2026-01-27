@@ -8,40 +8,7 @@ const I18N = window.GB_I18N || {
 const t = I18N.t;
 
 // ===========================
-// 1. info acceso-características
-// ===========================
-(function setupInfoScroll() {
-  const infoLink = document.querySelector('.nav-item[data-nav="info"]');
-  const accessSection = document.getElementById('info-acceso');
-
-  if (!infoLink || !accessSection) return;
-
-  // Leer altura del header desde la variable CSS
-  const rootStyles = getComputedStyle(document.documentElement);
-  const headerVar = rootStyles.getPropertyValue('--header-h').trim();
-  const headerH = headerVar ? parseInt(headerVar, 10) : 64; // fallback
-
-  function scrollToInfo() {
-    const rect = accessSection.getBoundingClientRect();
-    const targetY = window.scrollY + rect.top - (headerH + 10);
-
-    window.scrollTo({
-      top: targetY,
-      behavior: 'smooth',
-    });
-  }
-
-  infoLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    scrollToInfo();
-  });
-
-})();
-
-
-
-// ===========================
-// 2. Refresh brand link según idioma
+// 1. Refresh brand link según idioma
 // ===========================
 document.addEventListener('DOMContentLoaded', () => {
   const brand = document.getElementById('brandLink');
@@ -57,9 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-
 // ===========================
-// 3. MODO OSCURO / CLARO
+// 2. MODO OSCURO / CLARO
 // ===========================
 const themeToggleBtn = document.querySelector('#themeToggle');
 
@@ -123,6 +89,91 @@ function applyThemeUI(dark) {
   themeToggleBtn.addEventListener('click', () => {
     const nextDark = !isDark();
     applyThemeUI(nextDark);
+  });
+})();
+
+// ===========================
+// 3. TOPBAR hide/show en scroll (solo mobile)
+// ===========================
+(function setupTopbarAutoHideMobile() {
+  const topbar = document.querySelector('.topbar');
+  if (!topbar) return;
+
+  // Solo mobile
+  const isMobile = () => window.matchMedia('(max-width: 600px)').matches;
+
+  let lastY = window.scrollY || 0;
+  let ticking = false;
+
+  // Ajustes finos (tipo FB)
+  const MIN_SCROLL = 12;     // ignora micro-movimientos
+  const SHOW_AT_TOP = 10;    // si estás casi arriba, siempre mostrar
+  const LOCK_AFTER_SHOW = 200; // ms: evita parpadeo luego de mostrar
+
+  let lockedUntil = 0;       // tiempo hasta el cual no ocultamos (anti-parpadeo)
+
+  function showBar() {
+    topbar.classList.remove('is-hidden');
+    lockedUntil = Date.now() + LOCK_AFTER_SHOW;
+  }
+
+  function hideBar() {
+    // si estamos “bloqueados”, no ocultar
+    if (Date.now() < lockedUntil) return;
+    topbar.classList.add('is-hidden');
+  }
+
+  function onScroll() {
+    if (!isMobile()) {
+      // si sales de mobile, que quede normal
+      topbar.classList.remove('is-hidden');
+      lastY = window.scrollY || 0;
+      return;
+    }
+
+    const y = window.scrollY || 0;
+
+    // Siempre mostrar cerca del top
+    if (y <= SHOW_AT_TOP) {
+      showBar();
+      lastY = y;
+      return;
+    }
+
+    const delta = y - lastY;
+
+    // Ignorar micro scroll
+    if (Math.abs(delta) < MIN_SCROLL) return;
+
+    // Scroll down => esconder
+    if (delta > 0) {
+      hideBar();
+    } else {
+      // Scroll up => mostrar
+      showBar();
+    }
+
+    lastY = y;
+  }
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          onScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
+
+  // Si cambia el tamaño (rotación / resize) recalcular
+  window.addEventListener('resize', () => {
+    if (!isMobile()) topbar.classList.remove('is-hidden');
+    lastY = window.scrollY || 0;
   });
 })();
 
