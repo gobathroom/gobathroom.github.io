@@ -371,6 +371,7 @@ button.icon-btn {
    + underline alineado al borde real del topbar
    + center sin fondos (menos saturado)
    + right sin fondos (estilo FB)
+   + NEW: hide/show suave con clase .is-hidden (para JS)
    ========================================================= */
 @media (max-width: 600px) {
   .topbar {
@@ -388,6 +389,21 @@ button.icon-btn {
 
     height: auto;
     min-height: unset;
+
+    /* =========================================
+       NEW: animación hide/show tipo FB
+       (JS agrega/quita .is-hidden)
+       ========================================= */
+    will-change: transform;
+    transition: transform 220ms ease, opacity 220ms ease;
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* NEW: estado oculto (JS lo activa) */
+  .topbar.is-hidden {
+    transform: translateY(-110%);
+    opacity: 0.98;
   }
 
   /* Reubicar bloques */
@@ -455,7 +471,7 @@ button.icon-btn {
   }
 
   /* =====================================================
-     NEW: RIGHT ICONS — sin fondo en mobile (estilo FB)
+     RIGHT ICONS — sin fondo en mobile (estilo FB)
      ===================================================== */
 
   /* Quita highlight azul/gris feo en mobile */
@@ -506,6 +522,7 @@ button.icon-btn {
     display: none;
   }
 }
+
 
 
 
