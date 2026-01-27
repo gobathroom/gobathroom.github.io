@@ -371,7 +371,7 @@ button.icon-btn {
    + underline alineado al borde real del topbar
    + center sin fondos (menos saturado)
    + right sin fondos (estilo FB)
-   + hide/show rápido y estable (JS añade/quita .is-hidden)
+   + NEW: hide/show tipo FB (progresivo con scroll + snap)
    ========================================================= */
 @media (max-width: 600px) {
   .topbar {
@@ -388,17 +388,17 @@ button.icon-btn {
     height: auto;
     min-height: unset;
 
-    /* Hide/Show estable */
+    /* ✅ Movimiento tipo FB (JS actualiza --tb-offset) */
+    --tb-offset: 0px;
     will-change: transform;
-    transform: translateY(0);
-    transition: transform 160ms ease-out; /* ✅ más rápido */
+    transform: translate3d(0, var(--tb-offset), 0);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
   }
 
-  /* Oculto: se va completo hacia arriba */
-  .topbar.is-hidden {
-    transform: translateY(-100%);
+  /* ✅ Solo cuando “snappea” (al soltar), animamos */
+  .topbar.is-snapping {
+    transition: transform 140ms ease-out;
   }
 
   .topbar .left { grid-column: 1; grid-row: 1; }
@@ -446,16 +446,22 @@ button.icon-btn {
     height: 3px;
     bottom: 0;
   }
-
   .main-nav .nav-item.is-active::after {
     bottom: 0;
   }
 
-  /* RIGHT ICONS sin fondo */
+  /* =====================================================
+     RIGHT ICONS — sin fondo en mobile (estilo FB)
+     ===================================================== */
+
+  .topbar .right .icon-btn,
+  .topbar .right .lang-btn,
+  .main-nav .nav-item {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   .topbar .right .icon-btn,
   .topbar .right .lang-btn {
-    -webkit-tap-highlight-color: transparent;
-
     background: transparent;
     border-radius: 0;
     border: none;
@@ -490,9 +496,10 @@ button.icon-btn {
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
   @media (max-width: 600px) {
-    .topbar { transition: none; }
+    .topbar.is-snapping { transition: none; }
   }
 }
+
 
 
 
