@@ -78,50 +78,89 @@ function applyThemeUI(dark) {
 })();
 
 // ===========================
-// 3. TOPBAR SCROLL (solo mobile)
+// 3. TOPBAR SCROLL (solo mobile) - versión estable
 // ===========================
 (() => {
-  const mobileQuery = window.matchMedia('(max-width: 600px)');
+  const mq = window.matchMedia('(max-width: 600px)');
   const topbar = document.querySelector('.topbar');
-
   if (!topbar) return;
 
-  let lastScrollY = window.scrollY;
-  let ticking = false;
+  let lastY = window.scrollY;
+  let acc = 0;              // acumulador para evitar parpadeo
+  const THRESH = 18;        // sensibilidad (más alto = menos cambios)
+  let enabled = false;
 
-  function onScroll() {
-    if (!mobileQuery.matches) return;
-
-    const currentY = window.scrollY;
-    const diff = currentY - lastScrollY;
-
-    // Evita micro-scrolls
-    if (Math.abs(diff) < 6) return;
-
-    if (diff > 0 && currentY > 80) {
-      // Scroll DOWN → ocultar
-      topbar.classList.add('is-hidden');
-    } else {
-      // Scroll UP → mostrar
-      topbar.classList.remove('is-hidden');
-    }
-
-    lastScrollY = currentY;
+  function setBodyOffset() {
+    // altura real del topbar (2 filas)
+    const h = topbar.getBoundingClientRect().height;
+    document.documentElement.style.setProperty('--topbar-h', `${h}px`);
   }
 
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        onScroll();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  });
-
-  // Reset automático si cambia a desktop
-  mobileQuery.addEventListener('change', () => {
+  function enable() {
+    enabled = true;
     topbar.classList.remove('is-hidden');
-  });
+    setBodyOffset();
+  }
+
+  function disable() {
+    enabled = false;
+    topbar.classList.remove('is-hidden');
+    document.documentElement.style.setProperty('--topbar-h', `0px`);
+  }
+
+  function onScroll() {
+    if (!enabled) return;
+
+    const y = window.scrollY;
+
+    // Si estás arriba de todo, siempre visible
+    if (y <= 0) {
+      topbar.classList.remove('is-hidden');
+      lastY = y;
+      acc = 0;
+      return;
+    }
+
+    const dy = y - lastY;
+    lastY = y;
+
+    // ignora micro scrolls
+    if (Math.abs(dy) < 2) return;
+
+    // acumula movimiento para decidir
+    acc += dy;
+
+    if (acc > THRESH && y > 80) {
+      // bajando
+      topbar.classList.add('is-hidden');
+      acc = 0;
+    } else if (acc < -THRESH) {
+      // subiendo
+      topbar.classList.remove('is-hidden');
+      acc = 0;
+    }
+  }
+
+  // listener suave
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // recalcular altura si cambia orientación o carga algo
+  window.addEventListener('resize', () => {
+    if (mq.matches) setBodyOffset();
+  }, { passive: true });
+
+  // activar/desactivar según viewport
+  function sync() {
+    if (mq.matches) enable();
+    else disable();
+  }
+
+  // para Safari viejo, change puede no existir como addEventListener
+  if (mq.addEventListener) mq.addEventListener('change', sync);
+  else mq.addListener(sync);
+
+  // inicia
+  sync();
 })();
+
 
