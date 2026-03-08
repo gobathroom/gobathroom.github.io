@@ -28,8 +28,9 @@
   <link rel="stylesheet" href="/css/top-bar.css">
 </head>
 <body>
-  <!-- TOP BAR -->
+
   <header class="topbar">
+    <!-- LEFT -->
     <div class="topbar__left">
       <a href="/" class="brand" aria-label="Go Bathroom home">
         <img src="/assets/svg/logo.svg" alt="Go Bathroom logo" class="brand__logo">
@@ -37,46 +38,82 @@
       </a>
     </div>
 
-    <nav class="topbar__center" aria-label="Primary navigation">
-      <a href="#" class="topbar__icon-link is-active" aria-label="Home" title="Home">
-        <i class="fa-solid fa-house"></i>
-      </a>
+    <!-- CENTER: GLOBAL NAVIGATION WITH ICONS + TOOLTIPS -->
+    <div class="topbar__center">
+      <nav class="main-nav" aria-label="Primary navigation">
 
-      <a href="#" class="topbar__icon-link" aria-label="Audio guide" title="Audio guide">
-        <i class="fa-solid fa-volume-high"></i>
-      </a>
+        <a href="/" class="nav-item top-link is-active" aria-label="Home" data-label="Home">
+          <i class="fas fa-home" aria-hidden="true"></i>
+        </a>
 
-      <a href="#" class="topbar__icon-link" aria-label="Tips" title="Tips">
-        <i class="fa-solid fa-lightbulb"></i>
-      </a>
+        <a href="https://rebrand.ly/open-map"
+           class="nav-item top-link"
+           target="_blank"
+           rel="noopener"
+           aria-label="Open map in Google Maps"
+           data-label="Map">
+          <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+        </a>
 
-      <a href="#" class="topbar__icon-link" aria-label="Flags" title="Flags">
-        <i class="fa-solid fa-flag"></i>
-      </a>
+        <a href="https://forms.gle/oVjnNqzavacu8osk6"
+           class="nav-item top-link"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Suggest restroom"
+           data-label="Suggest">
+          <i class="fas fa-lightbulb" aria-hidden="true"></i>
+        </a>
 
-      <a href="#" class="topbar__icon-link" aria-label="Tools" title="Tools">
-        <i class="fa-solid fa-wand-magic-sparkles"></i>
-      </a>
-    </nav>
+        <a href="https://forms.gle/RKrdJqEcsdPvna8o8"
+           class="nav-item top-link"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Report restroom"
+           data-label="Report">
+          <i class="fas fa-flag" aria-hidden="true"></i>
+        </a>
 
+        <a href="/en/notices" class="nav-item top-link" aria-label="Notices" data-label="Notices">
+          <i class="fas fa-gavel" aria-hidden="true"></i>
+        </a>
+
+      </nav>
+    </div>
+
+    <!-- RIGHT -->
     <div class="topbar__right">
-      <button class="topbar__action-btn" type="button" aria-label="Account" title="Account">
-        <i class="fa-solid fa-user"></i>
+
+      <!-- Donate (PayPal) -->
+      <a class="icon-btn"
+         href="https://www.paypal.com/donate/?hosted_button_id=K773CAM5X3QBC"
+         target="_blank"
+         rel="noopener"
+         aria-label="Donate"
+         data-label="Donate">
+        <i class="fas fa-hand-holding-heart" aria-hidden="true"></i>
+      </a>
+
+      <!-- Theme -->
+      <button id="themeToggle"
+              class="icon-btn"
+              type="button"
+              aria-label="Change theme"
+              data-label="Theme">
+        <i class="fas fa-circle-half-stroke" aria-hidden="true"></i>
       </button>
 
-      <button class="topbar__action-btn" type="button" aria-label="Toggle theme" title="Toggle theme">
-        <i class="fa-solid fa-moon"></i>
-      </button>
+      <!-- Language -->
+      <a href="/es/" class="lang-btn" aria-label="Change language">
+        <i class="fas fa-globe" aria-hidden="true"></i>
+        <span class="lang-text">Español</span>
+      </a>
 
-      <button class="lang-switch" type="button" aria-label="Language" title="Language">
-        <i class="fa-solid fa-globe"></i>
-        <span class="lang-switch__text">English</span>
-      </button>
     </div>
   </header>
 
   <main class="content">
     <!-- Page content -->
   </main>
+
 </body>
 </html>
