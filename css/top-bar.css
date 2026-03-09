@@ -119,10 +119,11 @@
   background: var(--brand);
 }
 
-/* Tooltip */
-.nav-item::before,
-.icon-btn::before,
-.lang-btn::before {
+/* =========================================================
+   TOOLTIPS - CENTER
+   ========================================================= */
+
+.nav-item::before {
   content: attr(data-label);
   position: absolute;
   left: 50%;
@@ -145,11 +146,7 @@
 }
 
 .nav-item:hover::before,
-.icon-btn:hover::before,
-.lang-btn:hover::before,
-.nav-item:focus-visible::before,
-.icon-btn:focus-visible::before,
-.lang-btn:focus-visible::before {
+.nav-item:focus-visible::before {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
@@ -226,6 +223,42 @@
 
 .lang-btn::before {
   display: none;
+}
+
+/* =========================================================
+   TOOLTIPS - RIGHT
+   ========================================================= */
+
+.icon-btn::before,
+.lang-btn::before {
+  content: attr(data-label);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  bottom: -38px;
+
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--text-strong);
+  color: var(--panel);
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+  z-index: 20;
+}
+
+.icon-btn:hover::before,
+.lang-btn:hover::before,
+.icon-btn:focus-visible::before,
+.lang-btn:focus-visible::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* =========================================================
