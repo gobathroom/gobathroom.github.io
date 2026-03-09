@@ -84,7 +84,7 @@
   text-decoration: none;
   color: var(--text);
   background: transparent;
-  border-radius: 4px; /* bordes redondeados */
+  border-radius: 7px; /* bordes redondeados */
   transition: background-color 0.2s ease, color 0.2s ease;
   align-self: center; /* centra el bloque dentro del topbar */
 }
