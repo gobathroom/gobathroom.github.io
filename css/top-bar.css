@@ -288,7 +288,7 @@
   }
 
   .nav-item.is-active::after {
-    bottom: -4px;
+    bottom: -5px;
   }
 
   .brand-text {
