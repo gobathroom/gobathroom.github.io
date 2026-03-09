@@ -75,7 +75,7 @@
 .nav-item {
   position: relative;
   min-width: 144px; /* el doble aprox. de 72px */
-  height: calc(100% - 14px); /* deja espacio arriba y abajo */
+  height: calc(100% - 4px); /* deja espacio arriba y abajo */
 
   display: inline-flex;
   align-items: center;
