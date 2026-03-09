@@ -94,13 +94,18 @@
   line-height: 1;
 }
 
-.nav-item:hover {
+.nav-item:hover:not(.is-active) {
   background: var(--hover);
   color: var(--text-strong);
 }
 
 .nav-item.is-active {
   color: var(--brand);
+  background: transparent;
+}
+
+.nav-item.is-active:hover {
+  background: transparent;
 }
 
 .nav-item.is-active::after {
