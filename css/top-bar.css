@@ -127,7 +127,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%) translateY(6px);
-  bottom: -36px;
+  bottom: -4px;
 
   padding: 6px 10px;
   border-radius: var(--radius-sm);
