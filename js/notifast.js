@@ -63,22 +63,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     while (sequence.length < items.length) {
       if (useLaw) {
-        if (laws.length) {
-          sequence.push(laws[lawIndex % laws.length]);
-          lawIndex++;
-        }
+        sequence.push(laws[lawIndex % laws.length]);
+        lawIndex++;
         useLaw = false;
       } else {
         for (let i = 0; i < ratio && sequence.length < items.length; i++) {
-          if (others.length) {
-            sequence.push(others[otherIndex % others.length]);
-            otherIndex++;
-          }
+          sequence.push(others[otherIndex % others.length]);
+          otherIndex++;
         }
         useLaw = true;
       }
-
-      if (sequence.length >= items.length) break;
     }
 
     return sequence.slice(0, items.length);
