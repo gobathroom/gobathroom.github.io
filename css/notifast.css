@@ -12,9 +12,6 @@
   border-top: 1px solid var(--panel-surf-border);
   border-bottom: 1px solid var(--panel-surf-border);
   box-shadow: var(--panel-surf-shadow);
-
-  display: grid;
-  align-items: stretch;
   overflow: hidden;
 }
 
@@ -145,32 +142,32 @@
 
 /* ===========================
    DESKTOP
-   C | L | R
+   Grupo compacto:
+   [ contenido ] [ prev ] [ next ]
    =========================== */
 
-.notifbar {
-  grid-template-columns: minmax(0, 1fr) 52px 52px;
-  grid-template-rows: 1fr;
-}
+@media (min-width: 821px) {
+  .notifbar {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+  }
 
-.notifbar-main {
-  grid-column: 1;
-  grid-row: 1;
-}
+  .notifbar-main {
+    flex: 0 1 clamp(680px, 72vw, 1220px);
+    max-width: 1220px;
+  }
 
-.notif-nav--prev {
-  grid-column: 2;
-  grid-row: 1;
-}
+  .notif-nav {
+    flex: 0 0 52px;
+    min-width: 52px;
+    min-height: 100%;
+  }
 
-.notif-nav--next {
-  grid-column: 3;
-  grid-row: 1;
-}
-
-.notif-nav {
-  min-width: 52px;
-  min-height: 100%;
+  .notifbar-text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 
 /* ===========================
@@ -180,8 +177,10 @@
 
 @media (max-width: 820px) {
   .notifbar {
+    display: grid;
     grid-template-columns: 52px minmax(0, 1fr) 52px;
     grid-template-rows: 1fr;
+    align-items: stretch;
   }
 
   .notif-nav--prev {
@@ -215,16 +214,6 @@
 
   .notifbar-more {
     display: none !important;
-  }
-}
-/* ===========================
-   TEXT TRUNCATION
-   =========================== */
-
-@media (min-width: 821px) {
-  .notifbar-text {
-    white-space: nowrap;
-    text-overflow: ellipsis;
   }
 }
 
