@@ -1,1 +1,89 @@
+/* ==================================================================================
+   MAIN CONTENT LAYOUT
+   Left flexible space | Center content | Right flexible space
+   ================================================================================== */
 
+main.content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1100px) minmax(0, 1fr);
+  gap: 24px;
+
+  padding: 16px;
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+/* Left and right side spaces */
+.content__left-space,
+.content__right-space {
+  min-width: 0;
+}
+
+/* Center column */
+.content__center {
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+/* Generic section card */
+.content-section {
+  background: var(--panel);
+  border: 1px solid var(--panel-surf-border);
+  box-shadow: var(--panel-surf-shadow);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  min-width: 0;
+}
+
+/* ==================================================================================
+   RESPONSIVE
+   ================================================================================== */
+
+/* Tablet */
+@media (max-width: 1100px) {
+  main.content {
+    grid-template-columns: 1fr minmax(0, 1000px) 1fr;
+    gap: 20px;
+  }
+}
+
+/* Mobile / smaller tablets */
+@media (max-width: 900px) {
+  main.content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 16px 12px;
+  }
+
+  .content__left-space,
+  .content__right-space {
+    display: none;
+  }
+
+  .content__center {
+    gap: 20px;
+  }
+
+  .content-section {
+    padding: 20px;
+    border-radius: var(--radius);
+  }
+}
+
+/* Small mobile */
+@media (max-width: 520px) {
+  main.content {
+    padding: 12px;
+  }
+
+  .content__center {
+    gap: 16px;
+  }
+
+  .content-section {
+    padding: 16px;
+  }
+}
