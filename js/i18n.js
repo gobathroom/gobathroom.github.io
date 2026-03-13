@@ -36,10 +36,13 @@
 
     // 👇 AÑADIR ESTO
     notifast: {
-      lawLabel: 'Quick law',
-      tipLabel: 'Quick tip',
-      moreLabel: 'See more',
-    },
+  lawLabel: 'Quick law',
+  tipLabel: 'Quick tip',
+  moreLabel: 'Read more',
+  prevLabel: 'Previous notice',
+  nextLabel: 'Next notice',
+  openLabel: 'Open notice',
+},
 
     contact: {
       copyEmailLabel: 'Copy email address',
@@ -73,10 +76,13 @@
 
     // 👇 AÑADIR ESTO
     notifast: {
-      lawLabel: 'Ley rápida',
-      tipLabel: 'Tip rápido',
-      moreLabel: 'Ver más',
-    },
+  lawLabel: 'Ley rápida',
+  tipLabel: 'Tip rápido',
+  moreLabel: 'Ver más',
+  prevLabel: 'Aviso anterior',
+  nextLabel: 'Aviso siguiente',
+  openLabel: 'Abrir aviso',
+},
 
     contact: {
       copyEmailLabel: 'Copiar correo electrónico',
