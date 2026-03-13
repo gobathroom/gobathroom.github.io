@@ -142,51 +142,6 @@
 
 
 /* ===========================
-   GROUPED ARROWS (PRO LOOK)
-   =========================== */
-
-@media (min-width: 821px) {
-
-  .notif-nav--prev,
-  .notif-nav--next {
-    width: 36px;
-    min-width: 36px;
-    height: 28px;
-    min-height: 28px;
-  }
-
-  /* contenedor visual del control */
-  .notif-nav--prev {
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-  }
-
-  .notif-nav--next {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-  }
-
-  /* fondo del grupo */
-  .notif-nav--prev,
-  .notif-nav--next {
-    background: var(--panel);
-    border: 1px solid var(--panel-surf-border);
-  }
-
-  /* línea divisora central */
-  .notif-nav--prev {
-    border-right: none;
-  }
-
-  /* hover */
-  .notif-nav:hover {
-    background: var(--hover);
-  }
-
-}
-
-
-/* ===========================
    DESKTOP
    Texto centrado + flechas juntas a la derecha
    =========================== */
