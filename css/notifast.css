@@ -142,7 +142,7 @@
 
 /* ===========================
    DESKTOP
-   texto | flechas juntas
+   Texto centrado + flechas juntas a la derecha
    =========================== */
 
 @media (min-width: 821px) {
@@ -150,31 +150,30 @@
   .notifbar {
     display: flex;
     align-items: stretch;
+    justify-content: center;
   }
 
+  /* texto */
   .notifbar-main {
-    flex: 1;
-    min-width: 0;
+    flex: 0 1 clamp(680px, 72vw, 1220px);
+    max-width: 1220px;
   }
 
-  .notif-nav {
-    flex: 0 0 44px;
-    min-width: 44px;
+  /* contenedor de flechas */
+  .notif-nav--prev,
+  .notif-nav--next {
+    flex: 0 0 52px;
+    min-width: 52px;
     min-height: 100%;
   }
 
+  /* mover ambas flechas al final */
   .notif-nav--prev {
     order: 2;
   }
 
   .notif-nav--next {
     order: 3;
-  }
-
-  .notifbar-text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
 }
