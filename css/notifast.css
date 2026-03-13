@@ -142,32 +142,41 @@
 
 /* ===========================
    DESKTOP
-   Grupo compacto:
-   [ contenido ] [ prev ] [ next ]
+   texto | flechas juntas
    =========================== */
 
 @media (min-width: 821px) {
+
   .notifbar {
     display: flex;
     align-items: stretch;
-    justify-content: center;
   }
 
   .notifbar-main {
-    flex: 0 1 clamp(680px, 72vw, 1220px);
-    max-width: 1220px;
+    flex: 1;
+    min-width: 0;
   }
 
   .notif-nav {
-    flex: 0 0 52px;
-    min-width: 52px;
+    flex: 0 0 44px;
+    min-width: 44px;
     min-height: 100%;
+  }
+
+  .notif-nav--prev {
+    order: 2;
+  }
+
+  .notif-nav--next {
+    order: 3;
   }
 
   .notifbar-text {
     white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
   }
+
 }
 
 /* ===========================
