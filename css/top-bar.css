@@ -351,7 +351,6 @@
 /* =========================================================
    LAPTOP MEDIA / 15.6 / TABLET HORIZONTAL GRANDE
    992px - 1199px
-   Aquí evitamos que se apriete
    ========================================================= */
 
 @media (max-width: 1199px) {
@@ -422,9 +421,80 @@
 }
 
 /* =========================================================
+   LAPTOP APRETADA / AJUSTE FINO
+   1180px hacia abajo
+   ========================================================= */
+
+@media (max-width: 1180px) {
+  .topbar {
+    grid-template-columns: auto 1fr auto;
+    column-gap: 8px;
+    height: 60px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand-logo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .brand-text {
+    font-size: 1.25rem;
+  }
+
+  .main-nav {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nav-item {
+    min-width: 76px;
+    height: calc(100% - 8px);
+  }
+
+  .nav-item i {
+    font-size: 1.08rem;
+  }
+
+  .nav-item.is-active::after {
+    left: 14px;
+    right: 14px;
+  }
+
+  .right {
+    gap: 6px;
+  }
+
+  .icon-btn {
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+  }
+
+  .lang-btn {
+    height: 36px;
+    padding: 0 8px;
+    gap: 5px;
+  }
+
+  .icon-btn i,
+  .lang-btn i {
+    font-size: 1rem;
+  }
+
+  .lang-text {
+    font-size: 0.88rem;
+  }
+}
+
+/* =========================================================
    DESKTOP COMPACTO / TABLET HORIZONTAL
    900px - 991px
-   Sigue viéndose desktop, pero más compacto
    ========================================================= */
 
 @media (max-width: 991px) {
